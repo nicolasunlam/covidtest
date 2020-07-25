@@ -12,11 +12,11 @@
            
             <div class="container m-5">
             
-                <h2 class="pb-2 mb-3 border-bottom">Disponibilidad De Camas</h2> 
+                <h2 class="pb-2 mb-3 border-bottom">Diponibilidad de Camas Por Institución</h2> 
                 <br>
                 <div>
         		
-				<h6 class="">PASO 1: Elegir la cama en donde internar</h6>	
+				<h6 class="">PASO 1: Elegir el hospital en donde realizar la internación</h6>	
 		
        			 </div>
        			 <br>

@@ -65,4 +65,5 @@
 
 </main>
 
-<jsp:include page="../../partial/footer.jsp" />
+
+<jsp:include page="../../../partial/footer.jsp" />

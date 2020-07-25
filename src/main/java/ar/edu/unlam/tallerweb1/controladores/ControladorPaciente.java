@@ -85,13 +85,13 @@ public class ControladorPaciente {
     public ModelAndView registrarPaciente(HttpServletRequest request) {
 
     	ModelMap model = new ModelMap();
-
+    	
 		if(servicioAtajo.validarInicioDeSesion(request) != null) {
     		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
     	}
     	if(servicioAtajo.validarPermisoAPagina(request) != null) {
     		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}    	
+    	}
     	Rol rol = (Rol) request.getSession().getAttribute("ROL");
 		if(rol != null) {
 			model.put("rol", rol.name());	
@@ -115,12 +115,6 @@ public class ControladorPaciente {
 
     	ModelMap model = new ModelMap();
 
-		if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
     	Rol rol = (Rol) request.getSession().getAttribute("ROL");
 		if(rol != null) {
 			model.put("rol", rol.name());	
@@ -203,8 +197,11 @@ public class ControladorPaciente {
 	}
      
     /*Detalle por consultar paciente por Nro y Tipo de Documento*/
-	@RequestMapping(path = "/detallePaciente", method = RequestMethod.POST)
-	public ModelAndView validarConsulta(@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
+	@RequestMapping(path = "/detalle", method = RequestMethod.POST)
+	public ModelAndView validarConsulta(
+			
+			@ModelAttribute("paciente") Paciente paciente, 
+			HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
@@ -223,18 +220,11 @@ public class ControladorPaciente {
 		paciente = servicioPaciente.consultarPacientePorDoc(paciente.getNumeroDocumento(), paciente.getTipoDocumento());
 
 		if (paciente != null) {
+			
+			model.put("paciente", paciente);
+			model.put("detalleVista", "detallePaciente");
 
-			String mensaje = "Nombre: " + paciente.getNombre();
-			String mensaje2 = "Apellido: " + paciente.getApellido();
-			String mensaje3 = "Documento: (" + paciente.getTipoDocumento() + ") " + paciente.getNumeroDocumento();
-			String mensaje4 = "Email: " + paciente.getEmail();
-
-			model.put("mensaje", mensaje);
-			model.put("mensaje2", mensaje2);
-			model.put("mensaje3", mensaje3);
-			model.put("mensaje4", mensaje4);
-
-			return new ModelAndView("detallePaciente", model);
+			return new ModelAndView("detalle", model);
 		}
 
 		model.put("error", "No existe el paciente");
