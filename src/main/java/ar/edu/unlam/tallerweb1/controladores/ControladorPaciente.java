@@ -141,9 +141,9 @@ public class ControladorPaciente {
             paciente.setRol(Rol.PACIENTE);
             
             
-            
-            servicioPaciente.registrarPaciente(paciente);
 
+            servicioPaciente.registrarPaciente(paciente);
+           
             request.getSession().setAttribute("ROL", paciente.getRol());
 
             String nombre = paciente.getNombre();
@@ -159,8 +159,7 @@ public class ControladorPaciente {
             model.put("tipoDocumento", tipoDocumento);
             model.put("email", email);
 
-            String path="http://localhost:"+request.getLocalPort();
-            servicioMail.SendEmail(paciente.getEmail(), "Confirmación de registro: AsignAr"+ paciente.getNombre(), path);
+            
 
             Domicilio domicilio = new Domicilio();
             domicilio.setCalle(calle);
@@ -174,7 +173,10 @@ public class ControladorPaciente {
             servicioPaciente.actualizarPaciente(paciente);
             servicioDomicilio.actualizarDomicilio(domicilio);
             servicioLocalidad.actualizarLocalidad(localidad);
-
+            
+//            String path="http://localhost:"+request.getLocalPort();
+//            servicioMail.SendEmail(paciente.getEmail(), "Confirmación de registro: AsignAr"+ paciente.getNombre(), path);
+       
             return new ModelAndView("enfermedades", model);
         } else {
 
