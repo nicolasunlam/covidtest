@@ -11,6 +11,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTest;
@@ -33,6 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ControladorPaciente {
 
+	@Autowired
+	ServicioMail servicioMail;
     @Autowired
     ServicioPaciente servicioPaciente;
     @Autowired
@@ -130,9 +133,11 @@ public class ControladorPaciente {
 
             paciente.setPosibleInfectado(true);
             paciente.setRol(Rol.PACIENTE);
+            
+            
 
             servicioPaciente.registrarPaciente(paciente);
-
+           
             request.getSession().setAttribute("ROL", paciente.getRol());
 
             String nombre = paciente.getNombre();
@@ -148,7 +153,7 @@ public class ControladorPaciente {
             model.put("tipoDocumento", tipoDocumento);
             model.put("email", email);
 
-            servicioTest.enviarMail(paciente);
+            
 
             Domicilio domicilio = new Domicilio();
             domicilio.setCalle(calle);
@@ -162,7 +167,10 @@ public class ControladorPaciente {
             servicioPaciente.actualizarPaciente(paciente);
             servicioDomicilio.actualizarDomicilio(domicilio);
             servicioLocalidad.actualizarLocalidad(localidad);
-
+            
+//            String path="http://localhost:"+request.getLocalPort();
+//            servicioMail.SendEmail(paciente.getEmail(), "Confirmación de registro: AsignAr"+ paciente.getNombre(), path);
+       
             return new ModelAndView("enfermedades", model);
         } else {
 
