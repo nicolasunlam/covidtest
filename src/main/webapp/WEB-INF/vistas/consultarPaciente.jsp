@@ -18,7 +18,7 @@
       </div>
         <div>
 					
-        <form:form action="detallePaciente" method="POST" modelAttribute="paciente" role="form" class="contactForm">
+        <form:form action="detalle" method="POST" modelAttribute="paciente" role="form" class="contactForm">
                         
                         <div class="form-group">
                         

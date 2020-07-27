@@ -36,9 +36,6 @@ public class ControladorPermiso {
     	
     	ModelMap model = new ModelMap();
 
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
     	Rol rol = (Rol) request.getSession().getAttribute("ROL");
 		if(rol != null) {
 			model.put("rol", rol.name());	
@@ -67,9 +64,6 @@ public class ControladorPermiso {
         	
         	ModelMap model = new ModelMap();
 
-        	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-        		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-        	}
         	Rol rol = (Rol) request.getSession().getAttribute("ROL");
     		if(rol != null) {
     			model.put("rol", rol.name());	
@@ -106,9 +100,6 @@ public class ControladorPermiso {
     	
     	ModelMap model = new ModelMap();
 
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
     	Rol rol = (Rol) request.getSession().getAttribute("ROL");
 		if(rol != null) {
 			model.put("rol", rol.name());	
@@ -124,9 +115,6 @@ public class ControladorPermiso {
     	
     	ModelMap model = new ModelMap();
 
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
     	Rol rol = (Rol) request.getSession().getAttribute("ROL");
 		if(rol != null) {
 			model.put("rol", rol.name());	

@@ -53,7 +53,9 @@
 						<c:if test='${rol == "PACIENTE"}'>
 						"bienvenidoPaciente"
 						</c:if>
-						
+						<c:if test='${rol == null}'>
+						"home"
+						</c:if>
 						>Home
 						<span class="sr-only">(current)</span>
 				</a> 
@@ -62,6 +64,12 @@
 						<li class="nav-item ml-5"><a class="nav-link" href="generarPermiso">Generar Permiso
 						</a></li>
 				</li>
+				<c:if test='${rol == "PACIENTE"}'>
+				<li class="nav-item ml-5">
+					<a class="btn btn-warning" href="verMensajes">Ver mis Mensajes
+					</a>
+				</li>
+				</c:if>					
 			</ul>
 			
 				<c:if test="${rol == null}">

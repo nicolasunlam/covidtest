@@ -215,6 +215,8 @@ public class ControladorAsignacion {
 				model.put("mensaje2", mensaje2);
 				model.put("mensaje3", mensaje3);
 				
+				model.put("detalleVista", "detalleInternacion");
+				
 				model.put("detalleInternacion", "El paciente fue egresado");
 
 				return new ModelAndView("detalleInternacion", model);

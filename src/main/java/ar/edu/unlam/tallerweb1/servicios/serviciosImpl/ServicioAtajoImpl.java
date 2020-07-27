@@ -49,10 +49,8 @@ public class ServicioAtajoImpl implements ServicioAtajo{
 		  || request.getRequestURI().contains("/covidtest/detalleAsignacion")
 		  
 		  /*controladorNotificacion*/
-		  || request.getRequestURI().contains("/covidtest/crearMensaje")
 		  || request.getRequestURI().contains("/covidtest/crearMensajeParaInstitucion")
 		  || request.getRequestURI().contains("/covidtest/enviarMensaje")
-		  || request.getRequestURI().contains("/covidtest/verMensajes")
 			  
 		  /*controladorCama*/
 		  || request.getRequestURI().contains("/covidtest/disponibilidadCamas")
@@ -79,7 +77,6 @@ public class ServicioAtajoImpl implements ServicioAtajo{
 		  
 		  /*controladorRegistrarPaciente*/
 		  || request.getRequestURI().contains("/covidtest/registrarPaciente")
-		  || request.getRequestURI().contains("/covidtest/detalleRegistroPaciente")
 		  
 		  /*controladorPaciente*/
 		  || request.getRequestURI().contains("/covidtest/consultarPaciente")

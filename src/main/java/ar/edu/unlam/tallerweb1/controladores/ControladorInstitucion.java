@@ -199,10 +199,29 @@ public class ControladorInstitucion {
         return new ModelAndView("bienvenido", model);
     }
     
+    @RequestMapping("crearCamas")
+    public ModelAndView crearCamas(HttpServletRequest request) {
+    	
+    	 ModelMap model = new ModelMap();
+         
+         if(servicioAtajo.validarInicioDeSesion(request) != null) {
+     		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+     	}
+     	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+     		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+     	}
+     	Rol rol = (Rol) request.getSession().getAttribute("ROL");
+ 		if(rol != null) {
+ 			model.put("rol", rol.name());	
+ 		}
+     	model.put("armarHeader", servicioAtajo.armarHeader(request));
+    	return new ModelAndView("crearCamas",model);
+    }
+    
     @RequestMapping("crearCamaPorTipoSala")
     public ModelAndView crearCamaPorTipoSala(@RequestParam(value = "tipoCama") TipoCama tipoCama,
     		@RequestParam(value = "tipoSala")TipoSala tipoSala,
-    		@RequestParam(value = "numeroDocumento") Integer cantidadDeCamas,
+    		@RequestParam(value = "cantidadDeCamas") Integer cantidadDeCamas,
     		HttpServletRequest request) {
     	
     	Institucion institucion =servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
@@ -224,8 +243,8 @@ public class ControladorInstitucion {
          }
     	
     	
-    	return new ModelAndView("instConfirmacionCreacionCamaCorrecto") ;
+    	return new ModelAndView("redirect:/listaPacientesInternados") ;
     }
-    
+   
   
 }

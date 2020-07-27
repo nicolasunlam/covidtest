@@ -11,6 +11,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTest;
@@ -33,6 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ControladorPaciente {
 
+	@Autowired
+	ServicioMail servicioMail;
     @Autowired
     ServicioPaciente servicioPaciente;
     @Autowired
@@ -85,13 +88,13 @@ public class ControladorPaciente {
     public ModelAndView registrarPaciente(HttpServletRequest request) {
 
     	ModelMap model = new ModelMap();
-
+    	
 		if(servicioAtajo.validarInicioDeSesion(request) != null) {
     		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
     	}
     	if(servicioAtajo.validarPermisoAPagina(request) != null) {
     		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}    	
+    	}
     	Rol rol = (Rol) request.getSession().getAttribute("ROL");
 		if(rol != null) {
 			model.put("rol", rol.name());	
@@ -115,12 +118,6 @@ public class ControladorPaciente {
 
     	ModelMap model = new ModelMap();
 
-		if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
     	Rol rol = (Rol) request.getSession().getAttribute("ROL");
 		if(rol != null) {
 			model.put("rol", rol.name());	
@@ -136,9 +133,11 @@ public class ControladorPaciente {
 
             paciente.setPosibleInfectado(true);
             paciente.setRol(Rol.PACIENTE);
+            
+            
 
             servicioPaciente.registrarPaciente(paciente);
-
+           
             request.getSession().setAttribute("ROL", paciente.getRol());
 
             String nombre = paciente.getNombre();
@@ -154,7 +153,7 @@ public class ControladorPaciente {
             model.put("tipoDocumento", tipoDocumento);
             model.put("email", email);
 
-            servicioTest.enviarMail(paciente);
+            
 
             Domicilio domicilio = new Domicilio();
             domicilio.setCalle(calle);
@@ -168,7 +167,10 @@ public class ControladorPaciente {
             servicioPaciente.actualizarPaciente(paciente);
             servicioDomicilio.actualizarDomicilio(domicilio);
             servicioLocalidad.actualizarLocalidad(localidad);
-
+            
+//            String path="http://localhost:"+request.getLocalPort();
+//            servicioMail.SendEmail(paciente.getEmail(), "Confirmación de registro: AsignAr"+ paciente.getNombre(), path);
+       
             return new ModelAndView("enfermedades", model);
         } else {
 
@@ -203,8 +205,11 @@ public class ControladorPaciente {
 	}
      
     /*Detalle por consultar paciente por Nro y Tipo de Documento*/
-	@RequestMapping(path = "/detallePaciente", method = RequestMethod.POST)
-	public ModelAndView validarConsulta(@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
+	@RequestMapping(path = "/detalle", method = RequestMethod.POST)
+	public ModelAndView validarConsulta(
+			
+			@ModelAttribute("paciente") Paciente paciente, 
+			HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
@@ -223,18 +228,11 @@ public class ControladorPaciente {
 		paciente = servicioPaciente.consultarPacientePorDoc(paciente.getNumeroDocumento(), paciente.getTipoDocumento());
 
 		if (paciente != null) {
+			
+			model.put("paciente", paciente);
+			model.put("detalleVista", "detallePaciente");
 
-			String mensaje = "Nombre: " + paciente.getNombre();
-			String mensaje2 = "Apellido: " + paciente.getApellido();
-			String mensaje3 = "Documento: (" + paciente.getTipoDocumento() + ") " + paciente.getNumeroDocumento();
-			String mensaje4 = "Email: " + paciente.getEmail();
-
-			model.put("mensaje", mensaje);
-			model.put("mensaje2", mensaje2);
-			model.put("mensaje3", mensaje3);
-			model.put("mensaje4", mensaje4);
-
-			return new ModelAndView("detallePaciente", model);
+			return new ModelAndView("detalle", model);
 		}
 
 		model.put("error", "No existe el paciente");
