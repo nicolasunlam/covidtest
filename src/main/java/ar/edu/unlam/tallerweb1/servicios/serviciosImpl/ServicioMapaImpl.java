@@ -1,16 +1,25 @@
 package ar.edu.unlam.tallerweb1.servicios.serviciosImpl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Paciente;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMapa;
 
 @Service("servicioMapa")
 @Transactional
 public class ServicioMapaImpl implements ServicioMapa {
 
+	@Autowired
+	ServicioInstitucion servicioInstitucion;
+
 	@Override
-	public Double calcularDistanticiaEntreDosPuntos(Double latitud1, Double longitud1, Double latitud2,
+	public Double calcularDistanciaEntreDosPuntos(Double latitud1, Double longitud1, Double latitud2,
 			Double longitud2) {
 
 		double radioTierra = 6371;// en kilómetros
@@ -24,6 +33,12 @@ public class ServicioMapaImpl implements ServicioMapa {
 		double distancia = radioTierra * va2;
 
 		return distancia;
+	}
+
+	@Override
+	public Institucion calcularInstitucionMasCercana(Paciente paciente) {
+
+		return null;
 	}
 
 }

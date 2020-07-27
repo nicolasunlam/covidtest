@@ -40,15 +40,24 @@
 <link rel="stylesheet" type="text/css"
 	href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
 
-<h1 class="text-center mb-3 mt-5">Ingrese su dirección y luego
-	confirme la misma</h1>
-
-
-<div class="container-fluid my-5">
-	<div class="row">
-		<div class="col-1"></div>
-		<div id="map" class="col-10 border border-dark"></div>
-		<div class="col-1"></div>
+<div class="card text-white bg-dark mb-3">
+	<div class="card-header">
+		<h1 class="text-center">Ingrese su dirección y luego confirme la
+			misma</h1>
+	</div>
+	<div class="card-body m-0 p-0 text-dark">
+		<div id="map" class="border border-dark"></div>
+		<div class="container-fluid my-3">
+			<div class="row">
+				<div class="col-4"></div>
+				<div class="col-4 text-center">
+					<button type="button" class="btn btn-warning btn-lg"
+						data-toggle="modal" data-target="#modalMapa">Confirmar
+						dirección</button>
+				</div>
+				<div class="col-4"></div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -62,20 +71,18 @@
 	<button type="submit" class="btn btn-primary btn-lg">Confirmar
 		dirección</button>
 	<button type="reset" class="btn btn-primary btn-lg">Cancelar</button>
-</form> --%>
+</form>
+
+<div class="container-fluid my-5">
+	<div class="row">
+		<div class="col-1"></div>
+		<div id="map" class="col-10 border border-dark"></div>
+		<div class="col-1"></div>
+	</div>
+</div> --%>
 
 <!-- Button trigger modal -->
-<div class="container-fluid my-3">
-	<div class="row">
-		<div class="col-4"></div>
-		<div class="col-4 text-center">
-			<button type="button" class="btn btn-warning btn-lg"
-				data-toggle="modal" data-target="#modalMapa">Confirmar
-				dirección</button>
-		</div>
-		<div class="col-4"></div>
-	</div>
-</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="modalMapa" tabindex="-1" role="dialog"
@@ -276,7 +283,7 @@
 						attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					}).addTo(map);
 
-	let iconMarker = L.icon({
+	/*let iconMarker = L.icon({
 		iconUrl : 'img/red-cross.png',
 
 	});
@@ -285,7 +292,7 @@
 		marker = new L.marker([ hospitales[i].lat, hospitales[i].lon ], {
 			icon : iconMarker
 		}).bindPopup(hospitales[i].nombre).addTo(map);
-	};
+	};*/
 
 	var searchControl = new L.esri.Controls.Geosearch().addTo(map);
 

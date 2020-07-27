@@ -43,34 +43,37 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		sessionFactory.getCurrentSession().save(usuario);
 
 	}
-	
+
 	@Override
 	public void registrarInstitucion(Usuario usuario) {
-		
+
 		sessionFactory.getCurrentSession().save(usuario);
-		
+
 	}
 
 	@Override
 	public Usuario consultarUsuarioPorEmail(String email) {
-		
-		return	(Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
-				.add(Restrictions.eq("email", email))
-				.uniqueResult();
+
+		return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
+				.add(Restrictions.eq("email", email)).uniqueResult();
 	}
 
 	@Override
 	public Usuario consultarUsuarioPorId(Long id) {
-		return	(Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
-				.add(Restrictions.eq("id", id))
+		return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class).add(Restrictions.eq("id", id))
 				.uniqueResult();
 	}
 
 	@Override
 	public Usuario consultarUsuarioPorEmail(Usuario usuario) {
 		return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
-				.add(Restrictions.eq("email", usuario.getEmail()))
-				.uniqueResult();
+				.add(Restrictions.eq("email", usuario.getEmail())).uniqueResult();
 	}
-	
+
+	@Override
+	public void actualizarUsuario(Usuario usuario) {
+		sessionFactory.getCurrentSession().update(usuario);
+
+	}
+
 }

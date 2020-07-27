@@ -8,4 +8,6 @@ public interface ServicioUsuario {
 
 	public Usuario consultarUsuarioPorId(Long id);
 
+	void actualizarUsuario(Usuario usuario);
+
 }

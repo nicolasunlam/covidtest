@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMapa;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
 public class ControladorMapa {
@@ -26,6 +31,10 @@ public class ControladorMapa {
 	ServicioPaciente servicioPaciente;
 	@Autowired
 	ServicioMapa servicioMapa;
+	@Autowired
+	ServicioUsuario servicioUsuario;
+	@Autowired
+	ServicioInstitucion servicioInstitucion;
 
 	@RequestMapping("/mapaPaciente")
 	public ModelAndView mapaPaciente(HttpServletRequest request) {
@@ -63,16 +72,41 @@ public class ControladorMapa {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
+		/*
+		 * Long id = (Long) request.getSession().getAttribute("ID"); Paciente paciente =
+		 * servicioPaciente.consultarPacientePorId(id);
+		 */
+
 		Long id = (Long) request.getSession().getAttribute("ID");
-		Paciente paciente = servicioPaciente.consultarPacientePorId(id);
+		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
 
-		paciente.setLatitud(latitud);
-		paciente.setLongitud(longitud);
+		if (usuario.getRol() == Rol.PACIENTE) {
+			usuario.setLatitud(latitud);
+			usuario.setLongitud(longitud);
 
-		servicioPaciente.actualizarPaciente(paciente);
+			servicioUsuario.actualizarUsuario(usuario);
 
-		model.put("latitud", latitud);
-		model.put("longitud", longitud);
+			model.put("latitud", latitud);
+			model.put("longitud", longitud);
+		}
+
+		if (usuario.getRol() == Rol.INSTITUCION) {
+			usuario.setLatitud(latitud);
+			usuario.setLongitud(longitud);
+
+			servicioUsuario.actualizarUsuario(usuario);
+
+			model.put("latitud", latitud);
+			model.put("longitud", longitud);
+		}
+
+		/*
+		 * paciente.setLatitud(latitud); paciente.setLongitud(longitud);
+		 * 
+		 * servicioPaciente.actualizarPaciente(paciente);
+		 * 
+		 * model.put("latitud", latitud); model.put("longitud", longitud);
+		 */
 
 		return new ModelAndView("validarMapa", model);
 	}
@@ -98,7 +132,16 @@ public class ControladorMapa {
 		Double latitud2 = -34.72840647959868;
 		Double longitud2 = -58.61369019379556;
 
-		Double distancia = servicioMapa.calcularDistanticiaEntreDosPuntos(latitud1, longitud1, latitud2, longitud2);
+		Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(latitud1, longitud1, latitud2, longitud2);
+
+		/*
+		 * List<Institucion> instituciones =
+		 * servicioInstitucion.obtenerListaInstituciones();
+		 * 
+		 * for(int i=0; i<instituciones.size(); i++) { Double distanciaInstitucion =
+		 * servicioMapa.calcularDistanticiaEntreDosPuntos(latitud1, longitud1, latitud2,
+		 * longitud2) }
+		 */
 
 		model.put("distancia", distancia);
 

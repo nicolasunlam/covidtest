@@ -17,4 +17,6 @@ public interface RepositorioUsuario {
 
 	Usuario consultarUsuarioPorEmail(Usuario usuario);
 
+	void actualizarUsuario(Usuario usuario);
+
 }
