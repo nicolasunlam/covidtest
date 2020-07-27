@@ -242,7 +242,7 @@ public class ControladorTest {
 
         servicioPaciente.actualizarPaciente(paciente);
 
-        return new ModelAndView("detalleRegistroPaciente", model);
+        return new ModelAndView("mapaPaciente", model);
     }
 
     @RequestMapping(value = "/validar-email", method = RequestMethod.POST)
