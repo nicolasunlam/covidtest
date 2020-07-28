@@ -25,18 +25,6 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-
-<div class="form-group">
-	<c:if test="${not empty error}">
-		<h4>
-			<span>${error}</span>
-		</h4>
-		<br>
-	</c:if>
-</div>
-
-<div>${rol}</div>
-
 <script
 	src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -114,6 +102,14 @@
 					<div class="form-group">
 						<input type="hidden" class="form-control" id="longitud"
 							name="longitud">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="nombreCalle"
+							name="nombreCalle">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="alturaCalle"
+							name="alturaCalle">
 					</div>
 
 				</div>
@@ -313,33 +309,33 @@
 			console.log(data.results[0].city);
 			console.log(data.results[0].subregion);
 			console.log(data.results[0]);
-			//var obj = JSON.parse(data.results[0].text);
-			let domicilio = data.results[0].text.split(",")[0];
-			let domicilio2 = domicilio.split(" ");
-			let numero = data.results[0].text.split(",")[0].split(" ")[data.results[0].text.split(",")[0].split(" ").length-1];
-			
-			
-			console.log(domicilio);
-			//console.log(data.results[0].text.split(",")[0].split(" ")[data.results[0].text.split(",")[0].split(" ").length-1]);
-			console.log(numero);
-			
-			domicilio2.splice(domicilio2.length-1, 1);
-			//console.log(domicilio.length);
-			//console.log(data.results.split(","));
-			/*for(i=0; i<domicilio.split(" ").length-1; i++){
-				//console.log(domicilio.split(" ").length);
-				calle = domicilio.split(" ")[0].concat(domicilio.split(" ")[i]);
-				
-				
-				
-			}*/
-			
-			domicilio2.join(' ');
-			
-			console.log(domicilio2);
 
 			document.getElementById("latitud").value = posicion.lat;
 			document.getElementById("longitud").value = posicion.lng;
+
+			//Array con toda la información del domicilio (calle, altura, localidad, etc.)
+			var domicilioArray = data.results[0].text;
+			
+			//Array del domicilioArray separando elementos por las comas (la calle con su altura);
+			var calle = domicilioArray.split(",");
+			
+			//Separar por espacios;
+			var calleArray = calle[0].split(" ");
+			
+			//Último elemento del array (la altura de la calle);
+			var alturaCalle = calleArray[calleArray.length - 1];
+			
+			//Eliminar el último elemento del array (la altura de la calle);
+			calleArray.splice((calleArray.length - 1), 1);
+			
+			//Unir todos los elementos del array separándolos con un espacio;
+			var nombreCalle = calleArray.join(' ');
+			
+			console.log("Nombre de la calle: " + nombreCalle);
+			console.log("Altura de la calle: " + alturaCalle);
+			
+			document.getElementById("nombreCalle").value = nombreCalle;
+			document.getElementById("alturaCalle").value = alturaCalle;
 		}
 
 	});
