@@ -315,21 +315,28 @@
 			console.log(data.results[0]);
 			//var obj = JSON.parse(data.results[0].text);
 			let domicilio = data.results[0].text.split(",")[0];
+			let domicilio2 = domicilio.split(" ");
 			let numero = data.results[0].text.split(",")[0].split(" ")[data.results[0].text.split(",")[0].split(" ").length-1];
-			let calle;
+			
 			
 			console.log(domicilio);
 			//console.log(data.results[0].text.split(",")[0].split(" ")[data.results[0].text.split(",")[0].split(" ").length-1]);
 			console.log(numero);
+			
+			domicilio2.splice(domicilio2.length-1, 1);
 			//console.log(domicilio.length);
 			//console.log(data.results.split(","));
-			for(i=0; i<domicilio.split(" ").length-1; i++){
+			/*for(i=0; i<domicilio.split(" ").length-1; i++){
 				//console.log(domicilio.split(" ").length);
-				calle.join(domicilio.split(" ")[i].concat(" "));
+				calle = domicilio.split(" ")[0].concat(domicilio.split(" ")[i]);
 				
-			}
+				
+				
+			}*/
 			
-			console.log(calle);
+			domicilio2.join(' ');
+			
+			console.log(domicilio2);
 
 			document.getElementById("latitud").value = posicion.lat;
 			document.getElementById("longitud").value = posicion.lng;
