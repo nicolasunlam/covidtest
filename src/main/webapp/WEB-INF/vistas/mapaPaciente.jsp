@@ -313,7 +313,23 @@
 			console.log(data.results[0].city);
 			console.log(data.results[0].subregion);
 			console.log(data.results[0]);
+			//var obj = JSON.parse(data.results[0].text);
+			let domicilio = data.results[0].text.split(",")[0];
+			let numero = data.results[0].text.split(",")[0].split(" ")[data.results[0].text.split(",")[0].split(" ").length-1];
+			let calle;
+			
+			console.log(domicilio);
+			//console.log(data.results[0].text.split(",")[0].split(" ")[data.results[0].text.split(",")[0].split(" ").length-1]);
+			console.log(numero);
+			//console.log(domicilio.length);
 			//console.log(data.results.split(","));
+			for(i=0; i<domicilio.split(" ").length-1; i++){
+				//console.log(domicilio.split(" ").length);
+				calle.join(domicilio.split(" ")[i].concat(" "));
+				
+			}
+			
+			console.log(calle);
 
 			document.getElementById("latitud").value = posicion.lat;
 			document.getElementById("longitud").value = posicion.lng;
