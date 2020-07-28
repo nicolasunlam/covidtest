@@ -35,6 +35,8 @@
 	</c:if>
 </div>
 
+<div>${rol}</div>
+
 <script
 	src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -308,9 +310,15 @@
 			posicion = data.results[i].latlng;
 			console.log(posicion.lat);
 			console.log(posicion.lng);
+			console.log(data.results[0].city);
+			console.log(data.results[0].subregion);
+			console.log(data.results[0]);
+			//console.log(data.results.split(","));
+
 			document.getElementById("latitud").value = posicion.lat;
 			document.getElementById("longitud").value = posicion.lng;
 		}
+
 	});
 </script>
 

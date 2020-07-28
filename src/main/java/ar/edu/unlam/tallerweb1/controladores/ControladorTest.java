@@ -18,251 +18,242 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ControladorTest {
 
-    public ServicioPaciente getServicioPaciente() {
-        return servicioPaciente;
-    }
+	public ServicioPaciente getServicioPaciente() {
+		return servicioPaciente;
+	}
 
+	public void setServicioPaciente(ServicioPaciente servicioPaciente) {
+		this.servicioPaciente = servicioPaciente;
+	}
 
-    public void setServicioPaciente(ServicioPaciente servicioPaciente) {
-        this.servicioPaciente = servicioPaciente;
-    }
+	public void setServicioTest(ServicioTest servicioTest) {
+		this.servicioTest = servicioTest;
+	}
 
+	@Autowired
+	private ServicioTest servicioTest;
 
-    public void setServicioTest(ServicioTest servicioTest) {
-        this.servicioTest = servicioTest;
-    }
+	@Autowired
+	ServicioPaciente servicioPaciente;
 
-    @Autowired
-    private ServicioTest servicioTest;
+	@Autowired
+	private ServicioLogin servicioLogin;
 
-    @Autowired
-    ServicioPaciente servicioPaciente;
+	@Autowired
+	private ServicioLocalidad servicioLocalidad;
 
-    @Autowired
-    private ServicioLogin servicioLogin;
+	@Autowired
+	private ServicioAtajo servicioAtajo;
 
-    @Autowired
-    private ServicioLocalidad servicioLocalidad;
-    
-    @Autowired
-    private ServicioAtajo servicioAtajo;
+	public ServicioTest getServicioTest() {
+		return servicioTest;
+	}
 
-    public ServicioTest getServicioTest() {
-        return servicioTest;
-    }
+	public void setServicioLocalidad(ServicioLocalidad servicioLocalidad) {
+		this.servicioLocalidad = servicioLocalidad;
+	}
 
-    public void setServicioLocalidad(ServicioLocalidad servicioLocalidad) {
-        this.servicioLocalidad = servicioLocalidad;
-    }
+	public ServicioLocalidad getServicioLocalidad() {
+		return servicioLocalidad;
+	}
 
-    public ServicioLocalidad getServicioLocalidad() {
-        return servicioLocalidad;
-    }
+	@RequestMapping("/autoTest")
+	public ModelAndView aTest(HttpServletRequest request) {
 
-    @RequestMapping("/autoTest")
-    public ModelAndView aTest(HttpServletRequest request) {
+		ModelMap model = new ModelMap();
 
-    	ModelMap model = new ModelMap();
-
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-    	
-        return new ModelAndView("autoTest", model);
-
-    }
-
-    @RequestMapping(value = "/validarTest", method = RequestMethod.GET)
-    public ModelAndView validarTest(
-    		HttpServletRequest request,
-            @RequestParam(value = "fiebre", required = false) Float fiebre,
-            @RequestParam(value = "perdidaOlfato", required = false) Boolean olfato,
-            @RequestParam(value = "perdidaGusto", required = false) Boolean gusto,
-            @RequestParam(value = "tos", required = false) Boolean tos,
-            @RequestParam(value = "perdidaRespiracion", required = false) Boolean respiracion
-    ) {
-
-    	ModelMap model = new ModelMap();
-
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-    	
-        if (servicioTest.realizarTest(fiebre, olfato, gusto, tos, respiracion)) {
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
+		return new ModelAndView("autoTest", model);
 
-            return new ModelAndView("testPositivo", model);
-        } else {
-            return new ModelAndView("testNegativo", model);
-        }
+	}
 
-    }
+	@RequestMapping(value = "/validarTest", method = RequestMethod.GET)
+	public ModelAndView validarTest(HttpServletRequest request,
+			@RequestParam(value = "fiebre", required = false) Float fiebre,
+			@RequestParam(value = "perdidaOlfato", required = false) Boolean olfato,
+			@RequestParam(value = "perdidaGusto", required = false) Boolean gusto,
+			@RequestParam(value = "tos", required = false) Boolean tos,
+			@RequestParam(value = "perdidaRespiracion", required = false) Boolean respiracion) {
 
-    @RequestMapping("/testPositivo")
-    public ModelAndView testPositivo(HttpServletRequest request) {
-    	
-    	ModelMap model = new ModelMap();
+		ModelMap model = new ModelMap();
 
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-    	
-        return new ModelAndView("testPositivo", model);
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-    }
+		if (servicioTest.realizarTest(fiebre, olfato, gusto, tos, respiracion)) {
 
-    @RequestMapping("/testNegativo")
-    public ModelAndView testNegativo(HttpServletRequest request) {
-    	
-    	ModelMap model = new ModelMap();
-
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+			return new ModelAndView("testPositivo", model);
+		} else {
+			model.put("permiso", true);
+			return new ModelAndView("testNegativo", model);
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-    	
-        return new ModelAndView("testNegativo", model);
 
-    }
+	}
 
-    @RequestMapping("/enfermedades")
-    public ModelAndView enfermedades(
-            @RequestParam(value = "ID_PACIENTE", required = false) Long ID_PACIENTE,
-            HttpServletRequest request) {
-    	
-    	ModelMap model = new ModelMap();
+	@RequestMapping("/testPositivo")
+	public ModelAndView testPositivo(HttpServletRequest request) {
 
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+		ModelMap model = new ModelMap();
+
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-    	
-        request.getSession().getAttribute("ID_PACIENTE");
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-        return new ModelAndView("enfermedades", model);
-    }
+		return new ModelAndView("testPositivo", model);
 
-    @RequestMapping(path = "/validarEnfermedades", method = RequestMethod.POST)
-    public ModelAndView validarEnfermedades(
-            @ModelAttribute("paciente") Usuario usuario,
-            HttpServletRequest request,
-            @RequestParam(value = "tieneEmbarazo", required = false) Boolean tieneEmbarazo,
-            @RequestParam(value = "esFumador", required = false) Boolean esFumador,
-            @RequestParam(value = "tieneDiabetes", required = false) Boolean tieneDiabetes,
-            @RequestParam(value = "tieneEnfHepatica", required = false) Boolean tieneEnfHepatica,
-            @RequestParam(value = "tieneEnfRespiratoria", required = false) Boolean tieneEnfRespiratoria,
-            @RequestParam(value = "tieneEnfRenal", required = false) Boolean tieneEnfRenal,
-            @RequestParam(value = "tieneEnfCardiologica", required = false) Boolean tieneEnfCardiologica,
-            @RequestParam(value = "estatura", required = false) Float estatura,
-            @RequestParam(value = "peso", required = false) Float peso
-    ) {
-        	
-    	ModelMap model = new ModelMap();
+	}
 
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+	@RequestMapping("/testNegativo")
+	public ModelAndView testNegativo(HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-    	
-        Long id_paciente = (Long) request.getSession().getAttribute("ID_PACIENTE");
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-        Paciente paciente = servicioPaciente.consultarPacientePorId(id_paciente);
+		return new ModelAndView("testNegativo", model);
 
-        if (tieneEmbarazo == null) {
-            tieneEmbarazo = false;
-        }
-        if (esFumador == null) {
-            esFumador = false;
-        }
-        if (tieneDiabetes == null) {
-            tieneDiabetes = false;
-        }
-        if (tieneEnfHepatica == null) {
-            tieneEnfHepatica = false;
-        }
-        if (tieneEnfRespiratoria == null) {
-            tieneEnfRespiratoria = false;
-        }
-        if (tieneEnfRenal == null) {
-            tieneEnfRenal = false;
-        }
-        if (tieneEnfCardiologica == null) {
-            tieneEnfCardiologica = false;
-        }
+	}
 
-        Integer contador = 0;
+	@RequestMapping("/enfermedades")
+	public ModelAndView enfermedades(@RequestParam(value = "ID_PACIENTE", required = false) Long ID_PACIENTE,
+			HttpServletRequest request) {
 
-        if (tieneEmbarazo) {
-            paciente.setTieneEmbarazo(true);
-        }
-        if (esFumador) {
-            contador++;
-            paciente.setEsFumador(true);
-        }
-        if (tieneDiabetes) {
-            contador++;
-            paciente.setTieneDiabetes(true);
-        }
-        if (tieneEnfHepatica) {
-            contador++;
-            paciente.setTieneEnfHepatica(true);
-        }
-        if (tieneEnfRespiratoria) {
-            contador++;
-            paciente.setTieneEnfRespiratoria(true);
-        }
-        if (tieneEnfRenal) {
-            contador++;
-            paciente.setTieneEnfRenal(true);
-        }
-        if (tieneEnfCardiologica) {
-            contador++;
-            paciente.setTieneEnfCardiologica(true);
-        }
+		ModelMap model = new ModelMap();
 
-        Float estaturaMetros = estatura / 100;
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-        IMC categoriaIMC = servicioTest.calcularCategoriaIMC(peso, estaturaMetros);
+		request.getSession().getAttribute("ID_PACIENTE");
 
-        Integer prioridad = servicioPaciente.establecerPrioridad(contador, tieneEmbarazo, categoriaIMC, paciente.getEdad());
+		return new ModelAndView("enfermedades", model);
+	}
 
-        paciente.setPrioridad(prioridad);
+	@RequestMapping(path = "/validarEnfermedades", method = RequestMethod.POST)
+	public ModelAndView validarEnfermedades(@ModelAttribute("paciente") Usuario usuario, HttpServletRequest request,
+			@RequestParam(value = "tieneEmbarazo", required = false) Boolean tieneEmbarazo,
+			@RequestParam(value = "esFumador", required = false) Boolean esFumador,
+			@RequestParam(value = "tieneDiabetes", required = false) Boolean tieneDiabetes,
+			@RequestParam(value = "tieneEnfHepatica", required = false) Boolean tieneEnfHepatica,
+			@RequestParam(value = "tieneEnfRespiratoria", required = false) Boolean tieneEnfRespiratoria,
+			@RequestParam(value = "tieneEnfRenal", required = false) Boolean tieneEnfRenal,
+			@RequestParam(value = "tieneEnfCardiologica", required = false) Boolean tieneEnfCardiologica,
+			@RequestParam(value = "estatura", required = false) Float estatura,
+			@RequestParam(value = "peso", required = false) Float peso) {
 
-        servicioPaciente.actualizarPaciente(paciente);
+		ModelMap model = new ModelMap();
 
-        return new ModelAndView("mapaPaciente", model);
-    }
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-    @RequestMapping(value = "/validar-email", method = RequestMethod.POST)
-    public @ResponseBody
-    String validarEmail(@RequestBody String json) {
-    Paciente usuario = new Paciente();
-    usuario.setEmail(json);
-    Usuario usuario2 = servicioLogin.consultarUsuarioporEmail(usuario);
-    String mensaje = "OK";
-    try {
-        if (usuario2.getEmail() != null) {
-            mensaje = "BAD";
-            return mensaje;
-        }
-    } catch (NullPointerException e) {
-        mensaje = "OK";
-        return mensaje;
-    }
-    return mensaje;
-    }
+		Long id_paciente = (Long) request.getSession().getAttribute("ID_PACIENTE");
 
+		Paciente paciente = servicioPaciente.consultarPacientePorId(id_paciente);
+
+		if (tieneEmbarazo == null) {
+			tieneEmbarazo = false;
+		}
+		if (esFumador == null) {
+			esFumador = false;
+		}
+		if (tieneDiabetes == null) {
+			tieneDiabetes = false;
+		}
+		if (tieneEnfHepatica == null) {
+			tieneEnfHepatica = false;
+		}
+		if (tieneEnfRespiratoria == null) {
+			tieneEnfRespiratoria = false;
+		}
+		if (tieneEnfRenal == null) {
+			tieneEnfRenal = false;
+		}
+		if (tieneEnfCardiologica == null) {
+			tieneEnfCardiologica = false;
+		}
+
+		Integer contador = 0;
+
+		if (tieneEmbarazo) {
+			paciente.setTieneEmbarazo(true);
+		}
+		if (esFumador) {
+			contador++;
+			paciente.setEsFumador(true);
+		}
+		if (tieneDiabetes) {
+			contador++;
+			paciente.setTieneDiabetes(true);
+		}
+		if (tieneEnfHepatica) {
+			contador++;
+			paciente.setTieneEnfHepatica(true);
+		}
+		if (tieneEnfRespiratoria) {
+			contador++;
+			paciente.setTieneEnfRespiratoria(true);
+		}
+		if (tieneEnfRenal) {
+			contador++;
+			paciente.setTieneEnfRenal(true);
+		}
+		if (tieneEnfCardiologica) {
+			contador++;
+			paciente.setTieneEnfCardiologica(true);
+		}
+
+		Float estaturaMetros = estatura / 100;
+
+		IMC categoriaIMC = servicioTest.calcularCategoriaIMC(peso, estaturaMetros);
+
+		Integer prioridad = servicioPaciente.establecerPrioridad(contador, tieneEmbarazo, categoriaIMC,
+				paciente.getEdad());
+
+		paciente.setPrioridad(prioridad);
+
+		servicioPaciente.actualizarPaciente(paciente);
+
+		return new ModelAndView("mapaPaciente", model);
+	}
+
+	@RequestMapping(value = "/validar-email", method = RequestMethod.POST)
+	public @ResponseBody String validarEmail(@RequestBody String json) {
+		Paciente usuario = new Paciente();
+		usuario.setEmail(json);
+		Usuario usuario2 = servicioLogin.consultarUsuarioporEmail(usuario);
+		String mensaje = "OK";
+		try {
+			if (usuario2.getEmail() != null) {
+				mensaje = "BAD";
+				return mensaje;
+			}
+		} catch (NullPointerException e) {
+			mensaje = "OK";
+			return mensaje;
+		}
+		return mensaje;
+	}
 
 }

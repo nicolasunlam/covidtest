@@ -60,41 +60,13 @@ public class ControladorMapa {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		/*
-		 * Long id = (Long) request.getSession().getAttribute("ID"); Paciente paciente =
-		 * servicioPaciente.consultarPacientePorId(id);
-		 */
-
-		Long id = (Long) request.getSession().getAttribute("ID");
+		Long id = (Long) request.getSession().getAttribute("ID_PACIENTE");
 		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
 
-		if (usuario.getRol() == Rol.PACIENTE) {
-			usuario.setLatitud(latitud);
-			usuario.setLongitud(longitud);
+		usuario.setLatitud(latitud);
+		usuario.setLongitud(longitud);
 
-			servicioUsuario.actualizarUsuario(usuario);
-
-			model.put("latitud", latitud);
-			model.put("longitud", longitud);
-		}
-
-		if (usuario.getRol() == Rol.INSTITUCION) {
-			usuario.setLatitud(latitud);
-			usuario.setLongitud(longitud);
-
-			servicioUsuario.actualizarUsuario(usuario);
-
-			model.put("latitud", latitud);
-			model.put("longitud", longitud);
-		}
-
-		/*
-		 * paciente.setLatitud(latitud); paciente.setLongitud(longitud);
-		 * 
-		 * servicioPaciente.actualizarPaciente(paciente);
-		 * 
-		 * model.put("latitud", latitud); model.put("longitud", longitud);
-		 */
+		servicioUsuario.actualizarUsuario(usuario);
 
 		return new ModelAndView("validarMapa", model);
 	}

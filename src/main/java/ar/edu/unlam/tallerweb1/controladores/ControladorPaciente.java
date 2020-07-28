@@ -138,7 +138,7 @@ public class ControladorPaciente {
 
             servicioPaciente.registrarPaciente(paciente);
            
-            request.getSession().setAttribute("ROL", paciente.getRol());
+            //request.getSession().setAttribute("ROL", paciente.getRol());
 
             String nombre = paciente.getNombre();
             String documento = paciente.getNumeroDocumento();
@@ -146,6 +146,7 @@ public class ControladorPaciente {
             TipoDocumento tipoDocumento = paciente.getTipoDocumento();
 
             Paciente pacienteBuscado = servicioPaciente.consultarPacientePorDoc(documento, tipoDocumento);
+            //Cambiar, posiblemente, a ID_USUARIO
             request.getSession().setAttribute("ID_PACIENTE", pacienteBuscado.getId());
 
             model.put("nombre", nombre);
