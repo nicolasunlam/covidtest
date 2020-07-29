@@ -49,7 +49,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item ml-5 active"><a class="nav-link"
+				<li class="nav-item ml-5"><a class="nav-link"
 					href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
 						</c:if>
@@ -68,7 +68,7 @@
 						test</a></li>
 				<c:if test="${permiso == true}">
 					<li class="nav-item ml-5" id="botonPermiso"><a
-						class="nav-link" href="generarPermiso">Generar Permiso </a></li>
+						class="nav-link btn btn-primary active" href="generarPermiso">Generar Permiso </a></li>
 				</c:if>
 				</li>
 				<c:if test='${rol == "PACIENTE"}'>
