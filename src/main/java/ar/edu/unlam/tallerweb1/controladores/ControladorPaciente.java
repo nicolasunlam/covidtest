@@ -169,8 +169,8 @@ public class ControladorPaciente {
             servicioDomicilio.actualizarDomicilio(domicilio);
             servicioLocalidad.actualizarLocalidad(localidad);
             
-//            String path="http://localhost:"+request.getLocalPort();
-//            servicioMail.SendEmail(paciente.getEmail(), "Confirmación de registro: AsignAr"+ paciente.getNombre(), path);
+            String path="http://localhost:"+request.getLocalPort();
+            servicioMail.SendEmail(paciente.getEmail(), "Confirmación de registro: AsignAr"+ paciente.getNombre(), path);
        
             return new ModelAndView("enfermedades", model);
         } else {
