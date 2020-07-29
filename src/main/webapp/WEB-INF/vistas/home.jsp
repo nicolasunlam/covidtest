@@ -9,7 +9,7 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-<h1 class="text-center mb-4 mt-5">Generar un permiso de circulación</h1>
+<h2 class="text-center p-2 mb-4 mt-5 h1 border-top p2">Generar un permiso de circulación</h2>
 
 <div class="text-center mt-5 mb-4">
 	<img src="img/permit.png" class="rounded" alt="no-virus" width="200"
@@ -45,9 +45,41 @@
 	</div>
 </div>
 
+<h2 class="text-center p-2 mb-4 mt-5 h1 border-top p2">Registrar institución</h2>
 
-<h1 class="text-center mb-3 mt-5">Consejos para prevenir el
-	Coronavirus</h1>
+<div class="text-center mt-5 mb-4">
+	<img src="img/hospital.png" class="rounded" alt="no-virus" width="200"
+		height="200">
+</div>
+
+<div class="container my-3">
+	<div class="form-group">
+		<ul class="list-group border border-dark">
+			<li
+				class="list-group-item list-group-item-warning text-center active"><h4
+					class="text-center">¿Cómo registro una institución?</h4></li>
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center my-2">
+				<h6>blablablablablablablablablablablablablabla</h6> <span
+				class="badge badge-primary badge-pill">1</span>
+			</li>
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center my-2">
+				<h6>blablablablablablablablablablablablablablablablablablabla</h6> <span
+				class="badge badge-primary badge-pill">2</span>
+			</li>
+			<li
+				class="list-group-item d-flex justify-content-between align-items-center mt-2">
+				<h6>blablablablablablablablablablablablablablablablablablabla</h6> <span class="badge badge-primary badge-pill">3</span>
+			</li>
+		</ul>
+
+	</div>
+</div>
+
+
+<h2 class="text-center p-2 mb-4 mt-5 h1 border-top p2">Consejos para prevenir el
+	Coronavirus</h2>
 
 <div class="container mb-5">
 	<div class="row">
