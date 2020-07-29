@@ -27,7 +27,7 @@
 
 	<nav
 		class="navbar sticky-top bg-dark text-white justify-content-center align-items-center">
-		<a class="text-center text-white" href="#" id="navbar-top">
+		<a class="text-center text-white" href="https://www.argentina.gob.ar/salud/coronavirus-COVID-19" id="navbar-top">
 			<h5>
 				Coronavirus COVID-19 conocé información y recomendaciones del
 				Ministerio de Salud</strong>
@@ -49,7 +49,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item ml-5"><a class="nav-link"
+				<li class="nav-item ml-5 active"><a class="nav-link"
 					href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
 						</c:if>
@@ -64,7 +64,7 @@
 						</c:if>>Home
 						<span class="sr-only">(current)</span>
 				</a>
-				<li class="nav-item ml-5"><a class="nav-link" href="autoTest">Realizar
+				<li class="nav-item ml-5"><a class="nav-link active" href="autoTest">Realizar
 						test</a></li>
 				<c:if test="${permiso == true}">
 					<li class="nav-item ml-5" id="botonPermiso"><a
