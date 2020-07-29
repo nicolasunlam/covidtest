@@ -9,7 +9,6 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-
 <div class="form-group">
 	<c:if test="${not empty error}">
 		<h4>
@@ -19,10 +18,29 @@
 	</c:if>
 </div>
 
+<div class="progress my-1">
+	<div class="progress-bar bg-success" role="progressbar"
+		style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+		aria-valuemax="100">100%</div>
+</div>
 
-<h2 class="text-center mb-3 mt-5">${latitud}</h2>
-<h2 class="text-center mb-3 mt-5">${longitud}</h2>
+<div class="alert alert-success alert-dismissible fade show text-center"
+	role="alert">
+	<h5>Registro exitoso</h5>
+	<button type="button" class="close" data-dismiss="alert"
+		aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
 
+
+<div class="text-center mt-5">
+	<img src="img/message.png" class="rounded" alt="no-virus" width="250"
+		height="250">
+</div>
+
+<h1 class="text-center mt-3 mb-5">Por favor, revise su casilla de
+	correo electrónico para completar el proceso de registro</h1>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -18,4 +18,10 @@ public class ServicioPartidoImpl implements ServicioPartido {
     public Partido obtenerPartidoPorNombre(String nombrePartido) {
         return repositorioPartido.obtenerPartidoPorNombre(nombrePartido);
     }
+
+	@Override
+	public void registrarPartido(Partido partido) {
+		repositorioPartido.registrarPartido(partido);
+		
+	}
 }

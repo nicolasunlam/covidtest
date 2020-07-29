@@ -87,7 +87,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="validarMapa" method="POST" modelAttribute="paciente">
+			<form action="validarMapa" method="POST" modelAttribute="usuario">
 				<div class="modal-body">
 
 					<p class="text-center">Recuerde que la información consignada
@@ -104,12 +104,20 @@
 							name="longitud">
 					</div>
 					<div class="form-group">
-						<input type="hidden" class="form-control" id="nombreCalle"
-							name="nombreCalle">
+						<input type="hidden" class="form-control" id="calle"
+							name="calle">
 					</div>
 					<div class="form-group">
-						<input type="hidden" class="form-control" id="alturaCalle"
-							name="alturaCalle">
+						<input type="hidden" class="form-control" id="numero"
+							name="numero">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="nombreLocalidad"
+							name="nombreLocalidad">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="nombrePartido"
+							name="nombrePartido">
 					</div>
 
 				</div>
@@ -334,8 +342,10 @@
 			console.log("Nombre de la calle: " + nombreCalle);
 			console.log("Altura de la calle: " + alturaCalle);
 			
-			document.getElementById("nombreCalle").value = nombreCalle;
-			document.getElementById("alturaCalle").value = alturaCalle;
+			document.getElementById("calle").value = nombreCalle;
+			document.getElementById("numero").value = alturaCalle;
+			document.getElementById("nombreLocalidad").value = data.results[0].city;
+			document.getElementById("nombrePartido").value = data.results[0].subregion;
 		}
 
 	});

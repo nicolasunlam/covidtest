@@ -12,14 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Domicilio;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMapa;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
@@ -35,6 +41,12 @@ public class ControladorMapa {
 	ServicioUsuario servicioUsuario;
 	@Autowired
 	ServicioInstitucion servicioInstitucion;
+	@Autowired
+	ServicioDomicilio servicioDomicilio;
+	@Autowired
+	ServicioLocalidad servicioLocalidad;
+	@Autowired
+	ServicioPartido servicioPartido;
 
 	@RequestMapping("/mapaPaciente")
 	public ModelAndView mapaPaciente(HttpServletRequest request) {
@@ -51,7 +63,10 @@ public class ControladorMapa {
 
 	@RequestMapping("/validarMapa")
 	public ModelAndView validarMapa(HttpServletRequest request, @RequestParam(value = "latitud") Double latitud,
-			@RequestParam(value = "longitud") Double longitud) {
+			@RequestParam(value = "longitud") Double longitud, @RequestParam(value = "calle") String calle,
+			@RequestParam(value = "numero") Integer numero,
+			@RequestParam(value = "nombreLocalidad") String nombreLocalidad,
+			@RequestParam(value = "nombrePartido") String nombrePartido) {
 		ModelMap model = new ModelMap();
 
 		Rol rol = (Rol) request.getSession().getAttribute("ROL");
@@ -65,6 +80,36 @@ public class ControladorMapa {
 
 		usuario.setLatitud(latitud);
 		usuario.setLongitud(longitud);
+
+		Domicilio domicilio = new Domicilio();
+		domicilio.setCalle(calle);
+		domicilio.setNumero(numero);
+		servicioDomicilio.registrarDomicilio(domicilio);
+		usuario.setDomicilio(domicilio);
+
+		Localidad localidad = new Localidad();
+		Partido partido = new Partido();
+
+		if (servicioPartido.obtenerPartidoPorNombre(nombrePartido) == null) {
+			servicioPartido.registrarPartido(partido);
+			partido.setNombrePartido(nombrePartido);
+			localidad.setPartido(partido);
+		} else {
+			partido = servicioPartido.obtenerPartidoPorNombre(nombrePartido);
+			localidad.setPartido(partido);
+		}
+
+		if (servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad) == null) {
+			servicioLocalidad.registrarLocalidad(localidad);
+			localidad.setNombreLocalidad(nombreLocalidad);
+			domicilio.setLocalidad(localidad);
+		} else {
+			localidad = servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad);
+			domicilio.setLocalidad(localidad);
+		}
+
+		servicioLocalidad.actualizarLocalidad(localidad);
+		servicioDomicilio.actualizarDomicilio(domicilio);
 
 		servicioUsuario.actualizarUsuario(usuario);
 

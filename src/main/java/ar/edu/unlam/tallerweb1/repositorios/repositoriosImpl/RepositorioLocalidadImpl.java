@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios.repositoriosImpl;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
+import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioLocalidad;
@@ -18,42 +19,47 @@ import java.util.List;
 @Transactional
 public class RepositorioLocalidadImpl implements RepositorioLocalidad {
 
-    @Inject
-    private SessionFactory sessionFactory;
+	@Inject
+	private SessionFactory sessionFactory;
 
-    @Autowired
-    public RepositorioLocalidadImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+	@Autowired
+	public RepositorioLocalidadImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
-    @SuppressWarnings({"unchecked", "deprecation"})
-    @Override
-    public List<Localidad> obtenerLocalidades() {
-        return sessionFactory.getCurrentSession().createCriteria(Localidad.class)
-                .list();
-    }
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
+	public List<Localidad> obtenerLocalidades() {
+		return sessionFactory.getCurrentSession().createCriteria(Localidad.class).list();
+	}
 
-    @SuppressWarnings({"unchecked", "deprecation"})
-    @Override
-    public Localidad obtenerLocalidadPorNombre(String nombreLocalidad) {
-        return (Localidad) sessionFactory.getCurrentSession().createCriteria(Localidad.class)
-                .add(Restrictions.eq("nombreLocalidad", nombreLocalidad))
-                .uniqueResult();
-    }
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
+	public Localidad obtenerLocalidadPorNombre(String nombreLocalidad) {
+		return (Localidad) sessionFactory.getCurrentSession().createCriteria(Localidad.class)
+				.add(Restrictions.eq("nombreLocalidad", nombreLocalidad)).uniqueResult();
+	}
 
-    @Override
-    public void actualizarLocalidad(Localidad localidad) {
-        sessionFactory.getCurrentSession().update(localidad);
-    }
+	@Override
+	public void actualizarLocalidad(Localidad localidad) {
+		sessionFactory.getCurrentSession().update(localidad);
+	}
 
-    @Override
-    public List<Partido> obtenerPartidoPorLocalidad(Long idPartido) {
-        return sessionFactory.getCurrentSession().createCriteria(Localidad.class).add(Restrictions.eq("partido_id", idPartido)).list();
-    }
+	@Override
+	public List<Partido> obtenerPartidoPorLocalidad(Long idPartido) {
+		return sessionFactory.getCurrentSession().createCriteria(Localidad.class)
+				.add(Restrictions.eq("partido_id", idPartido)).list();
+	}
 
-    @Override
-    public List<Institucion> listarInstitucionesPorZona(Zona zona) {
-        return sessionFactory.getCurrentSession().createCriteria(Localidad.class).add(Restrictions.eq("zona", zona)).list();
-    }
+	@Override
+	public List<Institucion> listarInstitucionesPorZona(Zona zona) {
+		return sessionFactory.getCurrentSession().createCriteria(Localidad.class).add(Restrictions.eq("zona", zona))
+				.list();
+	}
+
+	@Override
+	public void registrarLocalidad(Localidad localidad) {
+		sessionFactory.getCurrentSession().save(localidad);
+	}
 
 }

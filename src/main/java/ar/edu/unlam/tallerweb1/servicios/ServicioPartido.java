@@ -5,4 +5,6 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 public interface ServicioPartido {
 
     public Partido obtenerPartidoPorNombre(String nombrePartido);
+
+	public void registrarPartido(Partido partido);
 }

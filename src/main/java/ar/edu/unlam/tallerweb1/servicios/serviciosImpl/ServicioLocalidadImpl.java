@@ -43,4 +43,10 @@ public class ServicioLocalidadImpl implements ServicioLocalidad {
     public List<Institucion> listarInstitucionesPorZona(Zona zona) {
         return repositorioLocalidad.listarInstitucionesPorZona(zona);
     }
+
+	@Override
+	public void registrarLocalidad(Localidad localidad) {
+		repositorioLocalidad.registrarLocalidad(localidad);
+		
+	}
 }

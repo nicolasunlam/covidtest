@@ -87,7 +87,7 @@
 									required>
 							</div>
 
-							<div class="form-row my-4">
+							<%--<div class="form-row my-4">
 								<div class="form-group col-9">
 									<label for="calle">Calle <span
 										class="text-primary font-weight-bold">*</span></label> <input
@@ -107,12 +107,12 @@
 								</div>
 							</div>
 
-							<%--<div class="form-row my-4">
+							<div class="form-row my-4">
                             <label for="nombreLocalidad">Localidad <span class="text-primary font-weight-bold">*</span></label>
                             <input type="text" class="form-control" id="nombreLocalidad" name="nombreLocalidad" required>
                         </div>--%>
 
-							<div class="form-row my-4">
+							<%--<div class="form-row my-4">
 								<div class="form-group col-6">
 									<label for="nombreLocalidad">Localidad <span
 										class="text-primary font-weight-bold">*</span></label> <select
@@ -401,7 +401,7 @@
 									</select> <small id="partidoHelp" class="form-text text-muted">Seleccione
 										el partido en donde reside actualmente</small>
 								</div>
-							</div>
+							</div>--%>
 
 							<div class="form-row my-4">
 								<label for="email">Email <span
@@ -426,9 +426,13 @@
 										name="tipoDocumento" id="tipoDocumento"
 										class="form-control br-radius-zero" required>
 										<option id="tipoDocumentoDNI">DNI
-										<option id="tipoDocumentoPasaporte">PASAPORTE
+
+
+
+											<option id="tipoDocumentoPasaporte">PASAPORTE
 										<option id="tipoDocumentoLibretaCivica">LIBRETA
 											CÍVICA
+									
 									</select>
 								</div>
 								<div class="form-group col-6">
@@ -530,343 +534,518 @@
         </div>
 
     </div>
-</div>--%>
+</div>--%><!-- Optional JavaScript -->
+											<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+											<script
+												src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+												integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+												crossorigin="anonymous"></script>
+											<script
+												src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+												integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+												crossorigin="anonymous"></script>
+											<script
+												src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+												integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+												crossorigin="anonymous"></script>
+											<!-- Footer -->
+											<footer
+												class="page-footer font-small mdb-color pt-4 bg-whiteborder border-top">
+
+												<!-- Footer Links -->
+												<div class="container text-center text-md-left">
+
+													<!-- Footer links -->
+													<div class="row text-center text-md-left mt-3 pb-3">
+
+														<!-- Grid column -->
+														<div
+															class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 text-left">
+															<h6 class="text-uppercase mb-4 font-weight-bold">asignAR</h6>
+															<img src="img/share2.png" width="50" height="50"
+																class="d-inline-block align-top" alt="">
+														</div>
+														<!-- Grid column -->
+
+														<hr class="w-100 clearfix d-md-none">
+
+														<!-- Grid column -->
+														<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+															<h6 class="text-uppercase mb-4 font-weight-bold">ENLACES
+																ÚTILES</h6>
+															<p>
+																<a href="#!">Ministerio de Salud</a>
+															</p>
+															<p>
+																<a href="#!">Hospitales y establecimientos de salud</a>
+															</p>
+														</div>
+
+														<!-- Grid column -->
+														<hr class="w-100 clearfix d-md-none">
+
+														<!-- Grid column -->
+														<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+															<h6 class="text-uppercase mb-4 font-weight-bold">Teléfono</h6>
+															<p>
+																<i class="fas fa-home"></i> Llamá al <strong>120</strong>,
+																es gratuito desde cualquier lugar del país y te atienden
+																las 24 horas.
+															</p>
+															<hr>
+															<h6 class="text-uppercase mb-4 font-weight-bold">Whatsapp</h6>
+															<i class="fas fa-home"></i> Escribí "Hola" al <strong>+54
+																9 11 2256-0566</strong> para que encuentres respuestas a las
+															preguntas más frecuentes y recibas consejos de
+															prevención.
+															</p>
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-<!-- Footer -->
-<footer
-	class="page-footer font-small mdb-color pt-4 bg-whiteborder border-top">
+														</div>
+														<!-- Grid column -->
 
-	<!-- Footer Links -->
-	<div class="container text-center text-md-left">
+													</div>
+													<!-- Footer links -->
 
-		<!-- Footer links -->
-		<div class="row text-center text-md-left mt-3 pb-3">
+													<hr>
 
-			<!-- Grid column -->
-			<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 text-left">
-				<h6 class="text-uppercase mb-4 font-weight-bold">asignAR</h6>
-				<img src="img/share2.png" width="50" height="50"
-					class="d-inline-block align-top" alt="">
-			</div>
-			<!-- Grid column -->
+													<!-- Grid row -->
+													<div class="row d-flex align-items-center">
 
-			<hr class="w-100 clearfix d-md-none">
+														<!-- Grid column -->
+														<div class="col-md-7 col-lg-8">
 
-			<!-- Grid column -->
-			<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-				<h6 class="text-uppercase mb-4 font-weight-bold">ENLACES ÚTILES</h6>
-				<p>
-					<a href="#!">Ministerio de Salud</a>
-				</p>
-				<p>
-					<a href="#!">Hospitales y establecimientos de salud</a>
-				</p>
-			</div>
+															<!--Copyright-->
+															<p class="text-center text-md-left">
+																© 2020 Copyright: <strong>ASIGNAR</strong>
 
-			<!-- Grid column -->
-			<hr class="w-100 clearfix d-md-none">
+															</p>
 
-			<!-- Grid column -->
-			<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-				<h6 class="text-uppercase mb-4 font-weight-bold">Teléfono</h6>
-				<p>
-					<i class="fas fa-home"></i> Llamá al <strong>120</strong>, es
-					gratuito desde cualquier lugar del país y te atienden las 24 horas.
-				</p>
-				<hr>
-				<h6 class="text-uppercase mb-4 font-weight-bold">Whatsapp</h6>
-				<i class="fas fa-home"></i> Escribí "Hola" al <strong>+54 9
-					11 2256-0566</strong> para que encuentres respuestas a las preguntas más
-				frecuentes y recibas consejos de prevención.
-				</p>
+														</div>
+														<!-- Grid column -->
 
+														<!-- Grid column -->
+														<div class="col-md-5 col-lg-4 ml-lg-0">
 
-			</div>
-			<!-- Grid column -->
+															<!-- Social buttons -->
+															<div class="text-center text-md-right">
+																<ul class="list-unstyled list-inline">
+																	<li class="list-inline-item"><a
+																		class="btn-floating btn-sm rgba-white-slight mx-1">
+																			<i class="fab fa-facebook-f"></i>
+																	</a></li>
+																	<li class="list-inline-item"><a
+																		class="btn-floating btn-sm rgba-white-slight mx-1">
+																			<i class="fab fa-twitter"></i>
+																	</a></li>
+																	<li class="list-inline-item"><a
+																		class="btn-floating btn-sm rgba-white-slight mx-1">
+																			<i class="fab fa-google-plus-g"></i>
+																	</a></li>
+																	<li class="list-inline-item"><a
+																		class="btn-floating btn-sm rgba-white-slight mx-1">
+																			<i class="fab fa-linkedin-in"></i>
+																	</a></li>
+																</ul>
+															</div>
 
-		</div>
-		<!-- Footer links -->
+														</div>
+														<!-- Grid column -->
 
-		<hr>
+													</div>
+													<!-- Grid row -->
 
-		<!-- Grid row -->
-		<div class="row d-flex align-items-center">
+												</div>
+												<!-- Footer Links -->
 
-			<!-- Grid column -->
-			<div class="col-md-7 col-lg-8">
+											</footer>
+											<!-- Footer -->
+											</body>
+											<script>
+												//  document.getElementById("Tigre").style.display = "none";
+												// document.getElementsByClassName("partido1").style.display = "none";
+												/*    if (document.getElementsByClassName("partido1").select) {
+												 alert("Hola");
+												 } else {
+												 alert("Chau");
+												 }*/
+												function ShowSelected() {
+													/* Para obtener el valor */
+													var cod = document
+															.getElementById("nombreLocalidad").value;
+													//alert(cod);
 
-				<!--Copyright-->
-				<p class="text-center text-md-left">
-					© 2020 Copyright: <strong>ASIGNAR</strong>
+													if (cod == "Munro"
+															|| cod == "Villa Martelli"
+															|| cod == "Vicente López") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+													}
 
-				</p>
+													if (cod == "Victoria") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+													}
 
-			</div>
-			<!-- Grid column -->
+													if (cod == "Martínez"
+															|| cod == "San Isidro"
+															|| cod == "Beccar") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+													}
 
-			<!-- Grid column -->
-			<div class="col-md-5 col-lg-4 ml-lg-0">
+													if (cod == "Tigre"
+															|| cod == "General Pacheco"
+															|| cod == "Don Torcuato") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+													}
 
-				<!-- Social buttons -->
-				<div class="text-center text-md-right">
-					<ul class="list-unstyled list-inline">
-						<li class="list-inline-item"><a
-							class="btn-floating btn-sm rgba-white-slight mx-1"> <i
-								class="fab fa-facebook-f"></i>
-						</a></li>
-						<li class="list-inline-item"><a
-							class="btn-floating btn-sm rgba-white-slight mx-1"> <i
-								class="fab fa-twitter"></i>
-						</a></li>
-						<li class="list-inline-item"><a
-							class="btn-floating btn-sm rgba-white-slight mx-1"> <i
-								class="fab fa-google-plus-g"></i>
-						</a></li>
-						<li class="list-inline-item"><a
-							class="btn-floating btn-sm rgba-white-slight mx-1"> <i
-								class="fab fa-linkedin-in"></i>
-						</a></li>
-					</ul>
-				</div>
+													if (cod == "Villa Sarmiento"
+															|| cod == "El Palomar"
+															|| cod == "Haedo"
+															|| cod == "Morón"
+															|| cod == "Castelar") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+													}
 
-			</div>
-			<!-- Grid column -->
+													if (cod == "Ituzaingó"
+															|| cod == "Udaondo") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+													}
 
-		</div>
-		<!-- Grid row -->
+													if (cod == "Trujui"
+															|| cod == "Paso del Rey"
+															|| cod == "Moreno"
+															|| cod == "La Reja") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+													}
 
-	</div>
-	<!-- Footer Links -->
+													if (cod == "Lomas del Mirador"
+															|| cod == "La Tablada"
+															|| cod == "Isidro Casanova"
+															|| cod == "San Justo"
+															|| cod == "Gregorio de Laferrere") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+													}
 
-</footer>
-<!-- Footer -->
-</body>
-<script>
-	//  document.getElementById("Tigre").style.display = "none";
-	// document.getElementsByClassName("partido1").style.display = "none";
-	/*    if (document.getElementsByClassName("partido1").select) {
-	 alert("Hola");
-	 } else {
-	 alert("Chau");
-	 }*/
-	function ShowSelected() {
-		/* Para obtener el valor */
-		var cod = document.getElementById("nombreLocalidad").value;
-		//alert(cod);
+													if (cod == "Wilde"
+															|| cod == "Valentín Alsina") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+													}
 
-		if (cod == "Munro" || cod == "Villa Martelli" || cod == "Vicente López") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-		}
+													if (cod == "Villa Fiorito"
+															|| cod == "Banfield") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+													}
 
-		if (cod == "Victoria") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-		}
+													if (cod == "Canning"
+															|| cod == "José María Ezeiza"
+															|| cod == "Carlos Spegazzini") {
+														document
+																.getElementById("hurlinghamMunicipio").style.display = "none";
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+													}
 
-		if (cod == "Martínez" || cod == "San Isidro" || cod == "Beccar") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-		}
+													if (cod == "Hurlingham"
+															|| cod == "William C. Morris") {
+														document
+																.getElementById("ituzaingoMunicipio").style.display = "none";
+														document
+																.getElementById("lomasDeZamoraMunicipio").style.display = "none";
+														document
+																.getElementById("morenoMunicipio").style.display = "none";
+														document
+																.getElementById("moronMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("sanFernandoMunicipio").style.display = "none";
+														document
+																.getElementById("tigreMunicipio").style.display = "none";
+														document
+																.getElementById("avellanedaMunicipio").style.display = "none";
+														document
+																.getElementById("ezeizaMunicipio").style.display = "none";
+														document
+																.getElementById("florencioVarelaMunicipio").style.display = "none";
+														document
+																.getElementById("sanIsidroMunicipio").style.display = "none";
+														document
+																.getElementById("vicenteLopezMunicipio").style.display = "none";
+														document
+																.getElementById("laMatanzaMunicipio").style.display = "none";
+													}
 
-		if (cod == "Tigre" || cod == "General Pacheco" || cod == "Don Torcuato") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-		}
-
-		if (cod == "Villa Sarmiento" || cod == "El Palomar" || cod == "Haedo"
-				|| cod == "Morón" || cod == "Castelar") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-		}
-
-		if (cod == "Ituzaingó" || cod == "Udaondo") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-		}
-
-		if (cod == "Trujui" || cod == "Paso del Rey" || cod == "Moreno"
-				|| cod == "La Reja") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-		}
-
-		if (cod == "Lomas del Mirador" || cod == "La Tablada"
-				|| cod == "Isidro Casanova" || cod == "San Justo"
-				|| cod == "Gregorio de Laferrere") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-		}
-
-		if (cod == "Wilde" || cod == "Valentín Alsina") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-		}
-
-		if (cod == "Villa Fiorito" || cod == "Banfield") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-		}
-
-		if (cod == "Canning" || cod == "José María Ezeiza"
-				|| cod == "Carlos Spegazzini") {
-			document.getElementById("hurlinghamMunicipio").style.display = "none";
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-		}
-
-		if (cod == "Hurlingham" || cod == "William C. Morris") {
-			document.getElementById("ituzaingoMunicipio").style.display = "none";
-			document.getElementById("lomasDeZamoraMunicipio").style.display = "none";
-			document.getElementById("morenoMunicipio").style.display = "none";
-			document.getElementById("moronMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("sanFernandoMunicipio").style.display = "none";
-			document.getElementById("tigreMunicipio").style.display = "none";
-			document.getElementById("avellanedaMunicipio").style.display = "none";
-			document.getElementById("ezeizaMunicipio").style.display = "none";
-			document.getElementById("florencioVarelaMunicipio").style.display = "none";
-			document.getElementById("sanIsidroMunicipio").style.display = "none";
-			document.getElementById("vicenteLopezMunicipio").style.display = "none";
-			document.getElementById("laMatanzaMunicipio").style.display = "none";
-		}
-
-		/* Para obtener el texto
-		var combo = document.getElementById("nombreLocalidad");
-		var selected = combo.options[combo.selectedIndex].text;
-		alert(selected);*/
-	}
-</script>
-</html>
+													/* Para obtener el texto
+													var combo = document.getElementById("nombreLocalidad");
+													var selected = combo.options[combo.selectedIndex].text;
+													alert(selected);*/
+												}
+											</script>
+											</html>

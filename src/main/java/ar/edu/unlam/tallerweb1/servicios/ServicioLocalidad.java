@@ -18,4 +18,6 @@ public interface ServicioLocalidad {
     List<Partido> obtenerPartidoPorLocalidad(Long idPartido);
 
     List<Institucion> listarInstitucionesPorZona(Zona zona);
+
+	public void registrarLocalidad(Localidad localidad);
 }

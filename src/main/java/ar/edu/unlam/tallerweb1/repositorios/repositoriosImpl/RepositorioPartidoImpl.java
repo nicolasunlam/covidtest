@@ -13,15 +13,19 @@ import javax.inject.Inject;
 @Transactional
 public class RepositorioPartidoImpl implements RepositorioPartido {
 
-    @Inject
-    private SessionFactory sessionFactory;
+	@Inject
+	private SessionFactory sessionFactory;
 
-    @SuppressWarnings({"unchecked", "deprecation"})
-    @Override
-    public Partido obtenerPartidoPorNombre(String nombrePartido) {
-        return (Partido) sessionFactory.getCurrentSession().createCriteria(Partido.class)
-                .add(Restrictions.eq("nombrePartido", nombrePartido))
-                .uniqueResult();
-    }
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
+	public Partido obtenerPartidoPorNombre(String nombrePartido) {
+		return (Partido) sessionFactory.getCurrentSession().createCriteria(Partido.class)
+				.add(Restrictions.eq("nombrePartido", nombrePartido)).uniqueResult();
+	}
+
+	@Override
+	public void registrarPartido(Partido partido) {
+		sessionFactory.getCurrentSession().save(partido);
+	}
 
 }

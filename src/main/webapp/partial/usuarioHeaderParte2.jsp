@@ -67,7 +67,7 @@
 				<li class="nav-item ml-5"><a class="nav-link" href="autoTest">Realizar
 						test</a></li>
 				<c:if test="${permiso == true}">
-					<li class="nav-item ml-5"><a class="nav-link"
+					<li class="nav-item ml-5" id="botonPermiso"><a class="nav-link"
 						href="generarPermiso">Generar Permiso </a></li>
 				</c:if>
 				</li>
