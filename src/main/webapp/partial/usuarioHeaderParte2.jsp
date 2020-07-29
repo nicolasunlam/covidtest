@@ -67,8 +67,8 @@
 				<li class="nav-item ml-5"><a class="nav-link" href="autoTest">Realizar
 						test</a></li>
 				<c:if test="${permiso == true}">
-					<li class="nav-item ml-5" id="botonPermiso"><a class="nav-link"
-						href="generarPermiso">Generar Permiso </a></li>
+					<li class="nav-item ml-5" id="botonPermiso"><a
+						class="nav-link" href="generarPermiso">Generar Permiso </a></li>
 				</c:if>
 				</li>
 				<c:if test='${rol == "PACIENTE"}'>
@@ -88,3 +88,17 @@
 
 		</div>
 	</nav>
+
+	<c:if test="${permiso == true}">
+		<div
+			class="alert alert-warning alert-dismissible fade show text-center"
+			role="alert">
+			<h5>Usted tiene la posibilidad de generar un <strong>permiso de
+				circulación</strong> haciendo click en el botón ubicado arriba de este
+				mensaje</h5>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</c:if>
