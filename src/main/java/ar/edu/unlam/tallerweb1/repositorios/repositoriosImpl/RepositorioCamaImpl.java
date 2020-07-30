@@ -69,6 +69,22 @@ public class RepositorioCamaImpl implements RepositorioCama {
             		.add(Restrictions.isNull("motivoEgreso"))
                     .list();
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Cama> obtenerTotalDeCamasDisponibles() {
+	     
+		String hql = "SELECT c "
+					+ "FROM Cama as c "
+					+ "WHERE c NOT IN (SELECT a.cama " + 
+			        		"FROM Asignacion as a " + 
+			        		"WHERE a.cama = c " + 
+			        		"AND a.horaEgreso IS NULL) ";
+	
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+	
+	return query.getResultList();
+	}
     
     @SuppressWarnings({ "unchecked" })
     public List<Cama> obtenerCamasOcupadasPorInstitucion(Institucion institucion) {
@@ -89,7 +105,7 @@ public class RepositorioCamaImpl implements RepositorioCama {
     public List<CamaCantidad> obtenerCantidadDeCamasOcupadasDeCadaInstitucion() {
         
         String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad(c, count(*)) "
-        		   + "FROM Cama as c JOIN Institucion as i ON c.institucion = i "
+        		   + "FROM Cama as c "
         		   + "JOIN Asignacion as a ON a.cama = c "
         		   + "WHERE c.institucion NOT IN (SELECT a.cama "
         		   							   + "FROM Asignacion as a "

@@ -63,14 +63,7 @@ public class ServicioCamaImpl implements ServicioCama {
 	@Override
 	public List<Cama> obtenerTotalDeCamasDisponibles() {
 	
-    	List<Cama> camasTotalesPorInstitucion = obtenerCamas();
-        List<Cama> camasOcupadasPorInstitucion = obtenerTotalDeCamasOcupadas();
-      
-		for (Cama cama: camasOcupadasPorInstitucion) { 
-			camasTotalesPorInstitucion.remove(cama);
-		}
-
-    	return camasTotalesPorInstitucion;
+		return repositorioCama.obtenerTotalDeCamasDisponibles();
 
 	}
 	

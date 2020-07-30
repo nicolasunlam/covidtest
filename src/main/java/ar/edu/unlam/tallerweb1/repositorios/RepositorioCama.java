@@ -26,4 +26,6 @@ public interface RepositorioCama {
 	List<CamaCantidad> obtenerCantidadDeCamasDisponiblesDeCadaInstitucion();
 
 	List<Cama> obtenerCamasDisponiblesPorInstitucion(Institucion institucion);
+
+	List<Cama> obtenerTotalDeCamasDisponibles();
 }
