@@ -5,11 +5,12 @@
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
-<title>Inserte titulo aquí</title>
+<title>AsignAR</title>
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-<h2 class="text-center p-2 mb-4 mt-5 h1 border-top p2">Generar un permiso de circulación</h2>
+<h2 class="text-center p-2 mb-4 mt-5 h1">Generar un
+	permiso de circulación</h2>
 
 <div class="text-center mt-5 mb-4">
 	<img src="img/permit.png" class="rounded" alt="no-virus" width="200"
@@ -45,41 +46,9 @@
 	</div>
 </div>
 
-<h2 class="text-center p-2 mb-4 mt-5 h1 border-top p2">Registrar institución</h2>
 
-<div class="text-center mt-5 mb-4">
-	<img src="img/hospital.png" class="rounded" alt="no-virus" width="200"
-		height="200">
-</div>
-
-<div class="container my-3">
-	<div class="form-group">
-		<ul class="list-group border border-dark">
-			<li
-				class="list-group-item list-group-item-warning text-center active"><h4
-					class="text-center">¿Cómo registro una institución?</h4></li>
-			<li
-				class="list-group-item d-flex justify-content-between align-items-center my-2">
-				<h6>blablablablablablablablablablablablablabla</h6> <span
-				class="badge badge-primary badge-pill">1</span>
-			</li>
-			<li
-				class="list-group-item d-flex justify-content-between align-items-center my-2">
-				<h6>blablablablablablablablablablablablablablablablablablabla</h6> <span
-				class="badge badge-primary badge-pill">2</span>
-			</li>
-			<li
-				class="list-group-item d-flex justify-content-between align-items-center mt-2">
-				<h6>blablablablablablablablablablablablablablablablablablabla</h6> <span class="badge badge-primary badge-pill">3</span>
-			</li>
-		</ul>
-
-	</div>
-</div>
-
-
-<h2 class="text-center p-2 mb-4 mt-5 h1 border-top p2">Consejos para prevenir el
-	Coronavirus</h2>
+<h2 class="text-center p-2 mb-4 mt-5 h1 border-top">Consejos
+	para prevenir el Coronavirus</h2>
 
 <div class="container mb-5">
 	<div class="row">
@@ -200,6 +169,39 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
+<div class="container-fluid my-5 border-top p-1"></div>
+<div class="container-fluid w-75 my-5">
+	<div id="carouselExampleIndicators" class="carousel slide"
+		data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleIndicators" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img src="img/carrousel3.jpg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
+				<img src="img/carrousel4.jpeg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
+				<img src="img/carrousel5.jpg" class="d-block w-100" alt="...">
+			</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleIndicators"
+			role="button" data-slide="prev"> <span
+			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+			role="button" data-slide="next"> <span
+			class="carousel-control-next-icon" aria-hidden="true"></span> <span
+			class="sr-only">Next</span>
+		</a>
 	</div>
 </div>
 
