@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +15,19 @@ public class Institucion extends Usuario{
 	private Long id;
 	
     private Integer cantidadCamas;
+    
+    @Enumerated(EnumType.STRING)
+    private TipoInstitucion tipo;
 	
 	
+	public TipoInstitucion getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoInstitucion tipo) {
+		this.tipo = tipo;
+	}
+
 	public Long getId() {
 		return id;
 	}

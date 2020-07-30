@@ -19,9 +19,13 @@
 			class="table table-bordered table-hover responsive nowrap text-center align-middle">
 			<tr class="text-center align-middle">
 				<th scope="col">Nombre</th>
+				
+				<th scope="col">Tipo Institución</th>
+				
 				<th scope="col">Cuit</th>
 
 				<th scope="col">Camas Totales</th>
+				
 				<th scope="col">Acciones</th>
 
 			</tr>
@@ -30,6 +34,9 @@
 				<tr>
 					<td class="align-middle"><c:out
 							value="${instituciones.getNombre()}" /></td>
+							
+						<td class="align-middle"><c:out
+							value="${instituciones.getTipo().name()}" /></td>
 
 					<td class="align-middle"><c:out
 							value="${instituciones.getNumeroDocumento()}" /></td>
