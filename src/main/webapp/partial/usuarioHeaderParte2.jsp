@@ -64,7 +64,7 @@
 						</c:if>>Home
 						<span class="sr-only">(current)</span>
 				</a>
-				<li class="nav-item ml-5"><a class="nav-link active" href="autoTest">Realizar
+				<li class="nav-item ml-5"><a class="btn btn-danger" role="button" href="autoTest">Realizar
 						test</a></li>
 				<c:if test="${permiso == true}">
 					<li class="nav-item ml-5" id="botonPermiso"><a
