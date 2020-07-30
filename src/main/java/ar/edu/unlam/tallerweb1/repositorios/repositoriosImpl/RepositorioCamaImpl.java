@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
-import ar.edu.unlam.tallerweb1.modelo.listas.CamaInstitucion;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 
 @Repository("repositorioCama")
 @Transactional
@@ -61,24 +61,6 @@ public class RepositorioCamaImpl implements RepositorioCama {
 
     @SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
-    public List<Cama> obtenerCamasOcupadasPorInstitucion(Institucion institucion) {
-       
-            List<Cama> camasOcupadas = sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
-		            					.setProjection(Projections.projectionList()
-					                	.add(Projections.property("cama"), "cama"))
-					            		.add(Restrictions.isNull("motivoEgreso"))
-					                    .list();
-
-            for (Cama cama: camasOcupadas) { 
-            	if (cama.getInstitucion().equals(institucion)) {
-                	camasOcupadas.remove(cama);
-				}
-    		}
-            return camasOcupadas;
-    }
-
-    @SuppressWarnings({ "unchecked", "deprecation" })
-	@Override
     public List<Cama> obtenerTotalDeCamasOcupadas() {
        
             return sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
@@ -89,9 +71,9 @@ public class RepositorioCamaImpl implements RepositorioCama {
     }
     
     @SuppressWarnings({ "unchecked" })
-    public List<CamaInstitucion> obtenerCantidadDeCamasOcupadasPorInstitucion(Institucion institucion) {
+    public List<Cama> obtenerCamasOcupadasPorInstitucion(Institucion institucion) {
         
-        String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaInstitucion(c, i, count(*)) "
+        String hql = "SELECT c "
         		   + "FROM Cama as c JOIN Institucion as i ON c.institucion = i "
         		   + "JOIN Asignacion as a ON a.cama = c "
         		   + "WHERE c.institucion = :institucion "
@@ -104,9 +86,9 @@ public class RepositorioCamaImpl implements RepositorioCama {
     }
     
     @SuppressWarnings({ "unchecked" })
-    public List<CamaInstitucion> obtenerCantidadDeCamasOcupadasDeCadaInstitucion() {
+    public List<CamaCantidad> obtenerCantidadDeCamasOcupadasDeCadaInstitucion() {
         
-        String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaInstitucion(c, i, count(*)) "
+        String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad(c, count(*)) "
         		   + "FROM Cama as c JOIN Institucion as i ON c.institucion = i "
         		   + "JOIN Asignacion as a ON a.cama = c "
         		   + "WHERE c.institucion NOT IN (SELECT a.cama "
@@ -119,42 +101,39 @@ public class RepositorioCamaImpl implements RepositorioCama {
         
         return query.getResultList();
     }
+
+    @SuppressWarnings({ "unchecked" })
+	@Override
+	public List<CamaCantidad> obtenerCantidadDeCamasDisponiblesDeCadaInstitucion() {
+       
+		String hql = "SELECT select new ar.edu.unlam.tallerweb1.modelo.CamaCantidad(c, count(*))  "
+    			+ "FROM Cama as c JOIN Institucion as i ON c.institucion = i "
+    			+ "WHERE c NOT IN (SELECT a.cama " + 
+				        		"FROM Asignacion as a " + 
+				        		"WHERE a.cama = c " + 
+				        		"AND a.horaEgreso IS NULL)";
+
+    Query query = sessionFactory.getCurrentSession().createQuery(hql);
     
-    @SuppressWarnings({ "unchecked" })
-    public List<CamaInstitucion> obtenerCamasPorInstitucionConSuInstitucion(Institucion institucion) {
-        
-    	String hql = "select new ar.edu.unlam.tallerweb1.modelo.listas.CamaInstitucion(c, i) from Cama as c "
-    			+ "JOIN Institucion as i ON c.institucion = i where c.institucion = :institucion";
+    return query.getResultList();
+	}
 
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        query.setParameter("institucion", institucion);
-        
-        return query.getResultList();
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    public List<CamaInstitucion> obtenerCamasTotalesConSuInstitucion() {
-        
-        String hql = "select new ar.edu.unlam.tallerweb1.modelo.CamaInstitucion(c, i) from Cama as a JOIN Institucion as i ON c.institucion = i";
-
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        
-        return query.getResultList();
-    }
-    
-    @SuppressWarnings({ "unchecked" })
-    public List<CamaInstitucion> obtenerCamasTotalesDisponiblesConSuInstitucion() {
-        
-        String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaInstitucion(c, i) "
-        			+ "FROM Cama as c JOIN Institucion as i ON c.institucion = i "
-        			+ "WHERE c NOT IN (SELECT a.cama " + 
-					        		"FROM Asignacion as a " + 
-					        		"WHERE a.cama = c " + 
-					        		"AND a.horaEgreso IS NULL)";
-
-        Query query = sessionFactory.getCurrentSession().createQuery(hql);
-        
-        return query.getResultList();
-    }
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Cama> obtenerCamasDisponiblesPorInstitucion(Institucion institucion) {
+	     
+		String hql = "SELECT c "
+					+ "FROM Cama as c JOIN Institucion as i ON c.institucion = i "
+					+ "WHERE c.institucion = :institucion "
+					+ "AND c NOT IN (SELECT a.cama " + 
+			        		"FROM Asignacion as a " + 
+			        		"WHERE a.cama = c " + 
+			        		"AND a.horaEgreso IS NULL) ";
+	
+	Query query = sessionFactory.getCurrentSession().createQuery(hql);
+    query.setParameter("institucion", institucion);
+	
+	return query.getResultList();
+	}
 
 }
