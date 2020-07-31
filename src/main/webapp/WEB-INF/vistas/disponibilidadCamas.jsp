@@ -33,14 +33,14 @@
 		        
 		        <c:forEach items="${camas}" var="cama">
 		            <tr>
-		            	<td><c:out value="${cama.getCama().getId()}"/></td>
-		                <td><c:out value="${cama.getCama().getDescripcion()}"/></td>
-		                <td><c:out value="${cama.getCama().getTipoCama().name()}"/></td>
+		            	<td><c:out value="${cama.getId()}"/></td>
+		                <td><c:out value="${cama.getDescripcion()}"/></td>
+		                <td><c:out value="${cama.getTipoCama().name()}"/></td>
 		                <td><c:out value="${cama.getInstitucion().getNombre()}"/></td>
 		                
 		                <td class="align-middle">
 		                
-		                <a href="listaPacientesInfectadosPasoDos?idCama=${cama.getCama().getId()}" type="button" class="btn btn-primary">Seleccionar Cama</a>
+		                <a href="listaPacientesInfectadosPasoDos?idCama=${cama.getId()}" type="button" class="btn btn-primary">Seleccionar Cama</a>
 						
 		               </td>
 		            </tr>

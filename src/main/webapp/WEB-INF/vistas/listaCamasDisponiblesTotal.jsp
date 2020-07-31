@@ -40,6 +40,7 @@
 		        <tr>
 		            <th class="bg-light" >DESCRIPCION</th>
 		            <th class="bg-light" >TIPO</th>
+		            <th  class="bg-light">INSTITUCIÓN</th>
 		            <th  class="bg-light">SELECCIONAR</th>
 		        </tr>
 		        
@@ -47,6 +48,7 @@
 		            <tr>
 		                <td><c:out value="${cama.getDescripcion()}"/></td>
 		                <td><c:out value="${cama.getTipoCama().name()}"/></td>
+		                <td><c:out value="${cama.getInstitucion().getNombre()}"/></td>
 		                
 		                <td class="align-middle">
 		                

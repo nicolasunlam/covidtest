@@ -9,8 +9,9 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-<h2 class="text-center p-2 mb-4 mt-5 h1">Generar un
-	permiso de circulación</h2>
+<h2 class="text-center p-2 mb-4 mt-5 h1">
+	<strong>Generar un permiso de circulación</strong>
+</h2>
 
 <div class="text-center mt-5 mb-4">
 	<img src="img/permit.png" class="rounded" alt="no-virus" width="200"
@@ -47,8 +48,9 @@
 </div>
 
 
-<h2 class="text-center p-2 mb-4 mt-5 h1 border-top">Consejos
-	para prevenir el Coronavirus</h2>
+<h2 class="text-center p-2 mb-4 mt-5 h1 border-top">
+	<strong>Consejos para prevenir el Coronavirus</strong>
+</h2>
 
 <div class="container mb-5">
 	<div class="row">
@@ -172,8 +174,13 @@
 	</div>
 </div>
 
-<div class="container-fluid my-5 border-top p-1"></div>
-<div class="container-fluid w-75 my-5">
+<h2 class="text-center p-2 mb-3 mt-5 h1 border-top">
+	<strong>El operativo DetectAR presente en los barrios
+		bonaerenses</strong>
+</h2>
+
+
+<div class="container-fluid w-50 my-5">
 	<div id="carouselExampleIndicators" class="carousel slide"
 		data-ride="carousel">
 		<ol class="carousel-indicators">
@@ -181,13 +188,21 @@
 				class="active"></li>
 			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
 		</ol>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
+				<img src="img/carrousel1.jpg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
+				<img src="img/carrousel2.jpg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
 				<img src="img/carrousel3.jpg" class="d-block w-100" alt="...">
 			</div>
 			<div class="carousel-item">
-				<img src="img/carrousel4.jpeg" class="d-block w-100" alt="...">
+				<img src="img/carrousel4.jpg" class="d-block w-100" alt="...">
 			</div>
 			<div class="carousel-item">
 				<img src="img/carrousel5.jpg" class="d-block w-100" alt="...">
@@ -202,6 +217,37 @@
 			class="carousel-control-next-icon" aria-hidden="true"></span> <span
 			class="sr-only">Next</span>
 		</a>
+	</div>
+</div>
+
+<div class="container-fluid my-5 text-justify">
+	<div class="row">
+		<div class=col-3></div>
+		<div class=col-6>
+			<h2 class="text-justify mb-4 mt-4 h4">
+				A medida que los casos crecen, extendemos el DetectAR por todo el
+				territorio. El objetivo del operativo, es identificar a los <strong>contactos
+					estrechos convivientes</strong> de las personas recientemente <strong>confirmadas
+					con COVID-19</strong>, hacer un seguimiento sostenido, para distanciarlos
+				tempranamente si presentan síntomas y de esta forma mitigar la
+				contagiosidad del virus.
+			</h2>
+
+			<h2 class="text-center my-5 h4">La iniciativa incluye
+				hisopadores, y un equipo de salud que lleva adelante una estrategia
+				de puerta a puerta en duplas. La búsqueda activa, y la detección
+				temprana de persona con síntomas es la que más ha resultado en el
+				mundo junto con el distanciamiento físico en pos de la contención de
+				la transmisión del virus.</h2>
+
+			<h2 class="text-center my-5 h4">
+				El <strong>operativo DetectAR</strong> funciona en diferentes
+				barrios de la provincia de Buenos Aires, donde está demostrando
+				buenos resultados. En esta nueva etapa se estenderá a otros barrios,
+				y continuará según la cantidad de casos registrada.
+			</h2>
+		</div>
+		<div class=col-3></div>
 	</div>
 </div>
 

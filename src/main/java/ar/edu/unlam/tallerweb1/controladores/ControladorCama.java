@@ -5,7 +5,7 @@ import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.MotivoEgreso;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
-import ar.edu.unlam.tallerweb1.modelo.listas.CamaInstitucion;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsignacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
@@ -65,13 +65,13 @@ public class ControladorCama {
     	Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(id);
     	
     	if (request.getSession().getAttribute("ROL") == Rol.INSTITUCION) {
-        	List<CamaInstitucion> camasDisponiblesPorInstitucion = servicioCama.obtenerCamasPorInstitucionConSuInstitucion(institucion);
+        	List<Cama> camasDisponiblesPorInstitucion = servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion);
         	model.put("camas", camasDisponiblesPorInstitucion);
     	}
     	
     	if (request.getSession().getAttribute("ROL") == Rol.ADMIN) {
-        	List<CamaInstitucion> CamasTotalesDisponiblesConSuInstitucion = servicioCama.obtenerCamasTotalesDisponiblesConSuInstitucion();
-        	model.put("camas", CamasTotalesDisponiblesConSuInstitucion);
+        	List<Cama> CamasTotalesDisponibles = servicioCama.obtenerTotalDeCamasDisponibles();
+        	model.put("camas", CamasTotalesDisponibles);
     	}
         
         return new ModelAndView("disponibilidadCamas", model);
@@ -135,12 +135,12 @@ public class ControladorCama {
     	Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(id);
     	
     	if (request.getSession().getAttribute("ROL") == Rol.INSTITUCION) {
-        	List<CamaInstitucion> camasDisponiblesPorInstitucion = servicioCama.obtenerCantidadDeCamasOcupadasPorInstitucion(institucion);
+        	List<Cama> camasDisponiblesPorInstitucion = servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion);
         	model.put("camas", camasDisponiblesPorInstitucion);
     	}
     	
     	if (request.getSession().getAttribute("ROL") == Rol.ADMIN) {
-        	List<CamaInstitucion> CamasTotalesDisponiblesConSuInstitucion = servicioCama.obtenerCantidadDeCamasOcupadasDeCadaInstitucion();
+        	List<CamaCantidad> CamasTotalesDisponiblesConSuInstitucion = servicioCama.obtenerCantidadDeCamasDisponiblesDeCadaInstitucion();
         	model.put("camas", CamasTotalesDisponiblesConSuInstitucion);
     	}
         

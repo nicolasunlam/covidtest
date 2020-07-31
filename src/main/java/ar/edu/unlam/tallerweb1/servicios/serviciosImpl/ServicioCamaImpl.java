@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
-import ar.edu.unlam.tallerweb1.modelo.listas.CamaInstitucion;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCama;
 
 @Service
@@ -56,54 +56,25 @@ public class ServicioCamaImpl implements ServicioCama {
 	@Override
 	public List<Cama> obtenerCamasDisponiblesPorInstitucion(Institucion institucion) {
 	
-    	List<Cama> camasTotalesPorInstitucion = obtenerCamasPorInstitucion(institucion);
-        List<Cama> camasOcupadasPorInstitucion = obtenerCamasOcupadasPorInstitucion(institucion);
-      
-		for (Cama cama: camasOcupadasPorInstitucion) { 
-			camasTotalesPorInstitucion.remove(cama);
-		}
-
-    	return camasTotalesPorInstitucion;
+		 return repositorioCama.obtenerCamasDisponiblesPorInstitucion(institucion);
 
 	}
 	
 	@Override
 	public List<Cama> obtenerTotalDeCamasDisponibles() {
 	
-    	List<Cama> camasTotalesPorInstitucion = obtenerCamas();
-        List<Cama> camasOcupadasPorInstitucion = obtenerTotalDeCamasOcupadas();
-      
-		for (Cama cama: camasOcupadasPorInstitucion) { 
-			camasTotalesPorInstitucion.remove(cama);
-		}
-
-    	return camasTotalesPorInstitucion;
+		return repositorioCama.obtenerTotalDeCamasDisponibles();
 
 	}
-
+	
 	@Override
-	public List<CamaInstitucion> obtenerCamasTotalesConSuInstitucion() {
-		return repositorioCama.obtenerCamasTotalesConSuInstitucion();
-	}
-
-	@Override
-	public List<CamaInstitucion> obtenerCamasPorInstitucionConSuInstitucion(Institucion institucion) {
-		return repositorioCama.obtenerCamasPorInstitucionConSuInstitucion(institucion);
-	}
-
-	@Override
-	public List<CamaInstitucion> obtenerCamasTotalesDisponiblesConSuInstitucion() {
-		return repositorioCama.obtenerCamasTotalesDisponiblesConSuInstitucion();
-	}
-
-	@Override
-	public List<CamaInstitucion> obtenerCantidadDeCamasOcupadasPorInstitucion(Institucion institucion) {
-		return repositorioCama.obtenerCantidadDeCamasOcupadasPorInstitucion(institucion);
-	}
-
-	@Override
-	public List<CamaInstitucion> obtenerCantidadDeCamasOcupadasDeCadaInstitucion() {
+	public List<CamaCantidad> obtenerCantidadDeCamasOcupadasDeCadaInstitucion() {
 		return repositorioCama.obtenerCantidadDeCamasOcupadasDeCadaInstitucion();
+	}
+
+	@Override
+	public List<CamaCantidad> obtenerCantidadDeCamasDisponiblesDeCadaInstitucion() {
+		return repositorioCama.obtenerCantidadDeCamasDisponiblesDeCadaInstitucion();
 	}
 
 }
