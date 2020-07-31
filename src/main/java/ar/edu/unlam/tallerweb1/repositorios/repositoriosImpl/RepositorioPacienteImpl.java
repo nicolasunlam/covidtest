@@ -105,7 +105,7 @@ public class RepositorioPacienteImpl implements RepositorioPaciente {
     	List<Paciente> pacientesInternadosPorInstitucion = new ArrayList<Paciente>();
     	
         for (Asignacion asignacion: asignacionesVigentes) { 
-        	if (asignacion.getCama().getInstitucion().getId() == idInstitucion ) {
+        	if (asignacion.getCama().getSala().getSector().getPiso().getInstitucion().getId() == idInstitucion ) {
         		pacientesInternadosPorInstitucion.add(asignacion.getPaciente());
 			}
 		}

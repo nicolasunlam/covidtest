@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,10 +18,13 @@ public class Cama {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn
-    private Institucion institucion;
+//    @ManyToOne
+//    @JoinColumn
+//    private Institucion institucion;
 
+    @ManyToOne(cascade= CascadeType.ALL)
+    private Sala sala;
+    
     private String descripcion;
 
     @Enumerated(EnumType.STRING)
@@ -29,53 +33,51 @@ public class Cama {
     @Enumerated(EnumType.STRING)
     private TipoSala tipoSala;
 
-   
-
-
 	public TipoSala getTipoSala() {
 		return tipoSala;
 	}
-
 
 	public void setTipoSala(TipoSala tipoSala) {
 		this.tipoSala = tipoSala;
 	}
 
-
 	public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Institucion getInstitucion() {
-        return institucion;
-    }
-
-    public void setInstitucion(Institucion institucion) {
-        this.institucion = institucion;
-    }
-
+//    public Institucion getInstitucion() {
+//        return institucion;
+//    }
+//
+//    public void setInstitucion(Institucion institucion) {
+//        this.institucion = institucion;
+//    }
 
     public String getDescripcion() {
         return descripcion;
     }
 
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
 
 	public TipoCama getTipoCama() {
 		return tipoCama;
 	}
 
-
 	public void setTipoCama(TipoCama tipoCama) {
 		this.tipoCama = tipoCama;
+	}
+
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
 	}
 }

@@ -22,6 +22,12 @@ SELECT *
 FROM Cama;
 
 SELECT *
+FROM Cama c JOIN Sala sal ON c.sala_id = sal.id
+JOIN Sector as sec ON sal.sector_id = sec.id
+JOIN Piso as p ON sec.piso_id = p.id 
+JOIN Usuario as i ON p.institucion_id = i.id;
+
+SELECT *
 FROM Domicilio;
 
 SELECT *
@@ -65,6 +71,14 @@ FROM Cama c
     ON c.id = a.cama_id
 WHERE a.horaEgreso IS NULL;
 
+/*-------Cantidad de todas las asignaciones vigentes agrupadas por institucion-----------*/
+SELECT count(*), c.institucion_id
+FROM Cama c 
+	JOIN Asignacion a 
+    ON c.id = a.cama_id
+WHERE a.horaEgreso IS NULL
+GROUP BY c.institucion_id;
+
 /*------- Mostrar todas las camas tal para las cuales no existe una asignacion vigente (EXISTS no es reconido en HQL query)------------*/
 SELECT *
 FROM cama c
@@ -82,11 +96,14 @@ WHERE c.id NOT IN (SELECT a.cama_id
 			   AND a.horaEgreso IS NULL);                  
              
 /*------ Mostrar la cantidad de camas por institucion tal para las cuales no existe una asignacion vigente ------*/
-SELECT i.*,  count(*) as camas_disponibles
-FROM cama c JOIN usuario i ON c.institucion_id = i.id
+SELECT i.nombre,  count(*) as camas_disponibles
+FROM cama c  JOIN Sala sal ON c.sala_id = sal.id
+JOIN Sector as sec ON sal.sector_id = sec.id
+JOIN Piso as p ON sec.piso_id = p.id 
+JOIN Usuario as i ON p.institucion_id = i.id
 WHERE c.id NOT IN (SELECT a.cama_id
  			   FROM asignacion a
 			   WHERE a.cama_id = c.id
 			   AND a.horaEgreso IS NULL)
-GROUP BY c.institucion_id;                  
+GROUP BY i.id;                  
 

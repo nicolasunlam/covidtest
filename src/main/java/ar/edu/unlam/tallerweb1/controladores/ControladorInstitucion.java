@@ -102,18 +102,18 @@ public class ControladorInstitucion {
             request.getSession().setAttribute("ID", institucion.getId());
             request.getSession().setAttribute("ROL", institucion.getRol());
 
-            for (int i = 0; i < institucion.getCantidadCamas().intValue(); i++) {
-
-                Cama cama = new Cama();
-                cama.setInstitucion(institucion);
-                
-                
-                int numeroCama = i + 1;
-                String descripcion = "" + numeroCama;
-                cama.setDescripcion(descripcion);
-
-                servicioCama.registrarCama(cama);
-            }
+//            for (int i = 0; i < institucion.getCantidadCamas().intValue(); i++) {
+//
+//                Cama cama = new Cama();
+//                cama.setInstitucion(institucion);
+//                
+//                
+//                int numeroCama = i + 1;
+//                String descripcion = "" + numeroCama;
+//                cama.setDescripcion(descripcion);
+//
+//                servicioCama.registrarCama(cama);
+//            }
 
             Domicilio domicilio = new Domicilio();
 
@@ -224,23 +224,23 @@ public class ControladorInstitucion {
     		@RequestParam(value = "cantidadDeCamas") Integer cantidadDeCamas,
     		HttpServletRequest request) {
     	
-    	Institucion institucion =servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
-    	
-    	 for (int i = 0; i < cantidadDeCamas; i++) {
-
-             Cama cama = new Cama();
-             cama.setInstitucion(institucion);
-             cama.setTipoCama(tipoCama);
-             cama.setTipoSala(tipoSala);
-             
-             
-             int numeroCama = i+1;
-             String descripcion = "" + numeroCama;
-             cama.setDescripcion(descripcion);
-
-           
-             servicioCama.registrarCama(cama);
-         }
+//    	Institucion institucion =servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+//    	
+//    	 for (int i = 0; i < cantidadDeCamas; i++) {
+//
+//             Cama cama = new Cama();
+//             cama.setInstitucion(institucion);
+//             cama.setTipoCama(tipoCama);
+//             cama.setTipoSala(tipoSala);
+//             
+//             
+//             int numeroCama = i+1;
+//             String descripcion = "" + numeroCama;
+//             cama.setDescripcion(descripcion);
+//
+//           
+//             servicioCama.registrarCama(cama);
+//         }
     	
     	
     	return new ModelAndView("redirect:/listaPacientesInternados") ;
