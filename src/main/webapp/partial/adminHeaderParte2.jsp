@@ -71,60 +71,23 @@
                             Inicio
                         </a>
                     </li>
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="cantidadDeCamasDisponibles">
-                            <span data-feather="inbox"></span>
-                            Disponibilidad Camas
-                        </a>
-                    </li>
+                    
                     <li class="nav-item mt-3 mb-3">
                         <a class="nav-link" href="listaInstituciones">
                             <span data-feather="users"></span>
                             Lista de Instituciones
                         </a>
                     </li>
-                          <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="listaPacientesInternados">
-                            <span data-feather="users"></span>
-                            Pacientes Internados
-                        </a>
-                    </li>
+                     
                     <li class="nav-item mt-3 mb-3">
                         <a class="nav-link" href="posiblesinfectados">
                             <span data-feather="users"></span>
                             Lista de Espera
                         </a>
                     </li>
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="consultarPaciente">
-                            <span data-feather="search"></span>
-                            Consultar paciente
-                        </a>
-                    </li>
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="internarPaciente">
-                            <span data-feather="user-plus"></span>
-                            Internar paciente
-                        </a>
-                    </li>
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="egresarPaciente">
-                            <span data-feather="user-minus"></span>
-                            Egresar paciente
-                        </a>
-                    </li>
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="listaPacientesInfectados">
-                            <span data-feather="users"></span>
-                            Pacientes Infectados
-                        </a>
-                    </li>
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="consultarAsignacion">
-                            <span data-feather="search"></span>
-                            Consultar Asignación
-                        </a>
-                    </li>
+                    
+                    
+                   
                     <li class="nav-item mt-3 mb-3">
                         <a class="nav-link" href="grafico-pacientes">
                             <span data-feather="bar-chart-2"></span>
