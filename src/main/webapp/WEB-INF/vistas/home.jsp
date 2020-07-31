@@ -9,8 +9,8 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-<h2 class="text-center p-2 mb-4 mt-5 h1">Generar un
-	permiso de circulación</h2>
+<h2 class="text-center p-2 mb-4 mt-5 h1">Generar un permiso de
+	circulación</h2>
 
 <div class="text-center mt-5 mb-4">
 	<img src="img/permit.png" class="rounded" alt="no-virus" width="200"
@@ -47,8 +47,8 @@
 </div>
 
 
-<h2 class="text-center p-2 mb-4 mt-5 h1 border-top">Consejos
-	para prevenir el Coronavirus</h2>
+<h2 class="text-center p-2 mb-4 mt-5 h1 border-top">Consejos para
+	prevenir el Coronavirus</h2>
 
 <div class="container mb-5">
 	<div class="row">
@@ -172,8 +172,18 @@
 	</div>
 </div>
 
-<div class="container-fluid my-5 border-top p-1"></div>
-<div class="container-fluid w-75 my-5">
+<h2 class="text-center p-2 mb-4 mt-5 h1 border-top">El operativo
+	DetectAR comienza con testeos en la ciudad de San Justo</h2>
+
+<div class="container-fluid my-5 mx-5">
+	<h2 class="text-center mb-4 my-5 h3 text-muted w-100">Será desde
+		este jueves. El dispositivo ya funciona en 22 barrios, donde se
+		encontraron 3.528 casos positivos de Covid-19.</h2>
+</div>
+
+
+
+<div class="container-fluid w-50 my-5">
 	<div id="carouselExampleIndicators" class="carousel slide"
 		data-ride="carousel">
 		<ol class="carousel-indicators">
@@ -181,13 +191,21 @@
 				class="active"></li>
 			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
 		</ol>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
+				<img src="img/carrousel1.jpg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
+				<img src="img/carrousel2.jpg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
 				<img src="img/carrousel3.jpg" class="d-block w-100" alt="...">
 			</div>
 			<div class="carousel-item">
-				<img src="img/carrousel4.jpeg" class="d-block w-100" alt="...">
+				<img src="img/carrousel4.jpg" class="d-block w-100" alt="...">
 			</div>
 			<div class="carousel-item">
 				<img src="img/carrousel5.jpg" class="d-block w-100" alt="...">
@@ -203,6 +221,26 @@
 			class="sr-only">Next</span>
 		</a>
 	</div>
+</div>
+
+<div class="container-fluid my-5 mx-5 text-center">
+	<h2 class="text-center mb-4 my-5 h4 text-muted w-75">El operativo
+		DetectAR sigue avanzando por todo el territorio bonaerense. Este lunes
+		comenzó con testeos enEl operativo DetectAR sigue avanzando por todo
+		el territorio bonaerense. Este lunes comenzó con testeos enEl
+		operativo DetectAR sigue avanzando por todo el territorio bonaerense.
+		Este lunes comenzó con testeos enEl operativo DetectAR sigue avanzando
+		por todo el territorio bonaerense. Este lunes comenzó con testeos enEl
+		operativo DetectAR sigue avanzando por todo el territorio bonaerense.</h2>
+
+	<h2 class="text-center mb-4 my-5 h4 text-muted w-75">El operativo
+		DetectAR sigue avanzando por todo el territorio bonaerense. Este lunes
+		comenzó con testeos enEl operativo DetectAR sigue avanzando por todo
+		el territorio bonaerense. Este lunes comenzó con testeos enEl
+		operativo DetectAR sigue avanzando por todo el territorio bonaerense.
+		Este lunes comenzó con testeos enEl operativo DetectAR sigue avanzando
+		por todo el territorio bonaerense. Este lunes comenzó con testeos enEl
+		operativo DetectAR sigue avanzando por todo el territorio bonaerense.</h2>
 </div>
 
 
