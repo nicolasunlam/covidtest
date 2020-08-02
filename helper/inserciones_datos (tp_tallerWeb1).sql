@@ -168,20 +168,20 @@ VALUES (1, "Cirujia", NULL, 2),
        (3, "Radiografías", NULL, 3),
        (4, "Quemaduras", NULL, 4),
        /*MORON*/
-       (5, "Cirujia", NULL, 2),
-	   (6, "Internación", NULL, 2),
-       (7, "Radiografías", NULL, 3),
-       (8, "Quemaduras", NULL, 4),
+       (5, "Cirujia", NULL, 6),
+	   (6, "Internación", NULL, 6),
+       (7, "Radiografías", NULL, 7),
+       (8, "Quemaduras", NULL, 8),
        /*SANTOJANNI*/
-       (9, "Cirujia", NULL, 2),
-	   (10, "Internación", NULL, 2),
-       (11, "Radiografías", NULL, 3),
-       (12, "Quemaduras", NULL, 4),
+       (9, "Cirujia", NULL, 9),
+	   (10, "Internación", NULL, 10),
+       (11, "Radiografías", NULL, 11),
+       (12, "Quemaduras", NULL, 12),
        /*CARRILLO*/
-       (13, "Cirujia", NULL, 2),
-	   (14, "Internación", NULL, 2),
-       (15, "Radiografías", NULL, 3),
-       (16, "Quemaduras", NULL, 4);
+       (13, "Cirujia", NULL, 13),
+	   (14, "Internación", NULL, 14),
+       (15, "Radiografías", NULL, 14),
+       (16, "Quemaduras", NULL, 15);
        
 INSERT INTO sala(id, descripcion, tipoSala, sector_id)
 		/*FAVALORO*/
