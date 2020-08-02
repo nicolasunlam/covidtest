@@ -18,10 +18,6 @@ public class Cama {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn
-//    private Institucion institucion;
-
     @ManyToOne(cascade= CascadeType.ALL)
     private Sala sala;
     
@@ -48,14 +44,6 @@ public class Cama {
     public void setId(Long id) {
         this.id = id;
     }
-
-//    public Institucion getInstitucion() {
-//        return institucion;
-//    }
-//
-//    public void setInstitucion(Institucion institucion) {
-//        this.institucion = institucion;
-//    }
 
     public String getDescripcion() {
         return descripcion;
