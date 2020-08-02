@@ -1,8 +1,7 @@
-
-
 /*------- ELIMINACION --------*/
 
 SET sql_safe_updates=0;
+DELETE FROM notificacion;
 DELETE FROM asignacion;
 DELETE FROM cama;
 DELETE FROM sala;
@@ -101,47 +100,44 @@ VALUES ("INSTITUCION", "Institucion", 2, "Fundación Favaloro", "favaloro@email.
        ("INSTITUCION", "Institucion", 5, "Hospital Profesor Doctor Ramón Carrillo", "carillo@email.com", "1234", "20500050007", "CUIT", 57, "HOSPITAL", 5,-36.70211051937402,-54.90211051937402);
 
 /* ----- PACIENTE AUTOTEST POSITIVOS----- */
-INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad)
-VALUES("PACIENTE", "Paciente", 6, "Alejandro", "Rodriguez", "alejandro@email.com", "1234", "1", "DNI", 2, true, null, 1, 45),
-      ("PACIENTE", "Paciente", 7, "Alejandra", "Rodriguez", "alejandra@email.com", "1234", "2", "DNI", 3, true, null, 2, 87),
-	  ("PACIENTE", "Paciente", 8, "Alan", "Rodriguez", "alan@email.com", "1234", "3", "DNI", 4, true, null, 2, 54),
-      ("PACIENTE", "Paciente", 9, "Ana", "Rodriguez", "ana@email.com", "1234", "4", "DNI", 3, true, null, 4, 64),
-      ("PACIENTE", "Paciente", 10, "Carlos", "Gómez", "carlos@email.com", "1234", "32100100", "DNI", 3, true, null, 5, 54),
-      ("PACIENTE", "Paciente", 11, "Carla", "Gómez", "carla@email.com", "1234", "32110100", "DNI", 3, true, null, 1, 88);
+INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud)
+VALUES("PACIENTE", "Paciente", 6, "Alejandro", "Rodriguez", "alejandro@email.com", "1234", "1", "DNI", 2, true, null, 1, 45, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 7, "Alejandra", "Rodriguez", "alejandra@email.com", "1234", "2", "DNI", 3, true, null, 2, 87, -34.72840647959868, -58.61369019379556),
+	  ("PACIENTE", "Paciente", 8, "Alan", "Rodriguez", "alan@email.com", "1234", "3", "DNI", 4, true, null, 2, 54, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 9, "Ana", "Rodriguez", "ana@email.com", "1234", "4", "DNI", 3, true, null, 4, 64, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 10, "Carlos", "Gómez", "carlos@email.com", "1234", "32100100", "DNI", 3, true, null, 5, 54, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 11, "Carla", "Gómez", "carla@email.com", "1234", "32110100", "DNI", 3, true, null, 1, 88, -34.72840647959868, -58.61369019379556);
       
 /* ----- PACIENTE INFECTADOS HISOPADO----- */
-INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad)
-VALUES("PACIENTE", "Paciente", 12, "Cristian", "Gómez", "cristian@email.com", "1234", "32120100", "DNI", 3, null, true, 4, 65),
-      ("PACIENTE", "Paciente", 13, "Celeste", "Gómez", "celeste@email.com", "1234", "32130100", "DNI", 1, null, true, 3, 32),
-	  ("PACIENTE", "Paciente", 14, "Dario", "García", "dario@email.com", "1234", "32140100", "DNI", 2, null, true, 2, 32),
-      ("PACIENTE", "Paciente", 15, "Danila", "García", "danila@email.com", "1234", "32150100", "DNI", 3, null, true, 1, 65),
-	  ("PACIENTE", "Paciente", 16, "Daniel", "García", "daniel@email.com", "1234", "32106100", "DNI", 4, null, false, 2, 97),
-      ("PACIENTE", "Paciente", 17, "Daniela", "García", "daniela@email.com", "1234", "32160100", "DNI", 3, null, true, 3, 45),
-      ("PACIENTE", "Paciente", 18, "Fabricio", "García", "fabricio@email.com", "1234", "32170100", "DNI", 1, null, true, 4, 64),
-      ("PACIENTE", "Paciente", 19, "Fabián", "García", "fabian@email.com", "1234", "32108100", "PASAPORTE", 1, null, true, 5, 97),
-      ("PACIENTE", "Paciente", 20, "Fabiana", "Garcia", "email12_pac@email.com", "1234", "16", "PASAPORTE", 3, null, true, 3, 45);
+INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud)
+VALUES("PACIENTE", "Paciente", 12, "Cristian", "Gómez", "cristian@email.com", "1234", "32120100", "DNI", 3, null, true, 4, 65, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 13, "Celeste", "Gómez", "celeste@email.com", "1234", "32130100", "DNI", 1, null, true, 3, 32, -34.72840647959868, -58.61369019379556),
+	  ("PACIENTE", "Paciente", 14, "Dario", "García", "dario@email.com", "1234", "32140100", "DNI", 2, null, true, 2, 32, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 15, "Danila", "García", "danila@email.com", "1234", "32150100", "DNI", 3, null, true, 1, 65, -34.72840647959868, -58.61369019379556),
+	  ("PACIENTE", "Paciente", 16, "Daniel", "García", "daniel@email.com", "1234", "32106100", "DNI", 4, null, false, 2, 97, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 17, "Daniela", "García", "daniela@email.com", "1234", "32160100", "DNI", 3, null, true, 3, 45, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 18, "Fabricio", "García", "fabricio@email.com", "1234", "32170100", "DNI", 1, null, true, 4, 64, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 19, "Fabián", "García", "fabian@email.com", "1234", "32108100", "PASAPORTE", 1, null, true, 5, 97, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 20, "Fabiana", "Garcia", "email12_pac@email.com", "1234", "16", "PASAPORTE", 3, null, true, 3, 45, -34.72840647959868, -58.61369019379556);
 
 /* ----- PACIENTE PARA INTERNAR----- */
-INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad)
-VALUES("PACIENTE", "Paciente", 21, "Juan", "Gómez", "cristian@email.com", "1234", "42120100", "DNI", 3, null, null, 4, 45),
-      ("PACIENTE", "Paciente", 22, "Juana", "Gómez", "celeste@email.com", "1234", "42130100", "DNI", 1, null, null, 3, 56),
-	  ("PACIENTE", "Paciente", 23, "José", "García", "dario@email.com", "1234", "42140100", "DNI", 2, null, null, 2, 32),
-      ("PACIENTE", "Paciente", 24, "Josefa", "García", "danila@email.com", "1234", "42150100", "DNI", 3, null, null, 1, 25),
-	  ("PACIENTE", "Paciente", 25, "Julián", "García", "daniel@email.com", "1234", "42106100", "DNI", 4, null, null, 2, 36),
-      ("PACIENTE", "Paciente", 26, "Juliana", "García", "daniela@email.com", "1234", "42160100", "DNI", 3, null, null, 3, 25),
-      ("PACIENTE", "Paciente", 27, "Julieta", "García", "fabricio@email.com", "1234", "42170100", "DNI", 1, null, null, 4, 65),
-      ("PACIENTE", "Paciente", 28, "Julia", "García", "julia@email.com", "1234", "42108100", "PASAPORTE", 1, null, null, 5, 78),
-      ("PACIENTE", "Paciente", 29, "Julio", "Garcia", "julio@email.com", "1234", "46", "PASAPORTE", 3, null, null, 3, 56),
-      ("PACIENTE", "Paciente", 30, "Julia", "García", "fabian@email.com", "1234", "52108100", "PASAPORTE", 1, null, null, 5, 69),
-      ("PACIENTE", "Paciente", 31, "Lorenzo", "Horandle", "lorenzo@email.com", "1234", "56", "PASAPORTE", 3, null, null, 3, 32),
-      ("PACIENTE", "Paciente", 32, "Laura", "Horandle", "laura@email.com", "1234", "42348100", "PASAPORTE", 1, null, null, 5, 78),
-      ("PACIENTE", "Paciente", 33, "Lucia", "Iraola", "lucila@email.com", "1234", "64643", "PASAPORTE", 3, null, null, 3, 56),
-      ("PACIENTE", "Paciente", 34, "Lucila", "Iraola", "lucila@email.com", "1234", "62122300", "PASAPORTE", 1, null, null, 5, 69),
-      ("PACIENTE", "Paciente", 35, "Ludmila", "Imarriota", "ludmila@email.com", "1234", "435656", "PASAPORTE", 3, null, null, 3, 32);
-
-/* ----- PACIENTE CON CORDENADA----- */
-INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad,latitud,longitud)
-VALUES("PACIENTE", "Paciente", 36, "Alejandro", "Rodriguez", "alejandrito@email.com", "1234", "127854", "DNI", 2, true, null, 1, 45,-34.72840647959868,-58.61369019379556);
+INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud)
+VALUES("PACIENTE", "Paciente", 21, "Juan", "Gómez", "cristian@email.com", "1234", "42120100", "DNI", 3, null, null, 4, 45, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 22, "Juana", "Gómez", "celeste@email.com", "1234", "42130100", "DNI", 1, null, null, 3, 56, -34.72840647959868, -58.61369019379556),
+	  ("PACIENTE", "Paciente", 23, "José", "García", "dario@email.com", "1234", "42140100", "DNI", 2, null, null, 2, 32, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 24, "Josefa", "García", "danila@email.com", "1234", "42150100", "DNI", 3, null, null, 1, 25, -34.72840647959868, -58.61369019379556),
+	  ("PACIENTE", "Paciente", 25, "Julián", "García", "daniel@email.com", "1234", "42106100", "DNI", 4, null, null, 2, 36, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 26, "Juliana", "García", "daniela@email.com", "1234", "42160100", "DNI", 3, null, null, 3, 25, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 27, "Julieta", "García", "fabricio@email.com", "1234", "42170100", "DNI", 1, null, null, 4, 65, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 28, "Julia", "García", "julia@email.com", "1234", "42108100", "PASAPORTE", 1, null, null, 5, 78, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 29, "Julio", "Garcia", "julio@email.com", "1234", "46", "PASAPORTE", 3, null, null, 3, 56, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 30, "Julia", "García", "fabian@email.com", "1234", "52108100", "PASAPORTE", 1, null, null, 5, 69, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 31, "Lorenzo", "Horandle", "lorenzo@email.com", "1234", "56", "PASAPORTE", 3, null, null, 3, 32, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 32, "Laura", "Horandle", "laura@email.com", "1234", "42348100", "PASAPORTE", 1, null, null, 5, 78, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 33, "Lucia", "Iraola", "lucila@email.com", "1234", "64643", "PASAPORTE", 3, null, null, 3, 56, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 34, "Lucila", "Iraola", "lucila@email.com", "1234", "62122300", "PASAPORTE", 1, null, null, 5, 69, -34.72840647959868, -58.61369019379556),
+      ("PACIENTE", "Paciente", 35, "Ludmila", "Imarriota", "ludmila@email.com", "1234", "435656", "PASAPORTE", 3, null, null, 3, 32, -34.72840647959868, -58.61369019379556),
+	  ("PACIENTE", "Paciente", 36, "Alejandro", "Rodriguez", "alejandrito@email.com", "1234", "127854", "DNI", 2, null, null, 1, 45,-34.72840647959868,-58.61369019379556);
 
 INSERT INTO piso(id, descripcion, tipoPiso, institucion_id)
 		/*FAVALORO*/
@@ -297,3 +293,9 @@ VALUES (12, '2020-01-01 01:00:00.000000', null, null, 40, 28),
 	   (13, '2020-02-01 01:00:00.000000', null, null, 41, 29),
        (14, '2020-03-01 01:00:00.000000', null, null, 42, 30),
 	   (15, '2020-04-01 01:00:00.000000', null, null, 43, 31);
+       
+/* ----- NOTIFICACIONES----- */
+INSERT INTO notificacion(asunto, fechaHora, msg, destinatario_id, remitente_id)
+VALUES ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro sistema de asignación de camas.", 6, 2),
+	   ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro sistema de asignación de camas.", 7, 2),
+	   ("Recordatorio", '2020-04-02 01:00:00.000000', "Se le recuerda que ...", 6, 2);

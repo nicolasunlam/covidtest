@@ -32,7 +32,7 @@
 		        
 		        <c:forEach items="${camas}" var="cama">
 		            <tr>
-		            	<td><c:out value="${cama.getInstitucion().getNombre()}"/></td>
+		            	<td><c:out value="${cama.getCama().getSala().getSector().getPiso().getInstitucion().getNombre()}"/></td>
 		                <td><c:out value="${cama.getCount()}"/></td>
 		                <td><c:out value=""/></td>
 		                
