@@ -21,7 +21,6 @@ import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
-import ar.edu.unlam.tallerweb1.modelo.listas.PacienteDistancia;
 
 @Repository("repositorioPaciente")
 @Transactional
