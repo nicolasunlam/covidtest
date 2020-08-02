@@ -1,3 +1,5 @@
+
+
 /*------- ELIMINACION --------*/
 
 SET sql_safe_updates=0;
@@ -106,7 +108,7 @@ VALUES("PACIENTE", "Paciente", 6, "Alejandro", "Rodriguez", "alejandro@email.com
       ("PACIENTE", "Paciente", 9, "Ana", "Rodriguez", "ana@email.com", "1234", "4", "DNI", 3, true, null, 4, 64),
       ("PACIENTE", "Paciente", 10, "Carlos", "Gómez", "carlos@email.com", "1234", "32100100", "DNI", 3, true, null, 5, 54),
       ("PACIENTE", "Paciente", 11, "Carla", "Gómez", "carla@email.com", "1234", "32110100", "DNI", 3, true, null, 1, 88);
-
+      
 /* ----- PACIENTE INFECTADOS HISOPADO----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad)
 VALUES("PACIENTE", "Paciente", 12, "Cristian", "Gómez", "cristian@email.com", "1234", "32120100", "DNI", 3, null, true, 4, 65),
@@ -295,6 +297,3 @@ VALUES (12, '2020-01-01 01:00:00.000000', null, null, 40, 28),
 	   (13, '2020-02-01 01:00:00.000000', null, null, 41, 29),
        (14, '2020-03-01 01:00:00.000000', null, null, 42, 30),
 	   (15, '2020-04-01 01:00:00.000000', null, null, 43, 31);
-
-       
-       

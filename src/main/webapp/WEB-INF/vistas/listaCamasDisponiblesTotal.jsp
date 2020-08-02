@@ -38,23 +38,25 @@
 	  <div class="table-responsive">
 		    <table class="table table-bordered table-hover responsive nowrap text-center">
 		        <tr>
-		            <th class="bg-light" >DESCRIPCION</th>
+		     	   <th class="bg-light" >CÓDIGO</th>
+		            <th class="bg-light" >DESCRIPCIÓN</th>
 		            <th class="bg-light" >TIPO</th>
 		            <th  class="bg-light">INSTITUCIÓN</th>
-		            <th  class="bg-light">SELECCIONAR</th>
+		            <th  class="bg-light">ACCIÓN</th>
 		        </tr>
 		        
 		        <c:forEach items="${listaCamasDisponiblesTotal}" var="cama">
 		            <tr>
+		                <td><c:out value="${cama.getId()}"/></td>
 		                <td><c:out value="${cama.getDescripcion()}"/></td>
 		                <td><c:out value="${cama.getTipoCama().name()}"/></td>
-		                <td><c:out value="${cama.getInstitucion().getNombre()}"/></td>
+		                <td><c:out value="${cama.getSala().getSector().getPiso().getInstitucion().getNombre()}"/></td>
 		                
 		                <td class="align-middle">
 		                
 		                <c:if test="${admin}">
 						 	<a href="detalleInternacion?numeroDocumento=${paciente.getNumeroDocumento()}&tipoDocumento=${paciente.getTipoDocumento()}&cama=${cama.getId()}" 
-		               type="button" class="btn btn-secondary">Seleccionar Cama</a> 
+		               type="button" class="btn btn-success">Seleccionar Cama</a> 
 						</c:if>
 						
 		                <c:if test="${!admin}">
