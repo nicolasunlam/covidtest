@@ -36,7 +36,7 @@
 		            	<td><c:out value="${cama.getId()}"/></td>
 		                <td><c:out value="${cama.getDescripcion()}"/></td>
 		                <td><c:out value="${cama.getTipoCama().name()}"/></td>
-		                <td><c:out value="${cama.getSala().getSector().getPiso().getInstitucion().getNombre()}"/></td>
+		                <td><c:out value="${cama.getInstitucion().getNombre()}"/></td>
 		                
 		                <td class="align-middle">
 		                

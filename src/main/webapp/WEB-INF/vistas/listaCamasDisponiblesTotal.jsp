@@ -38,7 +38,6 @@
 	  <div class="table-responsive">
 		    <table class="table table-bordered table-hover responsive nowrap text-center">
 		        <tr>
-		        	<th class="bg-light" >CÓDIGO</th>
 		            <th class="bg-light" >DESCRIPCION</th>
 		            <th class="bg-light" >TIPO</th>
 		            <th  class="bg-light">INSTITUCIÓN</th>
@@ -47,10 +46,9 @@
 		        
 		        <c:forEach items="${listaCamasDisponiblesTotal}" var="cama">
 		            <tr>
-		                <td><c:out value="${cama.getId()}"/></td>
 		                <td><c:out value="${cama.getDescripcion()}"/></td>
 		                <td><c:out value="${cama.getTipoCama().name()}"/></td>
-		                <td><c:out value="${cama.getSala().getSector().getPiso().getInstitucion().getNombre()}"/></td>
+		                <td><c:out value="${cama.getInstitucion().getNombre()}"/></td>
 		                
 		                <td class="align-middle">
 		                
