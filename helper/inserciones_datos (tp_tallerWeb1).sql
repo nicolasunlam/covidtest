@@ -92,11 +92,11 @@ INSERT INTO usuario(rol, DTYPE, id, nombre, email, password, numeroDocumento, ti
 VALUES ("ADMIN", "Institucion", 1, "Operadora Central 1", "admin@email.com", "1234", "20100041007", "CUIT", null, 1);
 
 /* ----- HOSPITAL ----- */
-INSERT INTO usuario(rol, DTYPE, id, nombre, email, password, numeroDocumento, tipoDocumento, cantidadCamas, tipo, domicilio_id)
-VALUES ("INSTITUCION", "Institucion", 2, "Hospital Fundación Favaloro", "favaloro@email.com", "1234","20200020007", "CUIT", null, "HOSPITAL", 2),
-       ("INSTITUCION", "Institucion", 3, "Hospital Italiano De Morón", "hospital_italiano_moron@email.com", "1234","20300030007", "CUIT", null, "HOSPITAL", 7),
-       ("INSTITUCION", "Institucion", 4, "Hospital Donación Francisco Santojanni", "santojanni@email.com", "1234","20400040007", "CUIT", null, "HOSPITAL", 6),
-       ("INSTITUCION", "Institucion", 5, "Hospital Profesor Doctor Ramón Carrillo", "carillo@email.com", "1234", "20500050007", "CUIT", null, "HOSPITAL", 5);
+INSERT INTO usuario(rol, DTYPE, id, nombre, email, password, numeroDocumento, tipoDocumento, cantidadCamas, tipo, domicilio_id,latitud,longitud)
+VALUES ("INSTITUCION", "Institucion", 2, "Fundación Favaloro", "favaloro@email.com", "1234","20200020007", "CUIT", 40, "HOSPITAL", 2,-34.70211051937402,-52.70211051937402),
+       ("INSTITUCION", "Institucion", 3, "Hospital Italiano De Morón", "hospital_italiano_moron@email.com", "1234","20300030007", "CUIT", 65, "HOSPITAL", 7,-35.70211051937402,-54.70211051937402),
+       ("INSTITUCION", "Institucion", 4, "Hospital Donación Francisco Santojanni", "santojanni@email.com", "1234","20400040007", "CUIT", 57, "HOSPITAL", 6,-33.70211051937402,-55.70211051937402),
+       ("INSTITUCION", "Institucion", 5, "Hospital Profesor Doctor Ramón Carrillo", "carillo@email.com", "1234", "20500050007", "CUIT", 57, "HOSPITAL", 5,-36.70211051937402,-54.90211051937402);
 
 /* ----- PACIENTE AUTOTEST POSITIVOS----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad)
@@ -136,6 +136,10 @@ VALUES("PACIENTE", "Paciente", 21, "Juan", "Gómez", "cristian@email.com", "1234
       ("PACIENTE", "Paciente", 33, "Lucia", "Iraola", "lucila@email.com", "1234", "64643", "PASAPORTE", 3, null, null, 3, 56),
       ("PACIENTE", "Paciente", 34, "Lucila", "Iraola", "lucila@email.com", "1234", "62122300", "PASAPORTE", 1, null, null, 5, 69),
       ("PACIENTE", "Paciente", 35, "Ludmila", "Imarriota", "ludmila@email.com", "1234", "435656", "PASAPORTE", 3, null, null, 3, 32);
+
+/* ----- PACIENTE CON CORDENADA----- */
+INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad,latitud,longitud)
+VALUES("PACIENTE", "Paciente", 36, "Alejandro", "Rodriguez", "alejandrito@email.com", "1234", "127854", "DNI", 2, true, null, 1, 45,-34.72840647959868,-58.61369019379556);
 
 INSERT INTO piso(id, descripcion, tipoPiso, institucion_id)
 		/*FAVALORO*/
