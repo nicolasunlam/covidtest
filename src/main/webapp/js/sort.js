@@ -1,3 +1,19 @@
+th = document.getElementsByTagName('th');
+
+for (let c = 0; c < th.length; c++) {
+	th[c].addEventListener('click', item(c))
+}
+
+function item(c) {
+	
+	return function() {
+		console.log(c)
+		sortTable()
+	}
+}
+
+
+
 function sortTable() {
 	var table, rows, switching, i, x, y, shouldSwitch;
 	table = document.getElementById("myTable");

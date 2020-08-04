@@ -15,7 +15,7 @@
 		<h2>Lista de Instituciones</h2>
 		<br> <br> <a href="panel">Volver a panel</a><br>
 
-		<table
+		<table id="myTable"
 			class="table table-bordered table-hover responsive nowrap text-center align-middle">
 			<tr class="text-center align-middle">
 				<th scope="col">Nombre</th>
@@ -85,5 +85,9 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="js/dashboard.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+<script src="js/sort.js"></script>
 </body>
 </html>
