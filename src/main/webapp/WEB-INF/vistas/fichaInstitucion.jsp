@@ -7,6 +7,8 @@
 
 <title>AsignAR</title>
 
+
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
@@ -112,12 +114,12 @@
 	<div class="row my-4">
 <div class="col-3">
       		<c:if test="${camasDisponibles > 0}">
-				<h4 class="d-inline mr-3">Hay disponibilidad de camas</h4>
+				<h4 class="d-inline mr-3">Hay disponibilidad</h4>
 				<img  src="img/right.png" width="35"
 				height="35" alt="Generic placeholder image" class="d-inline">
 		    </c:if>
 		   	<c:if test="${camasDisponibles <= 0}">
-				<h4 class="d-inline mr-3">No hay disponibilidad de camas</h4>
+				<h4 class="d-inline mr-3">No hay disponibilidad</h4>
 				<img  src="img/right.png" width="35"
 				height="35" alt="Generic placeholder image" class="d-inline">
 		    </c:if>
