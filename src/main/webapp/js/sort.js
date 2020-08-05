@@ -5,14 +5,12 @@ for (let c = 0; c < th.length; c++) {
 }
 
 function item(c) {
-	
+
 	return function() {
 		console.log(c)
 		sortTable(c)
 	}
 }
-
-
 
 function sortTable(c) {
 	var table, rows, switching, i, x, y, shouldSwitch;

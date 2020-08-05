@@ -533,7 +533,7 @@ public class ControladorPaciente {
 		List<Institucion> instituciones=servicioInstitucion.obtenerListaInstituciones();
 		Long id = (long) request.getSession().getAttribute("ID");
 		Usuario usuario=servicioUsuario.consultarUsuarioPorId(id);
-		ArrayList <PacienteDistancia> listaPacienteDistancia=new ArrayList<>();
+		ArrayList <PacienteDistancia> listaPacienteDistancia=new ArrayList<PacienteDistancia>();
 		
 		
 	    for(int i = 0; i < instituciones.size(); ++i) {
@@ -545,12 +545,10 @@ public class ControladorPaciente {
 			
 		
 			Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(latitudInstitucion, longitudInstitucion, latitudPaciente, longitudPaciente);
-	    	PacienteDistancia pacienteDistancia=new PacienteDistancia(usuario,distancia);
+	    	PacienteDistancia pacienteDistancia=new PacienteDistancia(instituciones.get(i),distancia);
 	    	
 	    	listaPacienteDistancia.add(pacienteDistancia);
-	        model.put("nombre"+i,instituciones.get(i).getNombre());
-	        model.put("distancia"+i,distancia);
-	        model.put("id"+i,instituciones.get(i).getId());
+
 
 		    model.put("listaInstituciones", listaPacienteDistancia);
 	        }
