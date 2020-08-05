@@ -110,20 +110,20 @@
 
 <div class="container-fluid pl-3 my-5 text-left">
 	<div class="row my-4">
-		<div class="col-4">
+<div class="col-3">
+      		<c:if test="${camasDisponibles > 0}">
+				<h4 class="d-inline mr-3">Hay disponibilidad de camas</h4>
+				<img  src="img/right.png" width="35"
+				height="35" alt="Generic placeholder image" class="d-inline">
+		    </c:if>
+		   	<c:if test="${camasDisponibles <= 0}">
+				<h4 class="d-inline mr-3">No hay disponibilidad de camas</h4>
+				<img  src="img/right.png" width="35"
+				height="35" alt="Generic placeholder image" class="d-inline">
+		    </c:if>
 
-			<%-- 			<c:if test="${not empty error}">
-				<h6>
-					<span>${error}</span>
-				</h6>
-				<br>
 		</div>
-		</c:if> --%>
-
-			<h4>Hay disponibilidad de camas en esta institución</h4>
-
-		</div>
-		<div class="col-1"></div>
+		<div class="col-2"></div>
 		<div class="col-5">
 			<h4>${distancia} kms.</h4>
 			<p id="latitudInstitucion" style="display: none;">${latitudInstitucion}</p>
@@ -156,7 +156,7 @@
 	var latitudPaciente = document.getElementById('latitudPaciente').innerHTML;
 	var longitudPaciente = document.getElementById('longitudPaciente').innerHTML;
 
-	var map = L.map('map').setView([ latitudInstitucion, longitudInstitucion ], 14);
+	var map = L.map('map').setView([ latitudInstitucion, longitudInstitucion ], 11);
 	
     let iconMarker = L.icon({
         iconUrl: 'img/red-cross.png',
