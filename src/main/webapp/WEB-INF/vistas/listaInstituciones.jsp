@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
 <title>Inserte titulo aquí</title>
-    
+
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -19,13 +20,13 @@
 			class="table table-bordered table-hover responsive nowrap text-center align-middle">
 			<tr class="text-center align-middle">
 				<th scope="col">Nombre</th>
-				
+
 				<th scope="col">Tipo Institución</th>
-				
+
 				<th scope="col">Cuit</th>
 
 				<th scope="col">Camas Totales</th>
-				
+
 				<th scope="col">Acciones</th>
 
 			</tr>
@@ -34,8 +35,8 @@
 				<tr>
 					<td class="align-middle"><c:out
 							value="${instituciones.getNombre()}" /></td>
-							
-						<td class="align-middle"><c:out
+
+					<td class="align-middle"><c:out
 							value="${instituciones.getTipo().name()}" /></td>
 
 					<td class="align-middle"><c:out
