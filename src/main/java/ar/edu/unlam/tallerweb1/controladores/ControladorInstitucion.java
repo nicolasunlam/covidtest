@@ -32,7 +32,7 @@ public class ControladorInstitucion {
 	public ControladorInstitucion(ServicioInstitucion servicioInstitucion, ServicioCama servicioCama,
 			ServicioPaciente servicioPaciente, ServicioUsuario servicioUsuario, ServicioDomicilio servicioDomicilio,
 			ServicioPartido servicioPartido, ServicioLocalidad servicioLocalidad, ServicioZona servicioZona,
-			ServicioAtajo servicioAtajo,ServicioMapa servicioMapa) {
+			ServicioAtajo servicioAtajo, ServicioMapa servicioMapa) {
 
 		this.servicioInstitucion = servicioInstitucion;
 		this.servicioCama = servicioCama;
@@ -42,7 +42,7 @@ public class ControladorInstitucion {
 		this.servicioPartido = servicioPartido;
 		this.servicioZona = servicioZona;
 		this.servicioAtajo = servicioAtajo;
-		this.servicioMapa=servicioMapa;
+		this.servicioMapa = servicioMapa;
 	}
 
 	@RequestMapping("/registrarInstitucion")
@@ -65,43 +65,41 @@ public class ControladorInstitucion {
 		return new ModelAndView("registrarInstitucion", model);
 	}
 
-    @RequestMapping("/detalleRegistroInstitucion")
-    public ModelAndView validarRegistroInstitucion(
-    		
-    		HttpServletRequest request,
-            @ModelAttribute("usuario") Institucion institucion, 
-            @RequestParam(value = "calle") String calle,
-            @RequestParam(value = "numero") Integer numero,
-            @RequestParam(value = "nombreLocalidad") String nombreLocalidad,
-            @RequestParam(value = "nombrePartido") String nombrePartido
+	@RequestMapping("/detalleRegistroInstitucion")
+	public ModelAndView validarRegistroInstitucion(
 
-    ) {
+			HttpServletRequest request, @ModelAttribute("usuario") Institucion institucion,
+			@RequestParam(value = "calle") String calle, @RequestParam(value = "numero") Integer numero,
+			@RequestParam(value = "nombreLocalidad") String nombreLocalidad,
+			@RequestParam(value = "nombrePartido") String nombrePartido
 
-        ModelMap model = new ModelMap();
-        
-        if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+	) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-        institucion.setTipoDocumento(TipoDocumento.CUIT);
-        
-        if (servicioUsuario.consultarUsuarioPorEmail(institucion.getEmail()) == null
-                && servicioInstitucion.consultarInstitucionPorCuit(institucion.getNumeroDocumento()) == null) {
+		institucion.setTipoDocumento(TipoDocumento.CUIT);
 
-            institucion.setRol(Rol.INSTITUCION);
+		if (servicioUsuario.consultarUsuarioPorEmail(institucion.getEmail()) == null
+				&& servicioInstitucion.consultarInstitucionPorCuit(institucion.getNumeroDocumento()) == null) {
 
-            servicioInstitucion.registrarInstitucion(institucion);
+			institucion.setRol(Rol.INSTITUCION);
 
-            request.getSession().setAttribute("ID", institucion.getId());
-            request.getSession().setAttribute("ROL", institucion.getRol());
+			servicioInstitucion.registrarInstitucion(institucion);
+
+			request.getSession().setAttribute("ID", institucion.getId());
+			request.getSession().setAttribute("ROL", institucion.getRol());
 
 //            for (int i = 0; i < institucion.getCantidadCamas().intValue(); i++) {
 //
@@ -116,35 +114,35 @@ public class ControladorInstitucion {
 //                servicioCama.registrarCama(cama);
 //            }
 
-            Domicilio domicilio = new Domicilio();
+			Domicilio domicilio = new Domicilio();
 
-            domicilio.setCalle(calle);
-            domicilio.setNumero(numero);
-            servicioDomicilio.registrarDomicilio(domicilio);
-            institucion.setDomicilio(domicilio);
-            Localidad localidad = servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad);
-            domicilio.setLocalidad(localidad);
-            Partido partido = servicioPartido.obtenerPartidoPorNombre(nombrePartido);
-            localidad.setPartido(partido);
-            servicioInstitucion.actualizarInstitucion(institucion);
-            servicioDomicilio.actualizarDomicilio(domicilio);
-            servicioLocalidad.actualizarLocalidad(localidad);
+			domicilio.setCalle(calle);
+			domicilio.setNumero(numero);
+			servicioDomicilio.registrarDomicilio(domicilio);
+			institucion.setDomicilio(domicilio);
+			Localidad localidad = servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad);
+			domicilio.setLocalidad(localidad);
+			Partido partido = servicioPartido.obtenerPartidoPorNombre(nombrePartido);
+			localidad.setPartido(partido);
+			servicioInstitucion.actualizarInstitucion(institucion);
+			servicioDomicilio.actualizarDomicilio(domicilio);
+			servicioLocalidad.actualizarLocalidad(localidad);
 
-            String mensaje = "Nombre: " + institucion.getNombre();
-            String mensaje2 = "Documento: (" + institucion.getTipoDocumento() + ") " + institucion.getNumeroDocumento();
-            String mensaje3 = "Email: " + institucion.getEmail();
+			String mensaje = "Nombre: " + institucion.getNombre();
+			String mensaje2 = "Documento: (" + institucion.getTipoDocumento() + ") " + institucion.getNumeroDocumento();
+			String mensaje3 = "Email: " + institucion.getEmail();
 
-            model.put("mensaje", mensaje);
-            model.put("mensaje2", mensaje2);
-            model.put("mensaje3", mensaje3);
+			model.put("mensaje", mensaje);
+			model.put("mensaje2", mensaje2);
+			model.put("mensaje3", mensaje3);
 
-            return new ModelAndView("detalleRegistroInstitucion", model);
-        } else {
+			return new ModelAndView("detalleRegistroInstitucion", model);
+		} else {
 
-            model.put("error", "Ya existe un usuario registrado con su mail o cuit");
+			model.put("error", "Ya existe un usuario registrado con su mail o cuit");
 
-            return new ModelAndView("registrarInstitucion", model);
-        }
+			return new ModelAndView("registrarInstitucion", model);
+		}
 	}
 
 	@RequestMapping("/listaInstituciones")
@@ -226,9 +224,8 @@ public class ControladorInstitucion {
 	}
 
 	@RequestMapping("detalleInstitucion")
-    public ModelAndView detalleInstitucion(@RequestParam(value="idInstitucion")Long idInstitucion,
-    		HttpServletRequest request) {
-    	
+	public ModelAndView detalleInstitucion(@RequestParam(value = "idInstitucion") Long idInstitucion,
+			HttpServletRequest request) {
 
 //    	Institucion institucion =servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
 //    	
@@ -247,7 +244,7 @@ public class ControladorInstitucion {
 //           
 //             servicioCama.registrarCama(cama);
 //         }
-    	ModelMap model=new ModelMap();
+		ModelMap model = new ModelMap();
 
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
 			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
@@ -260,26 +257,36 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-    	Long id= (Long) request.getSession().getAttribute("ID");
-    	Usuario usuario=servicioUsuario.consultarUsuarioPorId(id);
-    	Institucion institucion=servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
-    	
-    	Double distancia=servicioMapa.calcularDistanciaEntreDosPuntos(usuario.getLatitud(), usuario.getLongitud(), institucion.getLatitud(),institucion.getLongitud());
-    	
-    	Integer camasDisponibles=servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion).size();
-    	
-    	model.put("distancia", distancia);
-    	model.put("nombre",institucion.getNombre());
-    	model.put("email",institucion.getEmail());
-    	model.put("calle",institucion.getDomicilio().getCalle());
-    	model.put("numero",institucion.getDomicilio().getNumero());
-    	model.put("localidad", institucion.getDomicilio().getLocalidad().getNombreLocalidad());
-    	model.put("camas", institucion.getCantidadCamas());
-    	model.put("camasDisponibles", camasDisponibles);
-    	
-				return new ModelAndView("detalleInstitucion",model);
-    	
-    }
+
+		Long id = (Long) request.getSession().getAttribute("ID");
+		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+
+		Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(usuario.getLatitud(), usuario.getLongitud(),
+				institucion.getLatitud(), institucion.getLongitud());
+
+		Integer camasDisponibles = servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion).size();
+
+		Double latitudInstitucion = institucion.getLatitud();
+		Double longitudInstitucion = institucion.getLongitud();
+		Double latitudPaciente = usuario.getLatitud();
+		Double longitudPaciente = usuario.getLongitud();
+
+		model.put("distancia", distancia);
+		model.put("nombre", institucion.getNombre());
+		model.put("email", institucion.getEmail());
+		model.put("calle", institucion.getDomicilio().getCalle());
+		model.put("numero", institucion.getDomicilio().getNumero());
+		model.put("localidad", institucion.getDomicilio().getLocalidad().getNombreLocalidad());
+		model.put("camas", institucion.getCantidadCamas());
+		model.put("camasDisponibles", camasDisponibles);
+		model.put("latitudInstitucion", latitudInstitucion);
+		model.put("longitudInstitucion", longitudInstitucion);
+		model.put("latitudPaciente", latitudPaciente);
+		model.put("longitudPaciente", longitudPaciente);
+
+		return new ModelAndView("fichaInstitucion", model);
+
+	}
 
 }
