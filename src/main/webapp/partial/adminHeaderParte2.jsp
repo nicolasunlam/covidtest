@@ -75,7 +75,7 @@
                     <li class="nav-item mt-3 mb-3">
                         <a class="nav-link" href="admin">
                             <span data-feather="home"></span>
-                            Inicio
+                            Home Admin
                         </a>
                     </li>
                     
