@@ -28,7 +28,7 @@
     </c:if>
 </div>
 
-<h1 class="text-center mb-3 mt-5">Gracias por xregistrarse</h1>
+<h1 class="text-center mb-3 mt-5">Gracias por registrarse</h1>
 
 <div class="text-center my-5">
     <img src="img/right.png" class="rounded" alt="virus" width="200" height="200">
