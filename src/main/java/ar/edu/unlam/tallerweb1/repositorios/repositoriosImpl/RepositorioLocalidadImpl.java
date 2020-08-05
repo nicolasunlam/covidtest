@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.repositorios.repositoriosImpl;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
-import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioLocalidad;
@@ -33,7 +32,7 @@ public class RepositorioLocalidadImpl implements RepositorioLocalidad {
 		return sessionFactory.getCurrentSession().createCriteria(Localidad.class).list();
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	@Override
 	public Localidad obtenerLocalidadPorNombre(String nombreLocalidad) {
 		return (Localidad) sessionFactory.getCurrentSession().createCriteria(Localidad.class)
@@ -45,12 +44,14 @@ public class RepositorioLocalidadImpl implements RepositorioLocalidad {
 		sessionFactory.getCurrentSession().update(localidad);
 	}
 
+    @SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Partido> obtenerPartidoPorLocalidad(Long idPartido) {
 		return sessionFactory.getCurrentSession().createCriteria(Localidad.class)
 				.add(Restrictions.eq("partido_id", idPartido)).list();
 	}
 
+    @SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Institucion> listarInstitucionesPorZona(Zona zona) {
 		return sessionFactory.getCurrentSession().createCriteria(Localidad.class).add(Restrictions.eq("zona", zona))

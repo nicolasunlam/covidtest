@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.repositorios.repositoriosImpl;
 
-import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioInstitucion;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -23,6 +22,7 @@ public class RepositorioInstitucionImpl implements RepositorioInstitucion {
         this.sessionFactory = sessionFactory;
     }
 
+    @SuppressWarnings({ "deprecation" })
     @Override
     public Institucion consultarInstitucionPorCuit(String numeroCuit) {
 
@@ -30,6 +30,7 @@ public class RepositorioInstitucionImpl implements RepositorioInstitucion {
                 .add(Restrictions.eq("numeroDocumento", numeroCuit)).uniqueResult();
     }
 
+    @SuppressWarnings({ "unchecked", "deprecation" })
     @Override
     public List<Institucion> obtenerListaInstituciones() {
         return sessionFactory.getCurrentSession().createCriteria(Institucion.class)
@@ -37,12 +38,12 @@ public class RepositorioInstitucionImpl implements RepositorioInstitucion {
                 .list();
     }
 
+    @SuppressWarnings({ "deprecation" })
     @Override
     public Institucion obtenerInstitucionPorId(Long id) {
 
         return (Institucion) sessionFactory.getCurrentSession().createCriteria(Institucion.class)
                 .add(Restrictions.eq("id", id)).uniqueResult();
-
     }
 
     @Override
@@ -50,13 +51,10 @@ public class RepositorioInstitucionImpl implements RepositorioInstitucion {
         sessionFactory.getCurrentSession().update(institucion);
     }
 
+    @SuppressWarnings({ "unchecked", "deprecation" })
     @Override
     public List<Institucion> listarInstitucionesPorLocalidad(Long id) {
         return sessionFactory.getCurrentSession().createCriteria(Institucion.class).add(Restrictions.eq("localidad_id", id)).list();
     }
 
-    /*@Override
-    public List<Institucion> listarInstitucionesPorZona(Zona zona) {
-        return sessionFactory.getCurrentSession().createCriteria(Ins);
-    }*/
 }

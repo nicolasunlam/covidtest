@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.Query;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPaciente;
 
@@ -19,6 +20,7 @@ import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 
 @Repository("repositorioPaciente")
 @Transactional
@@ -105,7 +107,7 @@ public class RepositorioPacienteImpl implements RepositorioPaciente {
     	List<Paciente> pacientesInternadosPorInstitucion = new ArrayList<Paciente>();
     	
         for (Asignacion asignacion: asignacionesVigentes) { 
-        	if (asignacion.getCama().getInstitucion().getId() == idInstitucion ) {
+        	if (asignacion.getCama().getSala().getSector().getPiso().getInstitucion().getId() == idInstitucion ) {
         		pacientesInternadosPorInstitucion.add(asignacion.getPaciente());
 			}
 		}
@@ -116,5 +118,7 @@ public class RepositorioPacienteImpl implements RepositorioPaciente {
     public void actualizarPaciente(Paciente paciente) {
         sessionFactory.getCurrentSession().update(paciente);
     }
+    
+
 
 }

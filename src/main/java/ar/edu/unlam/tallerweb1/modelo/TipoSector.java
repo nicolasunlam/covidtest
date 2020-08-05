@@ -1,14 +1,14 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-public enum MotivoEgreso {
+
+public enum TipoSector {
 	
-	CURADO("Curado"), 
-	TRASLADADO("Trasladado"), 
-	FALLECIDO("Fallecido");
+	CIRUJIA("Cirujia"),
+	DIALISIS("Dálisis");
 	
     private final String descripcion;
 
-    private MotivoEgreso (String descripcion) {
+    private TipoSector (String descripcion) {
         this.descripcion = descripcion;
     }
 

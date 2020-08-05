@@ -20,7 +20,8 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
     public RepositorioAsignacionImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
+    
+    @SuppressWarnings({ "deprecation" })
     @Override
     public Asignacion consultarAsignacionPacienteInternado(Paciente paciente) {
 
@@ -37,6 +38,7 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
 
     }
 
+    @SuppressWarnings({ "deprecation" })
     public Asignacion consultarAsignacionPorId(Long nro) {
 
         return (Asignacion) sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
@@ -44,13 +46,8 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
                 .uniqueResult();
     }
 
-    /*@Override
-    public List<Asignacion> obtenerAsignaciones() {
-        return sessionFactory.getCurrentSession().createQuery("SELECT cama_id FROM asignacion")
-                .list();
-    }*/
-
-    @Override
+    @SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
     public List<Asignacion> obtenerAsignacionesActuales() {
         return sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
                 .add(Restrictions.isNull("motivoEgreso"))

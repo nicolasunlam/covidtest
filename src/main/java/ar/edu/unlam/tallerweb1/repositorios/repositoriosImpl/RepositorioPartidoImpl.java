@@ -16,7 +16,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 	@Inject
 	private SessionFactory sessionFactory;
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	@Override
 	public Partido obtenerPartidoPorNombre(String nombrePartido) {
 		return (Partido) sessionFactory.getCurrentSession().createCriteria(Partido.class)

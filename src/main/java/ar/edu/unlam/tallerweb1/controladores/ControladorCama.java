@@ -130,18 +130,25 @@ public class ControladorCama {
 			model.put("rol", rol.name());	
 		}
     	model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-    	Long id = (long) request.getSession().getAttribute("ID");
-    	Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(id);
     	
     	if (request.getSession().getAttribute("ROL") == Rol.INSTITUCION) {
+    		
+        	Long id = (long) request.getSession().getAttribute("ID");
+        	Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(id);
+        	
         	List<Cama> camasDisponiblesPorInstitucion = servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion);
         	model.put("camas", camasDisponiblesPorInstitucion);
     	}
     	
     	if (request.getSession().getAttribute("ROL") == Rol.ADMIN) {
-        	List<CamaCantidad> CamasTotalesDisponiblesConSuInstitucion = servicioCama.obtenerCantidadDeCamasDisponiblesDeCadaInstitucion();
-        	model.put("camas", CamasTotalesDisponiblesConSuInstitucion);
+    		
+        	List<CamaCantidad> camasDisponiblesDeCadaInstitucion = servicioCama.obtenerCantidadDeCamasDisponiblesDeCadaInstitucion();
+        	model.put("camas", camasDisponiblesDeCadaInstitucion);
+
+    		for (CamaCantidad camaCantidad : camasDisponiblesDeCadaInstitucion) {
+				System.out.println(camaCantidad);
+			}
+
     	}
         
         return new ModelAndView("cantidadDeCamasDisponibles", model);

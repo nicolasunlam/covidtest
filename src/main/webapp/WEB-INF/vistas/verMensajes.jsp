@@ -20,6 +20,7 @@
                  <table class="table table-bordered table-hover responsive nowrap text-center align-middle">
                     <tr class="text-center align-middle">
                         <th scope="col">De: </th>
+                        <th scope="col">Asunto</th>
                         <th scope="col">Mensaje</th>
                         <th scope="col">Fecha y Hora</th>
                         <th scope="col">Rol</th>
@@ -29,6 +30,9 @@
 							<tr>
 								<td class="align-middle"><c:out
 										value="${notificacion.getRemitente().getNombre()}" /></td>
+								<td class="align-middle">
+									<c:out value="${notificacion.getAsunto()}" />
+								</td>
 								<td class="align-middle"><c:out
 										value="${notificacion.getMsg()}" /></td>
 								<td class="align-middle"><c:out

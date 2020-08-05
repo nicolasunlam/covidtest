@@ -2,16 +2,21 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Domicilio;
+import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.listas.PacienteDistancia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMail;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMapa;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTest;
@@ -27,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +58,12 @@ public class ControladorPaciente {
 	ServicioPartido servicioPartido;
 	@Autowired
 	ServicioTest servicioTest;
+	@Autowired
+	ServicioInstitucion servicioInstitucion;
+	@Autowired
+	ServicioMapa servicioMapa;
 
+	
 	/* Pantalla de bienvenido al paciente cuando inicia sesión */
 	@RequestMapping("bienvenidoPaciente")
 	public ModelAndView irAbienvenido(HttpServletRequest request) {
@@ -499,7 +510,73 @@ public class ControladorPaciente {
 
 		return new ModelAndView("listapacientes2", model);
 	}
+	
+	@RequestMapping("/pacienteDistancia")
+	public ModelAndView pacienteDistancia (HttpServletRequest request) {
+		
+		ModelMap model = new ModelMap();
+		
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		
+		
+		
+		List<Institucion> instituciones=servicioInstitucion.obtenerListaInstituciones();
+		Long id = (long) request.getSession().getAttribute("ID");
+		Usuario usuario=servicioUsuario.consultarUsuarioPorId(id);
+		ArrayList <PacienteDistancia> listaPacienteDistancia=new ArrayList<>();
+		
+		
+	    for(int i = 0; i < instituciones.size(); ++i) {
 
+			Double latitudInstitucion = instituciones.get(i).getLatitud();
+			Double longitudInstitucion = instituciones.get(i).getLongitud();
+			Double latitudPaciente = usuario.getLatitud();
+			Double longitudPaciente =usuario.getLongitud();
+			
+		
+			Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(latitudInstitucion, longitudInstitucion, latitudPaciente, longitudPaciente);
+	    	PacienteDistancia pacienteDistancia=new PacienteDistancia(usuario,distancia);
+	    	
+	    	listaPacienteDistancia.add(pacienteDistancia);
+	        model.put("nombre"+i,instituciones.get(i).getNombre());
+	        model.put("distancia"+i,distancia);
+	        model.put("id"+i,instituciones.get(i).getId());
+
+		    model.put("listaInstituciones", listaPacienteDistancia);
+	        }
+	  	
+	    
+	     
+	    
+		
+		return new ModelAndView("pacienteDistancia", model);
+		
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/* ----- Getters and Setters ----- */
 	public ServicioPaciente getServicioPaciente() {
 		return servicioPaciente;
@@ -524,4 +601,62 @@ public class ControladorPaciente {
 	public void setServicioLocalidad(ServicioLocalidad servicioLocalidad) {
 		this.servicioLocalidad = servicioLocalidad;
 	}
+
+	public ServicioMail getServicioMail() {
+		return servicioMail;
+	}
+
+	public void setServicioMail(ServicioMail servicioMail) {
+		this.servicioMail = servicioMail;
+	}
+
+	public ServicioAtajo getServicioAtajo() {
+		return servicioAtajo;
+	}
+
+	public void setServicioAtajo(ServicioAtajo servicioAtajo) {
+		this.servicioAtajo = servicioAtajo;
+	}
+
+	public ServicioUsuario getServicioUsuario() {
+		return servicioUsuario;
+	}
+
+	public void setServicioUsuario(ServicioUsuario servicioUsuario) {
+		this.servicioUsuario = servicioUsuario;
+	}
+
+	public ServicioDomicilio getServicioDomicilio() {
+		return servicioDomicilio;
+	}
+
+	public void setServicioDomicilio(ServicioDomicilio servicioDomicilio) {
+		this.servicioDomicilio = servicioDomicilio;
+	}
+
+	public ServicioPartido getServicioPartido() {
+		return servicioPartido;
+	}
+
+	public void setServicioPartido(ServicioPartido servicioPartido) {
+		this.servicioPartido = servicioPartido;
+	}
+
+	public ServicioTest getServicioTest() {
+		return servicioTest;
+	}
+
+	public void setServicioTest(ServicioTest servicioTest) {
+		this.servicioTest = servicioTest;
+	}
+
+	public ServicioInstitucion getServicioInstitucion() {
+		return servicioInstitucion;
+	}
+
+	public void setServicioInstitucion(ServicioInstitucion servicioInstitucion) {
+		this.servicioInstitucion = servicioInstitucion;
+	}
+	
 }
+

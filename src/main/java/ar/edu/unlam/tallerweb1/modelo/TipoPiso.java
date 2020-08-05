@@ -1,14 +1,13 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-public enum MotivoEgreso {
+
+public enum TipoPiso {
 	
-	CURADO("Curado"), 
-	TRASLADADO("Trasladado"), 
-	FALLECIDO("Fallecido");
+	TIPO_PISO("Tipo de Piso");
 	
     private final String descripcion;
 
-    private MotivoEgreso (String descripcion) {
+    private TipoPiso (String descripcion) {
         this.descripcion = descripcion;
     }
 
