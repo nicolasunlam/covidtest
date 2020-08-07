@@ -7,4 +7,6 @@ public interface RepositorioPiso {
     void registrarPiso(Piso piso);
 
     void actualizarPiso(Piso piso);
+
+	Piso buscarPisoPorId(Long id);
 }

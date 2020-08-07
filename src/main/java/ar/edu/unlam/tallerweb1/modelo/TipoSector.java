@@ -4,7 +4,7 @@ package ar.edu.unlam.tallerweb1.modelo;
 public enum TipoSector {
 	
 	CIRUJIA("Cirujia"),
-	DIALISIS("Dálisis");
+	DIALISIS("Dialisis");
 	
     private final String descripcion;
 

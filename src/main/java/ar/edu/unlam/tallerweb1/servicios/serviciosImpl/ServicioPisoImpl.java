@@ -1,9 +1,11 @@
 package ar.edu.unlam.tallerweb1.servicios.serviciosImpl;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPiso;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPiso;
@@ -24,4 +26,11 @@ public class ServicioPisoImpl implements ServicioPiso {
     public void actualizarPiso(Piso piso) {
         repositorioPiso.actualizarPiso(piso);
     }
+
+	@Override
+	public Piso buscarPisoPorId(Long id) {
+		return repositorioPiso.buscarPisoPorId(id);
+	}
+    
+    
 }

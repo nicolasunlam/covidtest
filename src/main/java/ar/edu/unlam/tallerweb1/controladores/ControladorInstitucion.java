@@ -27,12 +27,14 @@ public class ControladorInstitucion {
 	private ServicioZona servicioZona;
 	private ServicioAtajo servicioAtajo;
 	private ServicioMapa servicioMapa;
+	private ServicioPiso servicioPiso;
+	private ServicioSector servicioSector;
 
 	@Autowired
 	public ControladorInstitucion(ServicioInstitucion servicioInstitucion, ServicioCama servicioCama,
 			ServicioPaciente servicioPaciente, ServicioUsuario servicioUsuario, ServicioDomicilio servicioDomicilio,
 			ServicioPartido servicioPartido, ServicioLocalidad servicioLocalidad, ServicioZona servicioZona,
-			ServicioAtajo servicioAtajo, ServicioMapa servicioMapa) {
+			ServicioAtajo servicioAtajo, ServicioMapa servicioMapa,ServicioPiso servicioPiso,ServicioSector servicioSector) {
 
 		this.servicioInstitucion = servicioInstitucion;
 		this.servicioCama = servicioCama;
@@ -43,6 +45,8 @@ public class ControladorInstitucion {
 		this.servicioZona = servicioZona;
 		this.servicioAtajo = servicioAtajo;
 		this.servicioMapa = servicioMapa;
+		this.servicioPiso=servicioPiso;
+		this.servicioSector=servicioSector;
 	}
 
 	@RequestMapping("/registrarInstitucion")
@@ -101,18 +105,7 @@ public class ControladorInstitucion {
 			request.getSession().setAttribute("ID", institucion.getId());
 			request.getSession().setAttribute("ROL", institucion.getRol());
 
-//            for (int i = 0; i < institucion.getCantidadCamas().intValue(); i++) {
-//
-//                Cama cama = new Cama();
-//                cama.setInstitucion(institucion);
-//                
-//                
-//                int numeroCama = i + 1;
-//                String descripcion = "" + numeroCama;
-//                cama.setDescripcion(descripcion);
-//
-//                servicioCama.registrarCama(cama);
-//            }
+
 
 			Domicilio domicilio = new Domicilio();
 
@@ -128,15 +121,15 @@ public class ControladorInstitucion {
 			servicioDomicilio.actualizarDomicilio(domicilio);
 			servicioLocalidad.actualizarLocalidad(localidad);
 
-			String mensaje = "Nombre: " + institucion.getNombre();
-			String mensaje2 = "Documento: (" + institucion.getTipoDocumento() + ") " + institucion.getNumeroDocumento();
-			String mensaje3 = "Email: " + institucion.getEmail();
+//			String mensaje = "Nombre: " + institucion.getNombre();
+//			String mensaje2 = "Documento: (" + institucion.getTipoDocumento() + ") " + institucion.getNumeroDocumento();
+//			String mensaje3 = "Email: " + institucion.getEmail();
+//
+//			model.put("mensaje", mensaje);
+//			model.put("mensaje2", mensaje2);
+//			model.put("mensaje3", mensaje3);
 
-			model.put("mensaje", mensaje);
-			model.put("mensaje2", mensaje2);
-			model.put("mensaje3", mensaje3);
-
-			return new ModelAndView("detalleRegistroInstitucion", model);
+			return new ModelAndView("crearPiso", model);
 		} else {
 
 			model.put("error", "Ya existe un usuario registrado con su mail o cuit");
@@ -144,6 +137,136 @@ public class ControladorInstitucion {
 			return new ModelAndView("registrarInstitucion", model);
 		}
 	}
+	@RequestMapping("/crearPiso")
+	public ModelAndView crearPiso(HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		return new ModelAndView("registrarPiso", model);
+	}
+	
+	
+	
+	@RequestMapping("/registrarPiso")
+	public ModelAndView registrarPiso(
+			HttpServletRequest request,
+		  @RequestParam(value = "descripcion") String descripcion,
+		  @RequestParam(value = "numeroPiso") Integer numeroPiso
+			) {
+		
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		
+		
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+		
+		Piso piso= new Piso();
+	
+		piso.setDescripcion(descripcion);
+		piso.setInstitucion(institucion);
+		piso.setNumeroPiso(numeroPiso);
+		
+		
+		
+		servicioPiso.registrarPiso(piso);
+		
+		model.put("idPiso",piso.getId());
+		
+		return new ModelAndView("registrarSector",model);
+	}
+	
+
+	@RequestMapping("/registrarSector")
+	public ModelAndView registrarSector(
+			HttpServletRequest request,
+		  @RequestParam(value = "tipoSector") TipoSector tipoSector,
+		  @RequestParam(value = "descripcion") String descripcion,
+		  @RequestParam(value = "idPiso")Long idPiso 
+			) {
+		
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		
+		Piso piso=servicioPiso.buscarPisoPorId(idPiso);
+		
+		Sector sector = new Sector();
+		sector.setPiso(piso);
+		sector.setTipoSector(tipoSector);
+		sector.setDescripcion(descripcion);
+		
+		servicioSector.registrarSector(sector);
+		
+		model.put("idSector",sector.getId());
+		
+
+
+		return new ModelAndView("registrarSala",model);
+	}
+	
+
+	
+//	@RequestMapping("/registrarSala")
+//	public ModelAndView registrarSala(
+//			HttpServletRequest request,
+//		  @RequestParam(value = "tipoSector") TipoSala tipoSala,
+//		  @RequestParam(value = "descripcion") String descripcion,
+//		  @RequestParam(value = "idPiso")Long idSector 
+//			) {
+//		
+//		ModelMap model = new ModelMap();
+//
+//		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+//			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+//		}
+//		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+//			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+//		}
+//		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+//		if (rol != null) {
+//			model.put("rol", rol.name());
+//		}
+//		model.put("armarHeader", servicioAtajo.armarHeader(request));
+//		
+//		
+//
+//		return new ModelAndView("crearCama",model);
+//	}
+	
+		
 
 	@RequestMapping("/listaInstituciones")
 	public ModelAndView listarInstituciones(HttpServletRequest request) {

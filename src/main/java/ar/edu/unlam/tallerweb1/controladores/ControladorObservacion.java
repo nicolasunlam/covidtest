@@ -31,7 +31,7 @@ public class ControladorObservacion {
 	}
 	
 	@RequestMapping("detalleObservacion")
-	public ModelAndView detalleObservación(
+	public ModelAndView detalleObservacion(
 			
 			@RequestParam Long idPaciente,
 			@RequestParam String descripcion,

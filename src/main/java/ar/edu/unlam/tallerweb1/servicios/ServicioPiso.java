@@ -7,5 +7,7 @@ public interface ServicioPiso {
     public void registrarPiso(Piso piso);
 
     public void actualizarPiso(Piso piso);
+    
+    public Piso buscarPisoPorId(Long id);
 
 }

@@ -6,7 +6,7 @@ public enum TipoSala {
 	TERAPIA_INTENSIVA("Terapia Intensiva"), 
 	TERAPIA_INTERMEDIA("Terapia Intermedia"), 
 	SALA_AISLAMIENTO("Sala de Aislamiento"),
-	HABITACION_HOTEL("Habitaciión de Hotel"), 
+	HABITACION_HOTEL("Habitacion de Hotel"), 
 	AULA_UNIVERSITARIA("Aula Universitaria"), 
 	CLUB("Club");
 	

@@ -20,6 +20,8 @@ public class Piso {
     private Institucion institucion;
 
     private String descripcion;
+    
+    private Integer numeroPiso;
 
 	@Enumerated(EnumType.STRING)
     private TipoPiso tipoPiso;
@@ -27,6 +29,17 @@ public class Piso {
     public Long getId() {
 		return id;
 	}
+    
+
+	public Integer getNumeroPiso() {
+		return numeroPiso;
+	}
+
+
+	public void setNumeroPiso(Integer numeroPiso) {
+		this.numeroPiso = numeroPiso;
+	}
+
 
 	public void setId(Long id) {
 		this.id = id;
