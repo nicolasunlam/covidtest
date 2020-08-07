@@ -34,7 +34,7 @@
 
 			<tr>
 				<td class="align-middle"><c:out
-						value="${instituciones.getPaciente().getNombre()}" /></td>
+						value="${instituciones.getUsuario().getNombre()}" /></td>
 
 				<td class="align-middle"><c:out
 						value="${fn:substring(instituciones.getDistancia(), 0, 5)} km" /></td>
@@ -49,7 +49,7 @@
 
 						<input class="invisible" type="hidden" id="idInstitucion"
 							name="idInstitucion"
-							value="${instituciones.getPaciente().getId()}"> <input
+							value="${instituciones.getUsuario().getId()}"> <input
 							class="btn btn-primary" type="submit"
 							value="Ver detalle institucion">
 

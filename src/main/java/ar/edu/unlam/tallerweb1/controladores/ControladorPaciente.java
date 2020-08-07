@@ -1,15 +1,25 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import ar.edu.unlam.tallerweb1.modelo.Cama;
-import ar.edu.unlam.tallerweb1.modelo.Domicilio;
-import ar.edu.unlam.tallerweb1.modelo.Institucion;
-import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
-import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
-import ar.edu.unlam.tallerweb1.modelo.listas.PacienteDistancia;
+import ar.edu.unlam.tallerweb1.modelo.listas.UsuarioDistancia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
@@ -21,21 +31,6 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTest;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ControladorPaciente {
@@ -179,7 +174,7 @@ public class ControladorPaciente {
 			 */
 
 			String path = "http://localhost:" + request.getLocalPort();
-			servicioMail.SendEmail(paciente.getEmail(), "Confirmación de registro: AsignAr" + paciente.getNombre(),
+			servicioMail.SendEmail(paciente.getEmail(), "Confirmaciï¿½n de registro: AsignAr" + paciente.getNombre(),
 					path);
 
 			return new ModelAndView("enfermedades", model);
@@ -527,39 +522,15 @@ public class ControladorPaciente {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-		
-		
-		List<Institucion> instituciones=servicioInstitucion.obtenerListaInstituciones();
+
 		Long id = (long) request.getSession().getAttribute("ID");
-		Usuario usuario=servicioUsuario.consultarUsuarioPorId(id);
-		ArrayList <PacienteDistancia> listaPacienteDistancia=new ArrayList<PacienteDistancia>();
-		
-		
-	    for(int i = 0; i < instituciones.size(); ++i) {
+		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
 
-			Double latitudInstitucion = instituciones.get(i).getLatitud();
-			Double longitudInstitucion = instituciones.get(i).getLongitud();
-			Double latitudPaciente = usuario.getLatitud();
-			Double longitudPaciente =usuario.getLongitud();
-			
-		
-			Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(latitudInstitucion, longitudInstitucion, latitudPaciente, longitudPaciente);
-	    	PacienteDistancia pacienteDistancia=new PacienteDistancia(instituciones.get(i),distancia);
-	    	
-	    	listaPacienteDistancia.add(pacienteDistancia);
+		List<UsuarioDistancia> listaUsuarioDistancia = servicioMapa.calcularDistanciaDeUsuarioAInsituciones(usuario);
 
+		model.put("listaInstituciones", listaUsuarioDistancia);
 
-		    model.put("listaInstituciones", listaPacienteDistancia);
-	        }
-	  	
-	    
-	     
-	    
-		
 		return new ModelAndView("pacienteDistancia", model);
-		
-		
 	}
 	
 	@RequestMapping("/fichaInstitucion")
@@ -582,18 +553,6 @@ public class ControladorPaciente {
 		return new ModelAndView("fichaInstitucion", model);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	/* ----- Getters and Setters ----- */
 	public ServicioPaciente getServicioPaciente() {

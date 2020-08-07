@@ -95,14 +95,14 @@ VALUES ("ADMIN", "Institucion", 1, "Operadora Central 1", "admin@email.com", "12
 /* ----- HOSPITAL ----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, email, password, numeroDocumento, tipoDocumento, cantidadCamas, tipo, domicilio_id,latitud,longitud)
 VALUES ("INSTITUCION", "Institucion", 2, "Fundación Favaloro", "favaloro@email.com", "1234","20200020007", "CUIT", 40, "HOSPITAL", 2,-34.70211051937402,-52.70211051937402),
-       ("INSTITUCION", "Institucion", 3, "Hospital Italiano De Morón", "hospital_italiano_moron@email.com", "1234","20300030007", "CUIT", 65, "HOSPITAL", 7,-35.70211051937402,-54.70211051937402),
-       ("INSTITUCION", "Institucion", 4, "Hospital Donación Francisco Santojanni", "santojanni@email.com", "1234","20400040007", "CUIT", 57, "HOSPITAL", 6,-33.70211051937402,-55.70211051937402),
-       ("INSTITUCION", "Institucion", 5, "Hospital Profesor Doctor Ramón Carrillo", "carillo@email.com", "1234", "20500050007", "CUIT", 57, "HOSPITAL", 5,-36.70211051937402,-54.90211051937402);
+       ("INSTITUCION", "Institucion", 3, "Hospital Italiano De Morón", "hospital_italiano_moron@email.com", "1234","20300030007", "CUIT", 65, "HOSPITAL", 7,-34.62211051937402,-52.70211051937402),
+       ("INSTITUCION", "Institucion", 4, "Hospital Donación Francisco Santojanni", "santojanni@email.com", "1234","20400040007", "CUIT", 57, "HOSPITAL", 6,-34.80211051937402,-52.70211051937402),
+       ("INSTITUCION", "Institucion", 5, "Hospital Profesor Doctor Ramón Carrillo", "carillo@email.com", "1234", "20500050007", "CUIT", 57, "HOSPITAL", 5,-34.10211051937402,-52.90211051937402);
 
 /* ----- PACIENTE AUTOTEST POSITIVOS----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud)
-VALUES("PACIENTE", "Paciente", 6, "Alejandro", "Rodriguez", "alejandro@email.com", "1234", "1", "DNI", 2, true, null, 1, 45, -34.72840647959868, -58.61369019379556),
-      ("PACIENTE", "Paciente", 7, "Alejandra", "Rodriguez", "alejandra@email.com", "1234", "2", "DNI", 3, true, null, 2, 87, -34.72840647959868, -58.61369019379556),
+VALUES("PACIENTE", "Paciente", 6, "Alejandro", "Rodriguez", "alejandro@email.com", "1234", "1", "DNI", 2, true, null, 1, 45, -34.72840647959868, -52.71369019379556),
+      ("PACIENTE", "Paciente", 7, "Alejandra", "Rodriguez", "alejandra@email.com", "1234", "2", "DNI", 3, true, null, 2, 87, -34.72840647959868, -52.82369019379556),
 	  ("PACIENTE", "Paciente", 8, "Alan", "Rodriguez", "alan@email.com", "1234", "3", "DNI", 4, true, null, 2, 54, -34.72840647959868, -58.61369019379556),
       ("PACIENTE", "Paciente", 9, "Ana", "Rodriguez", "ana@email.com", "1234", "4", "DNI", 3, true, null, 4, 64, -34.72840647959868, -58.61369019379556),
       ("PACIENTE", "Paciente", 10, "Carlos", "Gómez", "carlos@email.com", "1234", "32100100", "DNI", 3, true, null, 5, 54, -34.72840647959868, -58.61369019379556),
@@ -122,7 +122,7 @@ VALUES("PACIENTE", "Paciente", 12, "Cristian", "Gómez", "cristian@email.com", "
 
 /* ----- PACIENTE PARA INTERNAR----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud)
-VALUES("PACIENTE", "Paciente", 21, "Juan", "Gómez", "cristian@email.com", "1234", "42120100", "DNI", 3, null, null, 4, 45, -34.72840647959868, -58.61369019379556),
+VALUES("PACIENTE", "Paciente", 21, "Juan", "Gómez", "cristian@email.com", "1234", "42120100", "DNI", 3, null, null, 4, 45, -34.72840647959868, -53.61369019379556),
       ("PACIENTE", "Paciente", 22, "Juana", "Gómez", "celeste@email.com", "1234", "42130100", "DNI", 1, null, null, 3, 56, -34.72840647959868, -58.61369019379556),
 	  ("PACIENTE", "Paciente", 23, "José", "García", "dario@email.com", "1234", "42140100", "DNI", 2, null, null, 2, 32, -34.72840647959868, -58.61369019379556),
       ("PACIENTE", "Paciente", 24, "Josefa", "García", "danila@email.com", "1234", "42150100", "DNI", 3, null, null, 1, 25, -34.72840647959868, -58.61369019379556),
@@ -137,7 +137,7 @@ VALUES("PACIENTE", "Paciente", 21, "Juan", "Gómez", "cristian@email.com", "1234
       ("PACIENTE", "Paciente", 33, "Lucia", "Iraola", "lucila@email.com", "1234", "64643", "PASAPORTE", 3, null, null, 3, 56, -34.72840647959868, -58.61369019379556),
       ("PACIENTE", "Paciente", 34, "Lucila", "Iraola", "lucila@email.com", "1234", "62122300", "PASAPORTE", 1, null, null, 5, 69, -34.72840647959868, -58.61369019379556),
       ("PACIENTE", "Paciente", 35, "Ludmila", "Imarriota", "ludmila@email.com", "1234", "435656", "PASAPORTE", 3, null, null, 3, 32, -34.72840647959868, -58.61369019379556),
-	  ("PACIENTE", "Paciente", 36, "Alejandro", "Rodriguez", "alejandrito@email.com", "1234", "127854", "DNI", 2, null, null, 1, 45,-34.72840647959868,-58.61369019379556);
+	  ("PACIENTE", "Paciente", 36, "Alejandro", "Rodriguez", "alejandrito@email.com", "1234", "127854", "DNI", 2, null, null, 1, 45,-34.72840647959868, -52.71369019379556);
 
 INSERT INTO piso(id, descripcion, tipoPiso, institucion_id)
 		/*FAVALORO*/

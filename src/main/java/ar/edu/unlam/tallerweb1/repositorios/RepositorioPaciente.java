@@ -2,7 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
-import ar.edu.unlam.tallerweb1.modelo.listas.PacienteDistancia;
+import ar.edu.unlam.tallerweb1.modelo.listas.UsuarioDistancia;
 
 import java.util.List;
 

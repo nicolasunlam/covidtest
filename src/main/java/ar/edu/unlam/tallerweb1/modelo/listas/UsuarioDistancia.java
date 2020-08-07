@@ -1,25 +1,24 @@
 package ar.edu.unlam.tallerweb1.modelo.listas;
 
-import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
-public class PacienteDistancia {
+public class UsuarioDistancia {
 
 	private Usuario usuario;
 	private Double distancia;
 
-	public PacienteDistancia(Usuario paciente, Double distancia) {
+	public UsuarioDistancia(Usuario usuario, Double distancia) {
 
-		this.usuario = paciente;
+		this.usuario = usuario;
 		this.distancia = distancia;
 	}
 
-	public Usuario getPaciente() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setPaciente(Usuario paciente) {
-		this.usuario = paciente;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Double getDistancia() {
