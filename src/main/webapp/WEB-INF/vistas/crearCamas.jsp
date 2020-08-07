@@ -51,17 +51,7 @@
                     </select>
                 </div>
                 
-                <div class="form-group">
-                    <label for="tipoSala" class="h6 my-3">Tipo de sala <span
-                            class="text-primary font-weight-bold">*</span></label>
-                    <select name="tipoSala" id="tipoSala" class="form-control br-radius-zero"
-                            required onchange="ShowSelected();">
-                        <option id="tipoSalaTERAPIA_INTENSIVA" value="TERAPIA_INTENSIVA" >Terapia intensiva
-                        <option id="tipoSalaTERAPIA_INTERMEDIA" value="TERAPIA_INTERMEDIA" >Terapia intermedia
-                        <option id="tipoSalaSALA_AISLAMIENTO" value="SALA_AISLAMIENTO" >Sala aislamiento
-                        
-                    </select>
-                </div>
+               <input type="hidden" value="${idSala}" name="idSala">
                 
 
                

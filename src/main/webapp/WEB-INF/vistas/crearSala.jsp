@@ -11,42 +11,40 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
     
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h4>Registrar sector</h4>
+       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h4>Registrar sala</h4>
 
     </div>
     
         <div>
 
-            <form action="registrarSector" method="POST"  role="form"
+            <form action="registrarSala" method="POST"  role="form"
                   class="contactForm">
 
               
 
                 <div class="form-group">
-                    <label for="descripcion" class="h6 my-3">Descripcion<span
+                    <label for="cantidadDeCamas" class="h6 my-3">Descripcion<span
                             class="text-primary font-weight-bold">*</span></label>
                     <input type="text" name="descripcion" class="form-control br-radius-zero" id="descripcion"
                            placeholder="Ingrese descripcion" data-rule="minlen:1"
                            data-msg="Ingrese descripcion valido"/>
                     <div class="validation"></div>
-                </div>
                 
-                    <input type="hidden" value="${idPiso}" name="idPiso">
-                    
-                    
-                    
+                
                 <div class="form-group">
-                    <label for="tipoSector" class="h6 my-3">Tipo de sector <span
+                    <label for="tipoSala" class="h6 my-3">Tipo de sala <span
                             class="text-primary font-weight-bold">*</span></label>
-                    <select name="tipoSector" id="tipoSector" class="form-control br-radius-zero"
+                    <select name="tipoSala" id="tipoSala" class="form-control br-radius-zero"
                             required onchange="ShowSelected();">
-                        <option id="tipoSectorCIRUJIA" value="CIRUJIA" >Sector cirujia
-                        <option id="tipoSectorDIALISIS" value="DIALISIS"  >Sector dialisis
-                       
+                        <option id="tipoSalaTERAPIA_INTENSIVA" value="TERAPIA_INTENSIVA" >Terapia intensiva
+                        <option id="tipoSalaTERAPIA_INTERMEDIA" value="TERAPIA_INTERMEDIA"  >Terapia intermedia
+                        
                         
                     </select>
                 </div>
+                
+                <input type="hidden" value="${idSector}" name="idSector">
                 
                 
        
@@ -58,7 +56,7 @@
                 <br>
                 <div class="form-action">
                     <button type="submit" class="btn btn-outline-secondary">
-                        Registrar sector
+                        Registrar sala
                     </button>
                 </div>
                 <br>
@@ -73,6 +71,7 @@
 
         </div>
     </div>
+
 
 
 </body>
