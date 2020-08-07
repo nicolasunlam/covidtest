@@ -120,7 +120,7 @@ span {
 											class="rounded-circle bg-danger"></span></td>
 									</c:if>
 
-									<td class="align-middle">
+									<td class="text-center">
 										<div class="float-none"
 											style="margin-right: -5px; margin-top: 5px; /* margin-left: -30px"
 											* />

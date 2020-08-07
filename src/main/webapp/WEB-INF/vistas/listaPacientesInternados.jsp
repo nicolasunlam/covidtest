@@ -86,7 +86,7 @@
 					        	</td>
 		        			</c:if>
 		                
-		                <td class="align-middle">
+		                <td class="d-flex justify-content-around">
 		                <a href="egresarPacienteMotivo?idPaciente=${paciente.getId()}" type="button" class="btn btn-secondary">Egresar</a>
 		              
 		                <a href="listaCamasDisponiblesTotal?idPaciente=${paciente.getId()}&motivoEgreso=TRASLADADO" type="button" class="btn bg-warning">Trasladar</a>

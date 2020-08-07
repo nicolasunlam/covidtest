@@ -117,12 +117,11 @@
 			<div class="container mt-5">
 				<div class="row">
 					<div class="col-xl-3 col-sm-12">
-						<img class="d-inline" src="img/bat.png" width="100" height="100"
+						<img class="d-inline" src="img/cough.png" width="100" height="100"
 							alt="Generic placeholder image">
 					</div>
 					<div class="col-xl-9 col-sm-12">
-						<h4 class="d-inline">No comer sopita de murciélago y/o
-							derivados</h4>
+						<h4 class="d-inline">Al estornudar o toser, hacerlo sobre el pliegue del codo</h4>
 					</div>
 				</div>
 			</div>
