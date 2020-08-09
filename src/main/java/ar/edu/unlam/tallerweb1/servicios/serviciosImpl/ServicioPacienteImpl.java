@@ -10,6 +10,7 @@ import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPaciente;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -108,5 +109,29 @@ public class ServicioPacienteImpl implements ServicioPaciente {
     public List<Paciente> pacientesInternadosPorInstitucion(Long idInstitucion) {
         return repositorioPaciente.pacientesInternadosPorInstitucion(idInstitucion);
     }
+
+	@Override
+	public List<String> obtenerListaDeEnfermedadesDeUnPaciente(Paciente paciente) {
+
+		LinkedList<String> listaEnfermedades = new LinkedList<String>();
+		
+        if (paciente.getTieneDiabetes()) {
+            listaEnfermedades.add("Diabétes");
+        }
+        if (paciente.getTieneEnfHepatica()) {
+            listaEnfermedades.add("Hepática");
+        }
+        if (paciente.getTieneEnfCardiologica()) {
+            listaEnfermedades.add("Cardiológica");
+        }
+        if (paciente.getTieneEnfRenal()) {
+            listaEnfermedades.add("Renal");
+        }
+        if (paciente.getTieneEnfRespiratoria()) {
+            listaEnfermedades.add("Respiratoria");
+        }
+        
+        return listaEnfermedades;
+	}
 
 }

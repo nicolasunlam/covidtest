@@ -21,7 +21,7 @@ public class ControladorTratamiento {
 	@Autowired
 	private ServicioPaciente servicioPaciente;
 	
-	@RequestMapping("tratamiento")
+	@RequestMapping("tratamientoPaciente")
 	public ModelAndView verTratamiento(
 			
 			@RequestParam Long idPaciente,
@@ -46,14 +46,9 @@ public class ControladorTratamiento {
 			
 			model.put("nombre", nombre);
 
-			return new ModelAndView("tratamiento", model);
+			return new ModelAndView("tratamientoPaciente", model);
 			
 	}
-
-//	@RequestMapping(path = "/denied", method = RequestMethod.GET)
-//	public ModelAndView denegarAcceso() {
-//		return new ModelAndView("denied");
-//	}
 
 }
 

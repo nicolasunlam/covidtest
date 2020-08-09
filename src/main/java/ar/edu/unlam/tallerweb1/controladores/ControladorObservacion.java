@@ -22,12 +22,12 @@ public class ControladorObservacion {
 	private ServicioUsuario servicioUsuario;
 	
 	
-	@RequestMapping("realizarObservacion")
+	@RequestMapping("observar")
 	public ModelAndView realizarObservacion(HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
-		return new ModelAndView("tratamiento", model);	
+		return new ModelAndView("observar", model);	
 	}
 	
 	@RequestMapping("detalleObservacion")
