@@ -3,6 +3,12 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
 <title>Trasladar Paciente</title>
@@ -57,31 +63,11 @@
 		</div>
 		
 			<div class="my-2">
-				<label for="" class="h6">Domicilio:
-				</label> 
-				<span
-					class="">${paciente.getDomicilio().getCalle()} ${paciente.getDomicilio().getNumero()}, 
-					${paciente.getDomicilio().getLocalidad().getNombreLocalidad()}, 
-					${paciente.getDomicilio().getLocalidad().getPartido().getNombrePartido()},
-					${paciente.getDomicilio().getLocalidad().getPartido().getProvincia().getNombreProvincia().getValor()}.
-				</span>
-			</div>
-		
-			<div class="my-2">
 				<label for="" class="h6">Edad:
 				</label> 
 				<span
 					class="">${paciente.getEdad()}
 				</span>
-			</div>
-
-			<div class="my-2">
-				<c:if test="${paciente.getTieneEmbarazo() == true}">
-				<label for="" class="h6">Embarazo:
-				</label> <span
-					class=""> En curso.
-				</span>
-				</c:if>
 			</div>
 			
 			<div class="my-2">
@@ -99,29 +85,46 @@
 				<label for="" class="h6">Prioridad: 
 				</label> 
 					<span class="">
-						<c:if test="${paciente.getPrioridad() == 5}">
+						<c:if test="${paciente.getPrioridad() == 5 || paciente.getPrioridad() == 4}">
 							<span>Baja</span>
-							<span class="circulo rounded-circle bg-success"></span>
-						</c:if>
-						<c:if test="${paciente.getPrioridad() == 4}">
-							<span>Baja</span>
-							<span class="circulo rounded-circle bg-success"></span>
+							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill text-success" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  		<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+							</svg>
 						</c:if>
 						<c:if test="${paciente.getPrioridad() == 3}">
 							<span>Media</span>
-							<span class="circulo rounded-circle bg-warning"></span>
+							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill text-warning" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  		<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+								</svg>
 						</c:if>
-						<c:if test="${paciente.getPrioridad() == 2}">
-							<span>Alta</span>
-							<span class="circulo rounded-circle bg-danger"></span>
-						</c:if>
-						<c:if test="${paciente.getPrioridad() == 1}">
+						<c:if test="${paciente.getPrioridad() == 2 || paciente.getPrioridad() == 1}">
 						<span>Alta</span>
-							<span class="circulo rounded-circle bg-danger"></span>
-							
+								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  		<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+								</svg>
 						</c:if>
 					</span>
-				
+			</div>
+					
+			<div class="my-2">
+				<label for="" class="h6">Domicilio:
+				</label> 
+				<span
+					class="">
+<%-- 					${paciente.getDomicilio().getCalle()} ${paciente.getDomicilio().getNumero()},  --%>
+					${paciente.getDomicilio().getLocalidad().getNombreLocalidad()}, 
+					${paciente.getDomicilio().getLocalidad().getPartido().getNombrePartido()},
+					${paciente.getDomicilio().getLocalidad().getPartido().getProvincia().getNombreProvincia().getValor()}.
+				</span>
+			</div>
+			
+			<div class="my-2">
+				<c:if test="${paciente.getTieneEmbarazo() == true}">
+				<label for="" class="h6">Embarazo:
+				</label> <span
+					class=""> En curso.
+				</span>
+				</c:if>
 			</div>
 
 			<div class="row">
@@ -146,10 +149,12 @@
 			
 				<c:if test="${paciente.getEsFumador() == true}">
 				<label for="" class="h6">
-				<abbr>Fumador/a: </abbr>
+				Fumador<c:if test="${paciente.getEsFumador() == true}">a
+				</c:if>:
 				</label>
 				<span
-					class="text-danger"> Activo/a.
+					class="text-danger"> 
+					Activ<c:if test="${paciente.getEsFumador() == true}">o</c:if><c:if test="${paciente.getEsFumador() == true}">a</c:if>.
 				</span>
 				</c:if>
 				
