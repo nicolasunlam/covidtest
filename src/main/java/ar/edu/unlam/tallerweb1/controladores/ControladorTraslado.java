@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.MotivoTraslado;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoCama;
 import ar.edu.unlam.tallerweb1.modelo.TipoSala;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMotivoTraslado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTipoCama;
@@ -27,6 +29,8 @@ public class ControladorTraslado {
 
 	@Autowired
 	private ServicioPaciente servicioPaciente;
+	@Autowired
+	private ServicioInstitucion servicioInstitucion;
 	@Autowired
 	private ServicioAtajo servicioAtajo;
 	@Autowired
@@ -106,17 +110,8 @@ public class ControladorTraslado {
     	Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
 		model.put("paciente", paciente);
 
-    	List<String> listaEnfermedades = servicioPaciente.obtenerListaDeEnfermedadesDeUnPaciente(paciente);
-		model.put("listaEnfermedades", listaEnfermedades);
-		
-    	List<TipoSala> listaTipoSalas = servicioTipoSala.obtenerListaTipoSalas();
-		model.put("listaTipoSalas", listaTipoSalas); 
-		
-    	List<TipoCama> listaTipoCamas = servicioTipoCama.obtenerListaTipoCamas();
-		model.put("listaTipoCamas", listaTipoCamas);   
-		
-		List<MotivoTraslado> listaMotivoTraslado = servicioMotivoTraslado.obtenerListaDeMotivoDeTraslado();
-		model.put("listaMotivoTraslado", listaMotivoTraslado);
+		List<Institucion> listaInstitucions = servicioInstitucion.obtenerListaInstituciones();
+		model.put("listaInstitucions", listaInstitucions);
 		
 		return new ModelAndView("trasladarAInstitucion", model);
 			

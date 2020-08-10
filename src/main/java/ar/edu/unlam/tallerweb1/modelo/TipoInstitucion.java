@@ -1,6 +1,21 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-//Para creación de Institución.
+//Para creaciï¿½n de Instituciï¿½n.
 public enum TipoInstitucion {
-	CLUB, UNIVERSIDAD, HOSPITAL, HOTEL
+	
+	CLUB("Club"), 
+	UNIVERSIDAD("Universidad"), 
+	HOSPITAL("Hospital"), 
+	HOTEL("Hotel");
+	
+    private final String descripcion;
+
+    private TipoInstitucion (String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
 }
