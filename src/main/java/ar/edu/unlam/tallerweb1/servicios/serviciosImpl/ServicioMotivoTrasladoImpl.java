@@ -18,7 +18,7 @@ public class ServicioMotivoTrasladoImpl implements ServicioMotivoTraslado {
 
 		List<MotivoTraslado> listaMotivoTraslados = new LinkedList<MotivoTraslado>();
 		
-        for (MotivoTraslado motivoTraslado : listaMotivoTraslados) {
+        for (MotivoTraslado motivoTraslado : MotivoTraslado.values()) {
             	listaMotivoTraslados.add(motivoTraslado);
 		}
         

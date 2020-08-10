@@ -102,7 +102,7 @@ VALUES ("INSTITUCION", "Institucion", 2, "Fundación Favaloro", "favaloro@email.
 /* ----- PACIENTE AUTOTEST POSITIVOS----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud, esFumador, tieneDiabetes, tieneEmbarazo, tieneEnfCardiologica, tieneEnfHepatica, tieneEnfRenal, tieneEnfRespiratoria)
 VALUES("PACIENTE", "Paciente", 6, "Alejandro", "Rodriguez", "alejandro@email.com", "1234", "1", "DNI", 2, true, null, 1, 45, -34.72840647959868, -52.71369019379556, true, true, false, true, true, true, true),
-      ("PACIENTE", "Paciente", 7, "Alejandra", "Rodriguez", "alejandra@email.com", "1234", "2", "DNI", 3, true, null, 2, 87, -34.72840647959868, -52.82369019379556, true, true, true, true, true, true, true),
+      ("PACIENTE", "Paciente", 7, "Alejandra", "Rodriguez", "alejandra@email.com", "1234", "2", "DNI", 3, true, null, 1, 87, -34.72840647959868, -52.82369019379556, true, true, true, true, true, true, true),
 	  ("PACIENTE", "Paciente", 8, "Alan", "Rodriguez", "alan@email.com", "1234", "3", "DNI", 4, true, null, 2, 54, -34.72840647959868, -58.61369019379556, true, true, true, true, false, true, true),
       ("PACIENTE", "Paciente", 9, "Ana", "Rodriguez", "ana@email.com", "1234", "4", "DNI", 3, true, null, 4, 64, -34.72840647959868, -58.61369019379556, true, true, true, true, false, true, true),
       ("PACIENTE", "Paciente", 10, "Carlos", "Gómez", "carlos@email.com", "1234", "32100100", "DNI", 3, true, null, 5, 54, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
@@ -136,7 +136,7 @@ VALUES("PACIENTE", "Paciente", 21, "Juan", "Gómez", "cristian@email.com", "1234
       ("PACIENTE", "Paciente", 32, "Laura", "Horandle", "laura@email.com", "1234", "42348100", "PASAPORTE", 1, null, null, 5, 78, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
       ("PACIENTE", "Paciente", 33, "Lucia", "Iraola", "lucila@email.com", "1234", "64643", "PASAPORTE", 3, null, null, 3, 56, -34.72840647959868, -58.61369019379556, true, true, true, false, true, true, true),
       ("PACIENTE", "Paciente", 34, "Lucila", "Iraola", "lucila@email.com", "1234", "62122300", "PASAPORTE", 1, null, null, 5, 69, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
-      ("PACIENTE", "Paciente", 35, "Ludmila", "Imarriota", "ludmila@email.com", "1234", "435656", "PASAPORTE", 3, null, null, 3, 32, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
+      ("PACIENTE", "Paciente", 35, "Ludmila", "Imarriota", "ludmila@email.com", "1234", "435656", "PASAPORTE", 3, null, null, 5, 32, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, true),
 	  ("PACIENTE", "Paciente", 36, "Alejandrito", "Ismael", "alejandrito@email.com", "1234", "127854", "DNI", 2, null, null, 1, 45,-34.72840647959868, -52.71369019379556, true, true, false, true, true, true, true);
 
 INSERT INTO piso(id, descripcion, tipoPiso, institucion_id)

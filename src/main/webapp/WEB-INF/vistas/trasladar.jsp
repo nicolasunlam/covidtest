@@ -44,7 +44,7 @@
 			<div class="col">
 
 				<div class="">
-					<label for="" class="h4">${paciente.getApellido()}, ${paciente.getNombre()}</label> 
+					<label for="" class="h5">${paciente.getApellido()}, ${paciente.getNombre()}</label> 
 				</div>
 				<div class="">
 					<label for="" class="h6 ">${paciente.getTipoDocumento().name()}: ${paciente.getNumeroDocumento()}</label>
@@ -162,7 +162,8 @@
 						<div class="form-group px-0">
 			<p>Algunos de los siguientes requisitos para realizar el
 					traslado han sido autocompletados en base a la condición del
-					paciente. Puede modificarlos si lo desea.</p>
+					paciente. 
+					<br>Puede modificarlos si lo desea.</p>
 					</div>
 			
 			<div class="form-row">
@@ -172,7 +173,7 @@
 					class="text-primary font-weight-bold">*</span></label> <select
 					name="tipoSala" class="form-control br-radius-zero" required>
 					<c:forEach items="${listaTipoSalas}" var="tipoSala">
-						<option id="tipoSala"
+						<option id="tipoSala" value="${tipoSala}"
 							<c:if test="${tipoSala.getPrioridad() == paciente.getPrioridad()}">
 								selected
 						</c:if>>${tipoSala.getDescripcion()}
@@ -183,16 +184,19 @@
 
 			<div class="form-group col-lg-6 col-md-12">
 				<label for="" class="h6 my-3">Tipo de Cama<span
-					class="text-primary font-weight-bold">*</span></label> <select
+					class="text-primary font-weight-bold">*</span></label> 
+					
+					<select
 					name="tipoSala" class="form-control br-radius-zero" required>
 					<c:forEach items="${listaTipoCamas}" var="tipoCama">
 
-						<option id="tipoCama"
-							<c:if test="${tipocama.getPrioridad() == paciente.getPrioridad()}">
-						selected
-					</c:if>>${tipoSala.getDescripcion()}
+						<option id="tipoCama" value="${tipoCama}"
+							<c:if test="${tipoCama.getPrioridad() == paciente.getPrioridad()}">
+								selected
+							</c:if>>${tipoCama.getDescripcion()}
 					</c:forEach>
 				</select>
+				
 				<div class="validation"></div>
 			</div>
 			
@@ -204,9 +208,9 @@
 				<label for="" class="h6 my-3">Motivo del traslado<span
 					class="text-primary font-weight-bold">*</span></label> 
 					<select name="motivoTraslado" class="form-control br-radius-zero" required>
+					<option value="">Elija un motivo de traslado</option>
 					<c:forEach items="${listaMotivoTraslado}" var="motivoTraslado">
-						<option id="motivoTraslado"
-							>${motivoTraslado.getDescripcion()}
+						<option id="motivoTraslado" value="${motivoTraslado}">${motivoTraslado.getDescripcion()}</option>
 					</c:forEach>
 				</select>
 				<div class="validation"></div>
@@ -216,19 +220,19 @@
 				<label for="" class="h6 my-3">Urgencia<span
 					class="text-primary font-weight-bold">*</span></label> 
 					<select name="urgencia" class="form-control br-radius-zero" required>
-						<option id="urgencia"
+						<option id="urgencia"  value="Baja"
 							<c:if test="${paciente.getPrioridad() == 5 || paciente.getPrioridad() == 4}">
 							selected
 							</c:if>
 							><span class="circulo rounded-circle bg-success"></span>Baja
 							
-						<option id="urgencia"
+						<option id="urgencia" value="Media"
 							<c:if test="${paciente.getPrioridad() == 3}">
 							selected
 							</c:if>
 							><span class="circulo rounded-circle bg-warning"></span>Media
 							
-						<option id="urgencia"
+						<option id="urgencia" value="Alta"
 							<c:if test="${paciente.getPrioridad() == 2 || paciente.getPrioridad() == 1}">
 							selected
 							</c:if>

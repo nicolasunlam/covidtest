@@ -78,6 +78,49 @@ public class ControladorTraslado {
 		return new ModelAndView("trasladar", model);
 			
 	}
+	
+	@RequestMapping("trasladarAInstitucion")
+	public ModelAndView trasladarAInstitucion(
+			
+			@RequestParam Long idPaciente,
+			HttpServletRequest request
+			
+			) {
+
+    	ModelMap model = new ModelMap();
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if(rol != null) {
+			model.put("rol", rol.name());	
+		}
+    	model.put("armarHeader", servicioAtajo.armarHeader(request));
+    	/*-----------------------------------*/
+
+    	Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
+		model.put("paciente", paciente);
+
+    	List<String> listaEnfermedades = servicioPaciente.obtenerListaDeEnfermedadesDeUnPaciente(paciente);
+		model.put("listaEnfermedades", listaEnfermedades);
+		
+    	List<TipoSala> listaTipoSalas = servicioTipoSala.obtenerListaTipoSalas();
+		model.put("listaTipoSalas", listaTipoSalas); 
+		
+    	List<TipoCama> listaTipoCamas = servicioTipoCama.obtenerListaTipoCamas();
+		model.put("listaTipoCamas", listaTipoCamas);   
+		
+		List<MotivoTraslado> listaMotivoTraslado = servicioMotivoTraslado.obtenerListaDeMotivoDeTraslado();
+		model.put("listaMotivoTraslado", listaMotivoTraslado);
+		
+		return new ModelAndView("trasladarAInstitucion", model);
+			
+	}
 
 }
 

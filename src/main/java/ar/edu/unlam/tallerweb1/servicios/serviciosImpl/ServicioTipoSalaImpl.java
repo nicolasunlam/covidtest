@@ -18,7 +18,7 @@ public class ServicioTipoSalaImpl implements ServicioTipoSala {
 
 		LinkedList<TipoSala> listaTipoSalas = new LinkedList<TipoSala>();
 		
-        for (TipoSala tipoSalas : listaTipoSalas) {
+        for (TipoSala tipoSalas : TipoSala.values()) {
         	listaTipoSalas.add(tipoSalas);
 		}
         

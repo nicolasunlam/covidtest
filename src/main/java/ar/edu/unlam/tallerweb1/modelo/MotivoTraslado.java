@@ -3,7 +3,7 @@ package ar.edu.unlam.tallerweb1.modelo;
 public enum MotivoTraslado {
 	
 	FALTA_DE_MAQUINARIA("Falta de maquinaria"), 
-	DESEO_PERSONAL("Deseo Personal"), 
+	DESEO_PACIENTE("Deseo Del Paciente"), 
 	DESEO_FAMILIAR("Deseo Familiar"), 
 	OTRO("Otro");
 	

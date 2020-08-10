@@ -18,7 +18,7 @@ public class ServicioTipoCamaImpl implements ServicioTipoCama {
 
 		List<TipoCama> listaTipoCamas = new LinkedList<TipoCama>();
 		
-        for (TipoCama tipoCamas : listaTipoCamas) {
+        for (TipoCama tipoCamas : TipoCama.values()) {
         	listaTipoCamas.add(tipoCamas);
 		}
         
