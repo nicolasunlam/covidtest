@@ -3,12 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-  
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-<script src="js/dashboard.js"></script>
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
@@ -70,16 +64,6 @@
 
 			</div>
 		</div>
-  
-  <style>
-  span {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    margin-left: 6px;
-    background-color: #555;
-  }
-  </style>
 
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
@@ -91,9 +75,9 @@
 		  <div class="table-responsive">
 		    <table id="myTable" class="table table-bordered table-hover responsive nowrap text-center">
 		        <tr class="bg-white">
-		            <th style="vertical-align: middle;" class="border border-secondary" 
+		            <th style="vertical-align: middle; width: 16%" class="border border-secondary" 
 		            onmouseover="this.style.backgroundColor='#dee2e6 ';"
-					onmouseout="this.style.backgroundColor='white';">INSTITUCIÓN 
+					onmouseout="this.style.backgroundColor='white';">NOMBRE 
 		            
 			            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up float-right mt-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						  <path fill-rule="evenodd" d="M11 3.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
@@ -104,7 +88,7 @@
 					</th>
 		            <th style="vertical-align: middle;" class="border border-secondary" 
 		            onmouseover="this.style.backgroundColor='#dee2e6 ';"
-					onmouseout="this.style.backgroundColor='white';">TIPO <br>INSTITUCIÓN
+					onmouseout="this.style.backgroundColor='white';">TIPO 
 		             			            
 			            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up float-right mt-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						  <path fill-rule="evenodd" d="M11 3.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
@@ -137,7 +121,7 @@
 		            </th>
 		            <th style="vertical-align: middle;" class="border border-secondary" 
 		            onmouseover="this.style.backgroundColor='#dee2e6';"
-					onmouseout="this.style.backgroundColor='white';">CAMAS
+					onmouseout="this.style.backgroundColor='white';">DISPONIBILIDAD <br>DE CAMAS
 		            
 			            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down-up float-right mt-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						  <path fill-rule="evenodd" d="M11 3.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
@@ -146,10 +130,10 @@
 						</svg>
 		            
 		            </th>
-		            <th style="vertical-align: middle;" class="border border-secondary" 
+		            <th style="vertical-align: middle; width: 25%" class="border border-secondary" 
 		            onmouseover="this.style.backgroundColor='#dee2e6';"
 					onmouseout="this.style.backgroundColor='white';"> 
-		            SELECCIONAR</th>
+		            ACCIÓN</th>
 		        </tr>
 		        <c:forEach items="${listaInstituciones}" var="institucion">
 		            <tr>
@@ -160,46 +144,95 @@
 		                
 		                <td style="vertical-align: middle; text-align:left;">
 			                <c:forEach items="${institucion.getListaSala()}" var="lista">
-			               		<ul class="mb-3">
+			               		<ul class="my-2">
 				               		<c:if test="${lista.getCantidad() >= 5}">
 				               		<li class="text-success">
 				               		</c:if>
 				               		<c:if test="${lista.getCantidad() < 5}">
 				               		<li class="text-danger">
 				               		</c:if>
-					               		<c:out value="${lista.getCantidad()}"/>
-					               		<c:out value="${lista.getSala().getTipoSala().getDescripcion()}"/>
+					               		<c:out value="${lista.getCantidad()}"/> de
+					               		<c:out value="${lista.getSala().getTipoSala().getDescripcion()}"/>.
 				               		</li>
 							</ul>
 			      			</c:forEach>
 		                </td>
 		               
 		                <td style="vertical-align: middle;">
-							<div class="custom-control custom-radio">
-							  <input type="radio" id="customRadio${institucion.getInstitucion().getId()}" name="customRadio" class="custom-control-input">
-							  <label class="custom-control-label"  for="customRadio${institucion.getInstitucion().getId()}"></label>
-							</div>
+
+						<!--  <div class="custom-control custom-radio">
+						  <input type="radio" id="customRadio${institucion.getInstitucion().getId()}" name="customRadio" class="custom-control-input">
+						  <label class="custom-control-label"  for="customRadio${institucion.getInstitucion().getId()}"></label>
+						</div>  -->
+						
+		                <!-- Button trigger modal -->
+						<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter${institucion.getInstitucion().getId()}">
+						  Solicitar Traslado
+						</button>
+						
+						<button type="button" class="btn btn-outline-primary mt-3">
+						  Ver Detalle Institución
+						</button>
+						
+						<!-- Start Modal -->
+						<div class="modal fade" id="exampleModalCenter${institucion.getInstitucion().getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLongTitle">Solicitud de traslado</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span class="bg-white" aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body text-left">
+						        <h6>Se enviará la solicitud de traslado de la paciente <span class="font-weight-bold"> ${paciente.getNombre()} ${paciente.getApellido()} </span>
+						        de documento <span class="font-weight-bold"> ${paciente.getNumeroDocumento()} (${paciente.getTipoDocumento().getDescripcion()}) </span>a la siguiente institución:
+							    </h6>   
+							     
+							    <ul class="pl-3 mb-0">
+								    <li class="mb-1">Nombre: ${institucion.getInstitucion().getNombre()}.</li>
+		               				<li class="mb-1">Disponibilidad de camas: 
+							    </ul>
+							    
+						        <ul class="mb-0">
+						        		<c:forEach items="${institucion.getListaSala()}" var="lista">
+							               		<c:if test="${lista.getCantidad() >= 5}">
+							               		<li class="text-success">
+							               		</c:if>
+							               		<c:if test="${lista.getCantidad() < 5}">
+							               		<li class="text-danger">
+							               		</c:if>
+								               		${lista.getCantidad()} camas disponibles de
+								               		${lista.getSala().getTipoSala().getDescripcion()}
+							               		</li>
+						      			</c:forEach>
+						        </ul>
+						        
+						        <ul class="pl-3">
+								    <li class="mt-1 mb-1">Localidad: ${institucion.getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()}.</li>
+		               				<li class="mb-1">Distancia del traslado: ${Math.round(institucion.getDistancia())} Km.</li>						    
+							    </ul>
+						        
+						        <p>Al apretar el botón "Enviar Solicitud" se realizará el envío de la solicitud a la institución indicada.</p>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Volver</button>
+						        <button type="submit" class="btn btn-outline-success">Enviar Solicitud</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						<!-- End Modal -->
+						
 						</td>
-		               
+
 		            </tr>
 		        </c:forEach>
 		    </table>
 		</div>
-			
-		<div class="col-xl-3 col-lg-5 col-md-8 col-sm-12">	
-		<div class="row d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-			
-			<div class="mr-4">
-				<button type="submit" class="btn btn-outline-success">
-					Solicitar Traslado</button>
-			</div>
-			
-			<div class="">
-				<button type="" class="btn btn-outline-danger">
-					Cancelar</button>
-			</div>
-		
-		</div>
+
+		<div class="mt-2">
+			<button type="" class="btn btn-outline-danger">Cancelar</button>
 		</div>
 	
 		<div class="form-group my-2">
@@ -224,18 +257,17 @@
 </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
 <script>
 	window.jQuery
 			|| document
 					.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
 </script>
+
 <script src="js/sort.js"></script>
-<script src="../assets/dist/js/bootstrap.bundle.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-        <script src="js/dashboard.js"></script></body>
+<script src="js/bootstrap.bundle.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/feather.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>

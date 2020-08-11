@@ -263,6 +263,26 @@
 		
 		</div>
 		</div>
+		
+		<!-- <div class="col-xl-3 col-lg-5 col-md-8 col-sm-12">	
+		<div class="row d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+			
+			<div class="mr-4">
+
+		<div class="">
+				<button type="" class="btn btn-outline-danger">
+					Cancelar</button>
+			</div>
+
+			</div>
+			
+			<div class="">
+				<button type="" class="btn btn-outline-danger">
+					Cancelar</button>
+			</div>
+		
+		</div>
+		</div> -->
 	
 		<div class="form-group my-2">
 				<c:if test="${not empty error}">
