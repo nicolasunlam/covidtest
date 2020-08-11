@@ -298,7 +298,8 @@ public class ControladorInstitucion {
 	}
 
 	@RequestMapping("continuacionIngresoDatos")
-	public ModelAndView continuacionIngresoDatos(HttpServletRequest request) {
+	public ModelAndView continuacionIngresoDatos(@RequestParam(value = "eleccion") String eleccion,
+			HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
@@ -314,28 +315,47 @@ public class ControladorInstitucion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		String eleccion = request.getParameter("eleccion");
+		// String eleccion = request.getParameter("eleccion");
 
 		model.put("eleccion", eleccion);
+		
+		switch(eleccion) {
+		  case "piso":
+			  return new ModelAndView("redirect:/registrarPiso", model);
+		    //break;
+		  case "sector":
+			  return new ModelAndView("redirect:/registrarSector", model);
+		    //break;
+		  case "sala":
+			  return new ModelAndView("redirect:/registrarSala", model);
+		    //break;
+		  case "cama":
+			  return new ModelAndView("redirect:/crearCamaPorTipoSala", model);
+		    //break;
+		  default:
+			  return new ModelAndView("confirmacionPrueba", model);
+		}
 
-		if (eleccion == "Piso") {
-			return new ModelAndView("crearPiso", model);
-		}
-		if (eleccion == "Sector") {
-			return new ModelAndView("crearSector", model);
-		}
-		if (eleccion == "Sala") {
-			return new ModelAndView("crearSala", model);
-		}
-		if (eleccion == "Camas") {
-			return new ModelAndView("crearCamas", model);
-		}
+//		if (eleccion == "piso") {
+//			return new ModelAndView("redirect:/crearPiso", model);
+//		}
+//		if (eleccion == "sector") {
+//			return new ModelAndView("redirect:/crearSector", model);
+//			// return new ModelAndView("crearSector", model);
+//		}
+//		if (eleccion == "sala") {
+//			return new ModelAndView("redirect:/crearSala", model);
+//			// return new ModelAndView("crearSala", model);
+//		}
+//		if (eleccion == "camas") {
+//			return new ModelAndView("redirect:/crearCamas", model);
+//			// return new ModelAndView("crearCamas", model);
+//		}
 
-		return new ModelAndView("confirmacionPrueba", model);
+		
 
 	}
 
-	
 	@RequestMapping("/listaInstituciones")
 	public ModelAndView listarInstituciones(HttpServletRequest request) {
 

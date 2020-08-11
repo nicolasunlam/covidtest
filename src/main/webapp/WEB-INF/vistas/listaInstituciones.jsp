@@ -73,6 +73,13 @@
 					onkeyup="filtrarPorCUIT()" placeholder="Ingrese CUIT a buscar">
 			</div>
 
+			<div class="col-3 text-center">
+			<h5 class="mt-5 mb-3">Registrar Institución</h5>
+				<a href="registrarInstitucion"
+					class="btn btn-success w-75"><i
+					class="fa fa-hospital-o fa-3x"></i></a>
+			</div>
+
 		</div>
 		<a href="panel">Volver a panel</a>
 
