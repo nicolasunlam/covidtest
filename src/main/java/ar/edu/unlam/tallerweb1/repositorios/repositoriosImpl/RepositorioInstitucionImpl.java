@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios.repositoriosImpl;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioInstitucion;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
+import ar.edu.unlam.tallerweb1.modelo.TipoSala;
+import ar.edu.unlam.tallerweb1.modelo.listas.OrdenarPorPrioridad;
 import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.persistence.Query;
 
@@ -74,12 +79,12 @@ public class RepositorioInstitucionImpl implements RepositorioInstitucion {
 					+ "AND c NOT IN (SELECT a.cama "
 	    		   							   + "FROM Asignacion as a "
 	    		   							   + "WHERE a.cama = c "
-	    		   							   + "AND a.horaEgreso IS NULL) "
-	    		    + "GROUP BY i, sal.tipoSala";
-
+	    		   							   + "AND a.horaEgreso IS NULL) "		   
+	    		    + "GROUP BY i, sal.tipoSala ";
+		
       Query query = sessionFactory.getCurrentSession().createQuery(hql);
       query.setParameter("institucion", institucion);
-      
+
       return query.getResultList();
 	}
 

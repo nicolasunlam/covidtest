@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios.serviciosImpl;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalas;
+import ar.edu.unlam.tallerweb1.modelo.listas.OrdenarPorPrioridad;
 import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioInstitucion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -61,10 +63,16 @@ public class ServicioInstitucionImpl implements ServicioInstitucion {
         return repositorioInstitucion.listarInstitucionesPorLocalidad(id);
     }
 
-    @Override
-    public List<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion) {
+	@Override
+    public TreeSet<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion) {
        
-    	return repositorioInstitucion.obtenerEstadisticaDeSalasDeUnaInstitucion(institucion);	
+    	List<SalaCantidad> lista = repositorioInstitucion.obtenerEstadisticaDeSalasDeUnaInstitucion(institucion);	
+    	
+    	OrdenarPorPrioridad orden = new OrdenarPorPrioridad();
+    	TreeSet<SalaCantidad> listaOrdenada = new TreeSet<SalaCantidad>(orden);
+    	listaOrdenada.addAll(lista);
+
+    	return listaOrdenada;
     }
 
     
@@ -77,9 +85,9 @@ public class ServicioInstitucionImpl implements ServicioInstitucion {
 		
     	for(int i = 0; i < instituciones.size(); ++i) {
     		
-    		if (instituciones.get(i) != institucion) {
+    		if (instituciones.get(i).getId() != institucion.getId()) {
 			
-    		List <SalaCantidad> listaSala = repositorioInstitucion.obtenerEstadisticaDeSalasDeUnaInstitucion(instituciones.get(i));
+    		TreeSet<SalaCantidad> listaSala = obtenerEstadisticaDeSalasDeUnaInstitucion(instituciones.get(i));
     		
     		Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(instituciones.get(i).getLatitud(), 
     																		instituciones.get(i).getLongitud(), 

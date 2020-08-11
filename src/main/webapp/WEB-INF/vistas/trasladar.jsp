@@ -111,7 +111,6 @@
 				</label> 
 				<span
 					class="">
-<%-- 					${paciente.getDomicilio().getCalle()} ${paciente.getDomicilio().getNumero()},  --%>
 					${paciente.getDomicilio().getLocalidad().getNombreLocalidad()}, 
 					${paciente.getDomicilio().getLocalidad().getPartido().getNombrePartido()},
 					${paciente.getDomicilio().getLocalidad().getPartido().getProvincia().getNombreProvincia().getValor()}.

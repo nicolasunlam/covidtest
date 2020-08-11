@@ -7,6 +7,7 @@ import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalas;
 import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 
 import java.util.List;
+import java.util.TreeSet;
 
 public interface ServicioInstitucion {
 
@@ -24,7 +25,7 @@ public interface ServicioInstitucion {
 
 	public List<InstitucionDistanciaSalas> obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(Institucion institucion);
 
-	List<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion);
+	TreeSet<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion);
 
     //List<Institucion> listarInstitucionesPorZona(Zona zona);
 }

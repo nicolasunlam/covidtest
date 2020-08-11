@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo.listas;
 
-import java.util.List;
+
+import java.util.Set;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 
@@ -8,9 +9,9 @@ public class InstitucionDistanciaSalas {
 
 	private Institucion institucion;
 	private Double distancia;
-	private List<SalaCantidad> listaSala;
+	private Set<SalaCantidad> listaSala;
 	
-	public InstitucionDistanciaSalas(Institucion institucion, Double distancia, List<SalaCantidad> listaSala) {
+	public InstitucionDistanciaSalas(Institucion institucion, Double distancia, Set<SalaCantidad> listaSala) {
 		this.institucion = institucion;
 		this.distancia = distancia;
 		this.listaSala = listaSala;
@@ -32,11 +33,11 @@ public class InstitucionDistanciaSalas {
 		this.distancia = distancia;
 	}
 
-	public List<SalaCantidad> getListaSala() {
+	public Set<SalaCantidad> getListaSala() {
 		return listaSala;
 	}
 
-	public void setListaSala(List<SalaCantidad> listaSala) {
+	public void setListaSala(Set<SalaCantidad> listaSala) {
 		this.listaSala = listaSala;
 	}
 }

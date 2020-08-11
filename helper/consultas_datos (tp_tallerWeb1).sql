@@ -125,5 +125,6 @@ WHERE c.id NOT IN (SELECT a.cama_id
  			   FROM asignacion a
 			   WHERE a.cama_id = c.id
 			   AND a.horaEgreso IS NULL)
-GROUP BY i.id, sal.tipoSala;                 
+GROUP BY i.id, sal.tipoSala
+ORDER BY count(*);                 
 

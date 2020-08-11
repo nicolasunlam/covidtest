@@ -59,13 +59,13 @@
 			<div class="col">
 
 				<div class="">
-					<label for="" class="h5">${paciente.getApellido()}, ${paciente.getNombre()}</label> 
+					<label for="" class="h6 font-weight-bold">${paciente.getApellido()}, ${paciente.getNombre()}</label> 
 				</div>
 				<div class="">
-					<label for="" class="h6 ">${paciente.getTipoDocumento().name()}: ${paciente.getNumeroDocumento()}</label>
+					<label for="" class="p ">${paciente.getTipoDocumento().name()}: ${paciente.getNumeroDocumento()}</label>
 				</div>
 				<div class="">
-					<label for="" class="h6 ">${paciente.getEmail()}</label>
+					<label for="" class="p ">${paciente.getEmail()}</label>
 				</div>
 
 			</div>
@@ -153,12 +153,28 @@
 		        </tr>
 		        <c:forEach items="${listaInstituciones}" var="institucion">
 		            <tr>
-		                <td><c:out value="${institucion.getInstitucion().getNombre()}"/></td>
-		                <td><c:out value="${institucion.getInstitucion().getTipo().getDescripcion()}"/></td>
-		                <td><c:out value="${institucion.getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()}"/></td>
-		                <td><c:out value="${fn:substring(institucion.getDistancia(), 0, 5)} Km"/></td>
-		                <td><c:out value="${institucion.getInstitucion().getCantidadCamas()}"/></td>
-		                <td>
+		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getNombre()}"/></td>
+		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getTipo().getDescripcion()}"/></td>
+		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()}"/></td>
+		                <td style="vertical-align: middle;"><c:out value="${Math.round(institucion.getDistancia())} Km"/></td>
+		                
+		                <td style="vertical-align: middle; text-align:left;">
+			                <c:forEach items="${institucion.getListaSala()}" var="lista">
+			               		<ul class="mb-3">
+				               		<c:if test="${lista.getCantidad() >= 5}">
+				               		<li class="text-success">
+				               		</c:if>
+				               		<c:if test="${lista.getCantidad() < 5}">
+				               		<li class="text-danger">
+				               		</c:if>
+					               		<c:out value="${lista.getCantidad()}"/>
+					               		<c:out value="${lista.getSala().getTipoSala().getDescripcion()}"/>
+				               		</li>
+							</ul>
+			      			</c:forEach>
+		                </td>
+		               
+		                <td style="vertical-align: middle;">
 							<div class="custom-control custom-radio">
 							  <input type="radio" id="customRadio${institucion.getInstitucion().getId()}" name="customRadio" class="custom-control-input">
 							  <label class="custom-control-label"  for="customRadio${institucion.getInstitucion().getId()}"></label>
