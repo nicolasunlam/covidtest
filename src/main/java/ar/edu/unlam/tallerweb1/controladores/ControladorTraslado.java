@@ -17,6 +17,7 @@ import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoCama;
 import ar.edu.unlam.tallerweb1.modelo.TipoSala;
+import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMotivoTraslado;
@@ -109,9 +110,12 @@ public class ControladorTraslado {
 
     	Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
 		model.put("paciente", paciente);
-
-		List<Institucion> listaInstitucions = servicioInstitucion.obtenerListaInstituciones();
-		model.put("listaInstitucions", listaInstitucions);
+		
+		Long idInstitucion = (long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		List<InstitucionDistanciaSalas> listaInstituciones = servicioInstitucion.obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(institucion);
+		model.put("listaInstituciones", listaInstituciones);
 		
 		return new ModelAndView("trasladarAInstitucion", model);
 			

@@ -105,5 +105,25 @@ WHERE c.id NOT IN (SELECT a.cama_id
  			   FROM asignacion a
 			   WHERE a.cama_id = c.id
 			   AND a.horaEgreso IS NULL)
-GROUP BY i.id;                  
+GROUP BY i.id;    
+
+/*------ Mostrar las salas de cada institucion ------*/
+SELECT i.nombre, sal.id, sal.tipoSala,  count(*) as camas
+FROM cama c  JOIN Sala sal ON c.sala_id = sal.id
+JOIN Sector as sec ON sal.sector_id = sec.id
+JOIN Piso as p ON sec.piso_id = p.id 
+JOIN Usuario as i ON p.institucion_id = i.id
+GROUP BY i.id, sal.id;  
+
+/*------ Mostrar la cantidad de camas por tipo de sala de una institucion tal para las cuales no existe una asignacion vigente ------*/
+SELECT i.nombre, sal.tipoSala,  count(*) as camas_disponibles
+FROM cama c  JOIN Sala sal ON c.sala_id = sal.id
+JOIN Sector as sec ON sal.sector_id = sec.id
+JOIN Piso as p ON sec.piso_id = p.id 
+JOIN Usuario as i ON p.institucion_id = i.id
+WHERE c.id NOT IN (SELECT a.cama_id
+ 			   FROM asignacion a
+			   WHERE a.cama_id = c.id
+			   AND a.horaEgreso IS NULL)
+GROUP BY i.id, sal.tipoSala;                 
 

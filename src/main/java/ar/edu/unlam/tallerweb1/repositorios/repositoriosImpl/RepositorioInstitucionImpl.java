@@ -8,8 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
+import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 
 import java.util.List;
+
+import javax.persistence.Query;
 
 
 @Repository("repositorioInstitucion")
@@ -56,5 +59,28 @@ public class RepositorioInstitucionImpl implements RepositorioInstitucion {
     public List<Institucion> listarInstitucionesPorLocalidad(Long id) {
         return sessionFactory.getCurrentSession().createCriteria(Institucion.class).add(Restrictions.eq("localidad_id", id)).list();
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion) {
+	      
+		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad(sal, count(*)) "
+	    		    + "FROM Cama as c "
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec "
+					+ "JOIN Piso as p ON sec.piso = p "
+					+ "JOIN Institucion as i ON p.institucion = i "
+					+ "WHERE i = :institucion "
+					+ "AND c NOT IN (SELECT a.cama "
+	    		   							   + "FROM Asignacion as a "
+	    		   							   + "WHERE a.cama = c "
+	    		   							   + "AND a.horaEgreso IS NULL) "
+	    		    + "GROUP BY i, sal.tipoSala";
+
+      Query query = sessionFactory.getCurrentSession().createQuery(hql);
+      query.setParameter("institucion", institucion);
+      
+      return query.getResultList();
+	}
 
 }

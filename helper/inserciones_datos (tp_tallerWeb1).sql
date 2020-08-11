@@ -187,25 +187,25 @@ VALUES (1, "Cirujia", NULL, 2),
        
 INSERT INTO sala(id, descripcion, tipoSala, sector_id)
 		/*FAVALORO*/
-VALUES (1, "SALA 1", NULL, 2),
-	   (2, "SALA 2", NULL, 2),
-       (3, "SALA 3", NULL, 3),
-       (4, "SALA 4", NULL, 4),
+VALUES (1, "SALA 1", "TERAPIA_INTENSIVA", 2),
+	   (2, "SALA 2", "TERAPIA_INTENSIVA", 2),
+       (3, "SALA 3", "TERAPIA_INTENSIVA", 3),
+       (4, "SALA 4", "TERAPIA_INTERMEDIA", 4),
        /*MORON*/
-       (5, "SALA 1", NULL, 5),
-	   (6, "SALA 2", NULL, 6),
-       (7, "SALA 3", NULL, 7),
-       (8, "SALA 4", NULL, 8),
+       (5, "SALA 1", "TERAPIA_INTERMEDIA", 5),
+	   (6, "SALA 2", "TERAPIA_INTERMEDIA", 6),	
+       (7, "SALA 3", "TERAPIA_INTERMEDIA", 7),
+       (8, "SALA 4", "TERAPIA_INTERMEDIA", 8),
        /*SANTOJANNI*/
-       (9, "SALA 1", NULL, 9),
-	   (10, "SALA 2", NULL, 10),
-       (11, "SALA 3", NULL, 11),
-       (12, "SALA 4", NULL, 12),
+       (9, "SALA 1", "TERAPIA_INTENSIVA", 9),
+	   (10, "SALA 2", "TERAPIA_INTENSIVA", 10),
+       (11, "SALA 3", "TERAPIA_INTENSIVA", 11),
+       (12, "SALA 4", "TERAPIA_INTERMEDIA", 12),
        /*CARRILLO*/
-       (13, "SALA 1", NULL, 13),
-	   (14, "SALA 2", NULL, 14),
-       (15, "SALA 3", NULL, 15),
-       (16, "SALA 4", NULL, 16);
+       (13, "SALA 1", "TERAPIA_INTENSIVA", 13),
+	   (14, "SALA 2", "TERAPIA_INTERMEDIA", 14),
+       (15, "SALA 3", "TERAPIA_INTERMEDIA", 15),
+       (16, "SALA 4", "TERAPIA_INTERMEDIA", 16);
        
 INSERT INTO cama(id, descripcion, tipoCama, sala_id)
 		/*FAVALORO*/

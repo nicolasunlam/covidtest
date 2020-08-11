@@ -1,18 +1,21 @@
 package ar.edu.unlam.tallerweb1.servicios.serviciosImpl;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
-import ar.edu.unlam.tallerweb1.modelo.Zona;
-import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalas;
+import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioInstitucion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
-
-import java.util.List;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMapa;
 
 @Service
 @Transactional
@@ -22,6 +25,8 @@ public class ServicioInstitucionImpl implements ServicioInstitucion {
     private RepositorioInstitucion repositorioInstitucion;
     @Autowired
     private RepositorioUsuario repositorioUsuario;
+    @Autowired
+    private ServicioMapa servicioMapa;
 
     @Override
     public void registrarInstitucion(Usuario usuario){
@@ -56,10 +61,37 @@ public class ServicioInstitucionImpl implements ServicioInstitucion {
         return repositorioInstitucion.listarInstitucionesPorLocalidad(id);
     }
 
-    /*@Override
-    public List<Institucion> listarInstitucionesPorZona(Zona zona) {
-        return repositorioInstitucion.listarInstitucionesPorZona(zona);
-    }*/
+    @Override
+    public List<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion) {
+       
+    	return repositorioInstitucion.obtenerEstadisticaDeSalasDeUnaInstitucion(institucion);	
+    }
 
+    
+	@Override
+	public List<InstitucionDistanciaSalas> obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(Institucion institucion) {
+
+    	List <InstitucionDistanciaSalas> listaInstitucionDistanciaSalas = new LinkedList<InstitucionDistanciaSalas>();
+    	
+		List <Institucion> instituciones = repositorioInstitucion.obtenerListaInstituciones();
+		
+    	for(int i = 0; i < instituciones.size(); ++i) {
+    		
+    		if (instituciones.get(i) != institucion) {
+			
+    		List <SalaCantidad> listaSala = repositorioInstitucion.obtenerEstadisticaDeSalasDeUnaInstitucion(instituciones.get(i));
+    		
+    		Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(instituciones.get(i).getLatitud(), 
+    																		instituciones.get(i).getLongitud(), 
+																			institucion.getLatitud(), institucion.getLongitud());
+    		
+    		InstitucionDistanciaSalas institucionDistanciaSalas = new InstitucionDistanciaSalas(instituciones.get(i), distancia, listaSala);
+    		
+    		listaInstitucionDistanciaSalas.add(institucionDistanciaSalas);	
+			}
+	    }
+	    
+	    return listaInstitucionDistanciaSalas;
+	}
 
 }

@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
   
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -83,8 +83,8 @@
 
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-		<h5 class="">Lista de Instituciones</h2>
-		
+		<h5 class="">Lista de Instituciones</h5>
+				       
 	</div>
 		<p class="mt-2 mb-4">Datos de la instituciones para solicitar el traslado</p>
 
@@ -151,17 +151,17 @@
 					onmouseout="this.style.backgroundColor='white';"> 
 		            SELECCIONAR</th>
 		        </tr>
-		        <c:forEach items="${listaInstitucions}" var="institucion">
+		        <c:forEach items="${listaInstituciones}" var="institucion">
 		            <tr>
-		                <td><c:out value="${institucion.getNombre()}"/></td>
-		                <td><c:out value="${institucion.getTipo().getDescripcion()}"/></td>
-		                <td><c:out value="${institucion.getDomicilio().getLocalidad().getNombreLocalidad()}"/></td>
-		                <td><c:out value="0 Km"/></td>
-		                <td><c:out value="${institucion.getCantidadCamas()}"/></td>
+		                <td><c:out value="${institucion.getInstitucion().getNombre()}"/></td>
+		                <td><c:out value="${institucion.getInstitucion().getTipo().getDescripcion()}"/></td>
+		                <td><c:out value="${institucion.getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()}"/></td>
+		                <td><c:out value="${fn:substring(institucion.getDistancia(), 0, 5)} Km"/></td>
+		                <td><c:out value="${institucion.getInstitucion().getCantidadCamas()}"/></td>
 		                <td>
 							<div class="custom-control custom-radio">
-							  <input type="radio" id="customRadio${institucion.getId()}" name="customRadio" class="custom-control-input">
-							  <label class="custom-control-label"  for="customRadio${institucion.getId()}"></label>
+							  <input type="radio" id="customRadio${institucion.getInstitucion().getId()}" name="customRadio" class="custom-control-input">
+							  <label class="custom-control-label"  for="customRadio${institucion.getInstitucion().getId()}"></label>
 							</div>
 						</td>
 		               
