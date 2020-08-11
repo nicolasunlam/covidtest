@@ -136,13 +136,13 @@
                     </select>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="cantidadCamas" class="h6 my-3">Cantidad de camas<span
                             class="text-primary font-weight-bold">*</span></label>
                     <input type="number" class="form-control input-sm" id="cantidadCamas" name="cantidadCamas" min="1"
                            max="2000"
                            placeholder="Ingrese la cantidad de camas de la institución">
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label for="email" class="h6 my-3">Email<span class="text-primary font-weight-bold">*</span></label>
@@ -155,7 +155,7 @@
                 <div class="form-group">
                     <label for="password" class="h6 my-3">Contraseña de la cuenta<span
                             class="text-primary font-weight-bold">*</span></label>
-                    <input type="text" name="password" class="form-control br-radius-zero" id="password"
+                    <input type="password" name="password" class="form-control br-radius-zero" id="password"
                            placeholder="Ingrese una contraseña" data-rule="minlen:1"
                            data-msg="Ingrese una contraseña valida"/>
                     <div class="validation"></div>

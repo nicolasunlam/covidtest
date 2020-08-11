@@ -35,8 +35,8 @@ public class ControladorInstitucion {
 	public ControladorInstitucion(ServicioInstitucion servicioInstitucion, ServicioCama servicioCama,
 			ServicioPaciente servicioPaciente, ServicioUsuario servicioUsuario, ServicioDomicilio servicioDomicilio,
 			ServicioPartido servicioPartido, ServicioLocalidad servicioLocalidad, ServicioZona servicioZona,
-			ServicioAtajo servicioAtajo, ServicioMapa servicioMapa,ServicioPiso servicioPiso,ServicioSector servicioSector,
-			ServicioSala servicioSala) {
+			ServicioAtajo servicioAtajo, ServicioMapa servicioMapa, ServicioPiso servicioPiso,
+			ServicioSector servicioSector, ServicioSala servicioSala) {
 
 		this.servicioInstitucion = servicioInstitucion;
 		this.servicioCama = servicioCama;
@@ -47,9 +47,9 @@ public class ControladorInstitucion {
 		this.servicioZona = servicioZona;
 		this.servicioAtajo = servicioAtajo;
 		this.servicioMapa = servicioMapa;
-		this.servicioPiso=servicioPiso;
-		this.servicioSector=servicioSector;
-		this.servicioSala=servicioSala;
+		this.servicioPiso = servicioPiso;
+		this.servicioSector = servicioSector;
+		this.servicioSala = servicioSala;
 	}
 
 	@RequestMapping("/registrarInstitucion")
@@ -108,8 +108,6 @@ public class ControladorInstitucion {
 			request.getSession().setAttribute("ID", institucion.getId());
 			request.getSession().setAttribute("ROL", institucion.getRol());
 
-
-
 			Domicilio domicilio = new Domicilio();
 
 			domicilio.setCalle(calle);
@@ -140,6 +138,7 @@ public class ControladorInstitucion {
 			return new ModelAndView("registrarInstitucion", model);
 		}
 	}
+
 	@RequestMapping("/crearPiso")
 	public ModelAndView crearPiso(HttpServletRequest request) {
 
@@ -159,16 +158,12 @@ public class ControladorInstitucion {
 
 		return new ModelAndView("registrarPiso", model);
 	}
-	
-	
-	
+
 	@RequestMapping("/registrarPiso")
-	public ModelAndView registrarPiso(
-			HttpServletRequest request,
-		  @RequestParam(value = "descripcion") String descripcion,
-		  @RequestParam(value = "numeroPiso") Integer numeroPiso
-			) {
-		
+	public ModelAndView registrarPiso(HttpServletRequest request,
+			@RequestParam(value = "descripcion") String descripcion,
+			@RequestParam(value = "numeroPiso") Integer numeroPiso) {
+
 		ModelMap model = new ModelMap();
 
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
@@ -182,36 +177,28 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-		
-		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
-		
-		Piso piso= new Piso();
-	
+
+		Institucion institucion = servicioInstitucion
+				.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+
+		Piso piso = new Piso();
+
 		piso.setDescripcion(descripcion);
 		piso.setInstitucion(institucion);
 		piso.setNumeroPiso(numeroPiso);
-		
-		
-		
+
 		servicioPiso.registrarPiso(piso);
-		
-		model.put("idPiso",piso.getId());
-		
-		return new ModelAndView("crearSector",model);
+
+		model.put("idPiso", piso.getId());
+
+		return new ModelAndView("crearSector", model);
 	}
 
-	
-	
-
 	@RequestMapping("/registrarSector")
-	public ModelAndView registrarSector(
-			HttpServletRequest request,
-		  @RequestParam(value = "tipoSector") TipoSector tipoSector,
-		  @RequestParam(value = "descripcion") String descripcion,
-		  @RequestParam(value = "idPiso")Long idPiso 
-			) {
-		
+	public ModelAndView registrarSector(HttpServletRequest request,
+			@RequestParam(value = "tipoSector") TipoSector tipoSector,
+			@RequestParam(value = "descripcion") String descripcion, @RequestParam(value = "idPiso") Long idPiso) {
+
 		ModelMap model = new ModelMap();
 
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
@@ -225,33 +212,25 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-		Piso piso=servicioPiso.buscarPisoPorId(idPiso);
-		
+
+		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
+
 		Sector sector = new Sector();
 		sector.setPiso(piso);
 		sector.setTipoSector(tipoSector);
 		sector.setDescripcion(descripcion);
-		
+
 		servicioSector.registrarSector(sector);
-		
-		model.put("idSector",sector.getId());
-		
 
+		model.put("idSector", sector.getId());
 
-		return new ModelAndView("crearSala",model);
+		return new ModelAndView("crearSala", model);
 	}
-	
 
-	
 	@RequestMapping("/registrarSala")
-	public ModelAndView registrarSala(
-			HttpServletRequest request,
-		  @RequestParam(value = "tipoSala") TipoSala tipoSala,
-		  @RequestParam(value = "descripcion") String descripcion,
-		  @RequestParam(value = "idSector")Long idSector 
-			) {
-		
+	public ModelAndView registrarSala(HttpServletRequest request, @RequestParam(value = "tipoSala") TipoSala tipoSala,
+			@RequestParam(value = "descripcion") String descripcion, @RequestParam(value = "idSector") Long idSector) {
+
 		ModelMap model = new ModelMap();
 
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
@@ -265,33 +244,28 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-		Sector sector=servicioSector.buscarSectorPorId(idSector);
-		
-		Sala sala= new Sala();
-		
+
+		Sector sector = servicioSector.buscarSectorPorId(idSector);
+
+		Sala sala = new Sala();
+
 		sala.setDescripcion(descripcion);
 		sala.setSector(sector);
 		sala.setTipoSala(tipoSala);
-		
-		servicioSala.registrarSala(sala);
-		
-		model.put("idSala", sala.getId());
-		
-		
-		
-		
-		
 
-		return new ModelAndView("crearCamas",model);
-		
+		servicioSala.registrarSala(sala);
+
+		model.put("idSala", sala.getId());
+
+		return new ModelAndView("crearCamas", model);
+
 	}
-	
+
 	@RequestMapping("crearCamaPorTipoSala")
 	public ModelAndView crearCamaPorTipoSala(@RequestParam(value = "tipoCama") TipoCama tipoCama,
 			@RequestParam(value = "idSala") Long idSala,
 			@RequestParam(value = "cantidadDeCamas") Integer cantidadDeCamas, HttpServletRequest request) {
-		
+
 		ModelMap model = new ModelMap();
 
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
@@ -306,7 +280,7 @@ public class ControladorInstitucion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		Sala sala=servicioSala.buscarSalaPorId(idSala);
+		Sala sala = servicioSala.buscarSalaPorId(idSala);
 
 		for (int i = 0; i < cantidadDeCamas; i++) {
 
@@ -320,11 +294,48 @@ public class ControladorInstitucion {
 			servicioCama.registrarCama(cama);
 		}
 
-		return new ModelAndView("confirmacion",model);
+		return new ModelAndView("confirmacion", model);
 	}
-	
-		
 
+	@RequestMapping("continuacionIngresoDatos")
+	public ModelAndView continuacionIngresoDatos(HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		String eleccion = request.getParameter("eleccion");
+
+		model.put("eleccion", eleccion);
+
+		if (eleccion == "Piso") {
+			return new ModelAndView("crearPiso", model);
+		}
+		if (eleccion == "Sector") {
+			return new ModelAndView("crearSector", model);
+		}
+		if (eleccion == "Sala") {
+			return new ModelAndView("crearSala", model);
+		}
+		if (eleccion == "Camas") {
+			return new ModelAndView("crearCamas", model);
+		}
+
+		return new ModelAndView("confirmacionPrueba", model);
+
+	}
+
+	
 	@RequestMapping("/listaInstituciones")
 	public ModelAndView listarInstituciones(HttpServletRequest request) {
 
@@ -377,8 +388,6 @@ public class ControladorInstitucion {
 
 		return new ModelAndView("bienvenido", model);
 	}
-
-	
 
 	@RequestMapping("detalleInstitucion")
 	public ModelAndView detalleInstitucion(@RequestParam(value = "idInstitucion") Long idInstitucion,
