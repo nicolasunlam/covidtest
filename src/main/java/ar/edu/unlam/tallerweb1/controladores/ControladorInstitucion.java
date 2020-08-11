@@ -122,15 +122,7 @@ public class ControladorInstitucion {
 			servicioDomicilio.actualizarDomicilio(domicilio);
 			servicioLocalidad.actualizarLocalidad(localidad);
 
-//			String mensaje = "Nombre: " + institucion.getNombre();
-//			String mensaje2 = "Documento: (" + institucion.getTipoDocumento() + ") " + institucion.getNumeroDocumento();
-//			String mensaje3 = "Email: " + institucion.getEmail();
-//
-//			model.put("mensaje", mensaje);
-//			model.put("mensaje2", mensaje2);
-//			model.put("mensaje3", mensaje3);
-
-			return new ModelAndView("crearPiso", model);
+			return new ModelAndView("listarInstituciones", model);
 		} else {
 
 			model.put("error", "Ya existe un usuario registrado con su mail o cuit");
