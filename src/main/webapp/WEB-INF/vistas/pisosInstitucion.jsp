@@ -49,89 +49,82 @@
 
 	<div class="container-fluid">
 
-		<h2 class="my-5">Lista de Instituciones</h2>
+		<h2 class="my-5">Lista de Pisos</h2>
 
 		<div class="row">
 
 			<div class="col-3">
-				<h5 class="mt-5 mb-3">Nombre</h5>
+				<h5 class="mt-5 mb-3">Número</h5>
 				<input type="text" id="inputNombre"
 					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorNombre()" placeholder="Ingrese nombre a buscar">
+					onkeyup="filtrarPorNombre()" placeholder="Ingrese número a buscar">
 			</div>
 			<div class="col-3">
-				<h5 class="mt-5 mb-3">Tipo institución</h5>
+				<h5 class="mt-5 mb-3">Descripción</h5>
 				<input type="text" id="inputTipoInstitucion"
 					class="mb-5 bg-light border border-secondary"
 					onkeyup="filtrarPorTipoInstitucion()"
-					placeholder="Ingrese tipo institución a buscar">
+					placeholder="Ingrese descripción a buscar">
 			</div>
 			<div class="col-3">
-				<h5 class="mt-5 mb-3">CUIT</h5>
+				<h5 class="mt-5 mb-3">Tipo</h5>
 				<input type="text" id="inputCUIT"
 					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorCUIT()" placeholder="Ingrese CUIT a buscar">
+					onkeyup="filtrarPorCUIT()" placeholder="Ingrese tipo a buscar">
 			</div>
 
 			<div class="col-3 text-center">
-				<h5 class="mt-5 mb-3">Registrar Institución</h5>
-				<a href="registrarInstitucion" class="btn btn-success w-50"><i
-					class="fa fa-hospital-o fa-3x"></i></a>
+				<h5 class="mt-5 mb-3">Registrar Piso</h5>
+				<div class="mt-3">
+					<form action="crearMensajeParaInstitucion" method=post>
+						<input class="invisible" type="hidden" id="id" name="id"
+							value="${piso.getId()}"> <a
+							href="registrarInstitucion" class="btn btn-success w-75 h-25"
+							type="submit"><i class="fa fa-plus-square fa-2x"></i></a>
+					</form>
+				</div>
+
+
 			</div>
-
 		</div>
-		<a href="panel">Volver a panel</a>
-
 		<table id="myTable"
 			class="table table-bordered responsive nowrap align-middle">
 			<tr class="text-center align-middle" style="cursor: pointer;">
 				<th scope="col"
 					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';" id="nombreTabla">Nombre
+					onmouseout="this.style.backgroundColor='white';" id="nombreTabla">Número
 					<i class="fa fa-sort"></i>
 				</th>
 
 				<th scope="col"
 					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">Tipo
-					Institución <i class="fa fa-sort"></i>
+					onmouseout="this.style.backgroundColor='white';">Descripción <i
+					class="fa fa-sort"></i>
 				</th>
 
 				<th scope="col"
 					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">CUIT <i
+					onmouseout="this.style.backgroundColor='white';">Tipo <i
 					class="fa fa-sort"></i></th>
-
-				<th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">Camas Totales
-					<i class="fa fa-sort"></i>
-				</th>
 
 				<th scope="col"
 					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
 					onmouseout="this.style.backgroundColor='white';">Acciones</th>
 
 			</tr>
-			<c:forEach items="${listaInstituciones}" var="instituciones">
+			<c:forEach items="${listaPacientes}" var="paciente">
 
 				<tr onmouseover="this.style.backgroundColor='AliceBlue';"
 					onmouseout="this.style.backgroundColor='white';">
-					<td class="align-middle"><c:out
-							value="${instituciones.getNombre()}" /></td>
+					<td class="align-middle"><c:out value="${paciente.getId()}" /></td>
 
 					<td class="align-middle"><c:out
 							value="${instituciones.getTipo().name()}" /></td>
 
 					<td class="align-middle"><c:out
 							value="${instituciones.getNumeroDocumento()}" /></td>
-					<td class="align-middle"><c:out
-							value="${instituciones.getCantidadCamas()}" /></td>
-					<td class="d-flex justify-content-between"><a
-						href="listarPisos" class="btn btn-primary my-3">Detalle
-							Institución</a> <a
-						href="listaPacientesInternadosDeInstitucion?idInstitucion=${instituciones.getId()}"
-						class="btn btn-primary my-3">Ver Pacientes</a>
+
+					<td class="text-center">
 						<div class="mt-3">
 
 
@@ -140,10 +133,11 @@
 
 								<input class="invisible" type="hidden" id="id" name="id"
 									value="${instituciones.getId()}"> <input
-									class="btn btn-primary" type="submit" value="Enviar Mensaje">
+									class="btn btn-primary" type="submit" value="Detalle Piso">
 
 							</form>
-						</div></td>
+						</div>
+					</td>
 			</c:forEach>
 		</table>
 
@@ -178,88 +172,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
 <script src="js/sort.js"></script>
-
-<script>
-	/*nombreTabla = document.getElementById('nombreTabla');
-	iconoNombreTabla = document.getElementById('iconoNombreTabla');
-	console.log(iconoNombreTabla);*/
-
-	/*function alternarIcono() {
-		iconoNombreTabla.className.baseVal = "feather feather-code";
-		iconoNombreTabla.className.animVal = "feather feather-code";
-
-	}*/
-
-	//nombreTabla.onclick = hola();
-</script>
-
-<script>
-	function filtrarPorNombre() {
-		// Declare variables
-		var input, filter, table, tr, td, i, txtValue;
-		input = document.getElementById("inputNombre");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("myTable");
-		tr = table.getElementsByTagName("tr");
-
-		// Loop through all table rows, and hide those who don't match the search query
-		for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[0];
-			if (td) {
-				txtValue = td.textContent || td.innerText;
-				if (txtValue.toUpperCase().indexOf(filter) > -1) {
-					tr[i].style.display = "";
-				} else {
-					tr[i].style.display = "none";
-				}
-			}
-		}
-	}
-
-	function filtrarPorTipoInstitucion() {
-		// Declare variables
-		var input, filter, table, tr, td, i, txtValue;
-		input = document.getElementById("inputTipoInstitucion");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("myTable");
-		tr = table.getElementsByTagName("tr");
-
-		// Loop through all table rows, and hide those who don't match the search query
-		for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[1];
-			if (td) {
-				txtValue = td.textContent || td.innerText;
-				if (txtValue.toUpperCase().indexOf(filter) > -1) {
-					tr[i].style.display = "";
-				} else {
-					tr[i].style.display = "none";
-				}
-			}
-		}
-	}
-
-	function filtrarPorCUIT() {
-		// Declare variables
-		var input, filter, table, tr, td, i, txtValue;
-		input = document.getElementById("inputCUIT");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("myTable");
-		tr = table.getElementsByTagName("tr");
-
-		// Loop through all table rows, and hide those who don't match the search query
-		for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[2];
-			if (td) {
-				txtValue = td.textContent || td.innerText;
-				if (txtValue.toUpperCase().indexOf(filter) > -1) {
-					tr[i].style.display = "";
-				} else {
-					tr[i].style.display = "none";
-				}
-			}
-		}
-	}
-</script>
 
 </body>
 </html>

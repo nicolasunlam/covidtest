@@ -30,6 +30,7 @@ public class ControladorInstitucion {
 	private ServicioPiso servicioPiso;
 	private ServicioSector servicioSector;
 	private ServicioSala servicioSala;
+	private ServicioPaciente servicioPaciente;
 
 	@Autowired
 	public ControladorInstitucion(ServicioInstitucion servicioInstitucion, ServicioCama servicioCama,
@@ -50,6 +51,7 @@ public class ControladorInstitucion {
 		this.servicioPiso = servicioPiso;
 		this.servicioSector = servicioSector;
 		this.servicioSala = servicioSala;
+		this.servicioPaciente = servicioPaciente;
 	}
 
 	@RequestMapping("/registrarInstitucion")
@@ -310,22 +312,22 @@ public class ControladorInstitucion {
 		// String eleccion = request.getParameter("eleccion");
 
 		model.put("eleccion", eleccion);
-		
-		switch(eleccion) {
-		  case "piso":
-			  return new ModelAndView("redirect:/registrarPiso", model);
-		    //break;
-		  case "sector":
-			  return new ModelAndView("redirect:/registrarSector", model);
-		    //break;
-		  case "sala":
-			  return new ModelAndView("redirect:/registrarSala", model);
-		    //break;
-		  case "cama":
-			  return new ModelAndView("redirect:/crearCamaPorTipoSala", model);
-		    //break;
-		  default:
-			  return new ModelAndView("confirmacionPrueba", model);
+
+		switch (eleccion) {
+		case "piso":
+			return new ModelAndView("redirect:/registrarPiso", model);
+		// break;
+		case "sector":
+			return new ModelAndView("redirect:/registrarSector", model);
+		// break;
+		case "sala":
+			return new ModelAndView("redirect:/registrarSala", model);
+		// break;
+		case "cama":
+			return new ModelAndView("redirect:/crearCamaPorTipoSala", model);
+		// break;
+		default:
+			return new ModelAndView("confirmacionPrueba", model);
 		}
 
 //		if (eleccion == "piso") {
@@ -343,8 +345,6 @@ public class ControladorInstitucion {
 //			return new ModelAndView("redirect:/crearCamas", model);
 //			// return new ModelAndView("crearCamas", model);
 //		}
-
-		
 
 	}
 
@@ -370,6 +370,36 @@ public class ControladorInstitucion {
 		model.put("listaInstituciones", listaInstituciones);
 
 		return new ModelAndView("listaInstituciones", model);
+	}
+
+	@RequestMapping("/listarPisos")
+	public ModelAndView listarPisos(HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		List<Piso> listaPisos = servicioPiso.listarPisos();
+
+		Integer cantidadPisos = listaPisos.size();
+
+		model.put("listaPisos", listaPisos);
+		model.put("cantidadPisos", cantidadPisos);
+		List<Paciente> pacientes = servicioPaciente.pacientes();
+
+		model.put("listaPacientes", pacientes);
+
+		return new ModelAndView("pisosInstitucion", model);
 	}
 
 	@RequestMapping("bienvenido")

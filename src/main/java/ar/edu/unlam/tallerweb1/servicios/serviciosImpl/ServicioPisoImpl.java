@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios.serviciosImpl;
 
+import java.util.List;
+
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,23 +16,28 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioPiso;
 @Transactional
 public class ServicioPisoImpl implements ServicioPiso {
 
-    @Autowired
-    private RepositorioPiso repositorioPiso;
+	@Autowired
+	private RepositorioPiso repositorioPiso;
 
-    @Override
-    public void registrarPiso(Piso piso) {
-        repositorioPiso.registrarPiso(piso);
-    }
+	@Override
+	public void registrarPiso(Piso piso) {
+		repositorioPiso.registrarPiso(piso);
+	}
 
-    @Override
-    public void actualizarPiso(Piso piso) {
-        repositorioPiso.actualizarPiso(piso);
-    }
+	@Override
+	public void actualizarPiso(Piso piso) {
+		repositorioPiso.actualizarPiso(piso);
+	}
 
 	@Override
 	public Piso buscarPisoPorId(Long id) {
 		return repositorioPiso.buscarPisoPorId(id);
 	}
-    
-    
+
+	@Override
+	public List<Piso> listarPisos() {
+		return repositorioPiso.listarPisos();
+
+	}
+
 }
