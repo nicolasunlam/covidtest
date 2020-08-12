@@ -1,6 +1,9 @@
 package ar.edu.unlam.tallerweb1.repositorios.repositoriosImpl;
 
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.persistence.Query;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
@@ -47,6 +50,20 @@ public class RepositorioSectorImpl implements RepositorioSector {
 	public Sector buscarSectorPorId(Long id) {
 		return (Sector) sessionFactory.getCurrentSession().createCriteria(Sector.class)
                 .add(Restrictions.eq("id", id)).uniqueResult();
+	}
+
+
+	@Override
+	public List<Sector> consultarSectoresPorPiso(Piso piso) {
+        String hql = "SELECT sec "
+    		    + "FROM Sector as sec "
+				+ "JOIN Piso as p ON sec.piso = p "
+    		    + "WHERE p = :piso ";
+
+    Query query = sessionFactory.getCurrentSession().createQuery(hql);
+    query.setParameter("piso", piso);
+    
+    return query.getResultList();
 	}
 
 }

@@ -60,7 +60,7 @@ public class ControladorMapa {
 
 		return new ModelAndView("mapaPaciente", model);
 	}
-
+	
 	@RequestMapping("/validarMapa")
 	public ModelAndView validarMapa(HttpServletRequest request, @RequestParam(value = "latitud") Double latitud,
 			@RequestParam(value = "longitud") Double longitud, @RequestParam(value = "calle") String calle,

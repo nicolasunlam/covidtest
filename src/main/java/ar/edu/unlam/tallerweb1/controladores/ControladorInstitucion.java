@@ -70,6 +70,7 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		// model.put("idAdmin", idAdmin);
 
 		return new ModelAndView("registrarInstitucion", model);
 	}
@@ -107,9 +108,6 @@ public class ControladorInstitucion {
 
 			servicioInstitucion.registrarInstitucion(institucion);
 
-			request.getSession().setAttribute("ID", institucion.getId());
-			request.getSession().setAttribute("ROL", institucion.getRol());
-
 			Domicilio domicilio = new Domicilio();
 
 			domicilio.setCalle(calle);
@@ -124,7 +122,12 @@ public class ControladorInstitucion {
 			servicioDomicilio.actualizarDomicilio(domicilio);
 			servicioLocalidad.actualizarLocalidad(localidad);
 
-			return new ModelAndView("listarInstituciones", model);
+			// Usuario admin = servicioUsuario.consultarUsuarioPorId(idAdmin);
+
+			// request.getSession().setAttribute("ROL", admin.getRol());
+			// .getSession().setAttribute("ID", idAdmin);
+
+			return new ModelAndView("listaInstituciones", model);
 		} else {
 
 			model.put("error", "Ya existe un usuario registrado con su mail o cuit");
@@ -150,12 +153,11 @@ public class ControladorInstitucion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		return new ModelAndView("registrarPiso", model);
+		return new ModelAndView("crearPiso", model);
 	}
 
 	@RequestMapping("/registrarPiso")
 	public ModelAndView registrarPiso(HttpServletRequest request,
-			@RequestParam(value = "descripcion") String descripcion,
 			@RequestParam(value = "numeroPiso") Integer numeroPiso) {
 
 		ModelMap model = new ModelMap();
@@ -177,21 +179,23 @@ public class ControladorInstitucion {
 
 		Piso piso = new Piso();
 
-		piso.setDescripcion(descripcion);
 		piso.setInstitucion(institucion);
 		piso.setNumeroPiso(numeroPiso);
 
 		servicioPiso.registrarPiso(piso);
+		
+		List<Sector> sectores = servicioSector.consultarSectoresPorPiso(piso);
 
+		model.put("numeroPiso", numeroPiso);
 		model.put("idPiso", piso.getId());
+		model.put("sectores", sectores);
 
 		return new ModelAndView("crearSector", model);
 	}
 
 	@RequestMapping("/registrarSector")
 	public ModelAndView registrarSector(HttpServletRequest request,
-			@RequestParam(value = "tipoSector") TipoSector tipoSector,
-			@RequestParam(value = "descripcion") String descripcion, @RequestParam(value = "idPiso") Long idPiso) {
+			@RequestParam(value = "tipoSector") TipoSector tipoSector, @RequestParam(value = "idPiso") Long idPiso) {
 
 		ModelMap model = new ModelMap();
 
@@ -212,7 +216,6 @@ public class ControladorInstitucion {
 		Sector sector = new Sector();
 		sector.setPiso(piso);
 		sector.setTipoSector(tipoSector);
-		sector.setDescripcion(descripcion);
 
 		servicioSector.registrarSector(sector);
 
@@ -223,7 +226,7 @@ public class ControladorInstitucion {
 
 	@RequestMapping("/registrarSala")
 	public ModelAndView registrarSala(HttpServletRequest request, @RequestParam(value = "tipoSala") TipoSala tipoSala,
-			@RequestParam(value = "descripcion") String descripcion, @RequestParam(value = "idSector") Long idSector) {
+			@RequestParam(value = "idSector") Long idSector) {
 
 		ModelMap model = new ModelMap();
 
@@ -243,7 +246,6 @@ public class ControladorInstitucion {
 
 		Sala sala = new Sala();
 
-		sala.setDescripcion(descripcion);
 		sala.setSector(sector);
 		sala.setTipoSala(tipoSala);
 
@@ -367,6 +369,9 @@ public class ControladorInstitucion {
 
 		List<Institucion> listaInstituciones = servicioInstitucion.obtenerListaInstituciones();
 
+		Long idAdmin = (Long) request.getSession().getAttribute("ID");
+
+		model.put("idAdmin", idAdmin);
 		model.put("listaInstituciones", listaInstituciones);
 
 		return new ModelAndView("listaInstituciones", model);
@@ -389,15 +394,13 @@ public class ControladorInstitucion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		List<Piso> listaPisos = servicioPiso.listarPisos();
+		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
 
-		Integer cantidadPisos = listaPisos.size();
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+
+		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
 
 		model.put("listaPisos", listaPisos);
-		model.put("cantidadPisos", cantidadPisos);
-		List<Paciente> pacientes = servicioPaciente.pacientes();
-
-		model.put("listaPacientes", pacientes);
 
 		return new ModelAndView("pisosInstitucion", model);
 	}
@@ -495,6 +498,30 @@ public class ControladorInstitucion {
 
 		return new ModelAndView("fichaInstitucion", model);
 
+	}
+
+	// Muestra imagenes de las camas
+	@RequestMapping("/listarCamasDeInstitucion")
+	public ModelAndView listarCamasDeInstitucion(HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+
+		List<Cama> listadoCamas = servicioCama.obtenerCamasPorInstitucion(institucion);
+
+		Integer cantidadCamas = listadoCamas.size();
+
+		model.put("listadoCamas", listadoCamas);
+		model.put("cantidadCamas", cantidadCamas);
+
+		return new ModelAndView("disponibilidadCamasPrueba", model);
 	}
 
 }

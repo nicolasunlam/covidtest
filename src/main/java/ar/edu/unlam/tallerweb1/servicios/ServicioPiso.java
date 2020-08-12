@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 
 public interface ServicioPiso {
@@ -12,5 +13,5 @@ public interface ServicioPiso {
 
 	public Piso buscarPisoPorId(Long id);
 
-	List<Piso> listarPisos();
+	List<Piso> listarPisosPorInstitucion(Institucion institucion);
 }

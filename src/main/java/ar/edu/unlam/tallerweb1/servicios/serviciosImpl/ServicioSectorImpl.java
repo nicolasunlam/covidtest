@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios.serviciosImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +34,11 @@ public class ServicioSectorImpl implements ServicioSector {
     @Override
 	public Sector buscarSectorPorId(Long id) {
 		return repositorioSector.buscarSectorPorId(id);
+	}
+
+	@Override
+	public List<Sector> consultarSectoresPorPiso(Piso piso) {
+		return repositorioSector.consultarSectoresPorPiso(piso);
 	}
 
 

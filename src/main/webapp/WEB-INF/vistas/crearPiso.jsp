@@ -25,17 +25,6 @@
 			<form action="registrarPiso" method="POST" role="form"
 				class="contactForm">
 
-
-
-				<div class="form-group">
-					<label for="cantidadDeCamas" class="h6 my-3">Descripcion<span
-						class="text-primary font-weight-bold">*</span></label> <input type="text"
-						name="descripcion" class="form-control br-radius-zero"
-						id="descripcion" placeholder="Ingrese descripcion"
-						data-rule="minlen:1" data-msg="Ingrese descripcion valido" />
-					<div class="validation"></div>
-				</div>
-
 				<div class="form-group">
 					<label for="cantidadDeCamas" class="h6 my-3">Numero Piso<span
 						class="text-primary font-weight-bold">*</span></label> <input

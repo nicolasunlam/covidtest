@@ -76,12 +76,12 @@
 			<div class="col-3 text-center">
 				<h5 class="mt-5 mb-3">Registrar Piso</h5>
 				<div class="mt-3">
-					<form action="crearMensajeParaInstitucion" method=post>
-						<input class="invisible" type="hidden" id="id" name="id"
-							value="${piso.getId()}"> <a
-							href="registrarInstitucion" class="btn btn-success w-75 h-25"
-							type="submit"><i class="fa fa-plus-square fa-2x"></i></a>
-					</form>
+
+					<input class="invisible" type="hidden" id="id" name="id"
+						value="${piso.getId()}"> <a href="crearPiso"
+						class="btn btn-success w-75 h-25" type="submit"><i
+						class="fa fa-plus-square fa-2x"></i></a>
+
 				</div>
 
 
@@ -112,11 +112,11 @@
 					onmouseout="this.style.backgroundColor='white';">Acciones</th>
 
 			</tr>
-			<c:forEach items="${listaPacientes}" var="paciente">
+			<c:forEach items="${listaPisos}" var="piso">
 
 				<tr onmouseover="this.style.backgroundColor='AliceBlue';"
 					onmouseout="this.style.backgroundColor='white';">
-					<td class="align-middle"><c:out value="${paciente.getId()}" /></td>
+					<td class="align-middle"><c:out value="${piso.getId()}" /></td>
 
 					<td class="align-middle"><c:out
 							value="${instituciones.getTipo().name()}" /></td>

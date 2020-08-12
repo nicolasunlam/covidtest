@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios.repositoriosImpl;
 
+import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPiso;
 
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.Query;
 
 @Repository("repositorioPiso")
 @Transactional
@@ -43,9 +45,17 @@ public class RepositorioPisoImpl implements RepositorioPiso {
 	}
 
 	@Override
-	public List<Piso> listarPisos() {
+	public List<Piso> listarPisosPorInstitucion(Institucion institucion) {
+		        String hql = "SELECT p "
+    		    + "FROM Piso as p "
+				+ "JOIN Institucion as i ON p.institucion = i "
+    		    + "WHERE i = :institucion ";
 
-		return sessionFactory.getCurrentSession().createCriteria(Piso.class).list();
+    Query query = sessionFactory.getCurrentSession().createQuery(hql);
+    query.setParameter("institucion", institucion);
+    
+    return query.getResultList();
+
 	}
 
 }

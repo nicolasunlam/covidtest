@@ -35,8 +35,8 @@ public class ServicioPisoImpl implements ServicioPiso {
 	}
 
 	@Override
-	public List<Piso> listarPisos() {
-		return repositorioPiso.listarPisos();
+	public List<Piso> listarPisosPorInstitucion(Institucion institucion) {
+		return repositorioPiso.listarPisosPorInstitucion(institucion);
 
 	}
 

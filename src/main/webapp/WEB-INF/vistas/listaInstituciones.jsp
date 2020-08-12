@@ -75,8 +75,8 @@
 
 			<div class="col-3 text-center">
 				<h5 class="mt-5 mb-3">Registrar Institución</h5>
-				<a href="registrarInstitucion" class="btn btn-success w-50"><i
-					class="fa fa-hospital-o fa-3x"></i></a>
+				<a href="registrarInstitucion?idAdmin=${idAdmin}"
+					class="btn btn-success w-50"><i class="fa fa-hospital-o fa-3x"></i></a>
 			</div>
 
 		</div>
@@ -128,7 +128,7 @@
 					<td class="align-middle"><c:out
 							value="${instituciones.getCantidadCamas()}" /></td>
 					<td class="d-flex justify-content-between"><a
-						href="listarPisos" class="btn btn-primary my-3">Detalle
+						href="listarPisos?idInstitucion=${instituciones.getId()}" class="btn btn-primary my-3">Detalle
 							Institución</a> <a
 						href="listaPacientesInternadosDeInstitucion?idInstitucion=${instituciones.getId()}"
 						class="btn btn-primary my-3">Ver Pacientes</a>
