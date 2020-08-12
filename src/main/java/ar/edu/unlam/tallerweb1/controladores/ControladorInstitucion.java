@@ -30,6 +30,7 @@ public class ControladorInstitucion {
 	private ServicioPiso servicioPiso;
 	private ServicioSector servicioSector;
 	private ServicioSala servicioSala;
+	private ServicioPaciente servicioPaciente;
 
 	@Autowired
 	public ControladorInstitucion(ServicioInstitucion servicioInstitucion, ServicioCama servicioCama,
@@ -50,6 +51,7 @@ public class ControladorInstitucion {
 		this.servicioPiso = servicioPiso;
 		this.servicioSector = servicioSector;
 		this.servicioSala = servicioSala;
+		this.servicioPaciente = servicioPaciente;
 	}
 
 	@RequestMapping("/registrarInstitucion")
@@ -122,15 +124,7 @@ public class ControladorInstitucion {
 			servicioDomicilio.actualizarDomicilio(domicilio);
 			servicioLocalidad.actualizarLocalidad(localidad);
 
-//			String mensaje = "Nombre: " + institucion.getNombre();
-//			String mensaje2 = "Documento: (" + institucion.getTipoDocumento() + ") " + institucion.getNumeroDocumento();
-//			String mensaje3 = "Email: " + institucion.getEmail();
-//
-//			model.put("mensaje", mensaje);
-//			model.put("mensaje2", mensaje2);
-//			model.put("mensaje3", mensaje3);
-
-			return new ModelAndView("crearPiso", model);
+			return new ModelAndView("listarInstituciones", model);
 		} else {
 
 			model.put("error", "Ya existe un usuario registrado con su mail o cuit");
@@ -298,7 +292,8 @@ public class ControladorInstitucion {
 	}
 
 	@RequestMapping("continuacionIngresoDatos")
-	public ModelAndView continuacionIngresoDatos(HttpServletRequest request) {
+	public ModelAndView continuacionIngresoDatos(@RequestParam(value = "eleccion") String eleccion,
+			HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
@@ -314,28 +309,45 @@ public class ControladorInstitucion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		String eleccion = request.getParameter("eleccion");
+		// String eleccion = request.getParameter("eleccion");
 
 		model.put("eleccion", eleccion);
 
-		if (eleccion == "Piso") {
-			return new ModelAndView("crearPiso", model);
-		}
-		if (eleccion == "Sector") {
-			return new ModelAndView("crearSector", model);
-		}
-		if (eleccion == "Sala") {
-			return new ModelAndView("crearSala", model);
-		}
-		if (eleccion == "Camas") {
-			return new ModelAndView("crearCamas", model);
+		switch (eleccion) {
+		case "piso":
+			return new ModelAndView("redirect:/registrarPiso", model);
+		// break;
+		case "sector":
+			return new ModelAndView("redirect:/registrarSector", model);
+		// break;
+		case "sala":
+			return new ModelAndView("redirect:/registrarSala", model);
+		// break;
+		case "cama":
+			return new ModelAndView("redirect:/crearCamaPorTipoSala", model);
+		// break;
+		default:
+			return new ModelAndView("confirmacionPrueba", model);
 		}
 
-		return new ModelAndView("confirmacionPrueba", model);
+//		if (eleccion == "piso") {
+//			return new ModelAndView("redirect:/crearPiso", model);
+//		}
+//		if (eleccion == "sector") {
+//			return new ModelAndView("redirect:/crearSector", model);
+//			// return new ModelAndView("crearSector", model);
+//		}
+//		if (eleccion == "sala") {
+//			return new ModelAndView("redirect:/crearSala", model);
+//			// return new ModelAndView("crearSala", model);
+//		}
+//		if (eleccion == "camas") {
+//			return new ModelAndView("redirect:/crearCamas", model);
+//			// return new ModelAndView("crearCamas", model);
+//		}
 
 	}
 
-	
 	@RequestMapping("/listaInstituciones")
 	public ModelAndView listarInstituciones(HttpServletRequest request) {
 
@@ -358,6 +370,36 @@ public class ControladorInstitucion {
 		model.put("listaInstituciones", listaInstituciones);
 
 		return new ModelAndView("listaInstituciones", model);
+	}
+
+	@RequestMapping("/listarPisos")
+	public ModelAndView listarPisos(HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		List<Piso> listaPisos = servicioPiso.listarPisos();
+
+		Integer cantidadPisos = listaPisos.size();
+
+		model.put("listaPisos", listaPisos);
+		model.put("cantidadPisos", cantidadPisos);
+		List<Paciente> pacientes = servicioPaciente.pacientes();
+
+		model.put("listaPacientes", pacientes);
+
+		return new ModelAndView("pisosInstitucion", model);
 	}
 
 	@RequestMapping("bienvenido")

@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.util.List;
+
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 
 public interface RepositorioPiso {
@@ -9,4 +11,6 @@ public interface RepositorioPiso {
     void actualizarPiso(Piso piso);
 
 	Piso buscarPisoPorId(Long id);
+	
+	List<Piso> listarPisos();
 }
