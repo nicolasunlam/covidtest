@@ -114,14 +114,17 @@ public class ControladorTraslado {
 		}
     	model.put("armarHeader", servicioAtajo.armarHeader(request));
     	/*-----------------------------------*/
-    	
+
     	model.put("tipoCama", tipoCama);
     	model.put("tipoSala", tipoSala);
     	model.put("motivoTraslado", motivoTraslado);
     	model.put("urgencia", urgencia);
     	
     	Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
-		model.put("paciente", paciente);
+    	if(paciente == null) {
+			return new ModelAndView("redirect:/trasladar");	
+		}
+    	model.put("paciente", paciente);
 		
 		Long idInstitucion = (long) request.getSession().getAttribute("ID");
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
