@@ -2,10 +2,10 @@ package ar.edu.unlam.tallerweb1.modelo;
 
 public enum TipoDocumento {
 	
-	DNI("Documento Nacional de Identidad"), 
+	DNI("D.N.I"), 
 	LIBRETA_CIVICA("Libreta Cívica"), 
 	PASAPORTE("Pasaporte"), 
-	CUIT("Clave Única de Identificación Tributaria");
+	CUIT("C.U.I.T");
 	
     private final String descripcion;
 

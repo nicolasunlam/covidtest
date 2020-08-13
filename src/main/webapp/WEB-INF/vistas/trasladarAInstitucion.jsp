@@ -209,28 +209,26 @@
 			      			</c:forEach>
 			      			</div>
 			      			</div>
-			      			 	<p class="text-center my-0">
+			      			 	<p class="text-center my-0" style="font-size: 12px;">
 				               		<c:if test="${institucion.getCamaRequerida() != true && 
 				               		institucion.getSalaRequerida() != true }">
-		               					Esta institución no tiene una sala de ${tipoSala.getDescripcion()} ni una cama ${tipoCama.getDescripcion()} disponibles.
+		               					Esta institución <abbr class="font-weight-bold">NO TIENE</abbr> una sala de <abbr class="font-weight-bold">${tipoSala.getDescripcion()}</abbr> 
+		               					ni una cama <abbr class="font-weight-bold">${tipoCama.getDescripcion()}</abbr> disponibles.
 					               	</c:if>
 				               		<c:if test="${institucion.getCamaRequerida() == true && 
 				               		institucion.getSalaRequerida() != true }">
-		               					Esta institución no tiene una sala de ${tipoSala.getDescripcion()} disponible con una cama ${tipoCama.getDescripcion()}.
+		               					Esta institución <abbr class="font-weight-bold">NO TIENE</abbr> una sala de <abbr class="font-weight-bold">${tipoSala.getDescripcion()}</abbr>
+		               					disponible con una cama <abbr class="font-weight-bold">${tipoCama.getDescripcion()}</abbr>.
 					               	</c:if>
 					               	<c:if test="${institucion.getCamaRequerida() != true && 
 		               				institucion.getSalaRequerida() == true }">	
-					               		Esta institución no tiene una cama ${tipoCama.getDescripcion()} disponible en una sala de ${tipoSala.getDescripcion()}.
+					               		Esta institución <abbr class="font-weight-bold">NO TIENE</abbr> una cama <abbr class="font-weight-bold">${tipoCama.getDescripcion()}</abbr> 
+					               		disponible en una sala de <abbr class="font-weight-bold">${tipoSala.getDescripcion()}</abbr>.
 					               	</c:if>
 				               	</p>
 		                </td>
 		               
 		                <td style="vertical-align: middle;">
-
-						<!--  <div class="custom-control custom-radio">
-						  <input type="radio" id="customRadio${institucion.getInstitucion().getId()}" name="customRadio" class="custom-control-input">
-						  <label class="custom-control-label"  for="customRadio${institucion.getInstitucion().getId()}"></label>
-						</div>  -->
 						
 						<c:if test="${institucion.getCamaRequerida() == true && 
 	               		institucion.getSalaRequerida() == true }">
@@ -328,8 +326,25 @@
 		    </table>
 		</div>
 
-		<div class="mt-2">
-			<button type="" class="btn btn-outline-danger">Cancelar</button>
+		<div class="col-xl-3 col-lg-5 col-md-8 col-sm-12">	
+			
+			<div class="row d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+				
+				<div class="mr-4">
+	
+					<div class="">
+						<button type="" class="btn btn-outline-warning">
+						Volver atrás</button>
+					</div>
+	
+				</div>
+				
+				<div class="">
+					<button type="" class="btn btn-outline-danger">
+					Cancelar</button>
+				</div>
+			
+			</div>
 		</div>
 	
 		<div class="form-group my-2">

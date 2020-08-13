@@ -13,8 +13,6 @@ public class Institucion extends Usuario{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-    private Integer cantidadCamas;
     
     @Enumerated(EnumType.STRING)
     private TipoInstitucion tipo;
@@ -35,15 +33,5 @@ public class Institucion extends Usuario{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Integer getCantidadCamas() {
-		return cantidadCamas;
-	}
-
-	public void setCantidadCamas(Integer cantidadCamas) {
-		this.cantidadCamas = cantidadCamas;
-	}
-
-
 
 }

@@ -5,10 +5,10 @@ public enum TipoSala {
 	
 	TERAPIA_INTENSIVA("Terapia Intensiva", 1), 
 	TERAPIA_INTERMEDIA("Terapia Intermedia", 2), 
-	SALA_AISLAMIENTO("Sala de Aislamiento", 3),
-	HABITACION_HOTEL("Habitacion de Hotel", 5), 
-	AULA_UNIVERSITARIA("Aula Universitaria", 5), 
-	CLUB("Club", 5);
+	TERAPIA_COMÚN("Terapia común", 3),
+	AISLAMIENTO("Aislamiento", 4),
+	HABITACION("Habitacion", 5), 
+	AULA("Aula", 5);
 	
     private final String descripcion;
     private final Integer prioridad;

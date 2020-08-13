@@ -489,7 +489,7 @@ public class ControladorInstitucion {
 		model.put("calle", institucion.getDomicilio().getCalle());
 		model.put("numero", institucion.getDomicilio().getNumero());
 		model.put("localidad", institucion.getDomicilio().getLocalidad().getNombreLocalidad());
-		model.put("camas", institucion.getCantidadCamas());
+		model.put("camas", servicioCama.obtenerCamasPorInstitucion(institucion).size());
 		model.put("camasDisponibles", camasDisponibles);
 		model.put("latitudInstitucion", latitudInstitucion);
 		model.put("longitudInstitucion", longitudInstitucion);

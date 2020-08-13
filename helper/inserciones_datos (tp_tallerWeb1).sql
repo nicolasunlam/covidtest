@@ -89,15 +89,15 @@ VALUES (1, "Las Heras", 1200, 1),
        (8, "Solís", 463, 5);
 
 /* ----- ADMIN ----- */
-INSERT INTO usuario(rol, DTYPE, id, nombre, email, password, numeroDocumento, tipoDocumento, cantidadCamas, domicilio_id)
-VALUES ("ADMIN", "Institucion", 1, "Operadora Central 1", "admin@email.com", "1234", "20100041007", "CUIT", null, 1);
+INSERT INTO usuario(rol, DTYPE, id, nombre, email, password, numeroDocumento, tipoDocumento, domicilio_id)
+VALUES ("ADMIN", "Institucion", 1, "Operadora Central 1", "admin@email.com", "1234", "20100041007", "CUIT", 1);
 
 /* ----- HOSPITAL ----- */
-INSERT INTO usuario(rol, DTYPE, id, nombre, email, password, numeroDocumento, tipoDocumento, cantidadCamas, tipo, domicilio_id,latitud,longitud)
-VALUES ("INSTITUCION", "Institucion", 2, "Fundación Favaloro", "favaloro@email.com", "1234","20200020007", "CUIT", 40, "HOSPITAL", 2,-34.70211051937402,-52.70211051937402),
-       ("INSTITUCION", "Institucion", 3, "Hospital Italiano De Morón", "hospital_italiano_moron@email.com", "1234","20300030007", "CUIT", 65, "HOSPITAL", 7,-34.62211051937402,-52.70211051937402),
-       ("INSTITUCION", "Institucion", 4, "Hospital Donación Francisco Santojanni", "santojanni@email.com", "1234","20400040007", "CUIT", 57, "HOSPITAL", 6,-34.80211051937402,-52.70211051937402),
-       ("INSTITUCION", "Institucion", 5, "Hospital Profesor Doctor Ramón Carrillo", "carillo@email.com", "1234", "20500050007", "CUIT", 57, "HOSPITAL", 5,-34.10211051937402,-52.90211051937402);
+INSERT INTO usuario(rol, DTYPE, id, nombre, email, password, numeroDocumento, tipoDocumento, tipo, domicilio_id,latitud,longitud)
+VALUES ("INSTITUCION", "Institucion", 2, "Fundación Favaloro", "favaloro@email.com", "1234","20200020007", "CUIT", "HOSPITAL", 2,-34.70211051937402,-52.70211051937402),
+       ("INSTITUCION", "Institucion", 3, "Hospital Italiano De Morón", "hospital_italiano_moron@email.com", "1234","20300030007", "CUIT", "HOSPITAL", 7,-34.62211051937402,-52.70211051937402),
+       ("INSTITUCION", "Institucion", 4, "Hospital Donación Francisco Santojanni", "santojanni@email.com", "1234","20400040007", "CUIT", "HOSPITAL", 6,-34.80211051937402,-52.70211051937402),
+       ("INSTITUCION", "Institucion", 5, "Hospital Profesor Doctor Ramón Carrillo", "carillo@email.com", "1234", "20500050007", "CUIT", "HOSPITAL", 5,-34.10211051937402,-52.90211051937402);
 
 /* ----- PACIENTE AUTOTEST POSITIVOS----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud, esFumador, tieneDiabetes, tieneEmbarazo, tieneEnfCardiologica, tieneEnfHepatica, tieneEnfRenal, tieneEnfRespiratoria)
@@ -195,7 +195,7 @@ VALUES (1, "SALA 1", "TERAPIA_INTENSIVA", 2),
        (5, "SALA 1", "TERAPIA_INTERMEDIA", 5),
 	   (6, "SALA 2", "TERAPIA_INTERMEDIA", 6),	
        (7, "SALA 3", "TERAPIA_INTERMEDIA", 7),
-       (8, "SALA 4", "SALA_AISLAMIENTO", 8),
+       (8, "SALA 4", "AISLAMIENTO", 8),
        /*SANTOJANNI*/
        (9, "SALA 1", "TERAPIA_INTENSIVA", 9),
 	   (10, "SALA 2", "TERAPIA_INTENSIVA", 10),
@@ -205,7 +205,7 @@ VALUES (1, "SALA 1", "TERAPIA_INTENSIVA", 2),
        (13, "SALA 1", "TERAPIA_INTENSIVA", 13),
 	   (14, "SALA 2", "TERAPIA_INTERMEDIA", 14),
        (15, "SALA 3", "TERAPIA_INTERMEDIA", 15),
-       (16, "SALA 4", "TERAPIA_INTERMEDIA", 16);
+       (16, "SALA 4", "AISLAMIENTO", 16);
        
 INSERT INTO cama(id, descripcion, tipoCama, sala_id)
 		/*FAVALORO*/
@@ -251,7 +251,7 @@ VALUES (1, "101", "ARTICULADA_MANUAL", 1),
        (37, "138", "FIJA", 14),
 	   (38, "139", "ARTICULADA_MANUAL", 15),
        (39, "140", "ARTICULADA_MANUAL", 15),
-       (40, "141", "FIJA", 15),
+       (40, "141", "ARTICULADA_ELECTRICA", 15),
 	   (41, "142", "FIJA", 15),
        (42, "143", "FIJA", 15),
        (43, "144", "FIJA", 15),
