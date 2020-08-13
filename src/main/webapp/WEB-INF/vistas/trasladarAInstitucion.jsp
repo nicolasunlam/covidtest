@@ -64,6 +64,29 @@
 
 			</div>
 		</div>
+		
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom w-25 ">
+			<h5 class="">Requisitos</h2>
+		</div>
+		
+		<p class="mt-2">Requisitos necesarios para realizar el traslado</p>
+	
+		<div class="mt-2">
+			<label for="" class="p">Tipo de cama:</label> 
+			<span class="p">${tipoCama.getDescripcion()}.</span>
+		</div>		
+		<div class="">		
+			<label for="" class="p">Tipo de sala:</label> 
+			<span class="p">${tipoSala.getDescripcion()}.</span>
+		</div>		
+		<div class="">
+			<label for="" class="p">Motivo del traslado:</label> 
+			<span class="p">${motivoTraslado.getDescripcion()}.</span>
+		</div>		
+		<div class="mb-4">
+			<label for="" class="p">Urgencia:</label> 
+			<span class="p">${urgencia}.</span>
+		</div>
 
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
@@ -74,8 +97,9 @@
 
 		  <div class="table-responsive">
 		    <table id="myTable" class="table table-bordered table-hover responsive nowrap text-center">
-		        <tr class="bg-white">
-		            <th style="vertical-align: middle; width: 16%" class="border border-secondary" 
+		        <tr class="una bg-white">
+
+		            <th style="vertical-align: middle; width: 16%" class="border border-secondary"
 		            onmouseover="this.style.backgroundColor='#dee2e6 ';"
 					onmouseout="this.style.backgroundColor='white';">NOMBRE 
 		            
@@ -130,32 +154,75 @@
 						</svg>
 		            
 		            </th>
-		            <th style="vertical-align: middle; width: 25%" class="border border-secondary" 
+		            <th style="vertical-align: middle; width: 20%" class="border border-secondary" 
 		            onmouseover="this.style.backgroundColor='#dee2e6';"
 					onmouseout="this.style.backgroundColor='white';"> 
 		            ACCIÓN</th>
 		        </tr>
 		        <c:forEach items="${listaInstituciones}" var="institucion">
-		            <tr>
+		            <tr 							               		
+	               		<c:if test="${institucion.getCamaRequerida() != true || 
+	               		institucion.getSalaRequerida() != true }">
+		            		class="table-danger"
+		               	</c:if>
+		            >
+		            
+		            
 		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getNombre()}"/></td>
 		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getTipo().getDescripcion()}"/></td>
 		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()}"/></td>
 		                <td style="vertical-align: middle;"><c:out value="${Math.round(institucion.getDistancia())} Km"/></td>
 		                
-		                <td style="vertical-align: middle; text-align:left;">
+		                <td style="vertical-align: middle; text-align:left; width:25%;" class="mx-auto">
+			               <div class="d-flex justify-content-center">
+			                <div>
 			                <c:forEach items="${institucion.getListaSala()}" var="lista">
-			               		<ul class="my-2">
-				               		<c:if test="${lista.getCantidad() >= 5}">
-				               		<li class="text-success">
-				               		</c:if>
-				               		<c:if test="${lista.getCantidad() < 5}">
-				               		<li class="text-danger">
-				               		</c:if>
-					               		<c:out value="${lista.getCantidad()}"/> de
-					               		<c:out value="${lista.getSala().getTipoSala().getDescripcion()}"/>.
-				               		</li>
-							</ul>
+	               			
+	               				<c:if test="${institucion.getCamaRequerida()  == true && institucion.getSalaRequerida()  == true 
+	               				&& lista.getSala().getTipoSala() == tipoSala}">				               				               		
+				               		<ul class="my-2 pl-3">
+					               		<c:if test="${lista.getCantidad() >= 5}">
+					               		<li class="text-success">
+					               		</c:if>
+					               		<c:if test="${lista.getCantidad() < 5}">
+					               		<li class="text-danger">
+					               		</c:if>
+						               		<c:out value="${lista.getCantidad()}"/> de
+						               		<c:out value="${lista.getSala().getTipoSala().getDescripcion()}"/>.
+	
+						               		<c:forEach items="${lista.getListaCama()}" var="listaCamas">
+							               		<ul class="my-2 pl-3">
+							               		<c:if test="${listaCamas.getCount() >= 5}">
+							               		<li class="p text-dark">
+							               		</c:if>
+							               		<c:if test="${listaCamas.getCount() < 5}">
+							               		<li class="p text-dark">
+							               		</c:if>
+								               		${listaCamas.getCama().getTipoCama().getDescripcion()}: ${listaCamas.getCount()}.
+							               		</li>
+							               		</ul>
+					      					</c:forEach>
+					      					</li>
+									</ul>
+				               	</c:if>
+							
 			      			</c:forEach>
+			      			</div>
+			      			</div>
+			      			 	<p class="text-center my-0">
+				               		<c:if test="${institucion.getCamaRequerida() != true && 
+				               		institucion.getSalaRequerida() != true }">
+		               					Esta institución no tiene una sala de ${tipoSala.getDescripcion()} ni una cama ${tipoCama.getDescripcion()} disponibles.
+					               	</c:if>
+				               		<c:if test="${institucion.getCamaRequerida() == true && 
+				               		institucion.getSalaRequerida() != true }">
+		               					Esta institución no tiene una sala de ${tipoSala.getDescripcion()} disponible con una cama ${tipoCama.getDescripcion()}.
+					               	</c:if>
+					               	<c:if test="${institucion.getCamaRequerida() != true && 
+		               				institucion.getSalaRequerida() == true }">	
+					               		Esta institución no tiene una cama ${tipoCama.getDescripcion()} disponible en una sala de ${tipoSala.getDescripcion()}.
+					               	</c:if>
+				               	</p>
 		                </td>
 		               
 		                <td style="vertical-align: middle;">
@@ -165,19 +232,34 @@
 						  <label class="custom-control-label"  for="customRadio${institucion.getInstitucion().getId()}"></label>
 						</div>  -->
 						
-		                <!-- Button trigger modal -->
-						<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter${institucion.getInstitucion().getId()}">
-						  Solicitar Traslado
-						</button>
+						<c:if test="${institucion.getCamaRequerida() == true && 
+	               		institucion.getSalaRequerida() == true }">
+		                
+			                <!-- Button trigger modal -->
+							<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter${institucion.getInstitucion().getId()}">
+							  Solicitar Traslado
+							</button>
+							
+							<button type="button" class="btn btn-outline-primary mt-3">
+							  Ver Detalle Institución
+							</button>
 						
-						<button type="button" class="btn btn-outline-primary mt-3">
-						  Ver Detalle Institución
-						</button>
+		               	</c:if>	
+		               	
+		               	<c:if test="${institucion.getCamaRequerida() != true || 
+	               		institucion.getSalaRequerida() != true }">
+	               			
+	               			<span class="d-inline-block" data-toggle="popover" data-content="Disabled popover" data-animation="hover">
+								  <button class="btn btn-secondary" style="pointer-events: none;" type="button" disabled>
+								  Trasladar <br>de todos modos</button>
+							</span>
+							
+	               		</c:if>	
 						
 						<!-- Start Modal -->
 						<div class="modal fade" id="exampleModalCenter${institucion.getInstitucion().getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 						  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-						    <div class="modal-content">
+						    <div class="modal-content  px-3">
 						      <div class="modal-header">
 						        <h5 class="modal-title" id="exampleModalLongTitle">Solicitud de traslado</h5>
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -185,7 +267,7 @@
 						        </button>
 						      </div>
 						      <div class="modal-body text-left">
-						        <h6>Se enviará la solicitud de traslado de la paciente <span class="font-weight-bold"> ${paciente.getNombre()} ${paciente.getApellido()} </span>
+						        <h6 class="mb-3">Se enviará la solicitud de traslado de la paciente <span class="font-weight-bold"> ${paciente.getNombre()} ${paciente.getApellido()} </span>
 						        de documento <span class="font-weight-bold"> ${paciente.getNumeroDocumento()} (${paciente.getTipoDocumento().getDescripcion()}) </span>a la siguiente institución:
 							    </h6>   
 							     
@@ -193,18 +275,33 @@
 								    <li class="mb-1">Nombre: ${institucion.getInstitucion().getNombre()}.</li>
 		               				<li class="mb-1">Disponibilidad de camas: 
 							    </ul>
-							    
+							  
+						        <c:forEach items="${institucion.getListaSala()}" var="lista">
+						        		  
+							    <c:if test="${institucion.getCamaRequerida()  == true && institucion.getSalaRequerida()  == true 
+	               				&& lista.getSala().getTipoSala() == tipoSala}">
 						        <ul class="mb-0">
-						        		<c:forEach items="${institucion.getListaSala()}" var="lista">
+						        
 							               		<c:if test="${lista.getCantidad() >= 5}">
 							               		<li class="text-success">
 							               		</c:if>
 							               		<c:if test="${lista.getCantidad() < 5}">
 							               		<li class="text-danger">
 							               		</c:if>
-								               		${lista.getCantidad()} camas disponibles de
-								               		${lista.getSala().getTipoSala().getDescripcion()}
+								               		${lista.getCantidad()} camas de
+								               		${lista.getSala().getTipoSala().getDescripcion()}.
+								               		   
 							               		</li>
+
+								               		 <ul class="mb-0">
+								               		<c:forEach items="${lista.getListaCama()}" var="listaCamas">
+									               		<li class="text-dark">
+										               		${listaCamas.getCama().getTipoCama().getDescripcion()}: 
+								               				${listaCamas.getCount()}.
+									               		</li>
+							      					</c:forEach>
+								               		   </ul>
+								           </c:if>    		
 						      			</c:forEach>
 						        </ul>
 						        
@@ -262,6 +359,7 @@
 			|| document
 					.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
 </script>
+
 
 <script src="js/sort.js"></script>
 <script src="js/bootstrap.bundle.js"></script>

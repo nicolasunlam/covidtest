@@ -3,6 +3,8 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Sala;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 
 
@@ -19,6 +21,8 @@ public interface RepositorioInstitucion {
     List<Institucion> listarInstitucionesPorLocalidad(Long id);
 
     List<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion);
+
+	List<CamaCantidad> obtenerEstadisticaDeCamasDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion, Sala sala);
 
 //    List<Institucion> listarInstitucionesPorZona(Zona zona);
 }

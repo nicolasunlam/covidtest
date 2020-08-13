@@ -28,7 +28,7 @@
 	
 	<div class="my-4">
 		
-		<form action="trasladarAInstitcuion" method="GET" role="form"
+		<form action="trasladarAInstitucion" method="GET" role="form"
 			class="contactForm">
 
 			<div class="form-row d-flex justify-content-between flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
@@ -58,6 +58,8 @@
 				<div class="">
 					<label for="" class="h6 ">${paciente.getEmail()}</label>
 				</div>
+				
+					<input name="idPaciente" type="hidden" value="${paciente.getId()}">
 
 			</div>
 		</div>
@@ -191,7 +193,7 @@
 					class="text-primary font-weight-bold">*</span></label> 
 					
 					<select
-					name="tipoSala" class="form-control br-radius-zero" required>
+					name="tipoCama" class="form-control br-radius-zero" required>
 					<c:forEach items="${listaTipoCamas}" var="tipoCama">
 
 						<option id="tipoCama" value="${tipoCama}"

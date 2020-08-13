@@ -15,9 +15,12 @@ import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.MotivoTraslado;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
+import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.TipoCama;
 import ar.edu.unlam.tallerweb1.modelo.TipoSala;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalas;
+import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMotivoTraslado;
@@ -88,6 +91,10 @@ public class ControladorTraslado {
 	public ModelAndView trasladarAInstitucion(
 			
 			@RequestParam Long idPaciente,
+			@RequestParam TipoCama tipoCama,
+			@RequestParam TipoSala tipoSala,
+			@RequestParam MotivoTraslado motivoTraslado,
+			@RequestParam String urgencia,
 			HttpServletRequest request
 			
 			) {
@@ -107,14 +114,19 @@ public class ControladorTraslado {
 		}
     	model.put("armarHeader", servicioAtajo.armarHeader(request));
     	/*-----------------------------------*/
-
+    	
+    	model.put("tipoCama", tipoCama);
+    	model.put("tipoSala", tipoSala);
+    	model.put("motivoTraslado", motivoTraslado);
+    	model.put("urgencia", urgencia);
+    	
     	Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
 		model.put("paciente", paciente);
 		
 		Long idInstitucion = (long) request.getSession().getAttribute("ID");
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
-		List<InstitucionDistanciaSalas> listaInstituciones = servicioInstitucion.obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(institucion);
+		List<InstitucionDistanciaSalas> listaInstituciones = servicioInstitucion.obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(institucion, tipoCama, tipoSala);
 		model.put("listaInstituciones", listaInstituciones);
 		
 		return new ModelAndView("trasladarAInstitucion", model);

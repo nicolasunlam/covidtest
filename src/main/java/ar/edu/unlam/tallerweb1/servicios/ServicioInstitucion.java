@@ -1,8 +1,11 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
-
+import ar.edu.unlam.tallerweb1.modelo.Sala;
+import ar.edu.unlam.tallerweb1.modelo.TipoCama;
+import ar.edu.unlam.tallerweb1.modelo.TipoSala;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalas;
 import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 
@@ -23,9 +26,11 @@ public interface ServicioInstitucion {
 
     List<Institucion> listarInstitucionesPorLocalidad(Long id);
 
-	public List<InstitucionDistanciaSalas> obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(Institucion institucion);
+	public List<InstitucionDistanciaSalas> obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(Institucion institucion, TipoCama tipoCama, TipoSala tipoSala);
 
-	TreeSet<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion);
+	List<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion);
+
+	List<CamaCantidad> obtenerEstadisticaDeCamasDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion, Sala sala);
 
     //List<Institucion> listarInstitucionesPorZona(Zona zona);
 }

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
+import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.TipoSala;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.modelo.listas.OrdenarPorPrioridad;
 import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 
@@ -85,6 +87,31 @@ public class RepositorioInstitucionImpl implements RepositorioInstitucion {
       Query query = sessionFactory.getCurrentSession().createQuery(hql);
       query.setParameter("institucion", institucion);
 
+      return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CamaCantidad> obtenerEstadisticaDeCamasDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion, Sala sala) {
+	      
+		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad(c, count(*)) "
+	    		    + "FROM Cama as c "
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec "
+					+ "JOIN Piso as p ON sec.piso = p "
+					+ "JOIN Institucion as i ON p.institucion = i "
+					+ "WHERE i = :institucion "
+					+ "AND sal.tipoSala = :tipoSala "
+					+ "AND c NOT IN (SELECT a.cama "
+	    		   							   + "FROM Asignacion as a "
+	    		   							   + "WHERE a.cama = c "
+	    		   							   + "AND a.horaEgreso IS NULL) "		   
+	    		    + "GROUP BY c.tipoCama ";
+		
+      Query query = sessionFactory.getCurrentSession().createQuery(hql);
+      query.setParameter("institucion", institucion);
+      query.setParameter("tipoSala", sala.getTipoSala());
+      
       return query.getResultList();
 	}
 
