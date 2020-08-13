@@ -190,6 +190,28 @@ public class ControladorInstitucion {
 		model.put("idPiso", piso.getId());
 		model.put("sectores", sectores);
 
+		return new ModelAndView("detallePiso", model);
+	}
+	
+	@RequestMapping("/crearSector")
+	public ModelAndView crearSector(HttpServletRequest request, @RequestParam(value = "idPiso") Long idPiso) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		
+		model.put("idPiso", idPiso);
+
 		return new ModelAndView("crearSector", model);
 	}
 
