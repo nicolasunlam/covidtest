@@ -27,7 +27,7 @@
 		
 		<a href="listarSectores" class="btn btn-success">Volver</a>
 		
-		<a href="crearSector?idPiso=${idSector}" class="btn btn-success">Registrar Sala</a>
+		<a href="crearSala?idSector=${idSector}" class="btn btn-success">Registrar Sala</a>
 
 <%-- 		<div>
 
