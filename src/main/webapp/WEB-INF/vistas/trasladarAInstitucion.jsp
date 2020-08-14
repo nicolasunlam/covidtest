@@ -31,7 +31,7 @@
 	
   	<div class="">
 		
-		<form action="" method="GET" role="form"
+		<form action="enviarSolicitud" method="GET" role="form"
 			class="contactForm">
 
 			<div class="form-row d-flex justify-content-between flex-md-nowrap align-items-center pb-2 mb-4">
@@ -159,7 +159,9 @@
 					onmouseout="this.style.backgroundColor='white';"> 
 		            ACCIÓN</th>
 		        </tr>
+		        
 		        <c:forEach items="${listaInstituciones}" var="institucion">
+		           
 		            <tr 							               		
 	               		<c:if test="${institucion.getCamaRequerida() != true || 
 	               		institucion.getSalaRequerida() != true }">
@@ -174,58 +176,138 @@
 		                <td style="vertical-align: middle;"><c:out value="${Math.round(institucion.getDistancia())} Km"/></td>
 		                
 		                <td style="vertical-align: middle; text-align:left; width:25%;" class="mx-auto">
+			              
 			               <div class="d-flex justify-content-center">
-			                <div>
-			                <c:forEach items="${institucion.getListaSala()}" var="lista">
+			               
+			               <div>
+			                
+			               <c:forEach items="${institucion.getListaSala()}" var="lista" varStatus="loop">
 	               			
-	               				<c:if test="${institucion.getCamaRequerida()  == true && institucion.getSalaRequerida()  == true 
+	               				<c:if test="${institucion.getCamaRequerida()  == true && institucion.getSalaRequerida()  == true
 	               				&& lista.getSala().getTipoSala() == tipoSala}">				               				               		
 				               		<ul class="my-2 pl-3">
+					               		<li
 					               		<c:if test="${lista.getCantidad() >= 5}">
-					               		<li class="text-success">
+					               		class="text-success"
 					               		</c:if>
 					               		<c:if test="${lista.getCantidad() < 5}">
-					               		<li class="text-danger">
+					               		class="text-danger"
 					               		</c:if>
+					               		>
 						               		<c:out value="${lista.getCantidad()}"/> de
 						               		<c:out value="${lista.getSala().getTipoSala().getDescripcion()}"/>.
 	
 						               		<c:forEach items="${lista.getListaCama()}" var="listaCamas">
 							               		<ul class="my-2 pl-3">
-							               		<c:if test="${listaCamas.getCount() >= 5}">
+							               		
+							               		<c:if test="${listaCamas.getCama().tipoCama != tipoCama}">
 							               		<li class="p text-dark">
 							               		</c:if>
-							               		<c:if test="${listaCamas.getCount() < 5}">
-							               		<li class="p text-dark">
+							               		<c:if test="${listaCamas.getCama().tipoCama == tipoCama}">
+							               		<li class="p text-dark font-weight-bold">
 							               		</c:if>
+							               		
 								               		${listaCamas.getCama().getTipoCama().getDescripcion()}: ${listaCamas.getCount()}.
 							               		</li>
 							               		</ul>
 					      					</c:forEach>
 					      					</li>
 									</ul>
+
 				               	</c:if>
 							
 			      			</c:forEach>
+
 			      			</div>
+			      			
 			      			</div>
-			      			 	<p class="text-center my-0" style="font-size: 12px;">
-				               		<c:if test="${institucion.getCamaRequerida() != true && 
-				               		institucion.getSalaRequerida() != true }">
-		               					Esta institución <abbr class="font-weight-bold">NO TIENE</abbr> una sala de <abbr class="font-weight-bold">${tipoSala.getDescripcion()}</abbr> 
-		               					ni una cama <abbr class="font-weight-bold">${tipoCama.getDescripcion()}</abbr> disponibles.
-					               	</c:if>
-				               		<c:if test="${institucion.getCamaRequerida() == true && 
-				               		institucion.getSalaRequerida() != true }">
-		               					Esta institución <abbr class="font-weight-bold">NO TIENE</abbr> una sala de <abbr class="font-weight-bold">${tipoSala.getDescripcion()}</abbr>
-		               					disponible con una cama <abbr class="font-weight-bold">${tipoCama.getDescripcion()}</abbr>.
-					               	</c:if>
-					               	<c:if test="${institucion.getCamaRequerida() != true && 
-		               				institucion.getSalaRequerida() == true }">	
-					               		Esta institución <abbr class="font-weight-bold">NO TIENE</abbr> una cama <abbr class="font-weight-bold">${tipoCama.getDescripcion()}</abbr> 
-					               		disponible en una sala de <abbr class="font-weight-bold">${tipoSala.getDescripcion()}</abbr>.
-					               	</c:if>
-				               	</p>
+			      			 	
+			      			 <p  id="noTiene${institucion.getInstitucion().getId()}"
+			               		 class="text-center my-0" style="font-size: 12px;">	
+		               		
+		               		<c:if test="${institucion.getCamaRequerida() != true && 
+		               		institucion.getSalaRequerida() != true }">
+			               		
+	               					Esta institución <abbr class="font-weight-bold">NO TIENE</abbr> una sala de <abbr class="font-weight-bold">${tipoSala.getDescripcion()}</abbr> 
+	               					ni una cama <abbr class="font-weight-bold">${tipoCama.getDescripcion()}</abbr> disponibles.				               	
+				               	
+				               	</c:if>
+		               		<c:if test="${institucion.getCamaRequerida() == true && 
+		               		institucion.getSalaRequerida() != true }">
+
+	               					Esta institución <abbr class="font-weight-bold">NO TIENE</abbr> una sala de <abbr class="font-weight-bold">${tipoSala.getDescripcion()}</abbr>
+	               					disponible con una cama <abbr class="font-weight-bold">${tipoCama.getDescripcion()}</abbr>.
+               					
+			               	</c:if>
+			               	<c:if test="${institucion.getCamaRequerida() != true && 
+               				institucion.getSalaRequerida() == true }">	
+
+				               		Esta institución <abbr class="font-weight-bold">NO TIENE</abbr> una cama <abbr class="font-weight-bold">${tipoCama.getDescripcion()}</abbr> 
+				               		disponible en una sala de <abbr class="font-weight-bold">${tipoSala.getDescripcion()}</abbr>.
+			             
+			               	</c:if>
+			               	</p>
+			               	
+			               	<c:if test="${institucion.getCamaRequerida() != true || 
+		               		institucion.getSalaRequerida() != true }">
+			               	<div class="d-flex justify-content-center">
+			               		 
+			               		 <div  id="mostrarInfo${institucion.getInstitucion().getId()}" hidden>
+			               		 
+			               		 <c:forEach items="${institucion.getListaSala()}" var="lista" varStatus="loop">
+	               						               				               		
+				               			<ul class="my-2 pl-3">
+						               		<li
+						               		<c:if test="${lista.getCantidad() >= 5}">
+						               		class="text-success"
+						               		</c:if>
+						               		<c:if test="${lista.getCantidad() < 5}">
+						               		class="text-danger"
+						               		</c:if>
+						               		>
+						               		<c:out value="${lista.getCantidad()}"/> de
+						               		<c:out value="${lista.getSala().getTipoSala().getDescripcion()}"/>.
+	
+						               		<c:forEach items="${lista.getListaCama()}" var="listaCamas">
+							               		<ul class="my-2 pl-3">
+							               		
+							               		<c:if test="${listaCamas.getCama().tipoCama != tipoCama}">
+							               		<li class="p text-dark">
+							               		</c:if>
+							               		<c:if test="${listaCamas.getCama().tipoCama == tipoCama}">
+							               		<li class="p text-dark font-weight-bold">
+							               		</c:if>
+							               		
+								               	${listaCamas.getCama().getTipoCama().getDescripcion()}: ${listaCamas.getCount()}. 
+
+													<span class="mt-2">
+													  <input type="radio" name="opcionCama${institucion.getInstitucion().getId()}" id="activarBotones${institucion.getInstitucion().getId()}" value="${listaCamas.getCama().getId()}"
+													  onclick="javascript:activarBotones(this, 'botonAccionUno${institucion.getInstitucion().getId()}', 'botonAccionDos${institucion.getInstitucion().getId()}')">
+													</span>
+												
+							               		</li>
+							               		</ul>
+					      					</c:forEach>
+					      					
+					      					</li>
+										</ul>
+										
+			      				</c:forEach>
+			      				
+			      				</div>
+			      				
+			               	</div>
+			               	
+			               	<div class="d-flex justify-content-center">
+								<div class="custom-control custom-switch mt-2">
+								  <input type="checkbox" class="custom-control-input" id="activarInfo${institucion.getInstitucion().getId()}" 
+								  onclick="javascript:mostrarInfo(this, 'noTiene${institucion.getInstitucion().getId()}', 'mostrarInfo${institucion.getInstitucion().getId()}')">
+								  <label class="custom-control-label" for="activarInfo${institucion.getInstitucion().getId()}" >Mostrar información</label>
+								</div>
+							</div>
+							
+			      			</c:if>
+							
 		                </td>
 		               
 		                <td style="vertical-align: middle;">
@@ -234,11 +316,11 @@
 	               		institucion.getSalaRequerida() == true }">
 		                
 			                <!-- Button trigger modal -->
-							<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter${institucion.getInstitucion().getId()}">
+							<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalSolicitud${institucion.getInstitucion().getId()}">
 							  Solicitar Traslado
 							</button>
 							
-							<button type="button" class="btn btn-outline-primary mt-3">
+							<button type="button" class="btn btn-outline-primary mt-3" data-toggle="modal" data-target="#modalDetalle${institucion.getInstitucion().getId()}">
 							  Ver Detalle Institución
 							</button>
 						
@@ -247,69 +329,52 @@
 		               	<c:if test="${institucion.getCamaRequerida() != true || 
 	               		institucion.getSalaRequerida() != true }">
 	               			
-	               			<span class="d-inline-block" data-toggle="popover" data-content="Disabled popover" data-animation="hover">
-								  <button class="btn btn-secondary" style="pointer-events: none;" type="button" disabled>
-								  Trasladar <br>de todos modos</button>
-							</span>
+					  <button id="botonAccionUno${institucion.getInstitucion().getId()}" class="btn btn-outline-secondary" type="button" 
+					  data-toggle="modal" data-target="#modalSolicitud${institucion.getInstitucion().getId()}" disabled>
+					   Solicitar Traslado</button>
+						
+					 <button id="botonAccionDos${institucion.getInstitucion().getId()}" class="btn btn-outline-secondary mt-3" type="button" 
+					 data-toggle="modal" data-target="#modalDetalle${institucion.getInstitucion().getId()}"disabled>
+					  Ver Detalle Institución</button>
+					  		
+<!-- 							 <div class="d-flex justify-content-center"> -->
+<!-- 								<div class="custom-control custom-switch mt-2"> -->
+<%-- 								  <input type="checkbox" class="custom-control-input" id="activarBotones${institucion.getInstitucion().getId()}"  --%>
+<%-- 								  onclick="javascript:activarBotones(this, 'botonAccionUno${institucion.getInstitucion().getId()}', 'botonAccionDos${institucion.getInstitucion().getId()}')"> --%>
+								  
+<%-- 								  <label class="custom-control-label" for="activarBotones${institucion.getInstitucion().getId()}" >Activar botones</label> --%>
+<!-- 								</div> -->
+<!-- 							</div> -->
 							
 	               		</c:if>	
 						
 						<!-- Start Modal -->
-						<div class="modal fade" id="exampleModalCenter${institucion.getInstitucion().getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal fade" id="modalSolicitud${institucion.getInstitucion().getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 						  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 						    <div class="modal-content  px-3">
-						      <div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLongTitle">Solicitud de traslado</h5>
+						      <div class="modal-header pb-2">
+						        <h5 class="modal-title" id="exampleModalLongTitleUno">Solicitud de traslado</h5		>
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span class="bg-white" aria-hidden="true">&times;</span>
 						        </button>
 						      </div>
 						      <div class="modal-body text-left">
-						        <h6 class="mb-3">Se enviará la solicitud de traslado de la paciente <span class="font-weight-bold"> ${paciente.getNombre()} ${paciente.getApellido()} </span>
-						        de documento <span class="font-weight-bold"> ${paciente.getNumeroDocumento()} (${paciente.getTipoDocumento().getDescripcion()}) </span>a la siguiente institución:
-							    </h6>   
-							     
-							    <ul class="pl-3 mb-0">
-								    <li class="mb-1">Nombre: ${institucion.getInstitucion().getNombre()}.</li>
-		               				<li class="mb-1">Disponibilidad de camas: 
-							    </ul>
-							  
-						        <c:forEach items="${institucion.getListaSala()}" var="lista">
-						        		  
-							    <c:if test="${institucion.getCamaRequerida()  == true && institucion.getSalaRequerida()  == true 
-	               				&& lista.getSala().getTipoSala() == tipoSala}">
-						        <ul class="mb-0">
 						        
-							               		<c:if test="${lista.getCantidad() >= 5}">
-							               		<li class="text-success">
-							               		</c:if>
-							               		<c:if test="${lista.getCantidad() < 5}">
-							               		<li class="text-danger">
-							               		</c:if>
-								               		${lista.getCantidad()} camas de
-								               		${lista.getSala().getTipoSala().getDescripcion()}.
-								               		   
-							               		</li>
+						        <p class="p mt-2 mb-4" >
+							        Se enviará la solicitud de traslado del paciente 
+						        	<span class="font-weight-bold"> ${paciente.getNombre()} ${paciente.getApellido()} 
+						        	(${paciente.getTipoDocumento().getDescripcion()}: ${paciente.getNumeroDocumento()}) </span> 
+							        en una cama <span class="font-weight-bold text-lowercase">${tipoCama.getDescripcion()}</span> 
+							        en una sala de <span class="font-weight-bold text-lowercase">${tipoSala.getDescripcion()}</span>
+							        de la institución 
+							        <span class="font-weight-bold">"${institucion.getInstitucion().getNombre()}"</span>
+							        ubicada en la localidad de ${institucion.getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()} 
+							        a ${Math.round(institucion.getDistancia())} km de distancia.
+							    </p>   
 
-								               		 <ul class="mb-0">
-								               		<c:forEach items="${lista.getListaCama()}" var="listaCamas">
-									               		<li class="text-dark">
-										               		${listaCamas.getCama().getTipoCama().getDescripcion()}: 
-								               				${listaCamas.getCount()}.
-									               		</li>
-							      					</c:forEach>
-								               		   </ul>
-								           </c:if>    		
-						      			</c:forEach>
-						        </ul>
-						        
-						        <ul class="pl-3">
-								    <li class="mt-1 mb-1">Localidad: ${institucion.getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()}.</li>
-		               				<li class="mb-1">Distancia del traslado: ${Math.round(institucion.getDistancia())} Km.</li>						    
-							    </ul>
-						        
-						        <p>Al apretar el botón "Enviar Solicitud" se realizará el envío de la solicitud a la institución indicada.</p>
+						        <p class="mb-0 font-weight-lighter">Una vez autorizada la solicitud enviada, podrá realizar el traslado.</p>
 						      </div>
+						      
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Volver</button>
 						        <button type="submit" class="btn btn-outline-success">Enviar Solicitud</button>
@@ -323,6 +388,9 @@
 
 		            </tr>
 		        </c:forEach>
+		        
+		</form>
+		
 		    </table>
 		</div>
 
@@ -333,15 +401,21 @@
 				<div class="mr-4">
 	
 					<div class="">
-						<button type="" class="btn btn-outline-warning">
+					<a href="trasladar?idPaciente=${paciente.getId()}">
+						<button type="button" class="btn btn-outline-primary">
 						Volver atrás</button>
+					</a>
 					</div>
 	
 				</div>
 				
 				<div class="">
-					<button type="" class="btn btn-outline-danger">
+				
+				<a href="">
+					<button type="button" class="btn btn-outline-danger">
 					Cancelar</button>
+				</a>
+					
 				</div>
 			
 			</div>
@@ -355,9 +429,7 @@
 					<br>
 			</div>
 			</c:if>
-			
 
-		</form>
 
 	</div>
 </div>
@@ -375,7 +447,7 @@
 					.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
 </script>
 
-
+<script src="js/funciones.js"></script>
 <script src="js/sort.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
 <script src="js/bootstrap.min.js"></script>

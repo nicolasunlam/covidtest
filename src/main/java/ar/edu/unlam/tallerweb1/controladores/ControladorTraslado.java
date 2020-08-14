@@ -135,6 +135,55 @@ public class ControladorTraslado {
 		return new ModelAndView("trasladarAInstitucion", model);
 			
 	}
+	
+	@RequestMapping("enviarSolicitud")
+	public ModelAndView enviarSolicitud(
+			
+			@RequestParam Long idPaciente,
+			@RequestParam TipoCama tipoCama,
+			@RequestParam TipoSala tipoSala,
+			@RequestParam MotivoTraslado motivoTraslado,
+			@RequestParam String urgencia,
+			HttpServletRequest request
+			
+			) {
+
+    	ModelMap model = new ModelMap();
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if(rol != null) {
+			model.put("rol", rol.name());	
+		}
+    	model.put("armarHeader", servicioAtajo.armarHeader(request));
+    	/*-----------------------------------*/
+
+    	model.put("tipoCama", tipoCama);
+    	model.put("tipoSala", tipoSala);
+    	model.put("motivoTraslado", motivoTraslado);
+    	model.put("urgencia", urgencia);
+    	
+    	Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
+    	if(paciente == null) {
+			return new ModelAndView("redirect:/trasladar");	
+		}
+    	model.put("paciente", paciente);
+		
+		Long idInstitucion = (long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		List<InstitucionDistanciaSalas> listaInstituciones = servicioInstitucion.obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(institucion, tipoCama, tipoSala);
+		model.put("listaInstituciones", listaInstituciones);
+		
+		return new ModelAndView("verMensajes", model);
+			
+	}
 
 }
 

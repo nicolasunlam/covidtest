@@ -298,4 +298,5 @@ VALUES (12, '2020-01-01 01:00:00.000000', null, null, 40, 28),
 INSERT INTO notificacion(asunto, fechaHora, msg, destinatario_id, remitente_id)
 VALUES ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro sistema de asignación de camas.", 6, 2),
 	   ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro sistema de asignación de camas.", 7, 2),
-	   ("Recordatorio", '2020-04-02 01:00:00.000000', "Se le recuerda que ...", 6, 2);
+	   ("Recordatorio", '2020-04-02 01:00:00.000000', "Se le recuerda que ...", 6, 2),
+       ("Recordatorio", '2020-04-02 01:00:00.000000', "Muchas gracias.", 2, 6);
