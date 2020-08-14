@@ -1,11 +1,14 @@
 package ar.edu.unlam.tallerweb1.servicios.serviciosImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
+import ar.edu.unlam.tallerweb1.modelo.Sector;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioSala;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSala;
 
@@ -33,6 +36,12 @@ public class ServicioSalaImpl implements ServicioSala {
 	public Sala buscarSalaPorId(Long id) {
 	
 		return repositorioSala.buscarSalaPorId(id);
+	}
+
+	@Override
+	public List<Sala> listarSalasPorSector(Sector sector) {
+		// TODO Auto-generated method stub
+		return repositorioSala.listarSalasPorSector(sector);
 	}
 
 }

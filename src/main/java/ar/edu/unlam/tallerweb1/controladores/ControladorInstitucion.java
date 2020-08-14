@@ -210,7 +210,11 @@ public class ControladorInstitucion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 		
+		
+		
 		model.put("idPiso", idPiso);
+		
+		
 
 		return new ModelAndView("crearSector", model);
 	}
@@ -234,17 +238,53 @@ public class ControladorInstitucion {
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
+		
 
 		Sector sector = new Sector();
 		sector.setPiso(piso);
 		sector.setTipoSector(tipoSector);
 
 		servicioSector.registrarSector(sector);
+		
+		List <Sala> salas=servicioSala.listarSalasPorSector(sector);
 
+	
 		model.put("idSector", sector.getId());
+		model.put("piso", sector.getPiso());
+		model.put("tipoSector",sector.getTipoSector());
+		model.put("salas", salas);
+
+		return new ModelAndView("detalleSector", model);
+	}
+	
+	
+	@RequestMapping("/crearSala")
+	public ModelAndView crearSala(HttpServletRequest request, @RequestParam(value = "idSector") Long idSector) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		
+		
+		
+		model.put("idSector", idSector);
+		
+		
 
 		return new ModelAndView("crearSala", model);
 	}
+	
+	
 
 	@RequestMapping("/registrarSala")
 	public ModelAndView registrarSala(HttpServletRequest request, @RequestParam(value = "tipoSala") TipoSala tipoSala,
@@ -274,9 +314,37 @@ public class ControladorInstitucion {
 		servicioSala.registrarSala(sala);
 
 		model.put("idSala", sala.getId());
+		model.put("descripcion", sala.getDescripcion());
+		model.put("tipoSala",sala.getTipoSala());
+
+		return new ModelAndView("detalleSala", model);
+
+	}
+	
+	@RequestMapping("/crearCamas")
+	public ModelAndView crearCamas(HttpServletRequest request, @RequestParam(value = "idSala") Long idSala) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		
+		
+		
+		model.put("idSala", idSala);
+		
+		
 
 		return new ModelAndView("crearCamas", model);
-
 	}
 
 	@RequestMapping("crearCamaPorTipoSala")
