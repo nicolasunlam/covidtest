@@ -7,7 +7,14 @@
 
 <title>AsignAR</title>
 
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
+
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
+
+
 
 <style>
 #inputTipoInstitucion, #inputNombre, #inputCUIT {
@@ -43,11 +50,50 @@
 	/* Add a grey background color to the table header and on hover */
 	background-color: #f1f1f1;
 }
+
+.callout {
+	padding: 20px;
+	margin: 20px 0;
+	border: 1px solid #eee;
+	border-left-width: 5px;
+	border-radius: 3px;
+	border-left-color: #428bca; h4 { margin-top : 0;
+	margin-bottom: 5px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+
+code {
+	border-radius: 3px;
+}
+
+&
++
+.bs-callout {
+	margin-top: -5px;
+}
+}
 </style>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-	<div class="container-fluid">
+	<div class="container">
+
+
+		<div
+			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h2 class="">Lista de Pisos</h2>
+			<button type="button" class="btn btn-outline-success">
+				Agregar piso</button>
+		</div>
+		<h6 class="mb-5">Vea en detalle todos los pisos con sus
+			respectivos sectores, salas y camas</h6>
+
+
+
+		<%-- 	<div class="container-fluid">
 
 		<h2 class="my-5">Lista de Pisos</h2>
 
@@ -79,81 +125,293 @@
 
 					<input class="invisible" type="hidden" id="id" name="id"
 						value="${piso.getId()}"> <a href="crearPiso"
-						class="btn btn-success w-75 h-25" type="submit"><i
-						class="fa fa-plus-square fa-2x"></i></a>
+						class="btn btn-outline-success rounded  w-50" type="submit"><i
+						class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
 
 				</div>
 
 
 			</div>
 		</div>
-		<table id="myTable"
-			class="table table-bordered responsive nowrap align-middle">
-			<tr class="text-center align-middle" style="cursor: pointer;">
-				<th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';" id="nombreTabla">Número
-					<i class="fa fa-sort"></i>
-				</th>
+		<div class="container">
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6"></div>
+				<div class="col-3"></div>
+			</div>
 
-				<th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">Descripción <i
-					class="fa fa-sort"></i>
-				</th>
+			<table id="myTable"
+				class="table table-bordered responsive nowrap align-middle">
+				<tr class="text-center align-middle" style="cursor: pointer;">
+					<th scope="col"
+						onmouseover="this.style.backgroundColor='DeepSkyBlue';"
+						onmouseout="this.style.backgroundColor='white';" id="nombreTabla">Número
+						<i class="fa fa-sort"></i>
+					</th>
 
-				<th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">Tipo <i
-					class="fa fa-sort"></i></th>
+					<th scope="col"
+						onmouseover="this.style.backgroundColor='DeepSkyBlue';"
+						onmouseout="this.style.backgroundColor='white';">Acciones</th>
 
-				<th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">Acciones</th>
+				</tr>
+				<c:forEach items="${listaPisos}" var="piso">
 
-			</tr>
+					<tr onmouseover="this.style.backgroundColor='AliceBlue';"
+						onmouseout="this.style.backgroundColor='white';">
+						<td class="align-middle"><c:out
+								value="Piso Número ${piso.getNumeroPiso()}" /></td>
+
+						<td class="text-center">
+							<div class="mt-3">
+
+
+								<form action="listarSectoresPorPiso" method=get>
+
+
+									<input class="invisible" type="hidden" id="id" name="idPiso"
+										value="${piso.getId()}"> <input
+										class="btn btn-primary" type="submit" value="Detalle Piso">
+
+								</form>
+							</div>
+						</td>
+				</c:forEach>
+			</table>
+
+		</div> --%>
+
+		<div class="container my-5 px-0">
 			<c:forEach items="${listaPisos}" var="piso">
 
-				<tr onmouseover="this.style.backgroundColor='AliceBlue';"
-					onmouseout="this.style.backgroundColor='white';">
-					<td class="align-middle"><c:out value="${piso.getId()}" /></td>
+				<script>
+					window.onload = function() {
+						//alert(${piso.getId()});
+						var prefijo = "chartContainer";
+						var sufijo = ${piso.getId()};
+						
+						var palabra = prefijo.concat(sufijo);
+						alert(palabra);
 
-					<td class="align-middle"><c:out
-							value="${instituciones.getTipo().name()}" /></td>
+						var chart1 = new CanvasJS.Chart(
+								palabra.toString(),
+								{
+									theme : "light2", // "light1", "light2", "dark1", "dark2"
+									animationEnabled : true,
+									title : {
+										text : "Ocupación de camas en el piso"
+									},
+									data : [ {
+										type : "pie",
+										startAngle : 25,
+										toolTipContent : "<b>{label}</b>: {y}%",
+										showInLegend : "true",
+										legendText : "{label}",
+										indexLabelFontSize : 15,
+										indexLabel : "{label} - {y}%",
+										dataPoints : [ {
+											y : 51.08,
+											label : "Disponibles"
+										}, {
+											y : 27.34,
+											label : "Ocupadas"
+										}
 
-					<td class="align-middle"><c:out
-							value="${instituciones.getNumeroDocumento()}" /></td>
+										]
+									} ]
+								});
 
-					<td class="text-center">
-						<div class="mt-3">
+						chart1.render();
 
+						var chart2 = new CanvasJS.Chart("chartContainer2", {
+							theme : "light2", // "light1", "light2", "dark1", "dark2"
+							animationEnabled : true,
+							title : {
+								text : "Ocupación de camas en el piso"
+							},
+							data : [ {
+								type : "pie",
+								startAngle : 25,
+								toolTipContent : "<b>{label}</b>: {y}%",
+								showInLegend : "true",
+								legendText : "{label}",
+								indexLabelFontSize : 15,
+								indexLabel : "{label} - {y}%",
+								dataPoints : [ {
+									y : 51.08,
+									label : "Disponibles"
+								}, {
+									y : 27.34,
+									label : "Ocupadas"
+								}
 
-							<form action="crearMensajeParaInstitucion" method=post>
+								]
+							} ]
+						});
 
+						chart2.render();
 
-								<input class="invisible" type="hidden" id="id" name="id"
-									value="${instituciones.getId()}"> <input
-									class="btn btn-primary" type="submit" value="Detalle Piso">
+						var chart3 = new CanvasJS.Chart("chartContainer3", {
+							theme : "light2", // "light1", "light2", "dark1", "dark2"
+							animationEnabled : true,
+							title : {
+								text : "Ocupación de camas en el piso"
+							},
+							data : [ {
+								type : "pie",
+								startAngle : 25,
+								toolTipContent : "<b>{label}</b>: {y}%",
+								showInLegend : "true",
+								legendText : "{label}",
+								indexLabelFontSize : 15,
+								indexLabel : "{label} - {y}%",
+								dataPoints : [ {
+									y : 51.08,
+									label : "Disponibles"
+								}, {
+									y : 27.34,
+									label : "Ocupadas"
+								}
 
+								]
+							} ]
+						});
+
+						chart3.render();
+
+						var chart3 = new CanvasJS.Chart("chartContainer3", {
+							theme : "light2", // "light1", "light2", "dark1", "dark2"
+							animationEnabled : true,
+							title : {
+								text : "Ocupación de camas en el piso"
+							},
+							data : [ {
+								type : "pie",
+								startAngle : 25,
+								toolTipContent : "<b>{label}</b>: {y}%",
+								showInLegend : "true",
+								legendText : "{label}",
+								indexLabelFontSize : 15,
+								indexLabel : "{label} - {y}%",
+								dataPoints : [ {
+									y : 51.08,
+									label : "Disponibles"
+								}, {
+									y : 27.34,
+									label : "Ocupadas"
+								}
+
+								]
+							} ]
+						});
+
+						chart3.render();
+
+						var chart4 = new CanvasJS.Chart("chartContainer4", {
+							theme : "light2", // "light1", "light2", "dark1", "dark2"
+							animationEnabled : true,
+							title : {
+								text : "Ocupación de camas en el piso"
+							},
+							data : [ {
+								type : "pie",
+								startAngle : 25,
+								toolTipContent : "<b>{label}</b>: {y}%",
+								showInLegend : "true",
+								legendText : "{label}",
+								indexLabelFontSize : 15,
+								indexLabel : "{label} - {y}%",
+								dataPoints : [ {
+									y : 51.08,
+									label : "Disponibles"
+								}, {
+									y : 27.34,
+									label : "Ocupadas"
+								}
+
+								]
+							} ]
+						});
+
+						chart4.render();
+
+						var chart5 = new CanvasJS.Chart("chartContainer5", {
+							theme : "light2", // "light1", "light2", "dark1", "dark2"
+							animationEnabled : true,
+							title : {
+								text : "Ocupación de camas en el piso"
+							},
+							data : [ {
+								type : "pie",
+								startAngle : 25,
+								toolTipContent : "<b>{label}</b>: {y}%",
+								showInLegend : "true",
+								legendText : "{label}",
+								indexLabelFontSize : 15,
+								indexLabel : "{label} - {y}%",
+								dataPoints : [ {
+									y : 51.08,
+									label : "Disponibles"
+								}, {
+									y : 27.34,
+									label : "Ocupadas"
+								}
+
+								]
+							} ]
+						});
+
+						chart5.render();
+
+						
+					}
+				</script>
+
+				<div class="callout callout-primary">
+					<div class="row">
+						<div class="col-3">
+							<h5 class="mb-3">Piso ${piso.getNumeroPiso()}</h5>
+							<p class="my-1">Cantidad de camas: 15</p>
+							<p>Cantidad de salas: 13</p>
+							<form action="listarSectoresPorPiso" method=get class="mt-5">
+								<input class="invisible" type="hidden" id="id" name="idPiso"
+									value="${piso.getId()}"> <input
+									class="btn btn-outline-primary" type="submit"
+									value="Ver detalle">
 							</form>
 						</div>
-					</td>
+						<div class="col-4"></div>
+						<div class="col-4 mr-1" id="chartContainer${piso.getId()}"
+							style="height: 170px; width: 100%;"></div>
+					</div>
+				</div>
 			</c:forEach>
-		</table>
 
-	</div>
+		</div>
 
+
+
+
+		<%-- 		<div class="container justify-content-md-center bg-primary my-5 w-25">
+			<div class="row">
+				<div class="col-3 bg-white"></div>
+				<div class="col-6 text-center">
+					<i class="fa fa-h-square fa-3x mt-2 mb-2" aria-hidden="true"></i>
+				</div>
+				<div class="col-3 bg-white"></div>
+			</div>
+
+			<c:forEach items="${listaPisos}" var="piso">
+				<div class="bg-light my-2">
+					<h3 class="text-center">${piso.getId()}</h3>
+				</div>
+			</c:forEach>
+			<div class="bg-primary text-center" style="height: 5px;"></div>
+		</div> --%>
 </main>
 
-</div>
-</div>
-
-</main>
 
 
 
-</div>
-</div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
@@ -172,6 +430,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
 <script src="js/sort.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js">
+	
+</script>
 
 </body>
 </html>

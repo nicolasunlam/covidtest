@@ -494,6 +494,66 @@ public class ControladorInstitucion {
 
 		return new ModelAndView("pisosInstitucion", model);
 	}
+	
+	@RequestMapping("/listarSectoresPorPiso")
+	public ModelAndView listarSectoresPorPiso(HttpServletRequest request, @RequestParam(value = "idPiso") Long idPiso) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
+
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
+
+		List<Sector> listaSectoresPorPiso = servicioSector.consultarSectoresPorPiso(piso);
+
+		model.put("listaSectoresPorPiso", listaSectoresPorPiso);
+
+		return new ModelAndView("sectoresInstitucion", model);
+	}
+	
+	@RequestMapping("/listarSalasPorSector")
+	public ModelAndView listarSalasPorSector(HttpServletRequest request, @RequestParam(value = "idSector") Long idSector) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
+
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		Sector sector = servicioSector.buscarSectorPorId(idSector);
+
+		List<Sala> listaSalasPorSector = servicioSala.listarSalasPorSector(sector);
+
+		model.put("listaSalasPorSector", listaSalasPorSector);
+
+		return new ModelAndView("salasInstitucion", model);
+	}
 
 	@RequestMapping("bienvenido")
 	public ModelAndView irAbienvenido(HttpServletRequest request) {
@@ -612,6 +672,30 @@ public class ControladorInstitucion {
 		model.put("cantidadCamas", cantidadCamas);
 
 		return new ModelAndView("disponibilidadCamasPrueba", model);
+	}
+	
+	// Muestra imagenes de los pisos
+	@RequestMapping("/listarPisosDeInstitucion")
+	public ModelAndView listarPisosDeInstitucion(HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+
+		List<Piso> listadoPisos = servicioPiso.listarPisosPorInstitucion(institucion);
+
+		Integer cantidadPisos = listadoPisos.size();
+
+		model.put("listadoPisos", listadoPisos);
+		model.put("cantidadPisos", cantidadPisos);
+
+		return new ModelAndView("listarPisosDeInstitucion", model);
 	}
 
 }

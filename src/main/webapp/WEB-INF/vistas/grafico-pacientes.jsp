@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
 <title>Inserte titulo aquí</title>
-    
+
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
 <script>
@@ -98,46 +99,47 @@
 
 </script>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-        
-        
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1>Reportes</h1>
-       
-      </div>
-            <div class="">
-                <div class="row container-chart">
-                    <div class="col"></div>
-                    <div class="col-6">
-                        <div id="chartContainerBarras" style="height: 40em; width: 100%;"></div>
-                    </div>
-                    <div class="col"></div>
-                </div>
-            </div>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-            <div class="">
-                <div class="row container-chart">
-                    <div class="col"></div>
-                    <div class="col-6">
-                        <div id="chartContainerBarras2" style="height: 40em; width: 100%;"></div>
-                    </div>
-                    <div class="col"></div>
-                </div>
-            </div>
 
-            <div class="">
-                <div class="row container-chart">
-                    <div class="col"></div>
-                    <div class="col-6">
-                        <div id="chartContainerTorta" style="height: 40em; width: 100%;"></div>
-                    </div>
-                    <div class="col"></div>
-                </div>
-            </div>
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h1>Reportes</h1>
 
-        </main>
+	</div>
+	<div class="">
+		<div class="row container-chart">
+			<div class="col"></div>
+			<div class="col-6">
+				<div id="chartContainerBarras" style="height: 40em; width: 100%;"></div>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
 
-    </div>
+	<div class="">
+		<div class="row container-chart">
+			<div class="col"></div>
+			<div class="col-6">
+				<div id="chartContainerBarras2" style="height: 40em; width: 100%;"></div>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+
+	<div class="">
+		<div class="row container-chart">
+			<div class="col"></div>
+			<div class="col-6">
+				<div id="chartContainerTorta" style="height: 40em; width: 100%;"></div>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+
+</main>
+
+</div>
 </div>
 
 </main>
@@ -145,12 +147,14 @@
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
 <script src="../assets/dist/js/bootstrap.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="js/dashboard.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
