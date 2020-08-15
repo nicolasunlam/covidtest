@@ -467,8 +467,8 @@ public class ControladorInstitucion {
 		return new ModelAndView("listaInstituciones", model);
 	}
 
-	@RequestMapping("/listarPisos")
-	public ModelAndView listarPisos(HttpServletRequest request) {
+	@RequestMapping("/pisosInstitucion")
+	public ModelAndView pisosInstitucion(HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
@@ -489,8 +489,10 @@ public class ControladorInstitucion {
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 
 		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
-
 		model.put("listaPisos", listaPisos);
+		
+		List<Cama> listaCamasDisponibles = servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion);
+		model.put("listaCamasDisponibles", listaCamasDisponibles);
 
 		return new ModelAndView("pisosInstitucion", model);
 	}
