@@ -17,7 +17,7 @@
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h2 class="">Trasladar Paciente</h2>
-		
+
 	</div>
 		<h6 class="mb-5">Realice la solicitud del traslado del paciente a continuación</h6>
 	

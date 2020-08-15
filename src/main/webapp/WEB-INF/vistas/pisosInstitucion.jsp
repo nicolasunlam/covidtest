@@ -88,325 +88,100 @@ code {
 			<button type="button" class="btn btn-outline-success">
 				Agregar piso</button>
 		</div>
-		<h6 class="mb-5">Vea en detalle todos los pisos con sus
-			respectivos sectores, salas y camas</h6>
+		<h6 class="mb-5">Vea en detalle todos los pisos de su institución</h6>
 
-
-
-		<%-- 	<div class="container-fluid">
-
-		<h2 class="my-5">Lista de Pisos</h2>
-
-		<div class="row">
-
-			<div class="col-3">
-				<h5 class="mt-5 mb-3">Número</h5>
-				<input type="text" id="inputNombre"
-					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorNombre()" placeholder="Ingrese número a buscar">
-			</div>
-			<div class="col-3">
-				<h5 class="mt-5 mb-3">Descripción</h5>
-				<input type="text" id="inputTipoInstitucion"
-					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorTipoInstitucion()"
-					placeholder="Ingrese descripción a buscar">
-			</div>
-			<div class="col-3">
-				<h5 class="mt-5 mb-3">Tipo</h5>
-				<input type="text" id="inputCUIT"
-					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorCUIT()" placeholder="Ingrese tipo a buscar">
-			</div>
-
-			<div class="col-3 text-center">
-				<h5 class="mt-5 mb-3">Registrar Piso</h5>
-				<div class="mt-3">
-
-					<input class="invisible" type="hidden" id="id" name="id"
-						value="${piso.getId()}"> <a href="crearPiso"
-						class="btn btn-outline-success rounded  w-50" type="submit"><i
-						class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
-
-				</div>
-
-
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="col-6"></div>
-				<div class="col-3"></div>
-			</div>
-
-			<table id="myTable"
-				class="table table-bordered responsive nowrap align-middle">
-				<tr class="text-center align-middle" style="cursor: pointer;">
-					<th scope="col"
-						onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-						onmouseout="this.style.backgroundColor='white';" id="nombreTabla">Número
-						<i class="fa fa-sort"></i>
-					</th>
-
-					<th scope="col"
-						onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-						onmouseout="this.style.backgroundColor='white';">Acciones</th>
-
-				</tr>
-				<c:forEach items="${listaPisos}" var="piso">
-
-					<tr onmouseover="this.style.backgroundColor='AliceBlue';"
-						onmouseout="this.style.backgroundColor='white';">
-						<td class="align-middle"><c:out
-								value="Piso Número ${piso.getNumeroPiso()}" /></td>
-
-						<td class="text-center">
-							<div class="mt-3">
-
-
-								<form action="listarSectoresPorPiso" method=get>
-
-
-									<input class="invisible" type="hidden" id="id" name="idPiso"
-										value="${piso.getId()}"> <input
-										class="btn btn-primary" type="submit" value="Detalle Piso">
-
-								</form>
-							</div>
-						</td>
-				</c:forEach>
-			</table>
-
-		</div> --%>
-
-		<div class="container my-5 px-0">
+		<div class=" my-5 px-0">
 			<c:forEach items="${listaPisos}" var="piso">
 
-				<script>
-					window.onload = function() {
-						//alert(${piso.getId()});
-						var prefijo = "chartContainer";
-						var sufijo = ${piso.getId()};
-						
-						var palabra = prefijo.concat(sufijo);
-						alert(palabra);
-
-						var chart1 = new CanvasJS.Chart(
-								palabra.toString(),
-								{
-									theme : "light2", // "light1", "light2", "dark1", "dark2"
-									animationEnabled : true,
-									title : {
-										text : "Ocupación de camas en el piso"
-									},
-									data : [ {
-										type : "pie",
-										startAngle : 25,
-										toolTipContent : "<b>{label}</b>: {y}%",
-										showInLegend : "true",
-										legendText : "{label}",
-										indexLabelFontSize : 15,
-										indexLabel : "{label} - {y}%",
-										dataPoints : [ {
-											y : 51.08,
-											label : "Disponibles"
-										}, {
-											y : 27.34,
-											label : "Ocupadas"
-										}
-
-										]
-									} ]
-								});
-
-						chart1.render();
-
-						var chart2 = new CanvasJS.Chart("chartContainer2", {
-							theme : "light2", // "light1", "light2", "dark1", "dark2"
-							animationEnabled : true,
-							title : {
-								text : "Ocupación de camas en el piso"
-							},
-							data : [ {
-								type : "pie",
-								startAngle : 25,
-								toolTipContent : "<b>{label}</b>: {y}%",
-								showInLegend : "true",
-								legendText : "{label}",
-								indexLabelFontSize : 15,
-								indexLabel : "{label} - {y}%",
-								dataPoints : [ {
-									y : 51.08,
-									label : "Disponibles"
-								}, {
-									y : 27.34,
-									label : "Ocupadas"
-								}
-
-								]
-							} ]
-						});
-
-						chart2.render();
-
-						var chart3 = new CanvasJS.Chart("chartContainer3", {
-							theme : "light2", // "light1", "light2", "dark1", "dark2"
-							animationEnabled : true,
-							title : {
-								text : "Ocupación de camas en el piso"
-							},
-							data : [ {
-								type : "pie",
-								startAngle : 25,
-								toolTipContent : "<b>{label}</b>: {y}%",
-								showInLegend : "true",
-								legendText : "{label}",
-								indexLabelFontSize : 15,
-								indexLabel : "{label} - {y}%",
-								dataPoints : [ {
-									y : 51.08,
-									label : "Disponibles"
-								}, {
-									y : 27.34,
-									label : "Ocupadas"
-								}
-
-								]
-							} ]
-						});
-
-						chart3.render();
-
-						var chart3 = new CanvasJS.Chart("chartContainer3", {
-							theme : "light2", // "light1", "light2", "dark1", "dark2"
-							animationEnabled : true,
-							title : {
-								text : "Ocupación de camas en el piso"
-							},
-							data : [ {
-								type : "pie",
-								startAngle : 25,
-								toolTipContent : "<b>{label}</b>: {y}%",
-								showInLegend : "true",
-								legendText : "{label}",
-								indexLabelFontSize : 15,
-								indexLabel : "{label} - {y}%",
-								dataPoints : [ {
-									y : 51.08,
-									label : "Disponibles"
-								}, {
-									y : 27.34,
-									label : "Ocupadas"
-								}
-
-								]
-							} ]
-						});
-
-						chart3.render();
-
-						var chart4 = new CanvasJS.Chart("chartContainer4", {
-							theme : "light2", // "light1", "light2", "dark1", "dark2"
-							animationEnabled : true,
-							title : {
-								text : "Ocupación de camas en el piso"
-							},
-							data : [ {
-								type : "pie",
-								startAngle : 25,
-								toolTipContent : "<b>{label}</b>: {y}%",
-								showInLegend : "true",
-								legendText : "{label}",
-								indexLabelFontSize : 15,
-								indexLabel : "{label} - {y}%",
-								dataPoints : [ {
-									y : 51.08,
-									label : "Disponibles"
-								}, {
-									y : 27.34,
-									label : "Ocupadas"
-								}
-
-								]
-							} ]
-						});
-
-						chart4.render();
-
-						var chart5 = new CanvasJS.Chart("chartContainer5", {
-							theme : "light2", // "light1", "light2", "dark1", "dark2"
-							animationEnabled : true,
-							title : {
-								text : "Ocupación de camas en el piso"
-							},
-							data : [ {
-								type : "pie",
-								startAngle : 25,
-								toolTipContent : "<b>{label}</b>: {y}%",
-								showInLegend : "true",
-								legendText : "{label}",
-								indexLabelFontSize : 15,
-								indexLabel : "{label} - {y}%",
-								dataPoints : [ {
-									y : 51.08,
-									label : "Disponibles"
-								}, {
-									y : 27.34,
-									label : "Ocupadas"
-								}
-
-								]
-							} ]
-						});
-
-						chart5.render();
-
-						
-					}
-				</script>
-
 				<div class="callout callout-primary">
+					
 					<div class="row">
-						<div class="col-3">
-							<h5 class="mb-3">Piso ${piso.getNumeroPiso()}</h5>
-							<p class="my-1">Cantidad de camas: 15</p>
-							<p>Cantidad de salas: 13</p>
-							<form action="listarSectoresPorPiso" method=get class="mt-5">
+						
+						<div class="col-6">
+							<h5 class="mb-4">Piso ${piso.getNumeroPiso()}</h5>
+							<p class="my-1">Cantidad de sectores: 2</p>
+							<p class="my-1">Cantidad de salas: 12</p>
+							<p >Cantidad de camas: 27</p>
+							
+							<form action="listarSectoresPorPiso" method=get class="mt-4 mb-0 pt-1">
 								<input class="invisible" type="hidden" id="id" name="idPiso"
 									value="${piso.getId()}"> <input
 									class="btn btn-outline-primary" type="submit"
 									value="Ver detalle">
 							</form>
+							
 						</div>
-						<div class="col-4"></div>
-						<div class="col-4 mr-1" id="chartContainer${piso.getId()}"
-							style="height: 170px; width: 100%;"></div>
+						
+						<div class="col">
+							
+							<div class="row">
+								
+								<div class="col">
+								
+									<div class="row">
+									<p class="text-right">4 camas disponibles</p>
+									</div>
+								
+									<div class="row">
+									<c:forEach items="${listaPisos}" var="piso">
+										<span>
+										<img alt="" src="img/cama-ver.png" style="width:45px ">
+										</span>
+									</c:forEach>
+									</div>
+						
+								</div>
+								
+							</div>
+							
+							<div class="row">
+								
+								<div class="col">
+								
+									<div class="row">
+									<p class="text-right">4 camas ocupadas</p>
+									</div>
+								
+									<div class="row">
+									<c:forEach items="${listaPisos}" var="piso">
+										<span>
+										<img alt="" src="img/cama-ro.png" style="width:45px ">
+										</span>
+									</c:forEach>
+									</div>
+						
+								</div>
+								
+							</div>
+							
+							<div class="row">
+								
+								<div class="col">
+								
+									<div class="row">
+									<p class="text-right">4 camas reservadas</p>
+									</div>
+								
+									<div class="row">
+									<c:forEach items="${listaPisos}" var="piso">
+										<span>
+										<img alt="" src="img/cama-am.png" style="width:45px ">
+										</span>
+									</c:forEach>
+									</div>
+						
+								</div>
+								
+							</div>
+							
+						</div>
+
 					</div>
 				</div>
 			</c:forEach>
 
 		</div>
 
-
-
-
-		<%-- 		<div class="container justify-content-md-center bg-primary my-5 w-25">
-			<div class="row">
-				<div class="col-3 bg-white"></div>
-				<div class="col-6 text-center">
-					<i class="fa fa-h-square fa-3x mt-2 mb-2" aria-hidden="true"></i>
-				</div>
-				<div class="col-3 bg-white"></div>
-			</div>
-
-			<c:forEach items="${listaPisos}" var="piso">
-				<div class="bg-light my-2">
-					<h3 class="text-center">${piso.getId()}</h3>
-				</div>
-			</c:forEach>
-			<div class="bg-primary text-center" style="height: 5px;"></div>
-		</div> --%>
 </main>
 
 
