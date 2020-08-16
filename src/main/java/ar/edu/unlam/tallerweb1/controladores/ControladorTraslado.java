@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.MotivoTraslado;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
@@ -140,8 +141,8 @@ public class ControladorTraslado {
 	public ModelAndView enviarSolicitud(
 			
 			@RequestParam Long idPaciente,
-			@RequestParam TipoCama tipoCama,
-			@RequestParam TipoSala tipoSala,
+			@RequestParam Long idInstitucionATrasladar,
+			@RequestParam Long idCama,
 			@RequestParam MotivoTraslado motivoTraslado,
 			@RequestParam String urgencia,
 			HttpServletRequest request
@@ -164,8 +165,6 @@ public class ControladorTraslado {
     	model.put("armarHeader", servicioAtajo.armarHeader(request));
     	/*-----------------------------------*/
 
-    	model.put("tipoCama", tipoCama);
-    	model.put("tipoSala", tipoSala);
     	model.put("motivoTraslado", motivoTraslado);
     	model.put("urgencia", urgencia);
     	
@@ -173,15 +172,11 @@ public class ControladorTraslado {
     	if(paciente == null) {
 			return new ModelAndView("redirect:/trasladar");	
 		}
-    	model.put("paciente", paciente);
 		
 		Long idInstitucion = (long) request.getSession().getAttribute("ID");
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
-		List<InstitucionDistanciaSalas> listaInstituciones = servicioInstitucion.obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(institucion, tipoCama, tipoSala);
-		model.put("listaInstituciones", listaInstituciones);
-		
-		return new ModelAndView("verMensajes", model);
+		return new ModelAndView("redirect:/verMensajes");	
 			
 	}
 

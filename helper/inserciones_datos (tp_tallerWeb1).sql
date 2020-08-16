@@ -94,10 +94,10 @@ VALUES ("ADMIN", "Institucion", 1, "Operadora Central 1", "admin@email.com", "12
 
 /* ----- HOSPITAL ----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, email, password, numeroDocumento, tipoDocumento, tipo, domicilio_id,latitud,longitud)
-VALUES ("INSTITUCION", "Institucion", 2, "Fundación Favaloro", "favaloro@email.com", "1234","20200020007", "CUIT", "HOSPITAL", 2,-34.70211051937402,-52.70211051937402),
-       ("INSTITUCION", "Institucion", 3, "Hospital Italiano De Morón", "hospital_italiano_moron@email.com", "1234","20300030007", "CUIT", "HOSPITAL", 7,-34.62211051937402,-52.70211051937402),
-       ("INSTITUCION", "Institucion", 4, "Hospital Donación Francisco Santojanni", "santojanni@email.com", "1234","20400040007", "CUIT", "HOSPITAL", 6,-34.80211051937402,-52.70211051937402),
-       ("INSTITUCION", "Institucion", 5, "Hospital Profesor Doctor Ramón Carrillo", "carillo@email.com", "1234", "20500050007", "CUIT", "HOSPITAL", 5,-34.10211051937402,-52.90211051937402);
+VALUES ("INSTITUCION", "Institucion", 2, "Fundación Favaloro", "favaloro@email.com", "1234","20200020007", "CUIT", "HOSPITAL", 2,-34.5263629, -58.7300251),
+       ("INSTITUCION", "Institucion", 3, "Hospital Italiano De Morón", "hospital_italiano_moron@email.com", "1234","20300030007", "CUIT", "HOSPITAL", 7, -34.6491816, -58.618947),
+       ("INSTITUCION", "Institucion", 4, "Hospital Donación Francisco Santojanni", "santojanni@email.com", "1234","20400040007", "CUIT", "HOSPITAL", 6,-34.6494917, -58.5193395),
+       ("INSTITUCION", "Institucion", 5, "Hospital Profesor Doctor Ramón Carrillo", "carillo@email.com", "1234", "20500050007", "CUIT", "HOSPITAL", 5, -34.6271404, -58.5576004);
 
 /* ----- PACIENTE AUTOTEST POSITIVOS----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud, esFumador, tieneDiabetes, tieneEmbarazo, tieneEnfCardiologica, tieneEnfHepatica, tieneEnfRenal, tieneEnfRespiratoria)

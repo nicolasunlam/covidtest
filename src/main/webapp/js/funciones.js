@@ -1,4 +1,4 @@
-th = document.getElementsByTagName('th');
+	th = document.getElementsByTagName('th');
 
 for (let c = 0; c < th.length; c++) {
 	th[c].addEventListener('click', item(c))
@@ -56,12 +56,25 @@ function mostrarInfo(checkActivador, idNoTiene, idContenedorOculto) {
 
 function activarBotones(checkActivador, idBoton1, idBoton2){
 	var boton1 = document.getElementById(idBoton1);
-	var boton2 = document.getElementById(idBoton2);
+	//var boton2 = document.getElementById(idBoton2);
 	if(checkActivador.checked == true){
 		boton1.disabled = false;
-		boton2.disabled = false;
+	//	boton2.disabled = false;
 	}else{
 		boton1.disabled= true;
-		boton2.disabled = true;
+	//	boton2.disabled = true;
 	}
+}
+
+
+function elegirCama(idRadio, tipoCama, idInstitucion, tipoSala){
+	
+	var camaModal = "tipoCamaModal";
+	var concatenado = camaModal.concat(idInstitucion);
+	document.getElementById(concatenado).innerHTML = tipoCama;
+	
+	var salaModal = "tipoSalaModal";
+	var concatenado = salaModal.concat(idInstitucion);
+	document.getElementById(concatenado).innerHTML = tipoSala;
+
 }
