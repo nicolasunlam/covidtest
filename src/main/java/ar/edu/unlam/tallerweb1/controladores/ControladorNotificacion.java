@@ -102,7 +102,10 @@ public class ControladorNotificacion {
 			
 			@RequestParam(value = "idEmisor", required = false) Long idEmisor,
 			@RequestParam(value = "idReceptor", required = false) Long idReceptor,
-			@RequestParam(value = "mensaje", required = false) String mensaje, HttpServletRequest request) {
+			@RequestParam(value = "asunto", required = false)String asunto,
+			@RequestParam(value = "mensaje", required = false) String mensaje, HttpServletRequest request
+	
+			) {
 
 		ModelMap model = new ModelMap();
 
@@ -125,6 +128,7 @@ public class ControladorNotificacion {
 
 		notificacionNueva.setDestinatario(destinatario);
 		notificacionNueva.setRemitente(remitente);
+		notificacionNueva.setAsunto(asunto);
 		notificacionNueva.setMsg(mensaje);
 		notificacionNueva.setFechaHora(LocalDateTime.now());
 

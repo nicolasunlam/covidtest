@@ -29,7 +29,8 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title mt-3 mb-4">Mensaje</h5>
-                <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
+               <input type="text" class="form-control" id="asunto" name="asunto" placeholder="Asunto"/><br>
+               <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
                 <input type="hidden" value="${p.getId()}" name="idReceptor">
                 <input type="hidden" value="${id}" name="idEmisor">
                 <button class="btn btn-primary btn-lg mt-3" type="submit">Enviar</button>
