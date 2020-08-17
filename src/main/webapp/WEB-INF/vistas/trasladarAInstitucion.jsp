@@ -22,17 +22,17 @@
 		<h6 class="mb-5">Realice la solicitud del traslado del paciente a continuación</h6>
 	
 	
+	<section class="">
+		
+	<article class="">		
 	<div
-		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom w-25 ">
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom w-50 ">
 		<h5 class="">Paciente</h2>
 		
 	</div>
 		<p class="mt-2">Datos del paciente a trasladar</p>
 	
   	<div class="">
-		
-		<form action="enviarSolicitud" method="GET" role="form"
-			class="contactForm">
 
 			<div class="form-row d-flex justify-content-between flex-md-nowrap align-items-center pb-2 mb-4">
 
@@ -62,31 +62,35 @@
 					<label for="" class="p ">${paciente.getEmail()}</label>
 				</div>
 
+		</div>
+		</article>
+		
+		<article class="">
+			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom w-25 ">
+				<h5 class="">Requisitos</h2>
 			</div>
-		</div>
+			
+			<p class="mt-2">Requisitos necesarios para realizar el traslado</p>
 		
-		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom w-25 ">
-			<h5 class="">Requisitos</h2>
-		</div>
-		
-		<p class="mt-2">Requisitos necesarios para realizar el traslado</p>
-	
-		<div class="mt-2">
-			<label for="" class="p">Tipo de cama:</label> 
-			<span class="p">${tipoCama.getDescripcion()}.</span>
-		</div>		
-		<div class="">		
-			<label for="" class="p">Tipo de sala:</label> 
-			<span class="p">${tipoSala.getDescripcion()}.</span>
-		</div>		
-		<div class="">
-			<label for="" class="p">Motivo del traslado:</label> 
-			<span class="p">${motivoTraslado.getDescripcion()}.</span>
-		</div>		
-		<div class="mb-4">
-			<label for="" class="p">Urgencia:</label> 
-			<span class="p">${urgencia}.</span>
-		</div>
+			<div class="mt-2">
+				<label for="" class="p">Tipo de cama:</label> 
+				<span class="p">${tipoCama.getDescripcion()}.</span>
+			</div>		
+			<div class="">		
+				<label for="" class="p">Tipo de sala:</label> 
+				<span class="p">${tipoSala.getDescripcion()}.</span>
+			</div>		
+			<div class="">
+				<label for="" class="p">Motivo del traslado:</label> 
+				<span class="p">${motivoTraslado.getDescripcion()}.</span>
+			</div>		
+			<div class="mb-4">
+				<label for="" class="p">Urgencia:</label> 
+				<span class="p">${urgencia}.</span>
+			</div>
+		</article>
+
+		</section>
 
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
@@ -96,7 +100,9 @@
 		<p class="mt-2 mb-4">Datos de la instituciones para solicitar el traslado</p>
 
 		  <div class="table-responsive">
+		    
 		    <table id="myTable" class="table table-bordered table-hover responsive nowrap text-center">
+		        
 		        <tr class="una bg-white">
 
 		            <th style="vertical-align: middle; width: 16%" class="border border-secondary"
@@ -161,14 +167,21 @@
 		        </tr>
 		        
 		        <c:forEach items="${listaInstituciones}" var="institucion">
-		           
+	
 		            <tr 							               		
 	               		<c:if test="${institucion.getCamaRequerida() != true || 
 	               		institucion.getSalaRequerida() != true }">
 		            		class="table-danger"
 		               	</c:if>
 		            >
-		            
+		            	           		
+					<form action="enviarSolicitud" method="GET">
+		                  		
+	               	<input type="hidden" value="${paciente.getId()}" name="idPaciente">
+	               	<input type="hidden" value="${institucion.getInstitucion().getId()}" name="idInstitucionATrasladar">
+	               	<input type="hidden" value="${motivoTraslado}" name="motivoTraslado">
+	               	<input type="hidden" value="${urgencia}" name="urgencia">
+	               	<input type="hidden" value="${Math.round(institucion.getDistancia())}" name="distanciaTraslado">
 		            
 		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getNombre()}"/></td>
 		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getTipo().getDescripcion()}"/></td>
@@ -198,17 +211,33 @@
 						               		<c:out value="${lista.getSala().getTipoSala().getDescripcion()}"/>.
 	
 						               		<c:forEach items="${lista.getListaCama()}" var="listaCamas">
-							               		<ul class="my-2 pl-3">
+							               		<ul class="my-2 pl-3 d-flex justify-content-between align-items-center">
 							               		
 							               		<c:if test="${listaCamas.getCama().tipoCama != tipoCama}">
-							               		<li class="p text-dark">
+							               		<p class="text-dark mb-0 ">
 							               		</c:if>
 							               		<c:if test="${listaCamas.getCama().tipoCama == tipoCama}">
-							               		<li class="p text-dark font-weight-bold">
+							               		<p class="mb-0 text-dark font-weight-bold">
 							               		</c:if>
+							               	
+            									${listaCamas.getCama().getTipoCama().getDescripcion()}: ${listaCamas.getCount()}. 
+							                    </p>
+							               	
+												<span class="ml-5">
+												  
+												  <input type="radio" name="idCama" value="${listaCamas.getCama().getId()}" 
+												  id="${listaCamas.getCama().getId()}"
+												  onclick="javascript:elegirCama(${listaCamas.getCama().getId()}, '${listaCamas.getCama().getTipoCama().getDescripcion()}', 
+												  '${institucion.getInstitucion().getId()}', '${lista.getSala().getTipoSala().getDescripcion()}')"
+												  
+												  <c:if test="${listaCamas.getCama().tipoCama == tipoCama}">
+							               			 checked="checked"
+							               		  </c:if>
+												  
+												  >
+												
+												</span>
 							               		
-								               		${listaCamas.getCama().getTipoCama().getDescripcion()}: ${listaCamas.getCount()}.
-							               		</li>
 							               		</ul>
 					      					</c:forEach>
 					      					</li>
@@ -269,23 +298,27 @@
 						               		<c:out value="${lista.getSala().getTipoSala().getDescripcion()}"/>.
 	
 						               		<c:forEach items="${lista.getListaCama()}" var="listaCamas">
-							               		<ul class="my-2 pl-3">
+							               		<ul class="my-2 pl-3 d-flex justify-content-between align-items-center">
 							               		
 							               		<c:if test="${listaCamas.getCama().tipoCama != tipoCama}">
-							               		<li class="p text-dark">
+							               		<p class="text-dark mb-0 ">
 							               		</c:if>
 							               		<c:if test="${listaCamas.getCama().tipoCama == tipoCama}">
-							               		<li class="p text-dark font-weight-bold">
+							               		<p class="mb-0 text-dark font-weight-bold">
 							               		</c:if>
-							               		
-								               	${listaCamas.getCama().getTipoCama().getDescripcion()}: ${listaCamas.getCount()}. 
-
-													<span class="mt-2">
-													  <input type="radio" name="opcionCama${institucion.getInstitucion().getId()}" id="activarBotones${institucion.getInstitucion().getId()}" value="${listaCamas.getCama().getId()}"
-													  onclick="javascript:activarBotones(this, 'botonAccionUno${institucion.getInstitucion().getId()}', 'botonAccionDos${institucion.getInstitucion().getId()}')">
-													</span>
+							               	
+            									${listaCamas.getCama().getTipoCama().getDescripcion()}: ${listaCamas.getCount()}. 
+							                    </p>
+							               	
+												<span class="ml-5">
+												  
+												  <input type="radio" name="idCama" id="activarBotones${institucion.getInstitucion().getId()}" value="${listaCamas.getCama().getId()}"
+												  onclick="javascript:activarBotones(this, 'botonAccionUno${institucion.getInstitucion().getId()}', 'botonAccionDos${institucion.getInstitucion().getId()}')"
+												  onChange="javascript:elegirCama('${listaCamas.getCama().getId()}', '${listaCamas.getCama().getTipoCama().getDescripcion()}', '${institucion.getInstitucion().getId()}', 
+												  '${lista.getSala().getTipoSala().getDescripcion()}')">
 												
-							               		</li>
+												</span>
+							               		
 							               		</ul>
 					      					</c:forEach>
 					      					
@@ -333,18 +366,9 @@
 					  data-toggle="modal" data-target="#modalSolicitud${institucion.getInstitucion().getId()}" disabled>
 					   Solicitar Traslado</button>
 						
-					 <button id="botonAccionDos${institucion.getInstitucion().getId()}" class="btn btn-outline-secondary mt-3" type="button" 
-					 data-toggle="modal" data-target="#modalDetalle${institucion.getInstitucion().getId()}"disabled>
-					  Ver Detalle Institución</button>
-					  		
-<!-- 							 <div class="d-flex justify-content-center"> -->
-<!-- 								<div class="custom-control custom-switch mt-2"> -->
-<%-- 								  <input type="checkbox" class="custom-control-input" id="activarBotones${institucion.getInstitucion().getId()}"  --%>
-<%-- 								  onclick="javascript:activarBotones(this, 'botonAccionUno${institucion.getInstitucion().getId()}', 'botonAccionDos${institucion.getInstitucion().getId()}')"> --%>
-								  
-<%-- 								  <label class="custom-control-label" for="activarBotones${institucion.getInstitucion().getId()}" >Activar botones</label> --%>
-<!-- 								</div> -->
-<!-- 							</div> -->
+					 <button id="botonAccionDos${institucion.getInstitucion().getId()}" class="btn btn-outline-primary mt-3" type="button" 
+					 data-toggle="modal" data-target="#modalDetalle${institucion.getInstitucion().getId()}">
+					  Ver Detalle Institución</button>					  	
 							
 	               		</c:if>	
 						
@@ -364,8 +388,8 @@
 							        Se enviará la solicitud de traslado del paciente 
 						        	<span class="font-weight-bold"> ${paciente.getNombre()} ${paciente.getApellido()} 
 						        	(${paciente.getTipoDocumento().getDescripcion()}: ${paciente.getNumeroDocumento()}) </span> 
-							        en una cama <span class="font-weight-bold text-lowercase">${tipoCama.getDescripcion()}</span> 
-							        en una sala de <span class="font-weight-bold text-lowercase">${tipoSala.getDescripcion()}</span>
+							        en una cama <span id="tipoCamaModal${institucion.getInstitucion().getId()}" class="font-weight-bold text-lowercase">${tipoCama.getDescripcion()}</span> 
+							        en una sala de <span id="tipoSalaModal${institucion.getInstitucion().getId()}" class="font-weight-bold text-lowercase">${tipoSala.getDescripcion()}</span>
 							        de la institución 
 							        <span class="font-weight-bold">"${institucion.getInstitucion().getNombre()}"</span>
 							        ubicada en la localidad de ${institucion.getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()} 
@@ -384,12 +408,162 @@
 						</div>
 						<!-- End Modal -->
 						
-						</td>
+						<!-- Start Modal -->
+						<div class="modal fade" id="modalDetalle${institucion.getInstitucion().getId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						    <div class="modal-content  px-3">
+						      <div class="modal-header pb-2">
+						        <h5 class="modal-title" id="exampleModalLongTitleUno">${institucion.getInstitucion().getNombre()}</h5		>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span class="bg-white" aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body text-left">
+						        
+						        <p class="p mt-2" >
+							       Nombre de la institución: ${institucion.getInstitucion().getNombre()}.
+							    </p>  
+							    <p class="p mt-2" >
+							       Tipo de institución: ${institucion.getInstitucion().getTipo().getDescripcion()}.
+							    </p>  
+							    <p class="p mt-2" >   
+								    Dirección: ${institucion.getInstitucion().getDomicilio().getCalle()}  ${institucion.getInstitucion().getDomicilio().getNumero()}, 
+								    ${institucion.getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()} 
+									(${institucion.getInstitucion().getDomicilio().getLocalidad().getPartido().getNombrePartido()}), provincia de 
+									${institucion.getInstitucion().getDomicilio().getLocalidad().getPartido().getProvincia().getNombreProvincia().getValor()}.
+							    </p>   
 
-		            </tr>
-		        </c:forEach>
+						        <p class="mb-0 font-weight-lighter"></p>
+						      </div>
+						      
+						      
+							<!-- Load Leaflet from CDN-->
+							<link rel="stylesheet"
+								href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+							<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+							<style>
+							#map {
+								height: 400px;
+								width:  calc(100% - 15px);
+							}
+							</style>
+							
+							<!-- Load Esri Leaflet from CDN -->
+							<script
+								src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.2/esri-leaflet.js"></script>
+							
+							<script
+								src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+							<link rel="stylesheet" type="text/css"
+								href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+							
+							<div id="map" class="mx-2 w-100">
+							</div>
+
+
+<script>
+	var hospitales = [
+			{
+				"nombre" : "HOSPITAL GENERAL DE AGUDOS D. VELEZ SARSFIELD",
+				"lat" : -34.6253368,
+				"lon" : -58.50761514
+			}, {
+				"nombre" : "HOSPITAL MATERNO INFANTIL R. SARDA",
+				"lat" : -34.634856308414967,
+				"lon" : -58.402750627537664
+			}
+
+	];
+
+	var map = L.map('map').setView([ ${institucion.getInstitucion().getLatitud()}, ${institucion.getInstitucion().getLongitud()} ],
+			12);
+
+	L
+			.tileLayer(
+					'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+					{
+						attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+					}).addTo(map);
+
+	/*let iconMarker = L.icon({
+		iconUrl : 'img/red-cross.png',
+
+	});
+
+	for (var i = 0; i < hospitales.length; i++) {
+		marker = new L.marker([ hospitales[i].lat, hospitales[i].lon ], {
+			icon : iconMarker
+		}).bindPopup(hospitales[i].nombre).addTo(map);
+	};*/
+
+	var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+	var results = new L.LayerGroup().addTo(map);
+
+	let posicion;
+
+	searchControl.on('results', function(data) {
+		results.clearLayers();
+		for (var i = data.results.length - 1; i >= 0; i--) {
+			results.addLayer(L.marker(data.results[i].latlng));
+
+			posicion = data.results[i].latlng;
+			console.log(posicion.lat);
+			console.log(posicion.lng);
+			console.log(data.results[0].city);
+			console.log(data.results[0].subregion);
+			console.log(data.results[0]);
+
+			document.getElementById("latitud").value = posicion.lat;
+			document.getElementById("longitud").value = posicion.lng;
+
+			//Array con toda la información del domicilio (calle, altura, localidad, etc.)
+			var domicilioArray = data.results[0].text;
+			
+			//Array del domicilioArray separando elementos por las comas (la calle con su altura);
+			var calle = domicilioArray.split(",");
+			
+			//Separar por espacios;
+			var calleArray = calle[0].split(" ");
+			
+			//Último elemento del array (la altura de la calle);
+			var alturaCalle = calleArray[calleArray.length - 1];
+			
+			//Eliminar el último elemento del array (la altura de la calle);
+			calleArray.splice((calleArray.length - 1), 1);
+			
+			//Unir todos los elementos del array separándolos con un espacio;
+			var nombreCalle = calleArray.join(' ');
+			
+			console.log("Nombre de la calle: " + nombreCalle);
+			console.log("Altura de la calle: " + alturaCalle);
+			
+			document.getElementById("calle").value = nombreCalle;
+			document.getElementById("numero").value = alturaCalle;
+			document.getElementById("nombreLocalidad").value = data.results[0].city;
+			document.getElementById("nombrePartido").value = data.results[0].subregion;
+		}
+
+	});
+</script>
+
+						      
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Volver</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						<!-- End Modal -->
+						
+						</td>
+	        
+					</form>
+		            
+		            </tr>	
 		        
-		</form>
+		        </c:forEach>
+
 		
 		    </table>
 		</div>
@@ -437,16 +611,10 @@
 
 </main>
 
-
 </div>
 </div>
 
-<script>
-	window.jQuery
-			|| document
-					.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
-</script>
-
+<script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/funciones.js"></script>
 <script src="js/sort.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
