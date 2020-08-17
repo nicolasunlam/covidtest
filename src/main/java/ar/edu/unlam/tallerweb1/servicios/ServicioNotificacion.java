@@ -12,4 +12,6 @@ public interface ServicioNotificacion {
 	
 	public List<Notificacion> buscarNotificacionPorId(Usuario usuario);
 
+	public Notificacion buscarNotificacionPorSuId(Long id);
+
 }

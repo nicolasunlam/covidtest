@@ -10,4 +10,6 @@ public interface RepositorioNotificacion {
 	void registrarNotificacion(Notificacion notificacion);
 	
 	List<Notificacion> buscarNotificacionPorId(Usuario usuario);
+
+	Notificacion buscarNotificacionPorSuId(Long id);
 }
