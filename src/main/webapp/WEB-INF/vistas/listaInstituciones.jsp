@@ -102,11 +102,11 @@
 					onmouseout="this.style.backgroundColor='white';">CUIT <i
 					class="fa fa-sort"></i></th>
 
-				<th scope="col"
+				<!-- <th scope="col"
 					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
 					onmouseout="this.style.backgroundColor='white';">Camas Totales
 					<i class="fa fa-sort"></i>
-				</th>
+				</th> -->
 
 				<th scope="col"
 					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
@@ -125,8 +125,8 @@
 
 					<td class="align-middle"><c:out
 							value="${instituciones.getNumeroDocumento()}" /></td>
-					<td class="align-middle"><c:out
-							value="${instituciones.getCantidadCamas()}" /></td>
+					<%-- <td class="align-middle"><c:out
+							value="${instituciones.getCantidadCamas()}" /></td> --%>
 					<td class="d-flex justify-content-between"><a
 						href="listarPisos?idInstitucion=${instituciones.getId()}" class="btn btn-primary my-3">Detalle
 							Institución</a> <a
