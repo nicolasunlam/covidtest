@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -171,5 +173,15 @@ public class ControladorNotificacion {
 		
 		return new ModelAndView("verMensajes", model);
 	}
+	
+	@RequestMapping(value="/verDetalleMensaje/{id}")    
+    public String verDetalleMensaje(@PathVariable Long id, Model m){    
+       // Emp emp=dao.getEmpById(id);    
+		Notificacion not = servicioNotificacion.buscarNotificacionPorSuId(id);
+        m.addAttribute("notificacion",not);  
+        return "verDetalleMensaje";    
+        
+        //<td><a href="editemp/${emp.id}">Edit</a></td>  
+    }    
 	
 }

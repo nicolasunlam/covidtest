@@ -53,7 +53,7 @@
 								value="${notificacion.getRemitente().getRol().name()}" /></td>
 
 
-						<td><a class="btn btn-primary" href="#" role="button">Ver
+						<td><a class="btn btn-primary" href="verDetalleMensaje/${notificacion.getId()}" role="button">Ver
 								Mensaje</a></td>
 
 
