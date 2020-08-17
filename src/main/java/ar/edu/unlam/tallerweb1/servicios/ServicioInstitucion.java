@@ -6,7 +6,7 @@ import ar.edu.unlam.tallerweb1.modelo.TipoCama;
 import ar.edu.unlam.tallerweb1.modelo.TipoSala;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
-import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalas;
+import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalasCamas;
 import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 
 import java.util.List;
@@ -26,11 +26,6 @@ public interface ServicioInstitucion {
 
     List<Institucion> listarInstitucionesPorLocalidad(Long id);
 
-	public List<InstitucionDistanciaSalas> obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(Institucion institucion, TipoCama tipoCama, TipoSala tipoSala);
+	public List<InstitucionDistanciaSalasCamas> obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(Institucion institucion, TipoCama tipoCama, TipoSala tipoSala);
 
-	List<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion);
-
-	List<CamaCantidad> obtenerEstadisticaDeCamasDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion, Sala sala);
-
-    //List<Institucion> listarInstitucionesPorZona(Zona zona);
 }

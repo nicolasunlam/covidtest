@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 
 public interface RepositorioCama {
@@ -28,4 +29,6 @@ public interface RepositorioCama {
 	List<Cama> obtenerCamasDisponiblesPorInstitucion(Institucion institucion);
 
 	List<Cama> obtenerTotalDeCamasDisponibles();
+
+	List<CamaCantidad> obtenerCamasDisponiblesDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion, Sala sala);
 }

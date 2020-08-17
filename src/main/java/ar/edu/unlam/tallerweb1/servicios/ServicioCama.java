@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 
 public interface ServicioCama {
@@ -27,4 +28,6 @@ public interface ServicioCama {
 	List<CamaCantidad> obtenerCantidadDeCamasOcupadasDeCadaInstitucion();
 
 	List<CamaCantidad> obtenerCantidadDeCamasDisponiblesDeCadaInstitucion();
+
+	List<CamaCantidad> obtenerCamasDisponiblesDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion, Sala sala);
 }

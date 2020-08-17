@@ -6,6 +6,7 @@ import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.Sector;
+import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 
 public interface ServicioSala {
 
@@ -17,4 +18,6 @@ public interface ServicioSala {
     public Sala buscarSalaPorId(Long id);
     
 	List<Sala> listarSalasPorSector(Sector sector);
+
+	List<SalaCantidad> obtenerSalasConCantidadDeCamasDisponiblesDeUnaInstitucion(Institucion institucion);
 }

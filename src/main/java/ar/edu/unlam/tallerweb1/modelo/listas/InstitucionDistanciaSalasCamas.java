@@ -4,27 +4,38 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 
-public class InstitucionDistanciaSalas {
+public class InstitucionDistanciaSalasCamas {
 
 	private Institucion institucion;
 	private Double distancia;
 	private List<SalaCantidad> listaSala;
 	private Boolean camaRequerida;
 	private Boolean salaRequerida;
+	private Boolean salaYCamaRequerida;
 	
-	public InstitucionDistanciaSalas(Institucion institucion, Double distancia, List<SalaCantidad> listaSala) {
+	public InstitucionDistanciaSalasCamas(Institucion institucion, Double distancia, List<SalaCantidad> listaSala) {
 		this.institucion = institucion;
 		this.distancia = distancia;
 		this.listaSala = listaSala;
 	}
 
-	public InstitucionDistanciaSalas(Institucion institucion, Double distancia, List<SalaCantidad> listaSala,
+	public InstitucionDistanciaSalasCamas(Institucion institucion, Double distancia, List<SalaCantidad> listaSala,
 			Boolean camaRequerida, Boolean salaRequerida) {
 		this.institucion = institucion;
 		this.distancia = distancia;
 		this.listaSala = listaSala;
 		this.camaRequerida = camaRequerida;
 		this.salaRequerida = salaRequerida;
+	}
+
+	public InstitucionDistanciaSalasCamas(Institucion institucion, Double distancia, List<SalaCantidad> listaSala,
+			Boolean camaRequerida, Boolean salaRequerida, Boolean salaYCamaRequerida) {
+		this.institucion = institucion;
+		this.distancia = distancia;
+		this.listaSala = listaSala;
+		this.camaRequerida = camaRequerida;
+		this.salaRequerida = salaRequerida;
+		this.setSalaYCamaRequerida(salaYCamaRequerida);
 	}
 
 	public Institucion getInstitucion() {
@@ -65,5 +76,13 @@ public class InstitucionDistanciaSalas {
 
 	public void setSalaRequerida(Boolean salaRequerida) {
 		this.salaRequerida = salaRequerida;
+	}
+
+	public Boolean getSalaYCamaRequerida() {
+		return salaYCamaRequerida;
+	}
+
+	public void setSalaYCamaRequerida(Boolean salaYCamaRequerida) {
+		this.salaYCamaRequerida = salaYCamaRequerida;
 	}
 }

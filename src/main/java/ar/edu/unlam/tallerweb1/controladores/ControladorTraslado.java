@@ -22,7 +22,7 @@ import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoCama;
 import ar.edu.unlam.tallerweb1.modelo.TipoSala;
-import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalas;
+import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalasCamas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsignacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
@@ -87,7 +87,7 @@ public class ControladorTraslado {
 		
     	Asignacion reserva = servicioAsignacion.consultarReservaAsignacionPaciente(paciente);
 		if(reserva != null) {
-			return new ModelAndView("redirect:/listaPacienteInternados");	
+			return new ModelAndView("redirect:/listaPacientesInternados");	
 		}
 		
     	List<String> listaEnfermedades = servicioPaciente.obtenerListaDeEnfermedadesDeUnPaciente(paciente);
@@ -148,7 +148,7 @@ public class ControladorTraslado {
 		Long idInstitucion = (long) request.getSession().getAttribute("ID");
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
-		List<InstitucionDistanciaSalas> listaInstituciones = servicioInstitucion.obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(institucion, tipoCama, tipoSala);
+		List<InstitucionDistanciaSalasCamas> listaInstituciones = servicioInstitucion.obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(institucion, tipoCama, tipoSala);
 		model.put("listaInstituciones", listaInstituciones);
 		
 		return new ModelAndView("trasladarAInstitucion", model);
@@ -187,7 +187,7 @@ public class ControladorTraslado {
     	Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
     	Cama cama = servicioCama.consultarCamaPorId(idCama);
     	if(paciente == null || cama == null) {
-			return new ModelAndView("redirect:/trasladar");	
+			return new ModelAndView("redirect:/listaPacientesInternados");	
 		}
     	
     	ZoneId zone = ZoneId.of("America/Argentina/Buenos_Aires");
@@ -208,7 +208,8 @@ public class ControladorTraslado {
 			        + paciente.getApellido() + ", " + paciente.getNombre() 
 			        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
 			        + " en la cama " + cama.getDescripcion() + cama.getTipoCama().getDescripcion() 
-			        + " en una sala de " + cama.getSala().getTipoSala().getDescripcion() 
+			        + " de la sala de " + cama.getSala().getDescripcion() 
+			        + " de " + cama.getSala().getTipoSala().getDescripcion() 
 			        + " de la institución " + institucion.getNombre() 
 			        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()
 			        + " a " + distanciaTraslado + " km de distancia."; 

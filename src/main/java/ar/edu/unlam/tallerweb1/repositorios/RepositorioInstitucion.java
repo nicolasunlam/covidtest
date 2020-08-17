@@ -19,10 +19,4 @@ public interface RepositorioInstitucion {
     void actualizarInstitucion(Institucion institucion);
 
     List<Institucion> listarInstitucionesPorLocalidad(Long id);
-
-    List<SalaCantidad> obtenerEstadisticaDeSalasDeUnaInstitucion(Institucion institucion);
-
-	List<CamaCantidad> obtenerEstadisticaDeCamasDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion, Sala sala);
-
-//    List<Institucion> listarInstitucionesPorZona(Zona zona);
 }

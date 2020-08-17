@@ -132,3 +132,15 @@ WHERE c.id NOT IN (SELECT a.cama_id
 GROUP BY i.id, sal.tipoSala
 ORDER BY count(*);                 
 
+/*------ Mostrar la cantidad de camas por tipo de sala de una institucion tal para las cuales no existe una asignacion vigente ------*/
+SELECT count(*) as camas_disponibles
+FROM cama c  
+JOIN Sala sal ON c.sala_id = sal.id
+JOIN Sector as sec ON sal.sector_id = sec.id
+JOIN Piso as p ON sec.piso_id = p.id 
+JOIN Usuario as i ON p.institucion_id = i.id
+WHERE c.id NOT IN (SELECT a.cama_id
+ 			   FROM asignacion a
+			   WHERE a.cama_id = c.id
+			   AND a.horaEgreso IS NULL
+               AND a.horaReserva IS NULL);     
