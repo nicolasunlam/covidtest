@@ -43,5 +43,10 @@ public class ServicioAsignacionImpl implements ServicioAsignacion {
         return repositorioAsignacion.obtenerAsignacionesActuales();
     }
 
+    @Override
+    public Asignacion consultarReservaAsignacionPaciente(Paciente paciente) {
+
+        return repositorioAsignacion.consultarReservaAsignacionPaciente(paciente);
+    }
 
 }

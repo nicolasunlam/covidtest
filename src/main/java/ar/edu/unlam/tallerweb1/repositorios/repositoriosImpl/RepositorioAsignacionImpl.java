@@ -28,6 +28,7 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
         return (Asignacion) sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
                 .add(Restrictions.eq("paciente", paciente))
                 .add(Restrictions.isNull("horaEgreso"))
+                .add(Restrictions.isNotNull("horaIngreso"))
                 .uniqueResult();
     }
 
@@ -52,6 +53,17 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
         return sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
                 .add(Restrictions.isNull("motivoEgreso"))
                 .list();
+    }
+    
+    @SuppressWarnings({ "deprecation" })
+    @Override
+    public Asignacion consultarReservaAsignacionPaciente(Paciente paciente) {
+
+        return (Asignacion) sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
+                .add(Restrictions.eq("paciente", paciente))
+                .add(Restrictions.isNotNull("horaReserva"))
+                .add(Restrictions.isNull("horaIngreso"))
+                .uniqueResult();
     }
 
 }

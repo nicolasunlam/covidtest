@@ -181,6 +181,7 @@
 	               	<input type="hidden" value="${institucion.getInstitucion().getId()}" name="idInstitucionATrasladar">
 	               	<input type="hidden" value="${motivoTraslado}" name="motivoTraslado">
 	               	<input type="hidden" value="${urgencia}" name="urgencia">
+	               	<input type="hidden" value="${Math.round(institucion.getDistancia())}" name="distanciaTraslado">
 		            
 		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getNombre()}"/></td>
 		                <td style="vertical-align: middle;"><c:out value="${institucion.getInstitucion().getTipo().getDescripcion()}"/></td>

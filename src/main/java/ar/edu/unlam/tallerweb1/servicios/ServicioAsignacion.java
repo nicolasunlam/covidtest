@@ -14,4 +14,6 @@ public interface ServicioAsignacion {
     public Asignacion consultarAsignacionPorId(Long nro);
 
     List<Asignacion> obtenerAsignacionesActuales();
+
+	Asignacion consultarReservaAsignacionPaciente(Paciente paciente);
 }

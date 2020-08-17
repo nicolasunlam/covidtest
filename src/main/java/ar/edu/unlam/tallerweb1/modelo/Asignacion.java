@@ -16,29 +16,26 @@ public class Asignacion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-
-
 	private LocalDateTime horaEgreso;
 	private LocalDateTime horaIngreso;
-	
+	private LocalDateTime horaReserva;
 	private LocalDateTime horaTraslado;
+	private Boolean autorizada;
 	
 	@ManyToOne//(cascade= CascadeType.ALL)
 	private Paciente paciente;
-
+	
 	@ManyToOne//(cascade= CascadeType.ALL)
 	private Cama cama;
+
+	@Enumerated(EnumType.STRING)
+	private MotivoIngreso motivoIngreso;
 	
 	@Enumerated(EnumType.STRING)
 	private MotivoEgreso motivoEgreso;
-
-	public MotivoEgreso getMotivoEgreso() {
-		return motivoEgreso;
-	}
-
-	public void setMotivoEgreso(MotivoEgreso motivoEgreso) {
-		this.motivoEgreso = motivoEgreso;
-	}
+	
+	@Enumerated(EnumType.STRING)
+	private MotivoTraslado motivoTraslado;
 
 	public Long getId() {
 		return Id;
@@ -64,6 +61,22 @@ public class Asignacion {
 		this.horaIngreso = horaIngreso;
 	}
 
+	public LocalDateTime getHoraReserva() {
+		return horaReserva;
+	}
+
+	public void setHoraReserva(LocalDateTime horaReserva) {
+		this.horaReserva = horaReserva;
+	}
+
+	public Boolean getAutorizada() {
+		return autorizada;
+	}
+
+	public void setAutorizada(Boolean autorizada) {
+		this.autorizada = autorizada;
+	}
+
 	public Paciente getPaciente() {
 		return paciente;
 	}
@@ -78,6 +91,22 @@ public class Asignacion {
 
 	public void setCama(Cama cama) {
 		this.cama = cama;
+	}
+
+	public MotivoEgreso getMotivoEgreso() {
+		return motivoEgreso;
+	}
+
+	public void setMotivoEgreso(MotivoEgreso motivoEgreso) {
+		this.motivoEgreso = motivoEgreso;
+	}
+
+	public MotivoTraslado getMotivoTraslado() {
+		return motivoTraslado;
+	}
+
+	public void setMotivoTraslado(MotivoTraslado motivoTraslado) {
+		this.motivoTraslado = motivoTraslado;
 	}
 
 	public LocalDateTime getHoraTraslado() {
