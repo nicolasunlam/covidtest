@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
+import ar.edu.unlam.tallerweb1.modelo.listas.PisoConSectores;
 import ar.edu.unlam.tallerweb1.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -183,7 +184,7 @@ public class ControladorInstitucion {
 		piso.setNumeroPiso(numeroPiso);
 
 		servicioPiso.registrarPiso(piso);
-		
+
 		List<Sector> sectores = servicioSector.consultarSectoresPorPiso(piso);
 
 		model.put("numeroPiso", numeroPiso);
@@ -192,7 +193,7 @@ public class ControladorInstitucion {
 
 		return new ModelAndView("detallePiso", model);
 	}
-	
+
 	@RequestMapping("/crearSector")
 	public ModelAndView crearSector(HttpServletRequest request, @RequestParam(value = "idPiso") Long idPiso) {
 
@@ -209,12 +210,8 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-		
-		
+
 		model.put("idPiso", idPiso);
-		
-		
 
 		return new ModelAndView("crearSector", model);
 	}
@@ -238,26 +235,23 @@ public class ControladorInstitucion {
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
-		
 
 		Sector sector = new Sector();
 		sector.setPiso(piso);
 		sector.setTipoSector(tipoSector);
 
 		servicioSector.registrarSector(sector);
-		
-		List <Sala> salas=servicioSala.listarSalasPorSector(sector);
 
-	
+		List<Sala> salas = servicioSala.listarSalasPorSector(sector);
+
 		model.put("idSector", sector.getId());
 		model.put("piso", sector.getPiso());
-		model.put("tipoSector",sector.getTipoSector());
+		model.put("tipoSector", sector.getTipoSector());
 		model.put("salas", salas);
 
 		return new ModelAndView("detalleSector", model);
 	}
-	
-	
+
 	@RequestMapping("/crearSala")
 	public ModelAndView crearSala(HttpServletRequest request, @RequestParam(value = "idSector") Long idSector) {
 
@@ -274,17 +268,11 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-		
-		
+
 		model.put("idSector", idSector);
-		
-		
 
 		return new ModelAndView("crearSala", model);
 	}
-	
-	
 
 	@RequestMapping("/registrarSala")
 	public ModelAndView registrarSala(HttpServletRequest request, @RequestParam(value = "tipoSala") TipoSala tipoSala,
@@ -315,12 +303,12 @@ public class ControladorInstitucion {
 
 		model.put("idSala", sala.getId());
 		model.put("descripcion", sala.getDescripcion());
-		model.put("tipoSala",sala.getTipoSala());
+		model.put("tipoSala", sala.getTipoSala());
 
 		return new ModelAndView("detalleSala", model);
 
 	}
-	
+
 	@RequestMapping("/crearCamas")
 	public ModelAndView crearCamas(HttpServletRequest request, @RequestParam(value = "idSala") Long idSala) {
 
@@ -337,12 +325,8 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-		
-		
+
 		model.put("idSala", idSala);
-		
-		
 
 		return new ModelAndView("crearCamas", model);
 	}
@@ -488,15 +472,13 @@ public class ControladorInstitucion {
 
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 
-		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
-		model.put("listaPisos", listaPisos);
-		
-		List<Cama> listaCamasDisponibles = servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion);
-		model.put("listaCamasDisponibles", listaCamasDisponibles);
+		List<PisoConSectores> listaPisosConSectoresSalasYCamas = servicioPiso
+				.listarPisosConSectoresSalasYCamas(institucion);
+		model.put("listaPisosConSectoresSalasYCamas", listaPisosConSectoresSalasYCamas);
 
 		return new ModelAndView("pisosInstitucion", model);
 	}
-	
+
 	@RequestMapping("/listarSectoresPorPiso")
 	public ModelAndView listarSectoresPorPiso(HttpServletRequest request, @RequestParam(value = "idPiso") Long idPiso) {
 
@@ -517,7 +499,7 @@ public class ControladorInstitucion {
 		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
 
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
-		
+
 		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
 
 		List<Sector> listaSectoresPorPiso = servicioSector.consultarSectoresPorPiso(piso);
@@ -526,9 +508,10 @@ public class ControladorInstitucion {
 
 		return new ModelAndView("sectoresInstitucion", model);
 	}
-	
+
 	@RequestMapping("/listarSalasPorSector")
-	public ModelAndView listarSalasPorSector(HttpServletRequest request, @RequestParam(value = "idSector") Long idSector) {
+	public ModelAndView listarSalasPorSector(HttpServletRequest request,
+			@RequestParam(value = "idSector") Long idSector) {
 
 		ModelMap model = new ModelMap();
 
@@ -547,7 +530,7 @@ public class ControladorInstitucion {
 		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
 
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
-		
+
 		Sector sector = servicioSector.buscarSectorPorId(idSector);
 
 		List<Sala> listaSalasPorSector = servicioSala.listarSalasPorSector(sector);
@@ -675,7 +658,7 @@ public class ControladorInstitucion {
 
 		return new ModelAndView("disponibilidadCamasPrueba", model);
 	}
-	
+
 	// Muestra imagenes de los pisos
 	@RequestMapping("/listarPisosDeInstitucion")
 	public ModelAndView listarPisosDeInstitucion(HttpServletRequest request) {

@@ -12,6 +12,8 @@ import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsignacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCama;
 
 @Service
@@ -19,55 +21,55 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioCama;
 
 public class ServicioCamaImpl implements ServicioCama {
 
-    @Autowired
-    private RepositorioCama repositorioCama;
+	@Autowired
+	private RepositorioCama repositorioCama;
 
-    @Override
-    public Cama consultarCamaPorId(Long id) {
+	@Override
+	public Cama consultarCamaPorId(Long id) {
 
-        return repositorioCama.consultarCamaPorId(id);
-    }
+		return repositorioCama.consultarCamaPorId(id);
+	}
 
-    @Override
-    public void registrarCama(Cama cama) {
-        repositorioCama.registrarCama(cama);
-    }
+	@Override
+	public void registrarCama(Cama cama) {
+		repositorioCama.registrarCama(cama);
+	}
 
-    @Override
-    public List<Cama> obtenerCamas() {
-        return repositorioCama.obtenerCamas();
-    }
-    
+	@Override
+	public List<Cama> obtenerCamas() {
+		return repositorioCama.obtenerCamas();
+	}
+
 	@Override
 	public List<Cama> obtenerTotalDeCamasOcupadas() {
-		
+
 		return repositorioCama.obtenerTotalDeCamasOcupadas();
 	}
 
-    @Override
-    public List<Cama> obtenerCamasPorInstitucion(Institucion institucion) {
-        return repositorioCama.obtenerCamasPorInstitucion(institucion);
-    }
-    
-    @Override
-    public List<Cama> obtenerCamasOcupadasPorInstitucion(Institucion institucion) {
-        return repositorioCama.obtenerCamasOcupadasPorInstitucion(institucion);
-    }
+	@Override
+	public List<Cama> obtenerCamasPorInstitucion(Institucion institucion) {
+		return repositorioCama.obtenerCamasPorInstitucion(institucion);
+	}
+
+	@Override
+	public List<Cama> obtenerCamasOcupadasPorInstitucion(Institucion institucion) {
+		return repositorioCama.obtenerCamasOcupadasPorInstitucion(institucion);
+	}
 
 	@Override
 	public List<Cama> obtenerCamasDisponiblesPorInstitucion(Institucion institucion) {
-	
-		 return repositorioCama.obtenerCamasDisponiblesPorInstitucion(institucion);
+
+		return repositorioCama.obtenerCamasDisponiblesPorInstitucion(institucion);
 
 	}
-	
+
 	@Override
 	public List<Cama> obtenerTotalDeCamasDisponibles() {
-	
+
 		return repositorioCama.obtenerTotalDeCamasDisponibles();
 
 	}
-	
+
 	@Override
 	public List<CamaCantidad> obtenerCantidadDeCamasOcupadasDeCadaInstitucion() {
 		return repositorioCama.obtenerCantidadDeCamasOcupadasDeCadaInstitucion();
@@ -77,10 +79,21 @@ public class ServicioCamaImpl implements ServicioCama {
 	public List<CamaCantidad> obtenerCantidadDeCamasDisponiblesDeCadaInstitucion() {
 		return repositorioCama.obtenerCantidadDeCamasDisponiblesDeCadaInstitucion();
 	}
-	
-    @Override
-    public List<CamaCantidad> obtenerCamasDisponiblesDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion, Sala sala) {
-        return repositorioCama.obtenerCamasDisponiblesDeUnTipoDeSalaDeUnaInstitucion(institucion, sala);
-    }
+
+	@Override
+	public List<CamaCantidad> obtenerCamasDisponiblesDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion,
+			Sala sala) {
+		return repositorioCama.obtenerCamasDisponiblesDeUnTipoDeSalaDeUnaInstitucion(institucion, sala);
+	}
+
+	@Override
+	public List<Cama> obtenerCamasPorSala(Sala sala) {
+		return repositorioCama.obtenerCamasPorSala(sala);
+	}
+
+	@Override
+	public List<CamaConAsignacion> obtenerListaDeCamasPorAsignacionPorSala(Sala sala) {
+		return repositorioCama.obtenerListaDeCamasPorAsignacionPorSala(sala);
+	}
 
 }

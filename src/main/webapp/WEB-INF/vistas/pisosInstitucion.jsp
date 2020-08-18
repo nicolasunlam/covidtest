@@ -85,118 +85,122 @@ code {
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h2 class="">Pisos</h2>
-			<button type="button" class="btn btn-outline-success">
-				Agregar piso</button>
+			<a type="button" class="btn btn-outline-success" href="crearPiso">
+				Agregar piso</a>
 		</div>
 		<h6 class="mb-5">Vea en detalle todos los pisos de su institución</h6>
 
 		<div class=" my-5 px-0">
-			<c:forEach items="${listaPisos}" var="piso">
+			<c:forEach items="${listaPisosConSectoresSalasYCamas}"
+				var="pisoConSector">
 
 				<div class="callout callout-primary py-4">
-					
-					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mx-3">
-						
+
+					<div
+						class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mx-3">
+
 						<div class="col">
-						
+
 							<div class="row">
-							
-							<div class="col">
-							<h4 class="mb-4">Piso 1</h4>
-							<p class="my-2">Cantidad de sectores: 2</p>
-							<p class="my-2">Cantidad de salas: 12</p>
-							<p >Cantidad de camas: 27</p>
+
+								<div class="col">
+									<h4 class="mb-4">Piso
+										${pisoConSector.getPiso().getNumeroPiso()}</h4>
+									<p class="my-2">Cantidad de sectores: ${pisoConSector.getListaDeSectores().size()}</p>
+									<p class="my-2">Cantidad de salas: </p>
+									<p>Cantidad de camas: 27</p>
+								</div>
 							</div>
-							</div>
-							
+
 							<div class="pl-3 row">
-							<form action="" method=get class="mt-4 mb-0">
-								<input class="invisible" type="hidden" id="id" name="idPiso"
-									value="${piso.getId()}"> <input
-									class="btn btn-outline-primary" type="submit"
-									value="Ver detalle piso">
-							</form>
-							
-							<form action="" method=get class="mt-4 mb-0">
-								<input class="invisible" type="hidden" id="id" name="idPiso"
-									value="${piso.getId()}"> <input
-									class="btn btn-outline-success ml-3" type="submit"
-									value="Personalizar">
-							</form>
-							
+								<form action="" method=get class="mt-4 mb-0">
+									<input class="invisible" type="hidden" id="id" name="idPiso"
+										value="${pisoConSector.getPiso().getId()}"> <input
+										class="btn btn-outline-primary" type="submit"
+										value="Ver detalle piso">
+								</form>
+
+								<form action="" method=get class="mt-4 mb-0">
+									<input class="invisible" type="hidden" id="id" name="idPiso"
+										value="${piso.getId()}"> <input
+										class="btn btn-outline-success ml-3" type="submit"
+										value="Personalizar">
+								</form>
+
 							</div>
-							
+
 						</div>
-						
+
 						<div class="d-flex align-items-end flex-column col mr-3">
-							
+
 							<div class="row">
-								
+
 								<div class="col">
-								
-									<div class="row" style="display:block">
-									<p class="text-right mb-2">${listaCamasDisponibles.size()} camas disponibles</p>
+
+									<div class="row" style="display: block">
+										<p class="text-right mb-2">${listaCamasDisponibles.size()}
+											camas disponibles</p>
 									</div>
-								
+
 									<div class="row">
-									
-									<c:if test="${listaCamasDisponibles.size() > 8}">
-					            		<span class="text-success" style="margin-left: 4px;">
-										<p class="h5 mb-0">+ ${listaCamasDisponibles.size() - 8}</p>
-										</span>
-					               	</c:if>
-									<c:forEach items="${listaCamasDisponibles}" var="cama" end="7">
-										<span style="margin-left: 4px;">
-											<img alt="" src="img/cama-ver.png" style="width:35px ">
-										</span>
-									</c:forEach>
-									
+
+										<c:if test="${listaCamasDisponibles.size() > 8}">
+											<span class="text-success" style="margin-left: 4px;">
+												<p class="h5 mb-0">+ ${listaCamasDisponibles.size() - 8}</p>
+											</span>
+										</c:if>
+										<c:forEach items="${listaCamasDisponibles}" var="cama" end="7">
+											<span style="margin-left: 4px;"> <img alt=""
+												src="img/cama-ver.png" style="width: 35px">
+											</span>
+										</c:forEach>
+
 									</div>
-						
+
 								</div>
-								
+
 							</div>
-							
+
 							<div class="row">
-								
+
 								<div class="col my-2">
-								
-									<div class="row" style="display:block">
-									<p class="text-right my-2">4 camas ocupadas</p>
+
+									<div class="row" style="display: block">
+										<p class="text-right my-2">4 camas ocupadas</p>
 									</div>
-								
+
 									<div class="row">
-									<c:forEach items="${listaPisos}" var="piso">
-										<span style="margin-left: 4px;">
-										<img alt="" src="img/cama-ro.png" style="width:35px ">
-										</span>
-									</c:forEach>
+										<c:forEach items="${listaPisos}" var="piso">
+											<span style="margin-left: 4px;"> <img alt=""
+												src="img/cama-ro.png" style="width: 35px">
+											</span>
+										</c:forEach>
 									</div>
-						
+
 								</div>
-								
+
 							</div>
-							
+
 							<div class="row">
-								
+
 								<div class="col">
-								
-									<div class="row" style="display:block">
-									<p class="text-right my-2">4 camas reservadas</p>
+
+									<div class="row" style="display: block">
+										<p class="text-right my-2">4 camas reservadas</p>
 									</div>
-								
+
 									<div class="row">
-									<c:forEach items="${listaPisos}" var="piso">
-										<span style="margin-left: 4px;">
-										<img alt="" src="img/cama-am.png" style="width:35px ">
-										</span>
-									</c:forEach>
+										<c:forEach items="${listaPisos}" var="piso">
+											<span style="margin-left: 4px;"> <img alt=""
+												src="img/cama-am.png" style="width: 35px">
+											</span>
+										</c:forEach>
 									</div>
-						
+
 								</div>
-								
+
 							</div>
-							
+
 						</div>
 
 					</div>
@@ -204,7 +208,6 @@ code {
 			</c:forEach>
 
 		</div>
-
 </main>
 
 

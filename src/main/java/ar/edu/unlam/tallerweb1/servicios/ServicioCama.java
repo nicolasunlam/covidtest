@@ -6,12 +6,13 @@ import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
+import ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion;
 
 public interface ServicioCama {
 
-    void registrarCama(Cama cama);
+	void registrarCama(Cama cama);
 
-    Cama consultarCamaPorId(Long id);
+	Cama consultarCamaPorId(Long id);
 
 	List<Cama> obtenerCamas();
 
@@ -20,14 +21,18 @@ public interface ServicioCama {
 	List<Cama> obtenerCamasDisponiblesPorInstitucion(Institucion institucion);
 
 	List<Cama> obtenerCamasOcupadasPorInstitucion(Institucion institucion);
-	
+
 	List<Cama> obtenerTotalDeCamasOcupadas();
 
 	List<Cama> obtenerTotalDeCamasDisponibles();
-	
+
 	List<CamaCantidad> obtenerCantidadDeCamasOcupadasDeCadaInstitucion();
 
 	List<CamaCantidad> obtenerCantidadDeCamasDisponiblesDeCadaInstitucion();
 
 	List<CamaCantidad> obtenerCamasDisponiblesDeUnTipoDeSalaDeUnaInstitucion(Institucion institucion, Sala sala);
+
+	List<Cama> obtenerCamasPorSala(Sala sala);
+
+	List<CamaConAsignacion> obtenerListaDeCamasPorAsignacionPorSala(Sala sala);
 }
