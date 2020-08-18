@@ -4,7 +4,7 @@
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
-<title>Inserte titulo aquí</title>
+<title>Bienvenido</title>
     
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
@@ -14,7 +14,7 @@
                         ${nombre}</p>
                     <p class="lead">La institución ${nombre} posee ${camas} camas en total.</p>
                     <a class="btn btn-outline-primary" href="verMensajes" role="button">Ver Mensajes Recibidos</a>
-                    <a class="btn btn-outline-primary" href="crearMensaje" role="button">Enviar Mensaje</a>
+                   <a class="btn btn-outline-primary" href="verMensajesEnviados" role="button">Ver Mensajes Enviados</a>
                     <hr class="my-4">
                     		<p class="lead">
 			<a class="btn btn-primary btn-lg" href="listaPacientesInternados" role="submit">

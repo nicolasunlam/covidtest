@@ -4,7 +4,7 @@
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
-<title>Inserte titulo aquí</title>
+<title>Pacientes Infectados</title>
     
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 

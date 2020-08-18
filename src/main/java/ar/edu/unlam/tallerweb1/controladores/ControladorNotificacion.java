@@ -173,15 +173,44 @@ public class ControladorNotificacion {
 		
 		return new ModelAndView("verMensajes", model);
 	}
+	//Lista Mensajes enviador por la Institucion
+	@RequestMapping(path = "/verMensajesEnviados", method = RequestMethod.GET)
+	public ModelAndView verMensajesEnviados(
+			
+			HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if(rol != null) {
+			model.put("rol", rol.name());	
+		}
+    	model.put("armarHeader", servicioAtajo.armarHeader(request));
+		
+		Long id = (Long) request.getSession().getAttribute("ID");
+		
+		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
+		
+		List<Notificacion> list = servicioNotificacion.buscarNotificacionesEnviadasPorUsuario(usuario);
+		
+		model.put("list", list);
+		
+		return new ModelAndView("verMensajes", model);
+	}
 	
-	@RequestMapping(value="/verDetalleMensaje/{id}")    
-    public String verDetalleMensaje(@PathVariable Long id, Model m){    
-       // Emp emp=dao.getEmpById(id);    
+	@RequestMapping(value = "/verDetalleMensaje/{id}")
+	public String verDetalleMensaje(@PathVariable Long id, Model m) {
+
 		Notificacion not = servicioNotificacion.buscarNotificacionPorSuId(id);
-        m.addAttribute("notificacion",not);  
-        return "verDetalleMensaje";    
-        
-        //<td><a href="editemp/${emp.id}">Edit</a></td>  
-    }    
+		m.addAttribute("notificacion", not);
+		return "verDetalleMensaje";
+
+	} 
 	
 }

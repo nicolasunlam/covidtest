@@ -30,7 +30,9 @@ public class RepositorioNotificacionImpl implements RepositorioNotificacion {
     @SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Notificacion> buscarNotificacionPorId(Usuario usuario) {	
-		return session.getCurrentSession().createCriteria(Notificacion.class).add(Restrictions.eq("destinatario", usuario)).list();
+		return session.getCurrentSession().createCriteria(Notificacion.class)
+				.add(Restrictions.eq("destinatario", usuario))
+				.list();
 	}
 
 	@Override
@@ -39,6 +41,14 @@ public class RepositorioNotificacionImpl implements RepositorioNotificacion {
 		return (Notificacion) session.getCurrentSession().createCriteria(Notificacion.class)
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
+	}
+
+	@Override
+	public List<Notificacion> buscarNotificacionesEnviadasPorUsuario(Usuario usuario) {
+		
+		return session.getCurrentSession().createCriteria(Notificacion.class)
+				.add(Restrictions.eq("remitente", usuario))
+				.list();
 	}
 
 }

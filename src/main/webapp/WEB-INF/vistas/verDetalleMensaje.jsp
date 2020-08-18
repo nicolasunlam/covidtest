@@ -8,8 +8,9 @@
 </head>
 <body>
 
-	"${notificacion.getAsunto() }"
-	"${notificacion.getMsg() }"
-	"${notificacion.getFechaHora() }"
+	"${notificacion.getAsunto() }"<br>
+	"${notificacion.getMsg() }"<br>
+	"${notificacion.getFechaHora() }"<br>
+	
 </body>
 </html>
