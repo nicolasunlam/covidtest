@@ -123,12 +123,18 @@ public class ServicioInstitucionImpl implements ServicioInstitucion {
 	
 	private Boolean tieneSalaYCamaRequerida(TipoSala tipoSala, TipoCama tipoCama, List<SalaCantidad> listaSala) {
 
-	for(int i = 0; i < listaSala.size(); ++i) {	
-		
-		if (listaSala.get(i).getSala().getTipoSala() == tipoSala) {
-			return true;
+		for(int i = 0; i < listaSala.size(); ++i) {
+			
+			if(listaSala.get(i).getSala().getTipoSala() == tipoSala) {
+				
+				for(int j = 0; j < listaSala.get(i).getListaCama().size(); ++j) {	
+					
+					if (listaSala.get(i).getListaCama().get(j).getCama().getTipoCama() == tipoCama) {
+						return true;
+					}
+				}
+			}
 		}
-	}
-	return false;
+		return false;
 	}
 }

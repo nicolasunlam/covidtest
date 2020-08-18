@@ -169,8 +169,7 @@
 		        <c:forEach items="${listaInstituciones}" var="institucion">
 	
 		            <tr 							               		
-	               		<c:if test="${institucion.getCamaRequerida() != true || 
-	               		institucion.getSalaRequerida() != true }">
+	               		<c:if test="${institucion.getSalaYCamaRequerida() != true}">
 		            		class="table-danger"
 		               	</c:if>
 		            >
@@ -196,7 +195,7 @@
 			                
 			               <c:forEach items="${institucion.getListaSala()}" var="lista" varStatus="loop">
 	               			
-	               				<c:if test="${institucion.getCamaRequerida()  == true && institucion.getSalaRequerida()  == true
+	               				<c:if test="${institucion.getSalaYCamaRequerida()  == true
 	               				&& lista.getSala().getTipoSala() == tipoSala}">				               				               		
 				               		<ul class="my-2 pl-3">
 					               		<li
