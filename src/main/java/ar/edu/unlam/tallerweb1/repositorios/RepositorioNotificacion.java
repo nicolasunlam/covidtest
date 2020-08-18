@@ -12,4 +12,6 @@ public interface RepositorioNotificacion {
 	List<Notificacion> buscarNotificacionPorId(Usuario usuario);
 
 	Notificacion buscarNotificacionPorSuId(Long id);
+
+	List<Notificacion> buscarNotificacionesEnviadasPorUsuario(Usuario usuario);
 }

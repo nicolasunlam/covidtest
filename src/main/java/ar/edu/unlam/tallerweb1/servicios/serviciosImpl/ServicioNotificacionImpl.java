@@ -40,4 +40,11 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 		return repositorioNotificacion.buscarNotificacionPorSuId(id);
 	}
 
+
+	@Override
+	public List<Notificacion> buscarNotificacionesEnviadasPorUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return repositorioNotificacion.buscarNotificacionesEnviadasPorUsuario(usuario);
+	}
+
 }
