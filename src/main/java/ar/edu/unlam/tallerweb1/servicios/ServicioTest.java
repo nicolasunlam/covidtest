@@ -11,5 +11,4 @@ public interface ServicioTest {
     
     Boolean realizarPermiso(String nombre,String apellido,Integer edad,String tipoDocumento,Integer numeroDocumento,String motivo);
     
-    void enviarMail (Paciente paciente);
 }

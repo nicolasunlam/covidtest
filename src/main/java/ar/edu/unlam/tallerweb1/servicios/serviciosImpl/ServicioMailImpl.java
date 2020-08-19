@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMail;
 
@@ -30,7 +31,7 @@ public class ServicioMailImpl implements ServicioMail {
 	private VelocityEngine velocityEngine;
 	
 	@Override
-	public void SendEmail(String to, String subject, String path) {
+	public void SendEmail(String to, String subject, String path, Paciente usuario) {
 		
 		MimeMessage mimeMessage = mailSender.createMimeMessage();
 		
@@ -40,11 +41,12 @@ public class ServicioMailImpl implements ServicioMail {
 	        mimeMessageHelper.setTo(to);
 	        mimeMessageHelper.setSentDate(new Date());
 	        
-	        path=path + context.getContextPath()+"/login";
-	        
+			path = path + context.getContextPath() + "/login";
+
 	        Template template = this.velocityEngine.getTemplate("/templates/email-template.html");
 	        VelocityContext velocityContext = new VelocityContext();
 	        velocityContext.put("path",path);
+	        velocityContext.put("usuario",usuario.getNombre());
 	        
 	       
 	       
