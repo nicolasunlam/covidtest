@@ -8,6 +8,8 @@
 
 <title>Trasladar Paciente</title>
 
+<link href="css/bootstrap.css" rel="stylesheet">
+    
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -36,17 +38,10 @@
 
 			<div class="form-row d-flex justify-content-between flex-md-nowrap align-items-center pb-2 mb-4">
 
-				<div class="col-lg-1 col-md-2 col-sm-4">								
+				<div class="col-lg-1 col-md-2">								
 					
-					<label for="" class=""> <svg width="100%"
-							height="100%" viewBox="0 0 16 16" class="bi bi-person-circle"
-							fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-	  					  <path
-								d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
-						  <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-						  <path fill-rule="evenodd"
-								d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
-						</svg>
+					<label for="" class="">
+						<img alt="" src="img/avatar.svg" width="100%" height="85px" style="min-width: ">
 					</label>
 				</div>
 
@@ -618,8 +613,5 @@
 <script src="js/sort.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/feather.min.js"></script>
-<script src="js/Chart.min.js"></script>
-<script src="js/dashboard.js"></script>
 </body>
 </html>

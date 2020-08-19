@@ -2,9 +2,9 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="icon" href="img/asignar-logo.ico"> 
+<link rel="icon" href="img/iso-azul-blanco.svg"> 
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
 
 
         <!-- Bootstrap core CSS -->

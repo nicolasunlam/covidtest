@@ -3,23 +3,19 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="icon" href="img/asignar-logo.ico"> 
+<link rel="icon" href="img/iso-azul-blanco.svg"> 
+	
+<link href="css/bootstrap.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
 
 <style>
 #navbar-top:hover {
 	text-decoration: none;
+}
+.bg-primary{
+	background-color: #0099ff;
 }
 </style>
 
@@ -28,30 +24,49 @@
 <body>
 
 	<nav
-		class="navbar sticky-top bg-dark text-white justify-content-center align-items-center">
+		class="navbar bg-primary text-white justify-content-center align-items-center">
 		<a class="text-center text-white" href="https://www.argentina.gob.ar/salud/coronavirus-COVID-19" id="navbar-top">
-			<h5>
-				Coronavirus COVID-19 conocé información y recomendaciones del
-				Ministerio de Salud</strong>
-			</h5>
+			<img src="img/info.svg" width="14" height="" class="d-inline-block align-middle" alt="logo" style="margin-bottom: 0.10rem">
+			<span style="font-size:15px;">
+				Coronavirus COVID-19: conocé información y recomendaciones del
+				Ministerio de Salud
+			</span>
 		</a>
 	</nav>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" href="#"> <img src="img/share2.png"
-			width="35" height="35" class="d-inline-block align-top" alt="logo">
-			AsignAR
-		</a>
+	<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-white border-bottom">
+
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarTogglerDemo02"
 			aria-controls="navbarTogglerDemo02" aria-expanded="false"
 			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
+		<img src="img/toggler.svg" width="35" height="35" class="d-inline-block align-middle" alt="logo">
+			
 		</button>
+
+		<a class="navbar-brand text-primary d-flex mr-0"
+		href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+					<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+					<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+					<c:if test='${rol == null}'>
+						"home"
+						</c:if>
+		> 
+			<img src="img/iso-azul.svg" width="50" height="50" class="d-inline-block align-top" alt="iso">
+			<img src="img/logo-azul.svg" width="85" height="50" class="d-inline-block align-top" alt="asignar">
+		</a>
 
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item ml-5 active"><a class="nav-link"
+				<li class="nav-item ml-4 active">
+				
+					<a class="nav-link text-primary"
 					href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
 						</c:if>
@@ -63,32 +78,33 @@
 						</c:if>
 					<c:if test='${rol == null}'>
 						"home"
-						</c:if>>Home
+						</c:if>>Inicio
 						<span class="sr-only">(current)</span>
-				</a>
-				<li class="nav-item ml-5"><a class="btn btn-danger" role="button" href="autoTest">Realizar
+					</a>
+					
+				<li class="nav-item ml-3"><a class="btn btn-outline-success" role="button" href="autoTest">Realizar
 						test</a></li>
 				<c:if test="${permiso == true}">
-					<li class="nav-item ml-5" id="botonPermiso"><a
-						class="nav-link btn btn-primary active" href="generarPermiso">Generar Permiso </a></li>
+					<li class="nav-item ml-3" id="botonPermiso"><a
+						class="nav-link btn btn-outline-success active" href="generarPermiso">Generar Permiso </a></li>
 				</c:if>
 				</li>
 				<c:if test='${rol == "PACIENTE"}'>
-					<li class="nav-item ml-5"><a class="btn btn-warning"
-						href="verMensajes">Ver mis Mensajes </a></li>
+					<li class="nav-item ml-4"><a class="btn btn-outline-info"
+					role="button"	href="verMensajes">Ver mis Mensajes </a></li>
 				</c:if>
 			</ul>
-
+		</div>
+		
+		
 			<c:if test="${rol == null}">
-				<a href="login" class="btn btn-dark ml-5" role="button"
+				<a href="login" class="btn btn-outline-primary ml-3 mt-2" role="button"
 					aria-disabled="true">Iniciar Sesión</a>
 			</c:if>
 			<c:if test="${rol != null}">
-				<a href="logout" class="btn btn-dark ml-5" role="button"
+				<a href="logout" class="btn btn-outline-primary ml-3 my-2" role="button"
 					aria-disabled="true">Salir</a>
 			</c:if>
-
-		</div>
 	</nav>
 
 	<c:if test="${permiso == true}">
