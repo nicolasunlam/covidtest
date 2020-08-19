@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
+import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 
 import java.util.List;
@@ -66,4 +67,15 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
                 .uniqueResult();
     }
 
+    @SuppressWarnings({ "deprecation", "unchecked" })
+    @Override
+    public List<Asignacion> asignacionesReservadasPorInstitucion(Institucion institucion) {
+
+        return sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
+                .add(Restrictions.eq("cama.getSala().getSector().getPiso().getInstitucion()", institucion))
+                .add(Restrictions.isNotNull("horaReserva"))
+                .add(Restrictions.isNull("horaIngreso"))
+                .list();
+    }
+    
 }
