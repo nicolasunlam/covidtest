@@ -12,6 +12,8 @@ import ar.edu.unlam.tallerweb1.modelo.Paciente;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 @Repository("repositorioAsignacion")
 public class RepositorioAsignacionImpl implements RepositorioAsignacion {
 
@@ -71,11 +73,20 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
     @Override
     public List<Asignacion> asignacionesReservadasPorInstitucion(Institucion institucion) {
 
-        return sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
-                .add(Restrictions.eq("cama.getSala().getSector().getPiso().getInstitucion()", institucion))
-                .add(Restrictions.isNotNull("horaReserva"))
-                .add(Restrictions.isNull("horaIngreso"))
-                .list();
+		String hql = "SELECT c " 
+					+ "FROM Cama as c " 
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec " 
+					+ "JOIN Piso as p ON sec.piso = p "
+					+ "JOIN Institucion as i ON p.institucion = i " 
+					+ "JOIN Asignacion as a ON a.cama = c "
+					+ "WHERE i = :institucion " 
+					+ "AND a.horaReserva IS NOT NULL "
+					+ "AND a.horaIngreso IS NULL ";
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("institucion", institucion);
+
+		return query.getResultList();
     }
-    
 }

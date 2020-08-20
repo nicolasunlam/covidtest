@@ -561,7 +561,7 @@ public class ControladorAsignacion {
 			return new ModelAndView("egresarPaciente", model);
 		}		
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd, MMMM, yyyy HH:mm");
 		LocalDateTime dateTime = asignacionBuscada.getHoraIngreso();
 		String horaIngreso = dateTime.format(formatter);
 		

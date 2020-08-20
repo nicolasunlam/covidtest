@@ -295,7 +295,7 @@
 							               		<ul class="my-2 pl-3 d-flex justify-content-between align-items-center">
 							               		
 							               		<c:if test="${listaCamas.getCama().tipoCama != tipoCama}">
-							               		<p class="text-dark mb-0 ">
+							               		<p class="mb-0 text-dark mb-0 ">
 							               		</c:if>
 							               		<c:if test="${listaCamas.getCama().tipoCama == tipoCama}">
 							               		<p class="mb-0 text-dark font-weight-bold">

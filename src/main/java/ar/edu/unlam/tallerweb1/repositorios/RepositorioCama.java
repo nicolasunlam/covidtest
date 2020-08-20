@@ -34,5 +34,9 @@ public interface RepositorioCama {
 
 	List<Cama> obtenerCamasPorSala(Sala sala);
 
-	List<CamaConAsignacion> obtenerListaDeCamasPorAsignacionPorSala(Sala sala);
+	List<CamaConAsignacion> obtenerListaDeCamasDisponiblesPorSala(Sala sala);
+
+	List<CamaConAsignacion> obtenerListaDeCamasOcupadasPorSala(Sala sala);
+
+	List<CamaConAsignacion> obtenerListaDeCamasReservadasPorSala(Sala sala);
 }
