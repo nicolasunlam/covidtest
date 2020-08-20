@@ -32,7 +32,7 @@
 		
 		<c:if test="${listaPacientesInternados != null}">
 	
-		<h6 class="">PASO 1: Elegir el paciente a egresar</h6>	
+		<h6 class="">PASO 1: Elegir el paciente a internar</h6>	
 		
 		</br>		
 		

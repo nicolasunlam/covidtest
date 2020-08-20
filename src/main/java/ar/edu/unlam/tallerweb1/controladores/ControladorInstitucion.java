@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,18 +26,16 @@ public class ControladorInstitucion {
 	private ServicioDomicilio servicioDomicilio;
 	private ServicioLocalidad servicioLocalidad;
 	private ServicioPartido servicioPartido;
-	private ServicioZona servicioZona;
 	private ServicioAtajo servicioAtajo;
 	private ServicioMapa servicioMapa;
 	private ServicioPiso servicioPiso;
 	private ServicioSector servicioSector;
 	private ServicioSala servicioSala;
-	private ServicioPaciente servicioPaciente;
 
 	@Autowired
 	public ControladorInstitucion(ServicioInstitucion servicioInstitucion, ServicioCama servicioCama,
-			ServicioPaciente servicioPaciente, ServicioUsuario servicioUsuario, ServicioDomicilio servicioDomicilio,
-			ServicioPartido servicioPartido, ServicioLocalidad servicioLocalidad, ServicioZona servicioZona,
+			ServicioUsuario servicioUsuario, ServicioDomicilio servicioDomicilio,
+			ServicioPartido servicioPartido, ServicioLocalidad servicioLocalidad,
 			ServicioAtajo servicioAtajo, ServicioMapa servicioMapa, ServicioPiso servicioPiso,
 			ServicioSector servicioSector, ServicioSala servicioSala) {
 
@@ -46,13 +45,11 @@ public class ControladorInstitucion {
 		this.servicioDomicilio = servicioDomicilio;
 		this.servicioLocalidad = servicioLocalidad;
 		this.servicioPartido = servicioPartido;
-		this.servicioZona = servicioZona;
 		this.servicioAtajo = servicioAtajo;
 		this.servicioMapa = servicioMapa;
 		this.servicioPiso = servicioPiso;
 		this.servicioSector = servicioSector;
 		this.servicioSala = servicioSala;
-		this.servicioPaciente = servicioPaciente;
 	}
 
 	@RequestMapping("/registrarInstitucion")
@@ -122,11 +119,6 @@ public class ControladorInstitucion {
 			servicioInstitucion.actualizarInstitucion(institucion);
 			servicioDomicilio.actualizarDomicilio(domicilio);
 			servicioLocalidad.actualizarLocalidad(localidad);
-
-			// Usuario admin = servicioUsuario.consultarUsuarioPorId(idAdmin);
-
-			// request.getSession().setAttribute("ROL", admin.getRol());
-			// .getSession().setAttribute("ID", idAdmin);
 
 			return new ModelAndView("listaInstituciones", model);
 		} else {
@@ -414,22 +406,6 @@ public class ControladorInstitucion {
 			return new ModelAndView("confirmacionPrueba", model);
 		}
 
-//		if (eleccion == "piso") {
-//			return new ModelAndView("redirect:/crearPiso", model);
-//		}
-//		if (eleccion == "sector") {
-//			return new ModelAndView("redirect:/crearSector", model);
-//			// return new ModelAndView("crearSector", model);
-//		}
-//		if (eleccion == "sala") {
-//			return new ModelAndView("redirect:/crearSala", model);
-//			// return new ModelAndView("crearSala", model);
-//		}
-//		if (eleccion == "camas") {
-//			return new ModelAndView("redirect:/crearCamas", model);
-//			// return new ModelAndView("crearCamas", model);
-//		}
-
 	}
 
 	@RequestMapping("/listaInstituciones")
@@ -480,10 +456,46 @@ public class ControladorInstitucion {
 
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 
-		List<PisoConSectores> listaPisosConSectoresSalasYCamas = servicioPiso
-				.listarPisosConSectoresSalasYCamas(institucion);
-		model.put("listaPisosConSectoresSalasYCamas", listaPisosConSectoresSalasYCamas);
+		/*Clase Nueva 
+		PisoDetallado{
 
+		piso, 
+		listaSectores, 
+		listaSalas, 
+		listaCamasOcupadas, 
+		listaCamasReservadas, 
+		listaCamasLibres
+		
+		}
+		*/
+		
+		/*Controlador
+		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
+		List<PisoDetallado> listaPisosDetalados = ArrayList<PisDetallado>;
+		
+		for(listaPisos.size()){
+			
+			listaSectores = servicioSector.sectoresDeUnPiso(listaPiso.get(i));
+			listaSalas = servicioSala.salasDeUnPiso(listaPiso.get(i));
+			listaCamasOcupadas = servicioCama.camasOcupadasDeUnPiso(listaPiso.get(i));
+			listaCamasReservadas = servicioCama.camasReservadasDeUnPiso(listaPiso.get(i));
+			listaCamasLibres = servicioCama.cantidadCamasLibresDeUnPiso(listaPiso.get(i));
+			
+			PisoDetallado pisoDetallado = new PisoDetallado();
+			
+			pisoDetallado.setPiso(listaPiso.get(i));
+			pisoDetallado.setSectores(listaSectores);
+			pisoDetallado.setSalas(listaSalas);
+			pisoDetallado.setCamasOcupadas(listaCamasOcupadas);
+			pisoDetallado.setCamasReservadas(listaCamasReservadas);
+			pisoDetallado.setCamasLibres(listaCamasLibres);
+			
+			listaPisosDetalados.add(pisoDetallado);
+		}
+		
+		model.put("listaPisosDetalados", listaPisosDetalados);
+		*/
+		
 		return new ModelAndView("pisosInstitucion", model);
 	}
 

@@ -143,4 +143,21 @@ WHERE c.id NOT IN (SELECT a.cama_id
  			   FROM asignacion a
 			   WHERE a.cama_id = c.id
 			   AND a.horaEgreso IS NULL
-               AND a.horaReserva IS NULL);     
+               AND a.horaReserva IS NULL);   
+               
+/*------ Mostrar la cantidad de camas tal para las cuales existe una asignacion vigente ------*/
+SELECT a.*, c.*
+FROM cama c  
+JOIN Sala sal ON c.sala_id = sal.id
+JOIN Asignacion a ON a.cama_id = c.id
+WHERE a.horaEgreso IS NULL
+AND a.horaIngreso IS NOT NULL;  
+
+/*------ Mostrar la cantidad de camas tal para las cuales no existe una asignacion vigente ------*/
+SELECT c.*
+FROM cama c  
+JOIN Sala sal ON c.sala_id = sal.id
+WHERE c.id NOT IN (SELECT a.cama_id
+ 			   FROM asignacion a
+			   WHERE a.cama_id = c.id
+			   AND a.horaEgreso IS NULL);  	

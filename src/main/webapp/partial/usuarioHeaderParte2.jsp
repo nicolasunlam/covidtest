@@ -59,7 +59,7 @@
 						</c:if>
 		> 
 			<img src="img/iso-azul.svg" width="50" height="50" class="d-inline-block align-top" alt="iso">
-			<img src="img/logo-azul.svg" width="85" height="50" class="d-inline-block align-top" alt="asignar">
+			<img src="img/logo-azul.svg" width="80" height="50" class="d-inline-block align-top" alt="asignar">
 		</a>
 
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">

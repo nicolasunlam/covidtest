@@ -110,7 +110,8 @@ public class ServicioAtajoImpl implements ServicioAtajo {
 		}
 
 		/* ACCESO PERMITIDO SOLO A INSTITUCIONES */
-		if (request.getRequestURI().contains("/covidtest/bienvenido")) {
+		if (request.getRequestURI().contains("/covidtest/bienvenido")
+			|| request.getRequestURI().contains("/covidtest/trasladarAInstitucion")) {
 			if (rol == Rol.INSTITUCION) {
 				return null;
 			} else {
