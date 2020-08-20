@@ -1,6 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios.repositoriosImpl;
 
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioInstitucion;
+import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -9,17 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
-import ar.edu.unlam.tallerweb1.modelo.Sala;
-import ar.edu.unlam.tallerweb1.modelo.TipoSala;
-import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
-import ar.edu.unlam.tallerweb1.modelo.listas.OrdenarPorPrioridad;
-import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
-
-import javax.persistence.Query;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioInstitucion;
 
 
 @Repository("repositorioInstitucion")

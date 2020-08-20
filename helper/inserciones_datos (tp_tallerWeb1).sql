@@ -165,7 +165,7 @@ VALUES (1, 0, 2),
        
 INSERT INTO sector(id, descripcion, tipoSector, piso_id)
 		/*FAVALORO*/
-VALUES (1, "Cirujia", NULL, 2),
+VALUES (1, "Cirujia", NULL, 1),
 	   (2, "Internación", NULL, 2),
        (3, "Radiografías", NULL, 3),
        (4, "Quemaduras", NULL, 4),
@@ -187,7 +187,7 @@ VALUES (1, "Cirujia", NULL, 2),
        
 INSERT INTO sala(id, descripcion, tipoSala, sector_id)
 		/*FAVALORO*/
-VALUES (1, "SALA 1", "TERAPIA_INTENSIVA", 2),
+VALUES (1, "SALA 1", "TERAPIA_INTENSIVA", 1),
 	   (2, "SALA 2", "TERAPIA_INTENSIVA", 2),
        (3, "SALA 3", "TERAPIA_INTENSIVA", 3),
        (4, "SALA 4", "TERAPIA_INTERMEDIA", 4),

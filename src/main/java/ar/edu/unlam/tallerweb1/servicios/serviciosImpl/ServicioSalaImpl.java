@@ -78,7 +78,7 @@ public class ServicioSalaImpl implements ServicioSala {
 	@Override
 	public SalaConCamas obtenerDetalleDeSala(Sala sala) {
 		List<Cama> listaCamas = servicioCama.obtenerCamasPorSala(sala);
-		List<CamaConAsignacion> listaCamasConAsignacion = servicioCama.obtenerListaDeCamasPorAsignacionPorSala(sala);
+		List<CamaConAsignacion> listaCamasConAsignacion = servicioCama.obtenerListaDetalladaDeCamasPorSala(sala);
 
 		SalaConCamas salaConCamas = new SalaConCamas();
 		salaConCamas.setListaDeCamasConAsignacion(listaCamasConAsignacion);

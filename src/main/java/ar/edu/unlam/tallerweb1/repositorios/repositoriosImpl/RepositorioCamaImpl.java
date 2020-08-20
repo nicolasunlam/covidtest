@@ -184,12 +184,12 @@ public class RepositorioCamaImpl implements RepositorioCama {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CamaConAsignacion> obtenerListaDeCamasDisponiblesPorSala(Sala sala) {
-		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion(c, a) " 
+		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion(c) " 
 				+ "FROM Cama as c "
 				+ "JOIN Sala as sal ON c.sala = sal "
 				+ "JOIN Asignacion as a ON a.cama = c "
 				+ "WHERE sal = :sala "
-				+ "AND .horaEgreso IS NULL "
+				+ "AND a.horaEgreso IS NULL "
 				+ "AND a.horaIngreso IS NOT NULL "; 
 
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
@@ -204,6 +204,7 @@ public class RepositorioCamaImpl implements RepositorioCama {
 		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion(c, a) " 
 				+ "FROM Cama as c "
 				+ "JOIN Sala as sal ON c.sala = sal "
+				+ "JOIN Asignacion as a ON a.cama = c "
 				+ "WHERE sal = :sala "
 				+ "AND c NOT IN (SELECT a.cama " 
 								+ "FROM Asignacion as a " 

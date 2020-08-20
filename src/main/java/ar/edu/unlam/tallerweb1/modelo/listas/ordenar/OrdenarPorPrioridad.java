@@ -1,6 +1,8 @@
-package ar.edu.unlam.tallerweb1.modelo.listas;
+package ar.edu.unlam.tallerweb1.modelo.listas.ordenar;
 
 import java.util.Comparator;
+
+import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
 
 public class OrdenarPorPrioridad implements Comparator<SalaCantidad> {
 

@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.servicios.serviciosImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.transaction.Transactional;
 
@@ -13,7 +15,7 @@ import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsignacion;
+import ar.edu.unlam.tallerweb1.modelo.listas.ordenar.OrdenarPorIdCama;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCama;
 
 @Service
@@ -92,9 +94,38 @@ public class ServicioCamaImpl implements ServicioCama {
 	}
 
 	@Override
-	public List<CamaConAsignacion> obtenerListaDeCamasPorAsignacionPorSala(Sala sala) {
-		return null;
-//		return repositorioCama.obtenerListaDeCamasPorAsignacionPorSala(sala);
+	public List<CamaConAsignacion> obtenerListaDeCamasDisponiblesPorSala(Sala sala) {
+		return repositorioCama.obtenerListaDeCamasDisponiblesPorSala(sala);
+	}
+	
+	@Override
+	public List<CamaConAsignacion> obtenerListaDeCamasOcupadasPorSala(Sala sala) {
+		return repositorioCama.obtenerListaDeCamasOcupadasPorSala(sala);
+	}
+	
+	@Override
+	public List<CamaConAsignacion> obtenerListaDeCamasReservadasPorSala(Sala sala) {
+		return repositorioCama.obtenerListaDeCamasReservadasPorSala(sala);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CamaConAsignacion> obtenerListaDetalladaDeCamasPorSala(Sala sala) {
+
+		List<CamaConAsignacion> listaDetallada = new ArrayList<CamaConAsignacion>();
+		
+		listaDetallada.addAll(obtenerListaDeCamasDisponiblesPorSala(sala));
+		listaDetallada.addAll(obtenerListaDeCamasOcupadasPorSala(sala));
+		listaDetallada.addAll(obtenerListaDeCamasReservadasPorSala(sala));
+		
+    	OrdenarPorIdCama orden = new OrdenarPorIdCama();
+    	TreeSet<CamaConAsignacion> listaOrdenada = new TreeSet<CamaConAsignacion>(orden);
+    	listaOrdenada.addAll(listaDetallada);
+    	
+    	List<CamaConAsignacion> listaNueva = new ArrayList<CamaConAsignacion>(listaOrdenada);
+    	
+    	return listaNueva;
+		//return listaDetallada;
 	}
 
 }

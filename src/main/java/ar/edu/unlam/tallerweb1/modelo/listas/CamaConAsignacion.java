@@ -6,11 +6,15 @@ import ar.edu.unlam.tallerweb1.modelo.Cama;
 public class CamaConAsignacion {	
 
 	public CamaConAsignacion(Cama cama, Asignacion asignacion) {
-		super();
 		this.cama = cama;
 		this.asignacion = asignacion;
 	}
 
+
+	public CamaConAsignacion(Cama cama) {
+		this.cama = cama;
+	}
+	
 	private Cama cama;
 
 	private Asignacion asignacion;

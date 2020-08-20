@@ -456,6 +456,8 @@ public class ControladorInstitucion {
 
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 
+		List<PisoConSectores> listaPisosConSectoresSalasYCamas = servicioPiso.listarPisosConSectoresSalasYCamas(institucion);
+		model.put("listaPisosConSectoresSalasYCamas", listaPisosConSectoresSalasYCamas);
 		/*Clase Nueva 
 		PisoDetallado{
 
