@@ -16,7 +16,9 @@ public interface ServicioPiso {
 
 	List<Piso> listarPisosPorInstitucion(Institucion institucion);
 
-	public List<PisoConSectores> listarPisosConSectoresSalasYCamas(Institucion institucion);
+	public PisoConSectores pisoConSectoresSalasYCamas(Piso piso);
+
+	public List<PisoConSectores> listarPisosConSectoresSalasYCamasDeUnaInstitucion(Institucion institucion);
 
 	public PisoConSectores obtenerDetalleDePiso(Piso piso);
 }

@@ -1,21 +1,43 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import ar.edu.unlam.tallerweb1.modelo.*;
-import ar.edu.unlam.tallerweb1.modelo.listas.PisoConSectores;
-import ar.edu.unlam.tallerweb1.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import ar.edu.unlam.tallerweb1.modelo.Cama;
+import ar.edu.unlam.tallerweb1.modelo.Domicilio;
+import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Localidad;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelo.Piso;
+import ar.edu.unlam.tallerweb1.modelo.Rol;
+import ar.edu.unlam.tallerweb1.modelo.Sala;
+import ar.edu.unlam.tallerweb1.modelo.Sector;
+import ar.edu.unlam.tallerweb1.modelo.TipoCama;
+import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
+import ar.edu.unlam.tallerweb1.modelo.TipoSala;
+import ar.edu.unlam.tallerweb1.modelo.TipoSector;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.listas.PisoConSectores;
+import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
+import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
+import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMapa;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPiso;
+import ar.edu.unlam.tallerweb1.servicios.ServicioSala;
+import ar.edu.unlam.tallerweb1.servicios.ServicioSector;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
 @Controller
 public class ControladorInstitucion {
@@ -361,7 +383,7 @@ public class ControladorInstitucion {
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 
 		List<PisoConSectores> listaPisosConSectoresSalasYCamas = servicioPiso
-				.listarPisosConSectoresSalasYCamas(institucion);
+				.listarPisosConSectoresSalasYCamasDeUnaInstitucion(institucion);
 		model.put("listaPisosConSectoresSalasYCamas", listaPisosConSectoresSalasYCamas);
 
 		return new ModelAndView("pisosInstitucion", model);
@@ -455,9 +477,7 @@ public class ControladorInstitucion {
 		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
 
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
-
-		List<PisoConSectores> listaPisosConSectoresSalasYCamas = servicioPiso.listarPisosConSectoresSalasYCamas(institucion);
-		model.put("listaPisosConSectoresSalasYCamas", listaPisosConSectoresSalasYCamas);
+		
 		/*Clase Nueva 
 		PisoDetallado{
 
@@ -703,6 +723,39 @@ public class ControladorInstitucion {
 		model.put("cantidadPisos", cantidadPisos);
 
 		return new ModelAndView("listarPisosDeInstitucion", model);
+	}
+
+	@RequestMapping("/verPiso")
+	public ModelAndView verPiso(HttpServletRequest request,
+								Long idPiso) {
+
+		ModelMap model = new ModelMap();
+
+		/*-----------Validaciones--------------*/
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		/*-----------------------------------*/
+		
+		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
+		
+		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
+		if (piso.getInstitucion().getId() != idInstitucion) {
+			return new ModelAndView("redirect:/denied");
+		}
+		
+		PisoConSectores pisoConSectores = servicioPiso.pisoConSectoresSalasYCamas(piso);
+		model.put("pisoConSectores", pisoConSectores);
+		
+		return new ModelAndView("verPiso", model);
 	}
 
 }

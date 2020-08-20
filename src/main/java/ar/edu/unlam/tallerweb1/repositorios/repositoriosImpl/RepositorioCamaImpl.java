@@ -185,12 +185,13 @@ public class RepositorioCamaImpl implements RepositorioCama {
 	@Override
 	public List<CamaConAsignacion> obtenerListaDeCamasDisponiblesPorSala(Sala sala) {
 		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion(c) " 
-				+ "FROM Cama as c "
-				+ "JOIN Sala as sal ON c.sala = sal "
-				+ "JOIN Asignacion as a ON a.cama = c "
-				+ "WHERE sal = :sala "
-				+ "AND a.horaEgreso IS NULL "
-				+ "AND a.horaIngreso IS NOT NULL "; 
+					+ "FROM Cama as c "
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "WHERE sal = :sala "
+					+ "AND c NOT IN (SELECT a.cama " 
+								+ "FROM Asignacion as a " 
+								+ "WHERE a.cama = c "
+								+ "AND a.horaEgreso IS NULL)";
 
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("sala", sala);
@@ -202,14 +203,12 @@ public class RepositorioCamaImpl implements RepositorioCama {
 	@Override
 	public List<CamaConAsignacion> obtenerListaDeCamasOcupadasPorSala(Sala sala) {
 		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion(c, a) " 
-				+ "FROM Cama as c "
-				+ "JOIN Sala as sal ON c.sala = sal "
-				+ "JOIN Asignacion as a ON a.cama = c "
-				+ "WHERE sal = :sala "
-				+ "AND c NOT IN (SELECT a.cama " 
-								+ "FROM Asignacion as a " 
-								+ "WHERE a.cama = c "
-								+ "AND a.horaEgreso IS NULL)";
+					+ "FROM Cama as c "
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Asignacion as a ON a.cama = c "
+					+ "WHERE sal = :sala "
+					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.horaIngreso IS NOT NULL "; 
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("sala", sala);

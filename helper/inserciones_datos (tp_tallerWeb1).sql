@@ -183,29 +183,41 @@ VALUES (1, "Cirujia", NULL, 1),
        (13, "Cirujia", NULL, 13),
 	   (14, "Internación", NULL, 14),
        (15, "Radiografías", NULL, 14),
-       (16, "Quemaduras", NULL, 15);
+       (16, "Quemaduras", NULL, 15),
+       
+       /*MÁS SECTORES PARA FAVALORO*/
+       (17, "Cirujia", NULL, 2),
+	   (18, "Internación", NULL, 3),
+       (19, "Radiografías", NULL, 3),
+       (20, "Quemaduras", NULL, 3);
        
 INSERT INTO sala(id, descripcion, tipoSala, sector_id)
 		/*FAVALORO*/
-VALUES (1, "SALA 1", "TERAPIA_INTENSIVA", 1),
-	   (2, "SALA 2", "TERAPIA_INTENSIVA", 2),
-       (3, "SALA 3", "TERAPIA_INTENSIVA", 3),
-       (4, "SALA 4", "TERAPIA_INTERMEDIA", 4),
+VALUES (1, "1", "TERAPIA_INTENSIVA", 1),
+	   (2, "2", "TERAPIA_INTENSIVA", 2),
+       (3, "3", "TERAPIA_INTENSIVA", 3),
+       (4, "4", "TERAPIA_INTERMEDIA", 4),
        /*MORON*/
-       (5, "SALA 1", "TERAPIA_INTERMEDIA", 5),
-	   (6, "SALA 2", "TERAPIA_INTERMEDIA", 6),	
-       (7, "SALA 3", "TERAPIA_INTERMEDIA", 7),
-       (8, "SALA 4", "AISLAMIENTO", 8),
+       (5, "1", "TERAPIA_INTERMEDIA", 5),
+	   (6, "2", "TERAPIA_INTERMEDIA", 6),	
+       (7, "3", "TERAPIA_INTERMEDIA", 7),
+       (8, "4", "AISLAMIENTO", 8),
        /*SANTOJANNI*/
-       (9, "SALA 1", "TERAPIA_INTENSIVA", 9),
-	   (10, "SALA 2", "TERAPIA_INTENSIVA", 10),
-       (11, "SALA 3", "TERAPIA_INTENSIVA", 11),
-       (12, "SALA 4", "TERAPIA_INTERMEDIA", 12),
+       (9, "1", "TERAPIA_INTENSIVA", 9),
+	   (10, "2", "TERAPIA_INTENSIVA", 10),
+       (11, "3", "TERAPIA_INTENSIVA", 11),
+       (12, "4", "TERAPIA_INTERMEDIA", 12),
        /*CARRILLO*/
-       (13, "SALA 1", "TERAPIA_INTENSIVA", 13),
-	   (14, "SALA 2", "TERAPIA_INTERMEDIA", 14),
-       (15, "SALA 3", "TERAPIA_INTERMEDIA", 15),
-       (16, "SALA 4", "AISLAMIENTO", 16);
+       (13, "1", "TERAPIA_INTENSIVA", 13),
+	   (14, "2", "TERAPIA_INTERMEDIA", 14),
+       (15, "3", "TERAPIA_INTERMEDIA", 15),
+       (16, "4", "AISLAMIENTO", 16),
+       
+       /*MÁS SALAS PARA FAVALORO*/
+       (17, "5", "TERAPIA_INTENSIVA", 17),
+	   (18, "6", "TERAPIA_INTENSIVA", 18),
+       (19, "7", "TERAPIA_INTENSIVA", 18),
+       (20, "8", "TERAPIA_INTERMEDIA", 19);
        
 INSERT INTO cama(id, descripcion, tipoCama, sala_id)
 		/*FAVALORO*/
@@ -300,3 +312,8 @@ VALUES ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro siste
 	   ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro sistema de asignación de camas.", 7, 2),
 	   ("Recordatorio", '2020-04-02 01:00:00.000000', "Se le recuerda que ...", 6, 2),
        ("Recordatorio", '2020-04-02 01:00:00.000000', "Muchas gracias.", 2, 6);
+       
+/* ----- RESERVA ----- */
+INSERT INTO asignacion(id, horaReserva, horaEgreso, motivoEgreso, cama_id, paciente_id)
+VALUES (16, '2020-05-01 01:00:00.000000', null, null, 9, 32),
+	   (17, '2020-05-05 01:00:00.000000', null, null, 45, 33);

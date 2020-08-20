@@ -49,7 +49,13 @@ public class ServicioPisoImpl implements ServicioPiso {
 	}
 
 	@Override
-	public List<PisoConSectores> listarPisosConSectoresSalasYCamas(Institucion institucion) {
+	public PisoConSectores pisoConSectoresSalasYCamas(Piso piso) {
+		
+			return obtenerDetalleDePiso(piso);
+	}
+	
+	@Override
+	public List<PisoConSectores> listarPisosConSectoresSalasYCamasDeUnaInstitucion(Institucion institucion) {
 		List<Piso> listaPisos = listarPisosPorInstitucion(institucion);
 		List<PisoConSectores> listaPisosConDetalle = new ArrayList<PisoConSectores>();
 		for (int i = 0; i < listaPisos.size(); i++) {

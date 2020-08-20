@@ -107,8 +107,7 @@ public class ServicioCamaImpl implements ServicioCama {
 	public List<CamaConAsignacion> obtenerListaDeCamasReservadasPorSala(Sala sala) {
 		return repositorioCama.obtenerListaDeCamasReservadasPorSala(sala);
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public List<CamaConAsignacion> obtenerListaDetalladaDeCamasPorSala(Sala sala) {
 
@@ -122,10 +121,9 @@ public class ServicioCamaImpl implements ServicioCama {
     	TreeSet<CamaConAsignacion> listaOrdenada = new TreeSet<CamaConAsignacion>(orden);
     	listaOrdenada.addAll(listaDetallada);
     	
-    	List<CamaConAsignacion> listaNueva = new ArrayList<CamaConAsignacion>(listaOrdenada);
+    	List<CamaConAsignacion> listaOrdenadaFinal = new ArrayList<CamaConAsignacion>(listaOrdenada);
     	
-    	return listaNueva;
-		//return listaDetallada;
+    	return listaOrdenadaFinal;
 	}
 
 }
