@@ -93,7 +93,8 @@ public class ServicioCamaImpl implements ServicioCama {
 
 	@Override
 	public List<CamaConAsignacion> obtenerListaDeCamasPorAsignacionPorSala(Sala sala) {
-		return repositorioCama.obtenerListaDeCamasPorAsignacionPorSala(sala);
+		return null;
+//		return repositorioCama.obtenerListaDeCamasPorAsignacionPorSala(sala);
 	}
 
 }

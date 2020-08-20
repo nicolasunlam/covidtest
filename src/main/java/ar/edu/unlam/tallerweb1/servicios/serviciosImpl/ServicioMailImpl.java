@@ -43,7 +43,7 @@ public class ServicioMailImpl implements ServicioMail {
 	        
 			path = path + context.getContextPath() + "/login";
 
-	        Template template = this.velocityEngine.getTemplate("/templates/email-template.html");
+	        Template template = this.velocityEngine.getTemplate("/templates/email-template.html", "UTF-8");
 	        VelocityContext velocityContext = new VelocityContext();
 	        velocityContext.put("path",path);
 	        velocityContext.put("usuario",usuario.getNombre());
