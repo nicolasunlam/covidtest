@@ -48,8 +48,6 @@ public class ServicioMailImpl implements ServicioMail {
 	        velocityContext.put("path",path);
 	        velocityContext.put("usuario",usuario.getNombre());
 	        
-	       
-	       
 	        StringWriter stringWriter = new StringWriter();
 	        template.merge(velocityContext, stringWriter);
 	        
