@@ -15,18 +15,73 @@
 
 
 	<div class="container">
-		<div class="alert alert-success alert-dismissible fade show mt-1 mb-4"
-			role="alert">
-			<h5 class="text-center">Usted registró efectivamente el piso
-				${numeroPiso}</h5>
-			<button type="button" class="close" data-dismiss="alert"
-				aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
+
+
+		<div class="container">
+
+			<div class="row justify-content-center h-100 my-5">
+				<div class="col-sm-8 align-self-center">
+					<div class="card shadow ">
+						<div class="card-body" style="background-color: #F2F2F2;">
+
+							<h3 class="text-center mt-2">Registrar sector</h3>
+
+
+							<h5 class="mt-5 text-center">A continuación, registre el
+								tipo de sector para el piso</h5>
+
+							<form action="registrarSector" method="POST" role="form"
+								class="contactForm my-5">
+
+								<input type="hidden" value="${idPiso}" name="idPiso">
+
+
+
+								<div class="form-group">
+									<label for="tipoSector" class="h6 my-3">Tipo de sector
+									</label> <select name="tipoSector" id="tipoSector"
+										class="form-control br-radius-zero" required
+										onchange="ShowSelected();">
+										<option id="tipoSectorCIRUJIA" value="CIRUJIA">Sector
+											cirujia
+										<option id="tipoSectorDIALISIS" value="DIALISIS">Sector
+											dialisis
+									</select>
+								</div>
+
+								<ul>
+									<c:forEach items="${sectores}" var="sector">
+										<li>${sector.getId()}"</li>
+										<li>${sector.getTipo()}"</li>
+									</c:forEach>
+								</ul>
+								<input type="hidden" value="${idSector}" name="idSector">
+
+								<div class="form-action text-center mt-5">
+									<button type="submit" class="btn btn-outline-success">
+										Registrar sector</button>
+								</div>
+								<br>
+								<div class="form-group">
+									<c:if test="${not empty error}">
+										<h6>
+											<span>${error}</span>
+										</h6>
+										<br>
+								</div>
+								</c:if>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
 		</div>
 
 
-		<div
+		<%-- 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h4>Registrar sector</h4>
 
@@ -85,7 +140,7 @@
 
 			</form>
 
-		</div>
+		</div> --%>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

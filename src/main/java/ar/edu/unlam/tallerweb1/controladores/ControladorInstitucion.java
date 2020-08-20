@@ -364,7 +364,15 @@ public class ControladorInstitucion {
 			servicioCama.registrarCama(cama);
 		}
 
-		return new ModelAndView("confirmacion", model);
+		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
+
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+
+		List<PisoConSectores> listaPisosConSectoresSalasYCamas = servicioPiso
+				.listarPisosConSectoresSalasYCamas(institucion);
+		model.put("listaPisosConSectoresSalasYCamas", listaPisosConSectoresSalasYCamas);
+
+		return new ModelAndView("pisosInstitucion", model);
 	}
 
 	@RequestMapping("continuacionIngresoDatos")

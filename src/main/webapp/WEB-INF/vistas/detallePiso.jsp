@@ -11,25 +11,99 @@
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
+
 	<div class="container">
+
+		<div class="alert alert-success alert-dismissible fade show mt-1 mb-4"
+			role="alert">
+			<h5 class="text-center">¡Registro exitoso!</h5>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
+
+
+		<div class="row justify-content-center h-100 my-5">
+			<div class="col-sm-8 align-self-center">
+				<div class="card shadow ">
+					<div class="card-body" style="background-color: #F2F2F2;">
+
+						<h3 class="text-center mt-2">Se registró exitosamente el piso
+							n° ${numeroPiso}</h3>
+
+
+						<div class="container text-center">
+							<img src="img/right.png" style="width: 150px;" class="mt-5 mb-1"></img>
+						</div>
+
+
+						<div
+							class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+							<h6 class="text-center my-4" style="line-height : 40px;">
+								A continuación, seleccione <strong>"Volver"</strong> para ir al
+								listado de todos los pisos de la institución, de lo contrario
+								selecione <strong>"Registrar Sector"</strong> para agregar un
+								sector nuevo a este piso
+							</h6>
+
+						</div>
+
+						<div
+							class="d-flex justify-content-around flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+
+							<a href="pisosInstitucion" class="btn btn-outline-danger">Volver</a>
+							<a href="crearSector?idPiso=${idPiso}"
+								class="btn btn-outline-success">Registrar Sector</a>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<%-- <div class="container">
+		<div class="alert alert-success alert-dismissible fade show mt-1 mb-4"
+			role="alert">
+			<h5 class="text-center">Usted registró efectivamente el piso n°
+				${numeroPiso}</h5>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
+		<div class="container text-center">
+			<img src="img/right.png" style="width: 150px;" class="mt-5 mb-1"></img>
+		</div>
+
 
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<h4>Detalle Piso</h4>
-			
-			<h4>Piso número: ${numeroPiso}</h4>	
-					
-			
-			<%-- <h4 class="text-center">Usted registró efectivamente el piso
-			${numeroPiso}</h4> --%>
+			<h5 class="text-center my-4">
+				A continuación, seleccione <strong>"Volver"</strong> para ir al
+				listado de todos los pisos de la institución, de lo contrario
+				selecione <strong>"Registrar Sector"</strong> para agregar un sector
+				nuevo a este piso
+			</h5>
 
 		</div>
-		
-		<a href="listarPisos" class="btn btn-success">Volver</a>
-		
-		<a href="crearSector?idPiso=${idPiso}" class="btn btn-success">Registrar Sector</a>
 
-<%-- 		<div>
+		<div
+			class="d-flex justify-content-around flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+
+			<a href="pisosInstitucion" class="btn btn-outline-danger">Volver</a>
+			<a href="crearSector?idPiso=${idPiso}"
+				class="btn btn-outline-success">Registrar Sector</a>
+
+		</div> --%>
+
+	<%-- 		<div>
 
 			<form action="registrarSala" method="POST" role="form"
 				class="contactForm">
@@ -64,7 +138,11 @@
 			</form>
 
 		</div> --%>
-	</div>
+	<!-- </div> -->
+
+
+
+
 
 
 

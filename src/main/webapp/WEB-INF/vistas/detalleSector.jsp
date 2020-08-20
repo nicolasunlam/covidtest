@@ -13,23 +13,32 @@
 
 	<div class="container">
 
-		<div
+		<div class="alert alert-success alert-dismissible fade show mt-1 mb-4"
+			role="alert">
+			<h5 class="text-center">¡Registro exitoso!</h5>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
+		<%-- 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h4>Detalle Sector</h4>
 			
 			<h4>Sector número: ${numeroSector}</h4>	
 					
 			
-			<%-- <h4 class="text-center">Usted registró efectivamente el piso
-			${numeroPiso}</h4> --%>
+			<h4 class="text-center">Usted registró efectivamente el piso
+			${numeroPiso}</h4>
 
-		</div>
-		
+		</div> --%>
+		<%-- 		
 		<a href="listarSectores" class="btn btn-success">Volver</a>
 		
-		<a href="crearSala?idSector=${idSector}" class="btn btn-success">Registrar Sala</a>
+		<a href="crearSala?idSector=${idSector}" class="btn btn-success">Registrar Sala</a> --%>
 
-<%-- 		<div>
+		<%-- 		<div>
 
 			<form action="registrarSala" method="POST" role="form"
 				class="contactForm">
@@ -64,6 +73,53 @@
 			</form>
 
 		</div> --%>
+	</div>
+
+	<div class="container">
+
+
+
+		<div class="row justify-content-center h-100 my-5">
+			<div class="col-sm-8 align-self-center">
+				<div class="card shadow ">
+					<div class="card-body" style="background-color: #F2F2F2;">
+
+						<h3 class="text-center mt-2">Se registró exitosamente el
+							sector tipo <span
+								style="text-transform: lowercase; font-weight: bolder;">${tipoSector}</span></h3>
+
+
+						<div class="container text-center">
+							<img src="img/right.png" style="width: 150px;" class="mt-5 mb-1"></img>
+						</div>
+
+
+						<div
+							class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+							<h6 class="text-center my-4" style="line-height : 40px;">
+								A continuación, seleccione <strong>"Volver"</strong> para ir al
+								listado de todos los pisos de la institución, de lo contrario
+								selecione <strong>"Registrar Sala"</strong> para agregar una
+								nueva sala a este sector
+							</h6>
+
+						</div>
+
+						<div
+							class="d-flex justify-content-around flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+
+							<a href="pisosInstitucion" class="btn btn-outline-danger">Volver</a>
+							<a href="crearSala?idSector=${idSector}" class="btn btn-success">Registrar
+								Sala</a>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
 	</div>
 
 
