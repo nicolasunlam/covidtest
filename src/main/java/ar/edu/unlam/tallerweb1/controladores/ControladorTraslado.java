@@ -207,7 +207,7 @@ public class ControladorTraslado {
 		String msg = "Solicitud de traslado del paciente "
 			        + paciente.getApellido() + ", " + paciente.getNombre() 
 			        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
-			        + " en la cama " + cama.getDescripcion() + cama.getTipoCama().getDescripcion() 
+			        + " en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
 			        + " de la sala de " + cama.getSala().getDescripcion() 
 			        + " de " + cama.getSala().getTipoSala().getDescripcion() 
 			        + " de la institución " + institucion.getNombre() 
@@ -222,7 +222,7 @@ public class ControladorTraslado {
 		notificacionTraslado.setMsg(msg);
 		servicioNotificacion.registrarNotificacion(notificacionTraslado );
 		
-		return new ModelAndView("redirect:/verMensajes");	
+		return new ModelAndView("redirect:/verMensajesEnviados");	
 			
 	}
 	
