@@ -144,6 +144,7 @@ public class ControladorNotificacion {
 		return new ModelAndView("redirect:/bienvenido");
 	}
 
+	//Ver mensajes Recibidos
 	@RequestMapping(path = "/verMensajes", method = RequestMethod.GET)
 	public ModelAndView verMensajes(
 			

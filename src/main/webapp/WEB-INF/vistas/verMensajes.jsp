@@ -55,6 +55,8 @@
 
 						<td><a class="btn btn-primary" href="verDetalleMensaje/${notificacion.getId()}" role="button">Ver
 								Mensaje</a></td>
+								
+								<td><a class="btn btn-primary" href="" role="button">Responder</a></td>
 
 
 

@@ -7,14 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Cama;
+import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
@@ -59,7 +62,7 @@ public class ControladorPaciente {
 	ServicioMapa servicioMapa;
 
 	
-	/* Pantalla de bienvenido al paciente cuando inicia sesiÃ³n */
+	/* Pantalla de bienvenido al paciente cuando inicia sesión */
 	@RequestMapping("bienvenidoPaciente")
 	public ModelAndView irAbienvenido(HttpServletRequest request) {
 
@@ -88,6 +91,8 @@ public class ControladorPaciente {
 
 		return new ModelAndView("bienvenidoPaciente", model);
 	}
+	
+	
 
 	@RequestMapping("/registrarPaciente")
 	public ModelAndView registrarPaciente(HttpServletRequest request) {
@@ -532,6 +537,32 @@ public class ControladorPaciente {
 
 		return new ModelAndView("pacienteDistancia", model);
 	}
+	
+	//Acceder y Modificar Datos Desde Paciente
+	@RequestMapping("/MisDatos")
+	public ModelAndView verMisDatos(HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+		
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		Long id = (long) request.getSession().getAttribute("ID");
+
+
+		Paciente p = servicioPaciente.consultarPacientePorId(id);
+		model.put("paciente", p);
+		
+		return new ModelAndView("detalle/detallePaciente", model);
+	} 
 	
 	@RequestMapping("/fichaInstitucion")
 	public ModelAndView fichaInstitucion(HttpServletRequest request) {
