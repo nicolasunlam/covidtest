@@ -56,10 +56,9 @@ public class ControladorInstitucion {
 
 	@Autowired
 	public ControladorInstitucion(ServicioInstitucion servicioInstitucion, ServicioCama servicioCama,
-			ServicioUsuario servicioUsuario, ServicioDomicilio servicioDomicilio,
-			ServicioPartido servicioPartido, ServicioLocalidad servicioLocalidad,
-			ServicioAtajo servicioAtajo, ServicioMapa servicioMapa, ServicioPiso servicioPiso,
-			ServicioSector servicioSector, ServicioSala servicioSala) {
+			ServicioUsuario servicioUsuario, ServicioDomicilio servicioDomicilio, ServicioPartido servicioPartido,
+			ServicioLocalidad servicioLocalidad, ServicioAtajo servicioAtajo, ServicioMapa servicioMapa,
+			ServicioPiso servicioPiso, ServicioSector servicioSector, ServicioSala servicioSala) {
 
 		this.servicioInstitucion = servicioInstitucion;
 		this.servicioCama = servicioCama;
@@ -477,47 +476,15 @@ public class ControladorInstitucion {
 		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
 
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
-		
-		/*Clase Nueva 
-		PisoDetallado{
 
-		piso, 
-		listaSectores, 
-		listaSalas, 
-		listaCamasOcupadas, 
-		listaCamasReservadas, 
-		listaCamasLibres
-		
-		}
-		*/
-		
-		/*Controlador
-		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
-		List<PisoDetallado> listaPisosDetalados = ArrayList<PisDetallado>;
-		
-		for(listaPisos.size()){
-			
-			listaSectores = servicioSector.sectoresDeUnPiso(listaPiso.get(i));
-			listaSalas = servicioSala.salasDeUnPiso(listaPiso.get(i));
-			listaCamasOcupadas = servicioCama.camasOcupadasDeUnPiso(listaPiso.get(i));
-			listaCamasReservadas = servicioCama.camasReservadasDeUnPiso(listaPiso.get(i));
-			listaCamasLibres = servicioCama.cantidadCamasLibresDeUnPiso(listaPiso.get(i));
-			
-			PisoDetallado pisoDetallado = new PisoDetallado();
-			
-			pisoDetallado.setPiso(listaPiso.get(i));
-			pisoDetallado.setSectores(listaSectores);
-			pisoDetallado.setSalas(listaSalas);
-			pisoDetallado.setCamasOcupadas(listaCamasOcupadas);
-			pisoDetallado.setCamasReservadas(listaCamasReservadas);
-			pisoDetallado.setCamasLibres(listaCamasLibres);
-			
-			listaPisosDetalados.add(pisoDetallado);
-		}
-		
-		model.put("listaPisosDetalados", listaPisosDetalados);
-		*/
-		
+		List<PisoConSectores> listaPisosConSectoresSalasYCamas = servicioPiso
+				.listarPisosConSectoresSalasYCamasDeUnaInstitucion(institucion);
+		model.put("listaPisosConSectoresSalasYCamas", listaPisosConSectoresSalasYCamas);
+
+		Integer cantidadSalas = 0;
+
+		model.put("cantidadSalas", cantidadSalas);
+
 		return new ModelAndView("pisosInstitucion", model);
 	}
 
@@ -726,8 +693,7 @@ public class ControladorInstitucion {
 	}
 
 	@RequestMapping("/verPiso")
-	public ModelAndView verPiso(HttpServletRequest request,
-								Long idPiso) {
+	public ModelAndView verPiso(HttpServletRequest request, Long idPiso) {
 
 		ModelMap model = new ModelMap();
 
@@ -744,17 +710,17 @@ public class ControladorInstitucion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 		/*-----------------------------------*/
-		
+
 		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
-		
+
 		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
 		if (piso.getInstitucion().getId() != idInstitucion) {
 			return new ModelAndView("redirect:/denied");
 		}
-		
+
 		PisoConSectores pisoConSectores = servicioPiso.pisoConSectoresSalasYCamas(piso);
 		model.put("pisoConSectores", pisoConSectores);
-		
+
 		return new ModelAndView("verPiso", model);
 	}
 

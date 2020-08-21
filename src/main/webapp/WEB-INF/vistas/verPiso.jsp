@@ -79,70 +79,98 @@ code {
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-<div class="container px-5">
+	<div class="container px-5">
 
 
-	Piso ${pisoConSectores.getPiso().getId()}
-	
-	<br>
+		Piso ${pisoConSectores.getPiso().getId()}
 
-	<c:if test="${pisoConSectores.getListaDeSectores().size() == 0}">
+		<div class="container my-3">
+			<form action="crearSector" method=get class="mt-4 mb-0">
+				<input class="invisible" type="hidden" id="id" name="idPiso"
+					value="${pisoConSectores.getPiso().getId()}"> <input
+					class="btn btn-outline-success ml-3" type="submit"
+					value="Agregar Sector">
+			</form>
+		</div>
+
+		<br>
+
+		<c:if test="${pisoConSectores.getListaDeSectores().size() == 0}">
 										Este piso se encuentra vacio.
 		</c:if>
 
-	<br>
+		<br>
 
-	<c:forEach items="${pisoConSectores.getListaDeSectores()}" var="sector">
+		<c:forEach items="${pisoConSectores.getListaDeSectores()}"
+			var="sector">
 
 			Sector ${sector.getSector().getDescripcion()}
+			
+					<div class="container my-3">
+				<form action="crearSala" method=get class="mt-4 mb-0">
+					<input class="invisible" type="hidden" id="id" name="idSector"
+						value="${sector.getSector().getId()}"> <input
+						class="btn btn-outline-success ml-3" type="submit"
+						value="Agregar Sala">
+				</form>
+			</div>
 
 			<br>
 
-		<c:forEach items="${sector.getListaDeSalas()}" var="sala">
+			<c:forEach items="${sector.getListaDeSalas()}" var="sala">
 
 				Sala ${sala.getSala().getDescripcion()} (${sala.getSala().getTipoSala().getDescripcion()})
-
 				
+				<div class="container my-3">
+					<form action="crearCamas" method=get class="mt-4 mb-0">
+						<input class="invisible" type="hidden" id="id" name="idSala"
+							value="${sala.getSala().getId()}"> <input
+							class="btn btn-outline-success ml-3" type="submit"
+							value="Agregar Camas">
+					</form>
+				</div>
 
-			<c:if test="${sala.getListaDeCamasConAsignacion().size() == 0}">
+
+
+				<c:if test="${sala.getListaDeCamasConAsignacion().size() == 0}">
 									Camas:		No tiene camas.
 			</c:if>
 
-			<br>
+				<br>
 
-			<c:if test="${sala.getListaDeCamasConAsignacion().size() != 0}">
-				<c:forEach items="${sala.getListaDeCamasConAsignacion()}"
-					var="camaConAsignacion">
+				<c:if test="${sala.getListaDeCamasConAsignacion().size() != 0}">
+					<c:forEach items="${sala.getListaDeCamasConAsignacion()}"
+						var="camaConAsignacion">
 
-					<p>
-						Camas: ${camaConAsignacion.getCama().getId()} -
+						<p>
+							Camas: ${camaConAsignacion.getCama().getId()} -
 
-						<c:if test="${camaConAsignacion.getAsignacion() == null}">
+							<c:if test="${camaConAsignacion.getAsignacion() == null}">
 						Disponible
 					</c:if>
 
-						<c:if test="${camaConAsignacion.getAsignacion() != null}">
-							<c:if
-								test="${camaConAsignacion.getAsignacion().getHoraIngreso() != null}">
+							<c:if test="${camaConAsignacion.getAsignacion() != null}">
+								<c:if
+									test="${camaConAsignacion.getAsignacion().getHoraIngreso() != null}">
 							Ocupada por ${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
 						</c:if>
-							<c:if
-								test="${camaConAsignacion.getAsignacion().getHoraIngreso() == null}">
+								<c:if
+									test="${camaConAsignacion.getAsignacion().getHoraIngreso() == null}">
 							Reservada para ${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
 						</c:if>
-						</c:if>
-					</p>
+							</c:if>
+						</p>
 
-				</c:forEach>
-			</c:if>
+					</c:forEach>
+				</c:if>
+
+			</c:forEach>
+
+			<br>
 
 		</c:forEach>
 
-		<br>
-		
-	</c:forEach>
-
-	<%-- 
+		<%-- 
 
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -275,7 +303,7 @@ code {
 </div>
 </div> --%>
 
-</div>
+	</div>
 </main>
 
 

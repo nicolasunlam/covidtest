@@ -106,14 +106,15 @@ code {
 								<div class="col">
 									<h4 class="mb-4">Piso
 										${pisoConSector.getPiso().getNumeroPiso()}</h4>
-									<p class="my-2">Cantidad de sectores: ${pisoConSector.getListaDeSectores().size()}</p>
-									<p class="my-2">Cantidad de salas: </p>
+									<p class="my-2">Cantidad de sectores:
+										${pisoConSector.getListaDeSectores().size()}</p>
+									<p class="my-2">Cantidad de salas: ${cantidadSalas}</p>
 									<p>Cantidad de camas: 27</p>
 								</div>
 							</div>
 
 							<div class="pl-3 row">
-								<form action="" method=get class="mt-4 mb-0">
+								<form action="verPiso" method=get class="mt-4 mb-0">
 									<input class="invisible" type="hidden" id="id" name="idPiso"
 										value="${pisoConSector.getPiso().getId()}"> <input
 										class="btn btn-outline-primary" type="submit"
