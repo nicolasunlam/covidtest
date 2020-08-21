@@ -161,3 +161,13 @@ WHERE c.id NOT IN (SELECT a.cama_id
  			   FROM asignacion a
 			   WHERE a.cama_id = c.id
 			   AND a.horaEgreso IS NULL);  	
+               
+/*------ Mostrar ------*/
+SELECT a.id as a1, a2.id as a2
+FROM Asignacion a
+JOIN Asignacion a2 ON a.paciente_id = a2.paciente_id
+WHERE a.horaEgreso IS NULL
+AND a.horaIngreso IS NOT NULL
+AND a2.horaIngreso IS NULL
+AND a2.horaEgreso IS NULL;  
+

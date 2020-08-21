@@ -73,7 +73,7 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
     @Override
     public List<Asignacion> asignacionesReservadasPorInstitucion(Institucion institucion) {
 
-		String hql = "SELECT c " 
+		String hql = "SELECT a " 
 					+ "FROM Cama as c " 
 					+ "JOIN Sala as sal ON c.sala = sal "
 					+ "JOIN Sector as sec ON sal.sector = sec " 

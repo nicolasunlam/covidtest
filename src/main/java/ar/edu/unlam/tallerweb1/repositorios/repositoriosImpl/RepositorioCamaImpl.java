@@ -83,7 +83,7 @@ public class RepositorioCamaImpl implements RepositorioCama {
 	public List<Cama> obtenerTotalDeCamasDisponibles() {
 
 		String hql = "SELECT c " + "FROM Cama as c " + "WHERE c NOT IN (SELECT a.cama " + "FROM Asignacion as a "
-				+ "WHERE a.cama = c " + "AND a.horaEgreso IS NULL) ";
+				+ "WHERE a.cama = c " + "AND a.horaEgreso IS NULL " + "AND a.horaIngreso IS NOT NULL)";
 
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 
