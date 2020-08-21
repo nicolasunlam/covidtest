@@ -484,6 +484,45 @@ public class ControladorInstitucion {
 		Integer cantidadSalas = 0;
 
 		model.put("cantidadSalas", cantidadSalas);
+		
+		/*Clase Nueva 
+		PisoDetallado{
+		piso, 
+		listaSectores, 
+		listaSalas, 
+		listaCamasOcupadas, 
+		listaCamasReservadas, 
+		listaCamasLibres
+		
+		}
+		*/
+
+		/*Controlador
+		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
+		List<PisoDetallado> listaPisosDetalados = ArrayList<PisDetallado>;
+		
+		for(listaPisos.size()){
+			
+			listaSectores = servicioSector.sectoresDeUnPiso(listaPiso.get(i));
+			listaSalas = servicioSala.salasDeUnPiso(listaPiso.get(i));
+			listaCamasOcupadas = servicioCama.camasOcupadasDeUnPiso(listaPiso.get(i));
+			listaCamasReservadas = servicioCama.camasReservadasDeUnPiso(listaPiso.get(i));
+			listaCamasLibres = servicioCama.cantidadCamasLibresDeUnPiso(listaPiso.get(i));
+			
+			PisoDetallado pisoDetallado = new PisoDetallado();
+			
+			pisoDetallado.setPiso(listaPiso.get(i));
+			pisoDetallado.setSectores(listaSectores);
+			pisoDetallado.setSalas(listaSalas);
+			pisoDetallado.setCamasOcupadas(listaCamasOcupadas);
+			pisoDetallado.setCamasReservadas(listaCamasReservadas);
+			pisoDetallado.setCamasLibres(listaCamasLibres);
+			
+			listaPisosDetalados.add(pisoDetallado);
+		}
+		
+		model.put("listaPisosDetalados", listaPisosDetalados);
+		*/
 
 		return new ModelAndView("pisosInstitucion", model);
 	}
