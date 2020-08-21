@@ -81,96 +81,137 @@ code {
 
 	<div class="container px-5">
 
+		<div class="card border border-dark my-5 mx-2"
+			style="background-color: #F4FAFE;">
 
-		Piso ${pisoConSectores.getPiso().getId()}
-
-		<div class="container my-3">
-			<form action="crearSector" method=get class="mt-4 mb-0">
-				<input class="invisible" type="hidden" id="id" name="idPiso"
-					value="${pisoConSectores.getPiso().getId()}"> <input
-					class="btn btn-outline-success ml-3" type="submit"
-					value="Agregar Sector">
-			</form>
-		</div>
-
-		<br>
-
-		<c:if test="${pisoConSectores.getListaDeSectores().size() == 0}">
-										Este piso se encuentra vacio.
-		</c:if>
-
-		<br>
-
-		<c:forEach items="${pisoConSectores.getListaDeSectores()}"
-			var="sector">
-
-			Sector ${sector.getSector().getDescripcion()}
-			
-					<div class="container my-3">
-				<form action="crearSala" method=get class="mt-4 mb-0">
-					<input class="invisible" type="hidden" id="id" name="idSector"
-						value="${sector.getSector().getId()}"> <input
-						class="btn btn-outline-success ml-3" type="submit"
-						value="Agregar Sala">
-				</form>
+			<div class="card-header text-white"
+				style="background-color: #045FB4;">
+				<h3 class="text-center">Piso
+					${pisoConSectores.getPiso().getNumeroPiso()}</h3>
 			</div>
 
-			<br>
 
-			<c:forEach items="${sector.getListaDeSalas()}" var="sala">
-
-				Sala ${sala.getSala().getDescripcion()} (${sala.getSala().getTipoSala().getDescripcion()})
-				
-				<div class="container my-3">
-					<form action="crearCamas" method=get class="mt-4 mb-0">
-						<input class="invisible" type="hidden" id="id" name="idSala"
-							value="${sala.getSala().getId()}"> <input
-							class="btn btn-outline-success ml-3" type="submit"
-							value="Agregar Camas">
-					</form>
+			<c:if test="${pisoConSectores.getListaDeSectores().size() == 0}">
+				<div class="card shadow my-5 mx-2">
+					<div class="card-header bg-danger text-white text-center">
+						<h3 class="text-center">No hay sectores registrados en este
+							piso</h3>
+						<img src="img/no-stopping.png" style="width: 100px;" class="mt-4"></img>
+					</div>
 				</div>
-
-
-
-				<c:if test="${sala.getListaDeCamasConAsignacion().size() == 0}">
-									Camas:		No tiene camas.
 			</c:if>
 
-				<br>
 
-				<c:if test="${sala.getListaDeCamasConAsignacion().size() != 0}">
-					<c:forEach items="${sala.getListaDeCamasConAsignacion()}"
-						var="camaConAsignacion">
 
-						<p>
-							Camas: ${camaConAsignacion.getCama().getId()} -
 
-							<c:if test="${camaConAsignacion.getAsignacion() == null}">
-						Disponible
-					</c:if>
+			<c:forEach items="${pisoConSectores.getListaDeSectores()}"
+				var="sector">
 
-							<c:if test="${camaConAsignacion.getAsignacion() != null}">
-								<c:if
-									test="${camaConAsignacion.getAsignacion().getHoraIngreso() != null}">
-							Ocupada por ${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
-						</c:if>
-								<c:if
-									test="${camaConAsignacion.getAsignacion().getHoraIngreso() == null}">
-							Reservada para ${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
-						</c:if>
-							</c:if>
-						</p>
+				<div class="card border border-dark my-5 mx-2"
+					style="background-color: #7FCCFF;">
+
+					<div class="card-header text-white"
+						style="background-color: #0080FF;">
+						<h4 class="text-center">Sector de
+							${sector.getSector().getDescripcion()}</h4>
+					</div>
+
+					<div class="container mt-5">
+						<form action="crearSala" method=get class="text-center">
+							<input class="invisible" type="hidden" id="id" name="idSector"
+								value="${sector.getSector().getId()}"> <input
+								class="btn btn-success ml-3 w-50" type="submit"
+								value="Agregar Sala">
+						</form>
+					</div>
+
+
+
+					<c:forEach items="${sector.getListaDeSalas()}" var="sala">
+
+						<div class="card border border-dark my-5 mx-2">
+
+							<div class="card-header text-white"
+								style="background-color: #58ACFA;">
+								<h5 class="text-center">Sala de
+									${sala.getSala().getTipoSala().getDescripcion()}</h5>
+							</div>
+							<div class="card-body text-white"
+								style="background-color: #2E2E2E;">
+
+								<c:if test="${sala.getListaDeCamasConAsignacion().size() == 0}">
+									<div class="card shadow my-5 mx-2">
+										<div class="card-header bg-danger text-white text-center">
+											<h4 class="text-center">No hay camas registradas en esta
+												sala</h4>
+											<img src="img/no-stopping.png" style="width: 100px;"
+												class="mt-4"></img>
+										</div>
+									</div>
+								</c:if>
+
+
+
+								<c:if test="${sala.getListaDeCamasConAsignacion().size() != 0}">
+									<c:forEach items="${sala.getListaDeCamasConAsignacion()}"
+										var="camaConAsignacion">
+
+										<div class="mt-4">
+											<h5 style="font-weight: bold;">Cama
+												${camaConAsignacion.getCama().getDescripcion()}</h5>
+
+
+											<c:if test="${camaConAsignacion.getAsignacion() == null}">
+												<div class="d-inline">
+													<h6 class="d-inline mr-4">Disponible</h6>
+													<img src="img/cama-ver.png" style="width: 50px;" class=""></img>
+												</div>
+											</c:if>
+
+											<c:if test="${camaConAsignacion.getAsignacion() != null}">
+												<c:if
+													test="${camaConAsignacion.getAsignacion().getHoraIngreso() != null}">
+													<div class="d-inline">
+														<h6 class="d-inline mr-4">Ocupada por
+															${camaConAsignacion.getAsignacion().getPaciente().getNombre()}</h6>
+														<img src="img/cama-ro.png" style="width: 50px;" class=""></img>
+													</div>
+
+												</c:if>
+												<c:if
+													test="${camaConAsignacion.getAsignacion().getHoraIngreso() == null}">
+													<div class="d-inline">
+														<h6 class="d-inline mr-4">Reservada para
+															${camaConAsignacion.getAsignacion().getPaciente().getNombre()}</h6>
+														<img src="img/cama-am.png" style="width: 50px;" class=""></img>
+													</div>
+
+												</c:if>
+											</c:if>
+										</div>
+
+									</c:forEach>
+								</c:if>
+
+								<div class="container mt-5">
+									<form action="crearCamas" method=get class="text-center">
+										<input class="invisible" type="hidden" id="id" name="idSala"
+											value="${sala.getSala().getId()}"> <input
+											class="btn btn-success ml-3 w-50" type="submit"
+											value="Agregar Camas">
+									</form>
+								</div>
+
+							</div>
+						</div>
 
 					</c:forEach>
-				</c:if>
+
+				</div>
 
 			</c:forEach>
 
-			<br>
-
-		</c:forEach>
-
-		<%-- 
+			<%-- 
 
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -303,7 +344,16 @@ code {
 </div>
 </div> --%>
 
-	</div>
+			<div class="container mt-5">
+				<form action="crearSector" method=get class="text-center">
+					<input class="invisible" type="hidden" id="id" name="idPiso"
+						value="${pisoConSectores.getPiso().getId()}"> <input
+						class="btn btn-success ml-3 w-50" type="submit"
+						value="Agregar Sector">
+				</form>
+			</div>
+
+		</div>
 </main>
 
 
