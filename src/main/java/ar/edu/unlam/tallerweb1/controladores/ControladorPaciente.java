@@ -562,7 +562,7 @@ public class ControladorPaciente {
 		Paciente p = servicioPaciente.consultarPacientePorId(id);
 		model.put("paciente", p);
 		
-		return new ModelAndView("detalle/datosPaciente", model);
+		return new ModelAndView("MisDatos", model);
 	} 
 	
 	@RequestMapping("/fichaInstitucion")
