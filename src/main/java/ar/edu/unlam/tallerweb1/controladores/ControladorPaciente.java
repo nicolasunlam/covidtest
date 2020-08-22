@@ -537,8 +537,9 @@ public class ControladorPaciente {
 
 		return new ModelAndView("pacienteDistancia", model);
 	}
-	
+	//////////////////////////////////////////
 	//Acceder y Modificar Datos Desde Paciente
+	//////////////////////////////////////////
 	@RequestMapping("/MisDatos")
 	public ModelAndView verMisDatos(HttpServletRequest request) {
 		ModelMap model = new ModelMap();
@@ -561,7 +562,7 @@ public class ControladorPaciente {
 		Paciente p = servicioPaciente.consultarPacientePorId(id);
 		model.put("paciente", p);
 		
-		return new ModelAndView("detalle/detallePaciente", model);
+		return new ModelAndView("detalle/datosPaciente", model);
 	} 
 	
 	@RequestMapping("/fichaInstitucion")
@@ -665,6 +666,20 @@ public class ControladorPaciente {
 	public void setServicioInstitucion(ServicioInstitucion servicioInstitucion) {
 		this.servicioInstitucion = servicioInstitucion;
 	}
+	
+	/*-----------Validaciones--------------*/
+//    if (servicioAtajo.validarInicioDeSesion(request) != null) {
+//        return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+//    }
+//    if (servicioAtajo.validarPermisoAPagina(request) != null) {
+//        return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+//    }
+//    Rol rol = (Rol) request.getSession().getAttribute("ROL");
+//    if (rol != null) {
+//        model.put("rol", rol.name());
+//    }
+//    model.put("armarHeader", servicioAtajo.armarHeader(request));
+    /*-----------------------------------*/
 	
 }
 
