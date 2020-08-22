@@ -13,9 +13,21 @@
 
 	<div class="container">
 
+		<div class="container-fluid mt-1 text-center">
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<img src="img/hospital.png" class="rounded" alt="icono hospital"
+						width="100" height="100">
+					<h2 class="font-weight-bolder">${institucion.getNombre()}</h2>
+				</div>
+				<div class="col-3"></div>
+			</div>
+		</div>
+
 		<div class="callout callout-primary py-4">
 
-			<div class="row justify-content-center h-100 my-5">
+			<div class="row justify-content-center h-100">
 				<div class="col-sm-8 align-self-center">
 					<div class="card shadow ">
 						<div class="card-body" style="background-color: #F2F2F2;">

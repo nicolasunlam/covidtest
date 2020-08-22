@@ -168,6 +168,10 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+		
+		model.put("institucion", institucion);
 
 		return new ModelAndView("crearPiso", model);
 	}
@@ -224,6 +228,11 @@ public class ControladorInstitucion {
 		if (rol != null) {
 			model.put("rol", rol.name());
 		}
+		
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+		
+		model.put("institucion", institucion);
+		
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		model.put("idPiso", idPiso);
@@ -282,9 +291,19 @@ public class ControladorInstitucion {
 		if (rol != null) {
 			model.put("rol", rol.name());
 		}
+		
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+		
+		model.put("institucion", institucion);
+		
+		Sector sector = servicioSector.buscarSectorPorId(idSector);
+		Piso piso = servicioPiso.buscarPisoPorId(sector.getPiso().getId());
+		
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		model.put("idSector", idSector);
+		model.put("sector", sector);
+		model.put("piso", piso);
 
 		return new ModelAndView("crearSala", model);
 	}
@@ -340,9 +359,20 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-
+		
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+		
+		model.put("institucion", institucion);
+		
+		Sala sala = servicioSala.buscarSalaPorId(idSala);
+		Sector sector = servicioSector.buscarSectorPorId(sala.getSector().getId());
+		Piso piso = servicioPiso.buscarPisoPorId(sector.getPiso().getId());
+		
 		model.put("idSala", idSala);
-
+		model.put("sala", sala);
+		model.put("sector", sector);
+		model.put("piso", piso);
+		
 		return new ModelAndView("crearCamas", model);
 	}
 

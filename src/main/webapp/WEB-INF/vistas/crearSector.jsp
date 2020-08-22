@@ -16,6 +16,31 @@
 
 	<div class="container">
 
+		<div class="container-fluid mt-1 text-center">
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<img src="img/hospital.png" class="rounded" alt="icono hospital"
+						width="100" height="100">
+					<h2 class="font-weight-bolder">${institucion.getNombre()}</h2>
+				</div>
+				<div class="col-3"></div>
+			</div>
+		</div>
+
+		<div
+			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h2 class="">
+				<c:if test="${piso.getNumeroPiso() == 0}">Planta Baja
+                                    </c:if>
+
+				<c:if test="${piso.getNumeroPiso() != 0}">
+                                        Piso ${piso.getNumeroPiso()}
+                                    </c:if>
+			</h2>
+
+		</div>
+
 
 		<div class="container">
 
