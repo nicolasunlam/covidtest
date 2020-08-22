@@ -104,15 +104,14 @@ code {
 
 							<div class="col">
 								<h4 class="mb-4">
-									
+
 									<c:if test="${pisoDetallado.getPiso().getNumeroPiso() == 0}">
-										Planta baja
+										Planta Baja
 									</c:if>
-									
+
 									<c:if test="${pisoDetallado.getPiso().getNumeroPiso() != 0}">
 										Piso ${pisoDetallado.getPiso().getNumeroPiso()}
 									</c:if>
-									
 
 								</h4>
 								<p class="my-2">Cantidad de sectores:
@@ -145,22 +144,55 @@ code {
 							<div class="col">
 
 								<div class="row" style="display: block">
-									<p class="text-right mb-2">${pisoDetallado.getListaCamasDisponibles().size()}
-										camas disponibles</p>
+
+									<c:choose>
+										<c:when
+											test="${pisoDetallado.getListaCamasDisponibles().size() == 0}">
+											<p class="text-right mb-2">Ninguna cama disponible</p>
+										</c:when>
+										<c:when
+											test="${pisoDetallado.getListaCamasDisponibles().size() == 1}">
+											<p class="text-right mb-2">${pisoDetallado.getListaCamasDisponibles().size()}
+												cama disponible</p>
+										</c:when>
+										<c:otherwise>
+											<p class="text-right mb-2">${pisoDetallado.getListaCamasDisponibles().size()}
+												camas disponibles</p>
+										</c:otherwise>
+									</c:choose>
+
 								</div>
 
 								<div class="row flex-row-reverse">
 
-									<c:forEach items="${pisoDetallado.getListaCamasDisponibles()}"
-										var="cama" end="7">
-										<span style="margin-left: 4px;"> <img alt=""
-											src="img/cama-ver.png" style="width: 35px">
-										</span>
-									</c:forEach>
+									<c:choose>
 
-									<c:if test="${pisoDetallado.getListaCamasDisponibles().size() > 8}">
+										<c:when
+											test="${pisoDetallado.getListaCamasDisponibles().size() == 0}">
+											<span style="margin-left: 4px;"> <img alt=""
+												src="img/cama-gr.png" style="width: 35px">
+											</span>
+										</c:when>
+
+										<c:otherwise>
+
+											<c:forEach
+												items="${pisoDetallado.getListaCamasDisponibles()}"
+												var="cama" end="7">
+												<span style="margin-left: 4px;"> <img alt=""
+													src="img/cama-ver.png" style="width: 35px">
+												</span>
+											</c:forEach>
+
+										</c:otherwise>
+									</c:choose>
+
+
+									<c:if
+										test="${pisoDetallado.getListaCamasDisponibles().size() > 8}">
 										<span class="text-success" style="margin-left: 4px;">
-											<p class="h5 mb-0"> + ${pisoDetallado.getListaCamasDisponibles().size() - 8}</p>
+											<p class="h5 mb-0">+
+												${pisoDetallado.getListaCamasDisponibles().size() - 8}</p>
 										</span>
 									</c:if>
 
@@ -183,12 +215,14 @@ code {
 
 									<c:forEach items="${pisoDetallado.getListaCamasOcupadas()}"
 										var="cama" end="7">
-										<span class="d-flex flex-row-reverse" style="margin-left: 4px;"> <img alt=""
+										<span class="d-flex flex-row-reverse"
+											style="margin-left: 4px;"> <img alt=""
 											src="img/cama-ro.png" style="width: 35px">
 										</span>
 									</c:forEach>
 
-									<c:if test="${pisoDetallado.getListaCamasOcupadas().size() > 8}">
+									<c:if
+										test="${pisoDetallado.getListaCamasOcupadas().size() > 8}">
 										<span class="text-success" style="margin-left: 4px;">
 											<p class="h5 mb-0">+
 												${pisoDetallado.getListaCamasOcupadas().size() - 8}</p>
@@ -213,12 +247,14 @@ code {
 
 									<c:forEach items="${pisoDetallado.getListaCamasReservadas()}"
 										var="cama" end="7">
-										<span class="d-flex flex-row-reverse" style="margin-left: 4px;"> <img alt=""
+										<span class="d-flex flex-row-reverse"
+											style="margin-left: 4px;"> <img alt=""
 											src="img/cama-am.png" style="width: 35px">
 										</span>
 									</c:forEach>
 
-									<c:if test="${pisoDetallado.getListaCamasReservadas().size() > 8}">
+									<c:if
+										test="${pisoDetallado.getListaCamasReservadas().size() > 8}">
 										<span class="text-success" style="margin-left: 4px;">
 											<p class="h5 mb-0">+
 												${pisoDetallado.getListaCamasReservadas().size() - 8}</p>
