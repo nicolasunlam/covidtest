@@ -158,7 +158,8 @@ code {
 						<c:forEach items="${sala.getListaDeCamasConAsignacion()}"
 							var="camaConAsignacion">
 
-							<a class="btn btn-outline-dark m-2">
+							<a class="btn btn-outline-dark m-2"
+								onclick="javascript:mostrarInfo(this, 'informacionCama${camaConAsignacion.getCama().getId()}', 'imagenCama${camaConAsignacion.getCama().getId()}')">
 
 								<div class="mt-1 p-4">
 
@@ -169,7 +170,11 @@ code {
 									<c:if test="${camaConAsignacion.getAsignacion() == null}">
 
 
-										<img src="img/cama-ver.png" style="width: 115px;" class=""></img>
+										<img id="imagenCama${camaConAsignacion.getCama().getId()}"
+											src="img/cama-ver.png" style="width: 115px;" class=""></img>
+
+										<p id="informacionCama${camaConAsignacion.getCama().getId()}"
+											hidden>Hola mundo</p>
 
 									</c:if>
 
@@ -179,7 +184,7 @@ code {
 
 											<%-- <h6 class="">Ocupada por
 												${camaConAsignacion.getAsignacion().getPaciente().getNombre()}</h6> --%>
-											<img src="img/cama-ro.png" style="width: 100px;" class=""></img>
+											<img src="img/cama-ro.png" style="width: 115px;" class=""></img>
 
 
 										</c:if>
@@ -188,7 +193,7 @@ code {
 
 											<%-- <h6 class="">Reservada para
 												${camaConAsignacion.getAsignacion().getPaciente().getNombre()}</h6> --%>
-											<img src="img/cama-am.png" style="width: 100px;" class=""></img>
+											<img src="img/cama-am.png" style="width: 115px;" class=""></img>
 
 
 										</c:if>
@@ -235,6 +240,26 @@ code {
 <script src="js/sort.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js">
 	
+</script>
+<script>
+	var estado = true;
+
+	function mostrarInfo(boton, idInformacionCama, idImagenCama) {
+
+		var imagenCama = document.getElementById(idImagenCama);
+		var informacionCama = document.getElementById(idInformacionCama);
+
+		if (estado == true) {
+			informacionCama.hidden = false;
+			imagenCama.hidden = true;
+			estado = false;
+
+		} else {
+			infomacionCama.hidden = true;
+			imagenCama.hidden = false;
+			estado = true;
+		}
+	}
 </script>
 
 </body>
