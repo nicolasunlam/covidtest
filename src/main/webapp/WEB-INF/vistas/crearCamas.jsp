@@ -13,32 +13,21 @@
 
 	<div class="container">
 
-		<div class="container-fluid mt-1 text-center">
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="col-6">
-					<img src="img/hospital.png" class="rounded" alt="icono hospital"
-						width="100" height="100">
-					<h2 class="font-weight-bolder">${institucion.getNombre()}</h2>
-				</div>
-				<div class="col-3"></div>
-			</div>
-		</div>
-
-		<div
-			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<h2 class="">
-				<c:if test="${piso.getNumeroPiso() == 0}">Planta Baja
+		<div class="mt-2 border-bottom">
+			<h5>
+				${institucion.getNombre()} /
+				<c:if test="${piso.getNumeroPiso() == 0}">Planta Baja /
                                     </c:if>
-
 				<c:if test="${piso.getNumeroPiso() != 0}">
-                                        Piso ${piso.getNumeroPiso()}
+                                        Piso ${piso.getNumeroPiso()} /
                                     </c:if>
-			</h2>
-			<h2 class="">Sector ${sector.getDescripcion()}</h2>
-			<h2 class="">Sala ${sala.getTipoSala()}</h2>
+				Sector de ${sector.getDescripcion()} / Sala ${sala.getDescripcion()}
+				(${sala.getTipoSala()}) / Registrar Camas
+
+			</h5>
 
 		</div>
+
 
 		<div class="row justify-content-center h-100 my-5">
 			<div class="col-sm-8 align-self-center">

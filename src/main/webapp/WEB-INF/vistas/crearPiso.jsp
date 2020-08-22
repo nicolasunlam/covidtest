@@ -13,7 +13,7 @@
 
 	<div class="container">
 
-		<div class="container-fluid mt-1 text-center">
+		<%-- 		<div class="container-fluid mt-1 text-center">
 			<div class="row">
 				<div class="col-3"></div>
 				<div class="col-6">
@@ -23,6 +23,11 @@
 				</div>
 				<div class="col-3"></div>
 			</div>
+		</div> --%>
+
+		<div class="mt-2 border-bottom">
+			<h5>${institucion.getNombre()} / Registrar Sector</h5>
+
 		</div>
 
 		<div class="callout callout-primary py-4">
