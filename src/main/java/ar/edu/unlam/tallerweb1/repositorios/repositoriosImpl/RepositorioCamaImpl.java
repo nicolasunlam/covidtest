@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion;
@@ -231,5 +232,67 @@ public class RepositorioCamaImpl implements RepositorioCama {
 		query.setParameter("sala", sala);
 
 		return query.getResultList();
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Cama> listarCamasOcupadasPorPiso(Piso piso) {
+
+		String hql = "SELECT c " 
+					+ "FROM Cama as c " 
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec " 
+					+ "JOIN Piso as p ON sec.piso = p "
+					+ "JOIN Asignacion as a ON a.cama = c "
+					+ "WHERE p = :piso " 
+					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.horaIngreso IS NOT NULL "; 
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("piso", piso);
+
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Cama> listarCamasReservadasPorPiso(Piso piso) {
+
+		String hql = "SELECT c " 
+					+ "FROM Cama as c " 
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec " 
+					+ "JOIN Piso as p ON sec.piso = p "
+					+ "JOIN Asignacion as a ON a.cama = c "
+					+ "WHERE p = :piso " 
+					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.horaIngreso IS NULL "; 
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("piso", piso);
+
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Cama> listarCamasDisponiblesPorPiso(Piso piso) {
+
+		String hql = "SELECT c " 
+					+ "FROM Cama as c "
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec " 
+					+ "JOIN Piso as p ON sec.piso = p "
+					+ "WHERE p = :piso "
+					+ "AND c NOT IN (SELECT a.cama " 
+							+ "FROM Asignacion as a " 
+							+ "WHERE a.cama = c "
+							+ "AND a.horaEgreso IS NULL)";
+					
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("piso", piso);
+	
+		return query.getResultList();
+	
 	}
 }

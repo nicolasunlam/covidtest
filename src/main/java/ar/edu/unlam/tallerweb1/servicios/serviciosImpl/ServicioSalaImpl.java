@@ -1,13 +1,11 @@
 package ar.edu.unlam.tallerweb1.servicios.serviciosImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
@@ -77,7 +75,7 @@ public class ServicioSalaImpl implements ServicioSala {
 
 	@Override
 	public SalaConCamas obtenerDetalleDeSala(Sala sala) {
-		List<Cama> listaCamas = servicioCama.obtenerCamasPorSala(sala);
+
 		List<CamaConAsignacion> listaCamasConAsignacion = servicioCama.obtenerListaDetalladaDeCamasPorSala(sala);
 
 		SalaConCamas salaConCamas = new SalaConCamas();
@@ -85,6 +83,11 @@ public class ServicioSalaImpl implements ServicioSala {
 		salaConCamas.setSala(sala);
 
 		return salaConCamas;
+	}
+
+	@Override
+	public List<Sala> listarSalasPorPiso(Piso piso) {
+		return repositorioSala.listarSalasPorPiso(piso);
 	}
 
 }

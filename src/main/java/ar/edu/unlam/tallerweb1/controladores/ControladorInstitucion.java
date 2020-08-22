@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import ar.edu.unlam.tallerweb1.modelo.TipoSala;
 import ar.edu.unlam.tallerweb1.modelo.TipoSector;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.listas.PisoConSectores;
+import ar.edu.unlam.tallerweb1.modelo.listas.PisoDetallado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
@@ -484,45 +486,31 @@ public class ControladorInstitucion {
 		Integer cantidadSalas = 0;
 
 		model.put("cantidadSalas", cantidadSalas);
-		
-		/*Clase Nueva 
-		PisoDetallado{
-		piso, 
-		listaSectores, 
-		listaSalas, 
-		listaCamasOcupadas, 
-		listaCamasReservadas, 
-		listaCamasLibres
-		
-		}
-		*/
 
-		/*Controlador
 		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
-		List<PisoDetallado> listaPisosDetalados = ArrayList<PisDetallado>;
+		List<PisoDetallado> listaPisosDetallados = new ArrayList<PisoDetallado>();
 		
-		for(listaPisos.size()){
+		for(int i=0; i < listaPisos.size(); i++){
 			
-			listaSectores = servicioSector.sectoresDeUnPiso(listaPiso.get(i));
-			listaSalas = servicioSala.salasDeUnPiso(listaPiso.get(i));
-			listaCamasOcupadas = servicioCama.camasOcupadasDeUnPiso(listaPiso.get(i));
-			listaCamasReservadas = servicioCama.camasReservadasDeUnPiso(listaPiso.get(i));
-			listaCamasLibres = servicioCama.cantidadCamasLibresDeUnPiso(listaPiso.get(i));
+			List<Sector> listaSectores = servicioSector.consultarSectoresPorPiso(listaPisos.get(i));
+			List<Sala> listaSalas = servicioSala.listarSalasPorPiso(listaPisos.get(i));
+			List<Cama> listaCamasOcupadas = servicioCama.listarCamasOcupadasPorPiso(listaPisos.get(i));
+			List<Cama> listaCamasReservadas = servicioCama.listarCamasReservadasPorPiso(listaPisos.get(i));
+			List<Cama> listaCamasDisponibles = servicioCama.listarCamasDisponiblesPorPiso(listaPisos.get(i));
 			
 			PisoDetallado pisoDetallado = new PisoDetallado();
 			
-			pisoDetallado.setPiso(listaPiso.get(i));
-			pisoDetallado.setSectores(listaSectores);
-			pisoDetallado.setSalas(listaSalas);
-			pisoDetallado.setCamasOcupadas(listaCamasOcupadas);
-			pisoDetallado.setCamasReservadas(listaCamasReservadas);
-			pisoDetallado.setCamasLibres(listaCamasLibres);
+			pisoDetallado.setPiso(listaPisos.get(i));
+			pisoDetallado.setListaSectores(listaSectores);
+			pisoDetallado.setListaSalas(listaSalas);
+			pisoDetallado.setListaCamasOcupadas(listaCamasOcupadas);
+			pisoDetallado.setListaCamasReservadas(listaCamasReservadas);
+			pisoDetallado.setListaCamasDisponibles(listaCamasDisponibles);
 			
-			listaPisosDetalados.add(pisoDetallado);
+			listaPisosDetallados.add(pisoDetallado);
 		}
 		
-		model.put("listaPisosDetalados", listaPisosDetalados);
-		*/
+		model.put("listaPisosDetallados", listaPisosDetallados);
 
 		return new ModelAndView("pisosInstitucion", model);
 	}

@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.Sector;
 import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
@@ -21,4 +22,6 @@ public interface ServicioSala {
 	List<SalaCantidad> obtenerSalasConCantidadDeCamasDisponiblesDeUnaInstitucion(Institucion institucion);
 
 	public SalaConCamas obtenerDetalleDeSala(Sala sala);
+
+	public List<Sala> listarSalasPorPiso(Piso piso);
 }

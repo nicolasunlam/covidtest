@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion;
@@ -124,6 +125,23 @@ public class ServicioCamaImpl implements ServicioCama {
     	List<CamaConAsignacion> listaOrdenadaFinal = new ArrayList<CamaConAsignacion>(listaOrdenada);
     	
     	return listaOrdenadaFinal;
+	}
+
+	@Override
+	public List<Cama> listarCamasOcupadasPorPiso(Piso piso) {
+		return repositorioCama.listarCamasOcupadasPorPiso(piso);
+	}
+
+	@Override
+	public List<Cama> listarCamasReservadasPorPiso(Piso piso) {
+		return repositorioCama.listarCamasReservadasPorPiso(piso);
+
+	}
+
+	@Override
+	public List<Cama> listarCamasDisponiblesPorPiso(Piso piso) {
+		return repositorioCama.listarCamasDisponiblesPorPiso(piso);
+
 	}
 
 }

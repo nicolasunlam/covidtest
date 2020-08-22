@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.Sector;
 import ar.edu.unlam.tallerweb1.modelo.listas.SalaCantidad;
@@ -83,4 +84,20 @@ public class RepositorioSalaImpl implements RepositorioSala {
 
       return query.getResultList();
 	}
+	
+	@Override
+	public List<Sala> listarSalasPorPiso(Piso piso) {
+
+		String hql = "SELECT sal " 
+					+ "FROM Sala as sal " 
+					+ "JOIN Sector as sec ON sec = sal.sector " 
+					+ "JOIN Piso as p ON p = sec.piso " 
+					+ "WHERE p = :piso ";
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("piso", piso);
+
+		return query.getResultList();
+	}
+	
 }

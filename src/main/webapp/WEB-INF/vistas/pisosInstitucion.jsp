@@ -79,125 +79,151 @@ code {
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-	<div class="container px-5">
+<div class="container px-5">
 
 
-		<div
-			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<h2 class="">Pisos</h2>
-			<a type="button" class="btn btn-outline-success" href="crearPiso">
-				Agregar piso</a>
-		</div>
-		<h6 class="mb-5">Vea en detalle todos los pisos de su institución</h6>
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="">Pisos</h2>
+		<a type="button" class="btn btn-outline-success" href="crearPiso">
+			Agregar piso</a>
+	</div>
+	<h6 class="mb-5">Vea en detalle todos los pisos de su institución</h6>
 
-		<div class=" my-5 px-0">
-			<c:forEach items="${listaPisosConSectoresSalasYCamas}"
-				var="pisoConSector">
+	<div class=" my-5 px-0">
+		<c:forEach items="${listaPisosDetallados}" var="pisoDetallado">
 
-				<div class="callout callout-primary py-4">
+			<div class="callout callout-primary py-4">
 
-					<div
-						class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mx-3">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mx-3">
 
-						<div class="col">
+					<div class="col">
 
-							<div class="row">
+						<div class="row">
 
-								<div class="col">
-									<h4 class="mb-4">Piso
-										${pisoConSector.getPiso().getNumeroPiso()}</h4>
-									<p class="my-2">Cantidad de sectores:
-										${pisoConSector.getListaDeSectores().size()}</p>
-									<p class="my-2">Cantidad de salas: ${cantidadSalas}</p>
-									<p>Cantidad de camas: 27</p>
-								</div>
+							<div class="col">
+								<h4 class="mb-4">
+									
+									<c:if test="${pisoDetallado.getPiso().getNumeroPiso() == 0}">
+										Planta baja
+									</c:if>
+									
+									<c:if test="${pisoDetallado.getPiso().getNumeroPiso() != 0}">
+										Piso ${pisoDetallado.getPiso().getNumeroPiso()}
+									</c:if>
+									
+
+								</h4>
+								<p class="my-2">Cantidad de sectores:
+									${pisoDetallado.getListaSectores().size()}</p>
+								<p class="my-2">Cantidad de salas:
+									${pisoDetallado.getListaSalas().size()}</p>
+								<p>Cantidad de camas:
+									${pisoDetallado.getListaCamasOcupadas().size() 
+									+ pisoDetallado.getListaCamasReservadas().size() 
+									+ pisoDetallado.getListaCamasDisponibles().size()}</p>
 							</div>
+						</div>
 
-							<div class="pl-3 row">
-								<form action="verPiso" method=get class="mt-4 mb-0">
-									<input class="invisible" type="hidden" id="id" name="idPiso"
-										value="${pisoConSector.getPiso().getId()}"> <input
-										class="btn btn-outline-primary" type="submit"
-										value="Ver detalle piso">
-								</form>
+						<div class="pl-3 row">
+							<form action="verPiso" method=get class="mt-4 mb-0">
+								<input class="invisible" type="hidden" id="id" name="idPiso"
+									value="${pisoDetallado.getPiso().getId()}"> <input
+									class="btn btn-outline-primary" type="submit"
+									value="Ver detalle piso">
+							</form>
 
-								<form action="" method=get class="mt-4 mb-0">
-									<input class="invisible" type="hidden" id="id" name="idPiso"
-										value="${piso.getId()}"> <input
-										class="btn btn-outline-success ml-3" type="submit"
-										value="Personalizar">
-								</form>
+						</div>
+
+					</div>
+
+					<div class="d-flex align-items-end flex-column col mr-3">
+
+						<div class="row">
+
+							<div class="col">
+
+								<div class="row" style="display: block">
+									<p class="text-right mb-2">${pisoDetallado.getListaCamasDisponibles().size()}
+										camas disponibles</p>
+								</div>
+
+								<div class="row flex-row-reverse">
+
+									<c:forEach items="${pisoDetallado.getListaCamasDisponibles()}"
+										var="cama" end="7">
+										<span style="margin-left: 4px;"> <img alt=""
+											src="img/cama-ver.png" style="width: 35px">
+										</span>
+									</c:forEach>
+
+									<c:if test="${pisoDetallado.getListaCamasDisponibles().size() > 8}">
+										<span class="text-success" style="margin-left: 4px;">
+											<p class="h5 mb-0"> + ${pisoDetallado.getListaCamasDisponibles().size() - 8}</p>
+										</span>
+									</c:if>
+
+								</div>
 
 							</div>
 
 						</div>
 
-						<div class="d-flex align-items-end flex-column col mr-3">
+						<div class="row">
 
-							<div class="row">
+							<div class="col my-2">
 
-								<div class="col">
+								<div class="row" style="display: block">
+									<p class="text-right my-2">${pisoDetallado.getListaCamasOcupadas().size()}
+										camas ocupadas</p>
+								</div>
 
-									<div class="row" style="display: block">
-										<p class="text-right mb-2">${listaCamasDisponibles.size()}
-											camas disponibles</p>
-									</div>
+								<div class="row flex-row-reverse">
 
-									<div class="row">
+									<c:forEach items="${pisoDetallado.getListaCamasOcupadas()}"
+										var="cama" end="7">
+										<span class="d-flex flex-row-reverse" style="margin-left: 4px;"> <img alt=""
+											src="img/cama-ro.png" style="width: 35px">
+										</span>
+									</c:forEach>
 
-										<c:if test="${listaCamasDisponibles.size() > 8}">
-											<span class="text-success" style="margin-left: 4px;">
-												<p class="h5 mb-0">+ ${listaCamasDisponibles.size() - 8}</p>
-											</span>
-										</c:if>
-										<c:forEach items="${listaCamasDisponibles}" var="cama" end="7">
-											<span style="margin-left: 4px;"> <img alt=""
-												src="img/cama-ver.png" style="width: 35px">
-											</span>
-										</c:forEach>
-
-									</div>
-
+									<c:if test="${pisoDetallado.getListaCamasOcupadas().size() > 8}">
+										<span class="text-success" style="margin-left: 4px;">
+											<p class="h5 mb-0">+
+												${pisoDetallado.getListaCamasOcupadas().size() - 8}</p>
+										</span>
+									</c:if>
 								</div>
 
 							</div>
 
-							<div class="row">
+						</div>
 
-								<div class="col my-2">
+						<div class="row">
 
-									<div class="row" style="display: block">
-										<p class="text-right my-2">4 camas ocupadas</p>
-									</div>
+							<div class="col">
 
-									<div class="row">
-										<c:forEach items="${listaPisos}" var="piso">
-											<span style="margin-left: 4px;"> <img alt=""
-												src="img/cama-ro.png" style="width: 35px">
-											</span>
-										</c:forEach>
-									</div>
-
+								<div class="row" style="display: block">
+									<p class="text-right my-2">${pisoDetallado.getListaCamasReservadas().size()}
+										camas reservadas</p>
 								</div>
 
-							</div>
+								<div class="row flex-row-reverse">
 
-							<div class="row">
+									<c:forEach items="${pisoDetallado.getListaCamasReservadas()}"
+										var="cama" end="7">
+										<span class="d-flex flex-row-reverse" style="margin-left: 4px;"> <img alt=""
+											src="img/cama-am.png" style="width: 35px">
+										</span>
+									</c:forEach>
 
-								<div class="col">
-
-									<div class="row" style="display: block">
-										<p class="text-right my-2">4 camas reservadas</p>
-									</div>
-
-									<div class="row">
-										<c:forEach items="${listaPisos}" var="piso">
-											<span style="margin-left: 4px;"> <img alt=""
-												src="img/cama-am.png" style="width: 35px">
-											</span>
-										</c:forEach>
-									</div>
-
+									<c:if test="${pisoDetallado.getListaCamasReservadas().size() > 8}">
+										<span class="text-success" style="margin-left: 4px;">
+											<p class="h5 mb-0">+
+												${pisoDetallado.getListaCamasReservadas().size() - 8}</p>
+										</span>
+									</c:if>
 								</div>
 
 							</div>
@@ -205,10 +231,12 @@ code {
 						</div>
 
 					</div>
-				</div>
-			</c:forEach>
 
-		</div>
+				</div>
+			</div>
+		</c:forEach>
+
+	</div>
 </main>
 
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaCantidad;
 import ar.edu.unlam.tallerweb1.modelo.listas.CamaConAsignacion;
@@ -39,4 +40,10 @@ public interface RepositorioCama {
 	List<CamaConAsignacion> obtenerListaDeCamasOcupadasPorSala(Sala sala);
 
 	List<CamaConAsignacion> obtenerListaDeCamasReservadasPorSala(Sala sala);
+
+	List<Cama> listarCamasOcupadasPorPiso(Piso piso);
+
+	List<Cama> listarCamasReservadasPorPiso(Piso piso);
+
+	List<Cama> listarCamasDisponiblesPorPiso(Piso piso);
 }
