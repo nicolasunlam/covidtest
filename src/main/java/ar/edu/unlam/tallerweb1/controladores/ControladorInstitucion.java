@@ -383,11 +383,15 @@ public class ControladorInstitucion {
 
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 
+		Long idPiso = sala.getSector().getPiso().getId();
+
+		Boolean registro = true;
+
 		List<PisoConSectores> listaPisosConSectoresSalasYCamas = servicioPiso
 				.listarPisosConSectoresSalasYCamasDeUnaInstitucion(institucion);
 		model.put("listaPisosConSectoresSalasYCamas", listaPisosConSectoresSalasYCamas);
 
-		return new ModelAndView("pisosInstitucion", model);
+		return new ModelAndView("redirect:/verPiso?idPiso=" + idPiso + "&registro=" + registro);
 	}
 
 	@RequestMapping("continuacionIngresoDatos")
@@ -489,27 +493,27 @@ public class ControladorInstitucion {
 
 		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
 		List<PisoDetallado> listaPisosDetallados = new ArrayList<PisoDetallado>();
-		
-		for(int i=0; i < listaPisos.size(); i++){
-			
+
+		for (int i = 0; i < listaPisos.size(); i++) {
+
 			List<Sector> listaSectores = servicioSector.consultarSectoresPorPiso(listaPisos.get(i));
 			List<Sala> listaSalas = servicioSala.listarSalasPorPiso(listaPisos.get(i));
 			List<Cama> listaCamasOcupadas = servicioCama.listarCamasOcupadasPorPiso(listaPisos.get(i));
 			List<Cama> listaCamasReservadas = servicioCama.listarCamasReservadasPorPiso(listaPisos.get(i));
 			List<Cama> listaCamasDisponibles = servicioCama.listarCamasDisponiblesPorPiso(listaPisos.get(i));
-			
+
 			PisoDetallado pisoDetallado = new PisoDetallado();
-			
+
 			pisoDetallado.setPiso(listaPisos.get(i));
 			pisoDetallado.setListaSectores(listaSectores);
 			pisoDetallado.setListaSalas(listaSalas);
 			pisoDetallado.setListaCamasOcupadas(listaCamasOcupadas);
 			pisoDetallado.setListaCamasReservadas(listaCamasReservadas);
 			pisoDetallado.setListaCamasDisponibles(listaCamasDisponibles);
-			
+
 			listaPisosDetallados.add(pisoDetallado);
 		}
-		
+
 		model.put("listaPisosDetallados", listaPisosDetallados);
 
 		return new ModelAndView("pisosInstitucion", model);
@@ -720,7 +724,8 @@ public class ControladorInstitucion {
 	}
 
 	@RequestMapping("/verPiso")
-	public ModelAndView verPiso(HttpServletRequest request, Long idPiso) {
+	public ModelAndView verPiso(HttpServletRequest request, Long idPiso,
+			@RequestParam(value = "registro", required = false) Boolean registro) {
 
 		ModelMap model = new ModelMap();
 
@@ -737,6 +742,10 @@ public class ControladorInstitucion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 		/*-----------------------------------*/
+
+		if (registro != null) {
+			model.put("registro", registro);
+		}
 
 		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
 
