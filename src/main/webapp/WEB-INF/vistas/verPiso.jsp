@@ -173,8 +173,13 @@ code {
 										<img id="imagenCama${camaConAsignacion.getCama().getId()}"
 											src="img/cama-ver.png" style="width: 115px;" class=""></img>
 
-										<p id="informacionCama${camaConAsignacion.getCama().getId()}"
-											hidden>Hola mundo</p>
+										<div style="width: 115px;"
+											id="informacionCama${camaConAsignacion.getCama().getId()}"
+											hidden>
+											<p>Tipo Cama:
+												${camaConAsignacion.getCama().getTipoCama().getDescripcion()}</p>
+											<img src="img/cama-ver.png" style="width: 30px;" class=""></img>
+										</div>
 
 									</c:if>
 
@@ -184,7 +189,19 @@ code {
 
 											<%-- <h6 class="">Ocupada por
 												${camaConAsignacion.getAsignacion().getPaciente().getNombre()}</h6> --%>
-											<img src="img/cama-ro.png" style="width: 115px;" class=""></img>
+											<img id="imagenCama${camaConAsignacion.getCama().getId()}"
+												src="img/cama-ro.png" style="width: 115px;" class=""></img>
+
+											<div style="width: 115px;"
+												id="informacionCama${camaConAsignacion.getCama().getId()}"
+												hidden>
+												<p>Tipo Cama:
+													${camaConAsignacion.getCama().getTipoCama().getDescripcion()}</p>
+												<p>Ocupada por:
+													${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
+													${camaConAsignacion.getAsignacion().getPaciente().getApellido()}</p>
+												<img src="img/cama-ro.png" style="width: 30px;" class=""></img>
+											</div>
 
 
 										</c:if>
@@ -193,7 +210,19 @@ code {
 
 											<%-- <h6 class="">Reservada para
 												${camaConAsignacion.getAsignacion().getPaciente().getNombre()}</h6> --%>
-											<img src="img/cama-am.png" style="width: 115px;" class=""></img>
+											<img id="imagenCama${camaConAsignacion.getCama().getId()}"
+												src="img/cama-am.png" style="width: 115px;" class=""></img>
+
+											<div style="width: 115px;"
+												id="informacionCama${camaConAsignacion.getCama().getId()}"
+												hidden>
+												<p>Tipo Cama:
+													${camaConAsignacion.getCama().getTipoCama().getDescripcion()}</p>
+												<p>Reservado para:
+													${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
+													${camaConAsignacion.getAsignacion().getPaciente().getApellido()}</p>
+												<img src="img/cama-am.png" style="width: 30px;" class=""></img>
+											</div>
 
 
 										</c:if>
@@ -249,13 +278,13 @@ code {
 		var imagenCama = document.getElementById(idImagenCama);
 		var informacionCama = document.getElementById(idInformacionCama);
 
-		if (estado == true) {
+		if (informacionCama.hidden) {
 			informacionCama.hidden = false;
 			imagenCama.hidden = true;
 			estado = false;
 
 		} else {
-			infomacionCama.hidden = true;
+			informacionCama.hidden = true;
 			imagenCama.hidden = false;
 			estado = true;
 		}
