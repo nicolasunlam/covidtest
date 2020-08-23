@@ -31,4 +31,6 @@ public interface ServicioPaciente {
     List<Paciente> pacientesInternadosPorInstitucion(Long idInstitucion);
 
 	public List<String> obtenerListaDeEnfermedadesDeUnPaciente(Paciente paciente);
+
+//	public void actualizarDatosDePaciente(Paciente p);
 }

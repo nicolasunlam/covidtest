@@ -565,6 +565,17 @@ public class ControladorPaciente {
 		return new ModelAndView("MisDatos", model);
 	} 
 	
+	@RequestMapping(value = "/guardarCambios", method = RequestMethod.POST)
+	public String guardarCambios(@ModelAttribute("paciente") Paciente p, HttpServletRequest request) {
+		
+//		ModelMap model = new ModelMap();
+		Paciente buscado = servicioPaciente.consultarPacientePorId(p.getId());
+		servicioPaciente.actualizarPaciente(buscado);
+//		return new ModelAndView("MisDatos", model);
+		
+		 return "redirect:/MisDatos";  
+	}
+	
 	@RequestMapping("/fichaInstitucion")
 	public ModelAndView fichaInstitucion(HttpServletRequest request) {
 

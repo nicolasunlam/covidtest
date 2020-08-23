@@ -52,14 +52,14 @@ p.lead {
 
                 <div class="form-group"> --%>
 
-<form>
+<form method="post" action="guardarCambios">
   <div class="form-group">
-    <label for="exampleInputEmail1">Nombre</label>
+    <label for="nombre">Nombre</label>
     <input type="text" class="form-control" id="nombre" aria-describedby="nombre" placeholder="${paciente.getNombre()}">
     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Apellido</label>
+    <label for="apellido">Apellido</label>
     <input type="text" class="form-control" id="apellido" placeholder="${paciente.getApellido()}">
   </div>
  <div class="form-group">
