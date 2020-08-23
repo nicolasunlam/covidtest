@@ -35,6 +35,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMapa;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPiso;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSala;
@@ -55,12 +56,14 @@ public class ControladorInstitucion {
 	private ServicioPiso servicioPiso;
 	private ServicioSector servicioSector;
 	private ServicioSala servicioSala;
+	private ServicioPaciente servicioPaciente;
 
 	@Autowired
 	public ControladorInstitucion(ServicioInstitucion servicioInstitucion, ServicioCama servicioCama,
 			ServicioUsuario servicioUsuario, ServicioDomicilio servicioDomicilio, ServicioPartido servicioPartido,
 			ServicioLocalidad servicioLocalidad, ServicioAtajo servicioAtajo, ServicioMapa servicioMapa,
-			ServicioPiso servicioPiso, ServicioSector servicioSector, ServicioSala servicioSala) {
+			ServicioPiso servicioPiso, ServicioSector servicioSector, ServicioSala servicioSala,
+			ServicioPaciente servicioPaciente) {
 
 		this.servicioInstitucion = servicioInstitucion;
 		this.servicioCama = servicioCama;
@@ -73,6 +76,7 @@ public class ControladorInstitucion {
 		this.servicioPiso = servicioPiso;
 		this.servicioSector = servicioSector;
 		this.servicioSala = servicioSala;
+		this.servicioPaciente = servicioPaciente;
 	}
 
 	@RequestMapping("/registrarInstitucion")
@@ -168,9 +172,10 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
-		
+
+		Institucion institucion = servicioInstitucion
+				.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+
 		model.put("institucion", institucion);
 
 		return new ModelAndView("crearPiso", model);
@@ -228,11 +233,12 @@ public class ControladorInstitucion {
 		if (rol != null) {
 			model.put("rol", rol.name());
 		}
-		
-		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
-		
+
+		Institucion institucion = servicioInstitucion
+				.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+
 		model.put("institucion", institucion);
-		
+
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		model.put("idPiso", idPiso);
@@ -291,14 +297,15 @@ public class ControladorInstitucion {
 		if (rol != null) {
 			model.put("rol", rol.name());
 		}
-		
-		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
-		
+
+		Institucion institucion = servicioInstitucion
+				.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+
 		model.put("institucion", institucion);
-		
+
 		Sector sector = servicioSector.buscarSectorPorId(idSector);
 		Piso piso = servicioPiso.buscarPisoPorId(sector.getPiso().getId());
-		
+
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		model.put("idSector", idSector);
@@ -359,20 +366,21 @@ public class ControladorInstitucion {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
-		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
-		
+
+		Institucion institucion = servicioInstitucion
+				.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
+
 		model.put("institucion", institucion);
-		
+
 		Sala sala = servicioSala.buscarSalaPorId(idSala);
 		Sector sector = servicioSector.buscarSectorPorId(sala.getSector().getId());
 		Piso piso = servicioPiso.buscarPisoPorId(sector.getPiso().getId());
-		
+
 		model.put("idSala", idSala);
 		model.put("sala", sala);
 		model.put("sector", sector);
 		model.put("piso", piso);
-		
+
 		return new ModelAndView("crearCamas", model);
 	}
 
@@ -635,6 +643,24 @@ public class ControladorInstitucion {
 
 		model.put("nombre", nombre);
 		model.put("camas", camas);
+
+		/**/
+		List<Piso> pisosInstitucion = servicioPiso.listarPisosPorInstitucion(institucion);
+
+		Integer cantidadCamasReservadas = 0;
+		Integer cantidadCamasOcupadas = 0;
+		Integer cantidadCamasDisponibles = 0;
+
+		for (Piso piso : pisosInstitucion) {
+			cantidadCamasReservadas += servicioCama.listarCamasReservadasPorPiso(piso).size();
+			cantidadCamasDisponibles += servicioCama.listarCamasDisponiblesPorPiso(piso).size();
+			cantidadCamasOcupadas += servicioCama.listarCamasOcupadasPorPiso(piso).size();
+		}
+
+		model.put("cantidadCamasOcupadas", cantidadCamasOcupadas);
+		model.put("cantidadCamasDisponibles", cantidadCamasDisponibles);
+		model.put("cantidadCamasReservadas", cantidadCamasReservadas);
+		/**/
 
 		return new ModelAndView("bienvenido", model);
 	}
