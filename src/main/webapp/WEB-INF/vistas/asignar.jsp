@@ -11,7 +11,7 @@
   
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
-<title>Trasladar Paciente</title>
+<title>Asignar Paciente</title>
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
@@ -21,21 +21,22 @@
 
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h2 class="">Trasladar Paciente</h2>
+		<h2 class="">Asignar Paciente</h2>
 		
 	</div>
-		<p>A continuación se muestran los datos del paciente y sus requisitos para preparar su traslado.</p>
+		<p>A continuación se muestran los datos del paciente y sus requisitos para preparar su asignación.</p>
 	
 	<div class="my-4">
 		
-		<form action="trasladarAInstitucion" method="GET" role="form"
+		<form action="asignarAInstitucion" method="GET" role="form"
 			class="contactForm">
 
 			<div class="form-row d-flex justify-content-between flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
 
 				<div class="col-lg-1 col-md-2 col-sm-4">								
 					
-					<label for="" class=""> <img alt="" src="img/avatar.svg" width="100%" height="85px" style="min-width: ">
+					<label for="" class=""> 
+						<img alt="" src="img/avatar.svg" width="100%" height="85px" style="min-width: ">
 					</label>
 				</div>
 
@@ -142,12 +143,11 @@
 			
 				<c:if test="${paciente.getEsFumador() == true}">
 				<label for="" class="h6">
-				Fumador<c:if test="${paciente.getEsFumador() == true}">a
-				</c:if>:
+				Fumador/a:
 				</label>
 				<span
 					class="text-danger"> 
-					Activ<c:if test="${paciente.getEsFumador() == true}">o</c:if><c:if test="${paciente.getEsFumador() == true}">a</c:if>.
+					Activo/a.
 				</span>
 				</c:if>
 				
@@ -155,11 +155,11 @@
 
 			<div
 				class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-				<h4>Requisitos del traslado</h4>
+				<h4>Requisitos de la asignación</h4>
 			</div>
 						<div class="form-group px-0">
-			<p>Algunos de los siguientes requisitos para realizar el
-					traslado han sido autocompletados en base a la condición del
+			<p>Algunos de los siguientes requisitos para realizar la asignación
+			 han sido autocompletados en base a la condición del
 					paciente. 
 					<br>Puede modificarlos si lo desea.</p>
 					</div>
@@ -172,9 +172,12 @@
 					name="tipoSala" class="form-control br-radius-zero" required>
 					<c:forEach items="${listaTipoSalas}" var="tipoSala">
 						<option id="tipoSala" value="${tipoSala}"
+							
 							<c:if test="${tipoSala.getPrioridad() == paciente.getPrioridad()}">
 								selected
-						</c:if>>${tipoSala.getDescripcion()}
+						</c:if>
+						
+						>${tipoSala.getDescripcion()}
 					</c:forEach>
 				</select>
 				<div class="validation"></div>
@@ -201,19 +204,7 @@
 			</div>
 			
 			<div class="form-row">
-			
-			<div class="form-group col-lg-6 col-md-12">
-				<label for="" class="h6 my-3">Motivo del traslado<span
-					class="text-primary font-weight-bold">*</span></label> 
-					<select name="motivoTraslado" class="form-control br-radius-zero" required>
-					<option value="">Elija un motivo de traslado</option>
-					<c:forEach items="${listaMotivoTraslado}" var="motivoTraslado">
-						<option id="motivoTraslado" value="${motivoTraslado}">${motivoTraslado.getDescripcion()}</option>
-					</c:forEach>
-				</select>
-				<div class="validation"></div>
-			</div>
-			
+	
 			<div class="form-group col-lg-6 col-md-12">
 				<label for="" class="h6 my-3">Urgencia<span
 					class="text-primary font-weight-bold">*</span></label> 

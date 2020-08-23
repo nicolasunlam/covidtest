@@ -119,14 +119,15 @@
 			<c:forEach items="${traslados}" var="traslado">
 
 				<tr
-					<c:if test="${traslado.getAsignacionReservada().getAutorizada() == true}">
+					<c:if
+								test="${traslado.getAsignacionReservada().getAutorizada() == true}"> 
 		            		class="table-success autorizado"
 		               	</c:if>
 					<c:if test="${traslado.getAsignacionReservada().getAutorizada() == false}">
-		            		class="table-danger denegado"
-		               	</c:if>
+					class="table-danger denegado"
+					</c:if>
 					<c:if test="${traslado.getAsignacionReservada().getAutorizada() == null}">
-		            		class="espera"
+		            		class=" espera"
 		               	</c:if>>
 
 					<form action="procesarTraslado" method="GET">
@@ -148,17 +149,22 @@
 						<td style="vertical-align: middle;"><c:out
 								value="${Math.round(traslado.getDistancia())} Km" /></td>
 
-						<td style="vertical-align: middle;">${traslado.getAsignacionReservada().getUrgenciaTraslado()}</td>
+						<td style="vertical-align: middle;">${traslado.getAsignacionReservada().getUrgencia()}</td>
 
 						<td style="vertical-align: middle;"><c:if
-								test="${traslado.getAsignacionReservada().getAutorizada() == true}">
-		            		 Aceptado
+								test="${traslado.getAsignacionReservada().getAutorizada() == true && 
+									traslado.getAsignacionActual().getHoraEgreso() == null}">
+		            		 Aceptado (Esperando traslado)
+		              		 	</c:if> <c:if
+								test="${traslado.getAsignacionReservada().getAutorizada() == true && 
+									traslado.getAsignacionActual().getHoraEgreso() != null}">
+		            		 Aceptado (Traslado en curso)
 		              		 	</c:if> <c:if
 								test="${traslado.getAsignacionReservada().getAutorizada() == false}">
 		            		 Denegado
 		              		 	</c:if> <c:if
 								test="${traslado.getAsignacionReservada().getAutorizada() == null}">
-		            		 En espera
+		            		 En espera de autorización
 		              		 	</c:if></td>
 
 						<td style="vertical-align: middle;">
@@ -167,11 +173,32 @@
 							<div class="d-flex justify-content-center flex-wrap">
 
 								<c:if
-									test="${traslado.getAsignacionReservada().getAutorizada() == null}">
+									test="${traslado.getAsignacionReservada().getAutorizada() != true}">
+									<button class="btn btn-outline-success mx-1  my-1"
+										type="button" data-toggle="modal" style="width: 103px"
+										data-target="#modalTrasladar${traslado.getAsignacionReservada().getId()}">Aceptar
+										traslado</button>
+
+								</c:if>
+
+								<c:if
+									test="${traslado.getAsignacionReservada().getAutorizada() == true && 
+									traslado.getAsignacionActual().getHoraEgreso() == null}">
+
+									<button class="btn btn-outline-secondary mx-1  my-1"
+										type="button" data-toggle="modal" style="width: 103px"
+										data-target="#modalTrasladar${traslado.getAsignacionReservada().getId()}"
+										disabled>Internar Paciente</button>
+
+								</c:if>
+								<c:if
+									test="${traslado.getAsignacionReservada().getAutorizada() == true && 
+									traslado.getAsignacionActual().getHoraEgreso() != null}">
 
 									<button class="btn btn-outline-success mx-1  my-1"
 										type="button" data-toggle="modal" style="width: 103px"
-										data-target="#modalTrasladar${traslado.getAsignacionReservada().getId()}">Recibir</button>
+										data-target="#modalTrasladar${traslado.getAsignacionReservada().getId()}">Internar
+										Paciente</button>
 
 								</c:if>
 
@@ -244,15 +271,43 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-outline-primary"
 									data-dismiss="modal">Volver</button>
-								<form action="decidirTraslado" method="post">
 
-									<input name="idAsignacionReservada"
-										value="${traslado.getAsignacionReservada().getId()}" hidden>
-									<input name="distancia" value="${traslado.getDistancia()}"
-										hidden> <input name="decision" value="aceptado" hidden>
-									<button type="submit" class="btn btn-outline-success">Recibir
-										paciente</button>
-								</form>
+								<c:if
+									test="${traslado.getAsignacionReservada().getAutorizada() != true}">
+
+									<form action="decidirTraslado" method="post">
+
+										<input name="idAsignacionActual"
+											value="${traslado.getAsignacionActual().getId()}" hidden>
+										<input name="idAsignacionReservada"
+											value="${traslado.getAsignacionReservada().getId()}" hidden>
+										<input name="distancia" value="${traslado.getDistancia()}"
+											hidden> <input name="decision" value="aceptado"
+											hidden>
+										<button type="submit" class="btn btn-outline-success">Aceptar
+											traslado</button>
+									</form>
+
+								</c:if>
+
+								<c:if
+									test="${traslado.getAsignacionReservada().getAutorizada() == true && 
+									traslado.getAsignacionActual().getHoraEgreso() != null}">
+
+									<form action="internarPorTraslado" method="post">
+
+										<input name="idAsignacionActual"
+											value="${traslado.getAsignacionActual().getId()}" hidden>
+										<input name="idAsignacionReservada"
+											value="${traslado.getAsignacionReservada().getId()}" hidden>
+										<input name="distancia" value="${traslado.getDistancia()}"
+											hidden> <input name="decision" value="aceptado"
+											hidden>
+										<button type="submit" class="btn btn-outline-success">Internar paciente</button>
+									</form>
+
+								</c:if>
+
 							</div>
 						</div>
 					</div>

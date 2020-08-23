@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
+import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDistancia;
 import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble;
 
 import java.util.List;
@@ -92,7 +93,7 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
 					+ "JOIN Asignacion as a ON a.cama = c "
 					+ "JOIN Asignacion a2 ON a.paciente = a2.paciente "
 					+ "WHERE i = :institucion " 
-					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.motivoEgreso IS NULL "
 					+ "AND a.horaIngreso IS NOT NULL "
 					+ "AND a2.horaIngreso IS NULL "
 					+ "AND a2.horaEgreso IS NULL "
@@ -104,30 +105,30 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
 		return query.getResultList();
     }
     
-    @SuppressWarnings({"unchecked" })
-    @Override
-    public List<AsignacionDoble> reservasSolicitadasPorInternacionConAsignacionActualPorInstitucion(Institucion institucion) {
-
-		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble(a, a2) " 
-					+ "FROM Cama as c " 
-					+ "JOIN Sala as sal ON c.sala = sal "
-					+ "JOIN Sector as sec ON sal.sector = sec " 
-					+ "JOIN Piso as p ON sec.piso = p "
-					+ "JOIN Institucion as i ON p.institucion = i " 
-					+ "JOIN Asignacion as a ON a.cama = c "
-					+ "JOIN Asignacion a2 ON a.paciente = a2.paciente "
-					+ "WHERE i = :institucion " 
-					+ "AND a.horaEgreso IS NULL "
-					+ "AND a.horaIngreso IS NOT NULL "
-					+ "AND a2.horaIngreso IS NULL "
-					+ "AND a2.horaEgreso IS NULL "
-					+ "AND a2.motivoTraslado IS NULL ";  
-
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter("institucion", institucion);
-
-		return query.getResultList();
-    }
+//    @SuppressWarnings({"unchecked" })
+//    @Override
+//    public List<AsignacionDistancia> reservasSolicitadasPorInternacionPorInstitucion(Institucion institucion) {
+//
+//		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDistancia(a) " 
+//					+ "FROM Cama as c " 
+//					+ "JOIN Sala as sal ON c.sala = sal "
+//					+ "JOIN Sector as sec ON sal.sector = sec " 
+//					+ "JOIN Piso as p ON sec.piso = p "
+//					+ "JOIN Institucion as i ON p.institucion = i " 
+//					+ "JOIN Asignacion as a ON a.cama = c "
+//					+ "WHERE i = :institucion " 
+//					+ "AND a.horaEgreso IS NULL "
+//					+ "AND a.horaIngreso IS NULL "
+//					+ "AND a.paciente NOT IN (SELECT a2.paciente"
+//										   + "FROM Asignacion as a2 "
+//										   + "WHERE a2.a.horaIngreso IS NOT NULL"
+//										   + "AND a.horaEgreso IS NULL ) ";  
+//
+//		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+//		query.setParameter("institucion", institucion);
+//
+//		return query.getResultList();
+//    }
     
     @SuppressWarnings({"unchecked" })
     @Override
@@ -142,7 +143,7 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
 					+ "JOIN Asignacion as a ON a.cama = c "
 					+ "JOIN Asignacion a2 ON a.paciente = a2.paciente "
 					+ "WHERE i = :institucion " 
-					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.motivoEgreso IS NULL "
 					+ "AND a.horaIngreso IS NOT NULL "
 					+ "AND a2.horaIngreso IS NULL "
 					+ "AND a2.horaEgreso IS NULL ";  
@@ -191,7 +192,7 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
 					+ "JOIN Asignacion as a2 ON a2.cama = c "
 					+ "JOIN Asignacion as a ON a.paciente = a2.paciente "
 					+ "WHERE i = :institucion " 
-					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.motivoEgreso IS NULL "
 					+ "AND a.horaIngreso IS NOT NULL "
 					+ "AND a2.horaIngreso IS NULL "
 					+ "AND a2.horaEgreso IS NULL "
@@ -205,22 +206,22 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
     
     @SuppressWarnings({"unchecked" })
     @Override
-    public List<AsignacionDoble> reservasARecibirPorInternacionConAsignacionActualPorInstitucion(Institucion institucion) {
+    public List<AsignacionDistancia> reservasARecibirPorInternacionPorInstitucion(Institucion institucion) {
 
-		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble(a, a2) " 
-					+ "FROM Cama as c " 
-					+ "JOIN Sala as sal ON c.sala = sal "
-					+ "JOIN Sector as sec ON sal.sector = sec " 
-					+ "JOIN Piso as p ON sec.piso = p "
-					+ "JOIN Institucion as i ON p.institucion = i " 
-					+ "JOIN Asignacion as a2 ON a2.cama = c "
-					+ "JOIN Asignacion as a ON a.paciente = a2.paciente "
-					+ "WHERE i = :institucion " 
-					+ "AND a.horaEgreso IS NULL "
-					+ "AND a.horaIngreso IS NOT NULL "
-					+ "AND a2.horaIngreso IS NULL "
-					+ "AND a2.horaEgreso IS NULL "
-					+ "AND a2.motivoTraslado IS NULL ";  
+		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDistancia(a) " 
+				+ "FROM Cama as c " 
+				+ "JOIN Sala as sal ON c.sala = sal "
+				+ "JOIN Sector as sec ON sal.sector = sec " 
+				+ "JOIN Piso as p ON sec.piso = p "
+				+ "JOIN Institucion as i ON p.institucion = i " 
+				+ "JOIN Asignacion as a ON a.cama = c "
+				+ "WHERE i = :institucion " 
+				+ "AND a.motivoEgreso IS NULL "
+				+ "AND a.horaIngreso IS NULL "
+				+ "AND a.paciente NOT IN (SELECT a2.paciente"
+									   + "FROM Asignacion as a2 "
+									   + "WHERE a2.a.horaIngreso IS NOT NULL"
+									   + "AND a2.motivoEgreso IS NULL ) ";   
 
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("institucion", institucion);
@@ -241,7 +242,7 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
 					+ "JOIN Asignacion as a2 ON a2.cama = c "
 					+ "JOIN Asignacion as a ON a.paciente = a2.paciente "
 					+ "WHERE i = :institucion " 
-					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.motivoEgreso IS NULL "
 					+ "AND a.horaIngreso IS NOT NULL "
 					+ "AND a2.horaIngreso IS NULL "
 					+ "AND a2.horaEgreso IS NULL ";  

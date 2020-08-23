@@ -37,7 +37,7 @@ public class Asignacion {
 	@Enumerated(EnumType.STRING)
 	private MotivoTraslado motivoTraslado;
 	
-	private String urgenciaTraslado;
+	private String urgencia;
 
 	public Long getId() {
 		return Id;
@@ -119,12 +119,20 @@ public class Asignacion {
 		this.horaTraslado = horaTraslado;
 	}
 
-	public String getUrgenciaTraslado() {
-		return urgenciaTraslado;
+	public String getUrgencia() {
+		return urgencia;
 	}
 
-	public void setUrgenciaTraslado(String urgenciaTraslado) {
-		this.urgenciaTraslado = urgenciaTraslado;
+	public void setUrgencia(String urgencia) {
+		this.urgencia = urgencia;
+	}
+
+	public MotivoIngreso getMotivoIngreso() {
+		return motivoIngreso;
+	}
+
+	public void setMotivoIngreso(MotivoIngreso motivoIngreso) {
+		this.motivoIngreso = motivoIngreso;
 	}
 
 }

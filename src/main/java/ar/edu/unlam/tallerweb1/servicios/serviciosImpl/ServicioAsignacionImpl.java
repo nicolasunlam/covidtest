@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
+import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDistancia;
 import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsignacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsignacion;
@@ -71,11 +72,11 @@ public class ServicioAsignacionImpl implements ServicioAsignacion {
 		 return repositorioAsignacion.reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(institucion);
 	}
 
-	@Override
-	public List<AsignacionDoble> reservasSolicitadasPorInternacionConAsignacionActualPorInstitucion(
-			Institucion institucion) {
-		 return repositorioAsignacion.reservasSolicitadasPorInternacionConAsignacionActualPorInstitucion(institucion);
-	}
+//	@Override
+//	public List<AsignacionDistancia> reservasSolicitadasPorInternacionPorInstitucion(
+//			Institucion institucion) {
+//		 return repositorioAsignacion.reservasSolicitadasPorInternacionPorInstitucion(institucion);
+//	}
 
     /*-------- RESERVAS A RECIBIR ----------*/
 
@@ -90,9 +91,9 @@ public class ServicioAsignacionImpl implements ServicioAsignacion {
 	}
 
 	@Override
-	public List<AsignacionDoble> reservasARecibirPorInternacionConAsignacionActualPorInstitucion(
+	public List<AsignacionDistancia> reservasARecibirPorInternacionPorInstitucion(
 			Institucion institucion) {
-		 return repositorioAsignacion.reservasARecibirPorInternacionConAsignacionActualPorInstitucion(institucion);
+		 return repositorioAsignacion.reservasARecibirPorInternacionPorInstitucion(institucion);
 	}
 
 	@Override

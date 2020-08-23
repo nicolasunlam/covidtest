@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.TipoCama;
 import ar.edu.unlam.tallerweb1.modelo.TipoSala;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -136,5 +137,33 @@ public class ServicioInstitucionImpl implements ServicioInstitucion {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public List<InstitucionDistanciaSalasCamas> obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(Paciente paciente, TipoCama tipoCama, TipoSala tipoSala) {
+
+    	List <InstitucionDistanciaSalasCamas> listaInstitucionDistanciaSalas = new LinkedList<InstitucionDistanciaSalasCamas>();
+    	
+		List <Institucion> instituciones = repositorioInstitucion.obtenerListaInstituciones();
+		
+    	for(int i = 0; i < instituciones.size(); ++i) {
+			
+    		List<SalaCantidad> listaSala = servicioSala.obtenerSalasConCantidadDeCamasDisponiblesDeUnaInstitucion(instituciones.get(i));
+    		
+    		Boolean camaRequerida = tieneCamaRequerida(tipoCama, listaSala);
+    		Boolean salaRequerida = tieneSalaRequerida(tipoSala, listaSala);
+    		Boolean salaYCamaRequerida = tieneSalaYCamaRequerida(tipoSala, tipoCama, listaSala);
+    		
+    		Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(instituciones.get(i).getLatitud(), 
+    																		instituciones.get(i).getLongitud(), 
+																			paciente.getLatitud(), paciente.getLongitud());
+    		
+    		InstitucionDistanciaSalasCamas institucionDistanciaSalasCamas = new InstitucionDistanciaSalasCamas(instituciones.get(i), distancia, listaSala, camaRequerida, salaRequerida, salaYCamaRequerida);
+    		
+    		listaInstitucionDistanciaSalas.add(institucionDistanciaSalasCamas);	
+
+	    }
+	    
+	    return listaInstitucionDistanciaSalas;
 	}
 }

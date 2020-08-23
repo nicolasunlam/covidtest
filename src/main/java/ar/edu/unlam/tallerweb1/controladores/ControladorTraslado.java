@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
+import ar.edu.unlam.tallerweb1.modelo.MotivoEgreso;
+import ar.edu.unlam.tallerweb1.modelo.MotivoIngreso;
 import ar.edu.unlam.tallerweb1.modelo.MotivoTraslado;
 import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
@@ -203,7 +205,7 @@ public class ControladorTraslado {
     	asignacionAReservar.setPaciente(paciente);
     	asignacionAReservar.setHoraReserva(horaReserva);
     	asignacionAReservar.setMotivoTraslado(motivoTraslado);
-    	asignacionAReservar.setUrgenciaTraslado(urgencia);
+    	asignacionAReservar.setUrgencia(urgencia);
     	
 		servicioInternacion.registrarInternacion(asignacionAReservar);
     	
@@ -217,8 +219,8 @@ public class ControladorTraslado {
 			        + " en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
 			        + " de la sala de " + cama.getSala().getDescripcion() 
 			        + " de " + cama.getSala().getTipoSala().getDescripcion() 
-			        + " de la institución " + institucion.getNombre() 
-			        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()
+			        + " de la institución " + institucionATrasladar.getNombre() 
+			        + " ubicada en la localidad de " + institucionATrasladar.getDomicilio().getLocalidad().getNombreLocalidad()
 			        + " a " + distanciaTraslado + " km de distancia."; 
 		
 		Notificacion notificacionTraslado = new Notificacion();
@@ -305,7 +307,7 @@ public class ControladorTraslado {
 	}
 
 	@RequestMapping(value = "decidirTraslado", method = RequestMethod.POST)
-	public ModelAndView aceptarTraslado(
+	public ModelAndView decidirTraslado(
 			
 			@RequestParam Long idAsignacionReservada,
 			@RequestParam String decision,
@@ -327,8 +329,8 @@ public class ControladorTraslado {
     	if(asignacionReservada == null) {
 			return new ModelAndView("redirect:/listaPacienteInternados");	
 		}
-    	
-    	if(decision == "aceptado") {
+
+    	if(decision.equalsIgnoreCase("aceptado")) {
     		asignacionReservada.setAutorizada(true);
 		}else {
 			asignacionReservada.setAutorizada(false);
@@ -347,7 +349,7 @@ public class ControladorTraslado {
 		
 		String asunto;
 		String msg;
-		if(decision == "aceptado") {
+		if(decision.equalsIgnoreCase("aceptado")) {
 			 asunto = "Traslado Aceptado";
 			 msg = "Se le informa que el paciente "
 				        + paciente.getApellido() + ", " + paciente.getNombre() 
@@ -363,7 +365,7 @@ public class ControladorTraslado {
 			 asunto = "Traslado Denegado";
 			 msg = "Se le informa que han denegado el traslado del paciente "
 				        + paciente.getApellido() + ", " + paciente.getNombre() 
-				        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
+				        + " (" + paciente.getTipoDocumento().getDescripcion() + ": "  + paciente.getNumeroDocumento() + ") " 
 		        		+ " a la institución " + institucion.getNombre() 
 				        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()
 				        + " a " + Math.round(distancia) + " km de distancia "
@@ -390,7 +392,8 @@ public class ControladorTraslado {
 	@RequestMapping(value = "trasladoEnCurso", method = RequestMethod.POST)
 	public ModelAndView notificarTrasladoEnCurso(
 			
-			@RequestParam Long idAsignacion,
+			@RequestParam Long idAsignacionActual,
+			@RequestParam Long idAsignacionReservada,
 			@RequestParam Double distancia,
 			HttpServletRequest request
 			
@@ -405,10 +408,18 @@ public class ControladorTraslado {
     	}
     	/*-----------------------------------*/
     	
-    	Asignacion asignacionReservada = servicioAsignacion.consultarAsignacionPorId(idAsignacion);
-    	if(asignacionReservada == null) {
+    	Asignacion asignacionActual = servicioAsignacion.consultarAsignacionPorId(idAsignacionActual);
+    	Asignacion asignacionReservada = servicioAsignacion.consultarAsignacionPorId(idAsignacionReservada);
+    	
+    	if(asignacionReservada == null || asignacionActual == null) {
 			return new ModelAndView("redirect:/listaPacienteInternados");	
 		}
+    	
+		LocalDateTime hora = LocalDateTime.now();
+    	
+    	asignacionActual.setHoraEgreso(hora);
+    	
+    	servicioAsignacion.actualizarAsignacion(asignacionActual);
     	
 		Long idInstitucion = (long) request.getSession().getAttribute("ID");
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
@@ -429,8 +440,6 @@ public class ControladorTraslado {
 			        + " hasta su institución para realizar la internación correspondiente en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
 			        + " de la sala de " + cama.getSala().getDescripcion() 
 			        + " de " + cama.getSala().getTipoSala().getDescripcion() + " ."; 
-		
-		LocalDateTime hora = LocalDateTime.now();
 		
 		Notificacion notificacionTraslado = new Notificacion();
 		notificacionTraslado.setRemitente(institucion);
@@ -484,6 +493,73 @@ public class ControladorTraslado {
 		}
 		
 		return new ModelAndView("trasladosParaRecibir", model);
+			
+	}
+	
+	@RequestMapping(value = "internarPorTraslado", method = RequestMethod.POST)
+	public ModelAndView internarPorTraslado(
+			
+			@RequestParam Long idAsignacionActual,
+			@RequestParam Long idAsignacionReservada,
+			@RequestParam Double distancia,
+			HttpServletRequest request
+			
+			) {
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	/*-----------------------------------*/
+    	
+    	Asignacion asignacionActual = servicioAsignacion.consultarAsignacionPorId(idAsignacionActual);
+    	Asignacion asignacionReservada = servicioAsignacion.consultarAsignacionPorId(idAsignacionReservada);
+    	
+    	if(asignacionReservada == null || asignacionActual == null) {
+			return new ModelAndView("redirect:/listaPacienteInternados");	
+		}
+    	
+		LocalDateTime hora = LocalDateTime.now();
+    	
+    	asignacionActual.setMotivoEgreso(MotivoEgreso.TRASLADADO);
+    	servicioAsignacion.actualizarAsignacion(asignacionActual);
+    	
+    	asignacionReservada.setMotivoIngreso(MotivoIngreso.TRASLADO);
+    	asignacionReservada.setHoraIngreso(hora);
+    	servicioAsignacion.actualizarAsignacion(asignacionReservada);
+    	
+		Long idInstitucion = (long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		Institucion institucionATrasladar = servicioInstitucion.obtenerInstitucionPorId(asignacionReservada.getCama()
+				.getSala().getSector().getPiso().getInstitucion().getId());
+		
+		Paciente paciente = asignacionReservada.getPaciente();
+		Cama cama = asignacionReservada.getCama();
+		
+		String asunto = "Traslado Realizado";
+		String msg = "Se le informa que se ha realizado exitosamente el traslado del paciente "
+			        + paciente.getApellido() + ", " + paciente.getNombre() 
+			        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
+	        		+ " desde la institución " + institucion.getNombre() 
+			        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()
+			        + " a " + Math.round(distancia) + " km de distancia "
+			        + " hasta su institución para realizar la internación correspondiente en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
+			        + " de la sala de " + cama.getSala().getDescripcion() 
+			        + " de " + cama.getSala().getTipoSala().getDescripcion() + " ."; 
+		
+		Notificacion notificacionTraslado = new Notificacion();
+		notificacionTraslado.setRemitente(institucion);
+		notificacionTraslado.setDestinatario(institucionATrasladar);
+		notificacionTraslado.setFechaHora(hora);
+		notificacionTraslado.setAsunto(asunto);
+		notificacionTraslado.setMsg(msg);
+		servicioNotificacion.registrarNotificacion(notificacionTraslado );
+		
+		return new ModelAndView("redirect:/verMensajesEnviados");	
 			
 	}
 }
