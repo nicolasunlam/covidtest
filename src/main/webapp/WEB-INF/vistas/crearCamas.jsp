@@ -13,6 +13,22 @@
 
 	<div class="container">
 
+		<div class="mt-2 border-bottom">
+			<h5>
+				${institucion.getNombre()} /
+				<c:if test="${piso.getNumeroPiso() == 0}">Planta Baja /
+                                    </c:if>
+				<c:if test="${piso.getNumeroPiso() != 0}">
+                                        Piso ${piso.getNumeroPiso()} /
+                                    </c:if>
+				Sector de ${sector.getDescripcion()} / Sala ${sala.getDescripcion()}
+				(${sala.getTipoSala()}) / Registrar Camas
+
+			</h5>
+
+		</div>
+
+
 		<div class="row justify-content-center h-100 my-5">
 			<div class="col-sm-8 align-self-center">
 				<div class="card shadow ">
