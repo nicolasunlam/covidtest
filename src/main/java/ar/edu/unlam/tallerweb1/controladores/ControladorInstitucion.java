@@ -780,7 +780,9 @@ public class ControladorInstitucion {
 	}
 
 	@RequestMapping("/verPiso")
-	public ModelAndView verPiso(HttpServletRequest request, Long idPiso,
+	public ModelAndView verPiso(
+			HttpServletRequest request, 
+			@RequestParam Long idPiso,
 			@RequestParam(value = "registro", required = false) Boolean registro) {
 
 		ModelMap model = new ModelMap();
@@ -802,13 +804,8 @@ public class ControladorInstitucion {
 		if (registro != null) {
 			model.put("registro", registro);
 		}
-
-		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
-
+		
 		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
-		if (piso.getInstitucion().getId() != idInstitucion) {
-			return new ModelAndView("redirect:/denied");
-		}
 
 		PisoConSectores pisoConSectores = servicioPiso.pisoConSectoresSalasYCamas(piso);
 		model.put("pisoConSectores", pisoConSectores);

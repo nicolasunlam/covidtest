@@ -50,17 +50,17 @@
 
 			<tr class="una bg-white">
 
-				<th style="vertical-align: middle; width: 14%"
+				<th style="vertical-align: middle; width: 16%"
 					class="border border-secondary"
 					onmouseover="this.style.backgroundColor='#dee2e6 ';"
 					onmouseout="this.style.backgroundColor='white';">PACIENTE A
-					TRASLADAR<img style="margin-top: 0.40rem;"
+					RECIBIR<img style="margin-top: 0.40rem;"
 					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
 					width="10px" height="">
 
 				</th>
 
-				<th style="vertical-align: middle; width: 13%"
+				<th style="vertical-align: middle; width: 16%"
 					class="border border-secondary"
 					onmouseover="this.style.backgroundColor='#dee2e6 ';"
 					onmouseout="this.style.backgroundColor='white';">FECHA DE
@@ -70,17 +70,17 @@
 
 				</th>
 
-				<th style="vertical-align: middle; width: 14%"
+				<th style="vertical-align: middle; width: 16%"
 					class="border border-secondary"
 					onmouseover="this.style.backgroundColor='#dee2e6';"
 					onmouseout="this.style.backgroundColor='white';">INSTITUCIÓN
-					DESTINO <img style="margin-top: 0.40rem;"
+					ORIGEN <img style="margin-top: 0.40rem;"
 					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
 					width="10px" height="">
 
 				</th>
 
-				<th style="vertical-align: middle; width: 11%"
+				<th style="vertical-align: middle; width: 12%"
 					class="border border-secondary"
 					onmouseover="this.style.backgroundColor='#dee2e6';"
 					onmouseout="this.style.backgroundColor='white';">DISTANCIA<img
@@ -90,7 +90,7 @@
 
 				</th>
 
-				<th style="vertical-align: middle; width: 11%"
+				<th style="vertical-align: middle; width: 12%"
 					class="border border-secondary"
 					onmouseover="this.style.backgroundColor='#dee2e6';"
 					onmouseout="this.style.backgroundColor='white';">URGENCIA <img
@@ -100,7 +100,7 @@
 
 				</th>
 
-				<th style="vertical-align: middle; width: 11%"
+				<th style="vertical-align: middle; width: 12%"
 					class="border border-secondary"
 					onmouseover="this.style.backgroundColor='#dee2e6';"
 					onmouseout="this.style.backgroundColor='white';">ESTADO <img
@@ -110,7 +110,7 @@
 
 				</th>
 
-				<th style="vertical-align: middle; width: 20%"
+				<th style="vertical-align: middle; width: 14%"
 					class="border border-secondary"
 					onmouseover="this.style.backgroundColor='#dee2e6';"
 					onmouseout="this.style.backgroundColor='white';">ACCIÓN</th>
@@ -142,7 +142,7 @@
 								value="${ parsedDateTime }" /></td>
 
 						<td style="vertical-align: middle;"><c:out
-								value="${traslado.getAsignacionReservada().getCama()
+								value="${traslado.getAsignacionActual().getCama()
 						.getSala().getSector().getPiso().getInstitucion().getNombre()}" /></td>
 
 						<td style="vertical-align: middle;"><c:out
@@ -167,16 +167,11 @@
 							<div class="d-flex justify-content-center flex-wrap">
 
 								<c:if
-									test="${traslado.getAsignacionReservada().getAutorizada() != false}">
+									test="${traslado.getAsignacionReservada().getAutorizada() == null}">
 
-									<button type="button" data-toggle="modal" style="width: 103px"
-										data-target="#modalTrasladar${traslado.getAsignacionReservada().getId()}"
-										<c:if test="${traslado.getAsignacionReservada().getAutorizada() == true}">
-		            		 class="btn btn-outline-success mx-1  my-1"
-		              		 	</c:if>
-										<c:if test="${traslado.getAsignacionReservada().getAutorizada() != true}">
-		            		 class="btn btn-outline-secondary mx-1  my-1" disabled
-		              		 	</c:if>>Recibir</button>
+									<button class="btn btn-outline-success mx-1  my-1"
+										type="button" data-toggle="modal" style="width: 103px"
+										data-target="#modalTrasladar${traslado.getAsignacionReservada().getId()}">Recibir</button>
 
 								</c:if>
 
@@ -184,12 +179,15 @@
 									style="width: 103px" data-toggle="modal"
 									data-target="#modalDetalle${traslado.getAsignacionReservada().getId()}">
 									Ver Detalle</button>
-							</div>
-							<div>
-								<button type="button" class="btn btn-outline-danger mx-1  my-1"
-									style="width: 103px" data-toggle="modal"
-									data-target="#modalEliminar${traslado.getAsignacionReservada().getId()}">
-									Denegar</button>
+
+								<c:if
+									test="${traslado.getAsignacionReservada().getAutorizada() == null}">
+
+									<button type="button" class="btn btn-outline-danger mx-1  my-1"
+										style="width: 103px" data-toggle="modal"
+										data-target="#modalDenegar${traslado.getAsignacionReservada().getId()}">
+										Denegar</button>
+								</c:if>
 							</div>
 
 						</td>
@@ -207,7 +205,7 @@
 						role="document">
 						<div class="modal-content  px-3">
 							<div class="modal-header pb-2">
-								<h5 class="modal-title" id="exampleModalLongTitleUno">Realizar
+								<h5 class="modal-title" id="exampleModalLongTitleUno">Recibir
 									traslado</h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
@@ -217,39 +215,43 @@
 							<div class="modal-body text-left">
 
 								<p class="p mt-2 mb-4">
-									Realizar el traslado del paciente <strong>
+									Recibir el traslado del paciente <strong>
 										${traslado.getAsignacionReservada().getPaciente().getNombre()}
 										${traslado.getAsignacionReservada().getPaciente().getApellido()}
 									</strong> de numero de documento <strong>
 										${traslado.getAsignacionReservada().getPaciente().getNumeroDocumento()}
 										(${traslado.getAsignacionReservada().getPaciente().getTipoDocumento().getDescripcion()})
-									</strong> con destino de internación en la institución <strong>
-										"${traslado.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getNombre()}"
+									</strong> con origen de internación en la institución <strong>
+										"${traslado.getAsignacionActual().getCama().getSala().getSector().getPiso().getInstitucion().getNombre()}"
 									</strong>ubicada en
 									${traslado.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()},
 									${traslado.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getDomicilio().getLocalidad().getPartido().getProvincia().getNombreProvincia().getValor()},
 									a ${Math.round(traslado.getDistancia())} km. de distancia. La
-									internación está prevista para ser realizada en una cama <strong>
-										${traslado.getAsignacionReservada().getCama().getTipoCama().getDescripcion()}
-									</strong> en una sala de <strong>
-										${traslado.getAsignacionReservada().getCama().getSala().getTipoSala().getDescripcion()}</strong>.
+									internación está prevista para ser realizada en la <strong>cama
+										${traslado.getAsignacionReservada().getCama().getDescripcion()}
+										(${traslado.getAsignacionReservada().getCama().getTipoCama().getDescripcion()})
+									</strong> de la sala <strong>
+										${traslado.getAsignacionReservada().getCama().getSala().getDescripcion()}
+										(${traslado.getAsignacionReservada().getCama().getSala().getTipoSala().getDescripcion()})</strong>
+									de su intitución.
 								</p>
 
-								<p class="mb-0 font-weight-lighter">Al apretar "Trasladar"
-									se enviará una notificación a la institución para avisarle de
-									traslado en curso.</p>
+								<p class="mb-0 font-weight-lighter">Al apretar "Recibir
+									paciente" se enviará una notificación a la institución para
+									avisarle de sobre la autorización del traslado.</p>
 							</div>
 
 							<div class="modal-footer">
 								<button type="button" class="btn btn-outline-primary"
 									data-dismiss="modal">Volver</button>
-								<form action="trasladoEnCurso" method="post">
+								<form action="decidirTraslado" method="post">
 
-									<input name="idAsignacion"
+									<input name="idAsignacionReservada"
 										value="${traslado.getAsignacionReservada().getId()}" hidden>
 									<input name="distancia" value="${traslado.getDistancia()}"
-										hidden>
-									<button type="submit" class="btn btn-outline-success">Trasladar</button>
+										hidden> <input name="decision" value="aceptado" hidden>
+									<button type="submit" class="btn btn-outline-success">Recibir
+										paciente</button>
 								</form>
 							</div>
 						</div>
@@ -268,7 +270,7 @@
 						<div class="modal-content  px-3">
 							<div class="modal-header pb-2">
 								<h5 class="modal-title" id="exampleModalLongTitleUno">Detalle
-									de la solicitud de traslado</h5>
+									del traslado</h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
 									<span class="bg-white" aria-hidden="true">&times;</span>
@@ -277,27 +279,51 @@
 							<div class="modal-body text-left">
 
 								<p class="p mt-2 mb-4">
-									Solicitud de traslado realizada el diá <strong> <fmt:parseDate
-											value="${ traslado.getAsignacionReservada().getHoraReserva() }"
-											pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-										<fmt:formatDate pattern="dd 'de' MMMM 'a las' HH:mm 'horas'"
-											value="${ parsedDateTime }" />
-									</strong> para trasladar al paciente <strong>
+
+									<c:if
+										test="${traslado.getAsignacionReservada().getAutorizada() == null}">
+									Recibir
+									</c:if>
+									<c:if
+										test="${traslado.getAsignacionReservada().getAutorizada() == true}">
+									Ha aceptado
+									</c:if>
+									<c:if
+										test="${traslado.getAsignacionReservada().getAutorizada() == false}">
+									Ha rechazado
+									</c:if>
+									el traslado del paciente <strong>
 										${traslado.getAsignacionReservada().getPaciente().getNombre()}
 										${traslado.getAsignacionReservada().getPaciente().getApellido()}
 									</strong> de numero de documento <strong>
 										${traslado.getAsignacionReservada().getPaciente().getNumeroDocumento()}
 										(${traslado.getAsignacionReservada().getPaciente().getTipoDocumento().getDescripcion()})
-									</strong> con destino de internación en la institución <strong>
-										"${traslado.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getNombre()}"
+									</strong> con origen de internación en la institución <strong>
+										"${traslado.getAsignacionActual().getCama().getSala().getSector().getPiso().getInstitucion().getNombre()}"
 									</strong>ubicada en
 									${traslado.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getDomicilio().getLocalidad().getNombreLocalidad()},
 									${traslado.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getDomicilio().getLocalidad().getPartido().getProvincia().getNombreProvincia().getValor()},
 									a ${Math.round(traslado.getDistancia())} km. de distancia. La
-									internación está prevista para ser realizada en una cama <strong>
-										${traslado.getAsignacionReservada().getCama().getTipoCama().getDescripcion()}
-									</strong> en una sala de <strong>
-										${traslado.getAsignacionReservada().getCama().getSala().getTipoSala().getDescripcion()}</strong>.
+									internación
+									<c:if
+										test="${traslado.getAsignacionReservada().getAutorizada() == null}">
+									está prevista para ser realizada 
+									</c:if>
+									<c:if
+										test="${traslado.getAsignacionReservada().getAutorizada() == false}">
+									estaba prevista para ser realizada 
+									</c:if>
+									<c:if
+										test="${traslado.getAsignacionReservada().getAutorizada() == true}">
+									fue realizada
+									</c:if>
+									en la <strong>cama
+										${traslado.getAsignacionReservada().getCama().getDescripcion()}
+										(${traslado.getAsignacionReservada().getCama().getTipoCama().getDescripcion()})
+									</strong> de la sala <strong>
+										${traslado.getAsignacionReservada().getCama().getSala().getDescripcion()}
+										(${traslado.getAsignacionReservada().getCama().getSala().getTipoSala().getDescripcion()})</strong>
+									de su intitución.
 								</p>
 
 								<p class="mb-0 font-weight-lighter">Aprete el botón "Volver"
@@ -316,13 +342,13 @@
 
 				<!-- Start Modal -->
 				<div class="modal fade"
-					id="modalEliminar${traslado.getAsignacionReservada().getId()}"
+					id="modalDenegar${traslado.getAsignacionReservada().getId()}"
 					tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content  px-3">
 							<div class="modal-header pb-2">
-								<h5 class="modal-title" id="exampleModalLongTitleUno">Eliminar
+								<h5 class="modal-title" id="exampleModalLongTitleUno">Denegar
 									solicitud de traslado</h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
@@ -331,7 +357,7 @@
 							</div>
 							<div class="modal-body text-left">
 
-								<p class="p mt-2 mb-4">¿Está seguro/a que desea eliminar el
+								<p class="p mt-2 mb-4">¿Está seguro/a que desea denegar el
 									traslado solicitado?</p>
 
 								<p class="mb-0 font-weight-lighter text-danger">Una vez
@@ -342,10 +368,12 @@
 								<button type="button" class="btn btn-outline-primary"
 									data-dismiss="modal">Volver</button>
 
-								<form action="eliminarAsignacion" method="post">
-									<input name="idAsignacion"
+								<form action="decidirTraslado" method="post">
+									<input name="idAsignacionReservada"
 										value="${traslado.getAsignacionReservada().getId()}" hidden>
-									<button type="submit" class="btn btn-outline-danger">Eliminar
+									<input name="decision" value="denegado" hidden><input
+										name="distancia" value="${traslado.getDistancia()}" hidden>
+									<button type="submit" class="btn btn-outline-danger">Denegar
 										traslado</button>
 								</form>
 

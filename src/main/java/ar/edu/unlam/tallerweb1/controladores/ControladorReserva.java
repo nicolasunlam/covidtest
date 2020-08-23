@@ -22,6 +22,7 @@ import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoCama;
 import ar.edu.unlam.tallerweb1.modelo.TipoSala;
+import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble;
 import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalasCamas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsignacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
@@ -77,7 +78,7 @@ public class ControladorReserva {
 		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
     	Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
     	
-    	List<Asignacion> listaReservas = servicioAsignacion.asignacionesReservadasPorInstitucion(institucion);
+    	List<AsignacionDoble> listaReservas = servicioAsignacion.reservasSolicitadasConAsignacionActualPorInstitucion(institucion);
     	model.put("listaReservas", listaReservas);
 		
     	return new ModelAndView("reservasSolicitadas", model);

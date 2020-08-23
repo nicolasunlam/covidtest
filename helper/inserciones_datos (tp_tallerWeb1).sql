@@ -221,57 +221,73 @@ VALUES (1, "1", "TERAPIA_INTENSIVA", 1),
        
 INSERT INTO cama(id, descripcion, tipoCama, sala_id)
 		/*FAVALORO*/
-VALUES (1, "101", "ARTICULADA_MANUAL", 1),
-	   (2, "102", "ARTICULADA_ELECTRICA", 1),
-       (3, "103", "ARTICULADA_ELECTRICA", 1),
-       (4, "104", "ARTICULADA_ELECTRICA", 1),
-	   (5, "105", "ARTICULADA_MANUAL", 2),
-       (6, "106", "ARTICULADA_MANUAL", 2),
-       (7, "107", "ARTICULADA_ELECTRICA", 2),
-	   (8, "108", "ARTICULADA_ELECTRICA", 2),
-       (9, "109", "ARTICULADA_ELECTRICA", 3),
-       (10, "110", "ARTICULADA_MANUAL", 3),
-	   (11, "111", "ARTICULADA_MANUAL", 3),
-       (12, "112", "ARTICULADA_MANUAL", 4),
-       (13, "113", "FIJA", 4),
-	   (14, "114", "FIJA", 4),
-       (15, "115", "FIJA", 4),
+VALUES (1, "1", "ARTICULADA_MANUAL", 1),
+	   (2, "2", "ARTICULADA_ELECTRICA", 1),
+       (3, "3", "ARTICULADA_ELECTRICA", 1),
+       (4, "4", "ARTICULADA_ELECTRICA", 1),
+	   (5, "1", "ARTICULADA_MANUAL", 2),
+       (6, "2", "ARTICULADA_MANUAL", 2),
+       (7, "3", "ARTICULADA_ELECTRICA", 2),
+	   (8, "4", "ARTICULADA_ELECTRICA", 2),
+       (9, "1", "ARTICULADA_ELECTRICA", 3),
+       (10, "2", "ARTICULADA_MANUAL", 3),
+	   (11, "3", "ARTICULADA_MANUAL", 3),
+       (12, "4", "ARTICULADA_MANUAL", 4),
+       (13, "1", "FIJA", 4),
+	   (14, "2", "FIJA", 4),
+       (15, "3", "FIJA", 4),
        /*MORON*/
-       (16, "116", "FIJA", 5),
-	   (17, "117", "FIJA", 5),
-       (18, "118", "FIJA", 6),
-       (19, "119", "ARTICULADA_MANUAL", 6),
-	   (20, "120", "ARTICULADA_MANUAL", 7),
-       (21, "121", "FIJA", 8),
+       (16, "1", "FIJA", 5),
+	   (17, "2", "FIJA", 5),
+       (18, "1", "FIJA", 6),
+       (19, "2", "ARTICULADA_MANUAL", 6),
+	   (20, "1", "ARTICULADA_MANUAL", 7),
+       (21, "1", "FIJA", 8),
        /*SANTOJANNI*/
-       (22, "122", "ARTICULADA_ELECTRICA", 9),
-	   (23, "123", "ARTICULADA_ELECTRICA", 9),
-       (24, "124", "ARTICULADA_ELECTRICA", 9),
-       (25, "125", "ARTICULADA_MANUAL", 10),
-	   (26, "126", "ARTICULADA_MANUAL", 11),
-       (27, "127", "ARTICULADA_MANUAL", 11),
-       (28, "128", "FIJA", 11),
-	   (29, "129", "FIJA", 12),
-       (30, "130", "FIJA", 12),
-       (31, "131", "FIJA", 12),
+       (22, "1", "ARTICULADA_ELECTRICA", 9),
+	   (23, "2", "ARTICULADA_ELECTRICA", 9),
+       (24, "3", "ARTICULADA_ELECTRICA", 9),
+       (25, "1", "ARTICULADA_MANUAL", 10),
+	   (26, "1", "ARTICULADA_MANUAL", 11),
+       (27, "2", "ARTICULADA_MANUAL", 11),
+       (28, "3", "FIJA", 11),
+	   (29, "1", "FIJA", 12),
+       (30, "2", "FIJA", 12),
+       (31, "3", "FIJA", 12),
        /*CARRILLO*/
-	   (32, "132", "FIJA", 13),
-       (33, "134", "FIJA", 13),
-       (34, "135", "FIJA", 13),
-	   (35, "136", "FIJA", 14),
-       (36, "137", "ARTICULADA_MANUAL", 14),
-       (37, "138", "FIJA", 14),
-	   (38, "139", "ARTICULADA_MANUAL", 15),
-       (39, "140", "ARTICULADA_MANUAL", 15),
-       (40, "141", "ARTICULADA_ELECTRICA", 15),
-	   (41, "142", "FIJA", 15),
-       (42, "143", "FIJA", 15),
-       (43, "144", "FIJA", 15),
-	   (44, "145", "FIJA", 15),
-       (45, "146", "FIJA", 15),
-       (46, "147", "FIJA", 16),
-	   (47, "148", "FIJA", 16),
-       (48, "149", "FIJA", 16);
+	   (32, "1", "FIJA", 13),
+       (33, "2", "FIJA", 13),
+       (34, "3", "FIJA", 13),
+	   (35, "1", "FIJA", 14),
+       (36, "2", "ARTICULADA_MANUAL", 14),
+       (37, "3", "FIJA", 14),
+	   (38, "1", "ARTICULADA_MANUAL", 15),
+       (39, "2", "ARTICULADA_MANUAL", 15),
+       (40, "3", "ARTICULADA_ELECTRICA", 15),
+	   (41, "4", "FIJA", 15),
+       (42, "5", "FIJA", 15),
+       (43, "5", "FIJA", 15),
+	   (44, "6", "FIJA", 15),
+       (45, "7", "FIJA", 15),
+       (46, "1", "FIJA", 16),
+	   (47, "2", "FIJA", 16),
+       (48, "3", "FIJA", 16),
+       
+	   /*MÀS CAMAS PARA HOSP. FAVALORO*/
+	   (49, "5", "ARTICULADA_ELECTRICA", 1),
+       (50, "6", "ARTICULADA_ELECTRICA", 1),
+       (51, "7", "ARTICULADA_ELECTRICA", 1),
+	   (52, "8", "ARTICULADA_MANUAL", 1),
+       (53, "9", "ARTICULADA_MANUAL", 1),
+       (54, "10", "ARTICULADA_ELECTRICA", 1),
+	   (55, "11", "ARTICULADA_ELECTRICA", 1),
+       (56, "5", "ARTICULADA_ELECTRICA", 2),
+       (57, "6", "ARTICULADA_MANUAL", 2),
+	   (58, "7", "ARTICULADA_MANUAL", 2),
+       (59, "8", "ARTICULADA_MANUAL", 2),
+       (60, "9", "FIJA", 2),
+	   (61, "10", "FIJA", 2),
+       (62, "11", "FIJA", 2);
 
 /* ----- INTERNACION ----- */
 INSERT INTO asignacion(id, horaIngreso, horaEgreso, motivoEgreso, cama_id, paciente_id)
@@ -284,7 +300,7 @@ VALUES (1, '2020-01-01 01:00:00.000000', null, null, 1, 21),
 UPDATE asignacion a
 SET a.horaEgreso = '2020-02-01 01:00:00.000000',
 	a.motivoEgreso = "CURADO"
-WHERE a.cama_id IN(1,2,3);
+WHERE a.cama_id IN(1);
 
 /* ----- INGRESO Y EGRESO A LA VEZ (SON EGRESOS EN DEFINITVA)----- */
 INSERT INTO asignacion(id, horaIngreso, horaEgreso, motivoEgreso, cama_id, paciente_id)
@@ -295,8 +311,8 @@ VALUES (5, '2020-01-01 01:00:00.000000', '2020-02-01 01:00:00.000000', "CURADO",
 
 /* ----- INTERNACION 2 (rehusando 2 camas liberadas)----- */
 INSERT INTO asignacion(id, horaIngreso, horaEgreso, motivoEgreso, cama_id, paciente_id)
-VALUES (9, '2020-01-01 01:00:00.000000', null, null, 10, 25),
-	   (10, '2020-02-01 01:00:00.000000', null, null, 11, 26),
+VALUES (9, '2020-01-01 01:00:00.000000', null, null, 27, 25),
+	   (10, '2020-02-01 01:00:00.000000', null, null, 28, 26),
        (11, '2020-02-01 01:00:00.000000', null, null, 12, 27);
        
 /* ----- INTERNACION ----- */
@@ -313,12 +329,19 @@ VALUES ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro siste
 	   ("Recordatorio", '2020-04-02 01:00:00.000000', "Se le recuerda que ...", 6, 2),
        ("Recordatorio", '2020-04-02 01:00:00.000000', "Muchas gracias.", 2, 6);
        
-/* ----- RESERVA POR TRASLADO ----- */
+/* ----- RESERVAS POR TRASLADO ----- */
 INSERT INTO asignacion(id, horaReserva, motivoTraslado, horaEgreso, motivoEgreso, cama_id, paciente_id, autorizada, urgenciaTraslado)
-VALUES (16, '2020-05-01 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 43, 31, null, "Media"),
-	   (17, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 44, 33, null, "Media"),
-	   (18, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 16, 25, true, "Media"),
-	   (19, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 17, 26, false, "Media"),
-	   (20, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 25, 27, null, "Media"),
-	   (21, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 48, 35, true, "Media");
+VALUES 
+		/*RECIBE EL HOSP. CARILLO*/
+	   (16, '2020-05-01 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 43, 31, null, "Media"),
+	   (17, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 44, 22, false, "Media"),
+	   (18, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 48, 23, true, "Media"),
+       
+       /*RECIBE EL HOSP. FAVALORO*/
+	   (19, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 14, 25, true, "Media"),
+	   (20, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 15, 30, false, "Media"),
+	   (21, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 15, 26, null, "Media"),
+       
+       /*RECIBE EL HOSP. SANTOJIANNI*/       
+	   (22, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 25, 27, null, "Media");
        

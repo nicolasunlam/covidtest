@@ -304,6 +304,89 @@ public class ControladorTraslado {
 			
 	}
 
+	@RequestMapping(value = "decidirTraslado", method = RequestMethod.POST)
+	public ModelAndView aceptarTraslado(
+			
+			@RequestParam Long idAsignacionReservada,
+			@RequestParam String decision,
+			@RequestParam Double distancia,
+			HttpServletRequest request
+			
+			) {
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	/*-----------------------------------*/
+    	
+    	Asignacion asignacionReservada = servicioAsignacion.consultarAsignacionPorId(idAsignacionReservada);
+    	if(asignacionReservada == null) {
+			return new ModelAndView("redirect:/listaPacienteInternados");	
+		}
+    	
+    	if(decision == "aceptado") {
+    		asignacionReservada.setAutorizada(true);
+		}else {
+			asignacionReservada.setAutorizada(false);
+		}
+    	
+		servicioAsignacion.actualizarAsignacion(asignacionReservada);
+    	
+		Long idInstitucion = (long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		Institucion institucionOrigen = servicioInstitucion.obtenerInstitucionPorId(asignacionReservada.getCama()
+				.getSala().getSector().getPiso().getInstitucion().getId());
+		
+		Paciente paciente = asignacionReservada.getPaciente();
+		Cama cama = asignacionReservada.getCama();
+		
+		String asunto;
+		String msg;
+		if(decision == "aceptado") {
+			 asunto = "Traslado Aceptado";
+			 msg = "Se le informa que el paciente "
+				        + paciente.getApellido() + ", " + paciente.getNombre() 
+				        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
+		        		+ " ya puede ser trasladado a la institución " + institucion.getNombre() 
+				        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()
+				        + " a " + Math.round(distancia) + " km de distancia "
+				        + " para realizar la internación correspondiente en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
+				        + " de la sala de " + cama.getSala().getDescripcion() 
+				        + " de " + cama.getSala().getTipoSala().getDescripcion() + " ."; 
+			
+		}else {
+			 asunto = "Traslado Denegado";
+			 msg = "Se le informa que han denegado el traslado del paciente "
+				        + paciente.getApellido() + ", " + paciente.getNombre() 
+				        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
+		        		+ " a la institución " + institucion.getNombre() 
+				        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()
+				        + " a " + Math.round(distancia) + " km de distancia "
+				        + " para realizar la internación correspondiente en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
+				        + " de la sala de " + cama.getSala().getDescripcion() 
+				        + " de " + cama.getSala().getTipoSala().getDescripcion() + " ."; 		
+		}
+    	
+		
+		LocalDateTime hora = LocalDateTime.now();
+		
+		Notificacion notificacionTraslado = new Notificacion();
+		notificacionTraslado.setRemitente(institucion);
+		notificacionTraslado.setDestinatario(institucionOrigen);
+		notificacionTraslado.setFechaHora(hora);
+		notificacionTraslado.setAsunto(asunto);
+		notificacionTraslado.setMsg(msg);
+		servicioNotificacion.registrarNotificacion(notificacionTraslado );
+		
+		return new ModelAndView("redirect:/verMensajesEnviados");	
+			
+	}
+	
 	@RequestMapping(value = "trasladoEnCurso", method = RequestMethod.POST)
 	public ModelAndView notificarTrasladoEnCurso(
 			

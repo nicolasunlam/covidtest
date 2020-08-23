@@ -162,18 +162,8 @@ WHERE c.id NOT IN (SELECT a.cama_id
 			   WHERE a.cama_id = c.id
 			   AND a.horaEgreso IS NULL);  	
                
-/*------ Mostrar reservas por traslado (a2) con la internacion vigente (a)------*/
-SELECT a.id as a1, a2.id as a2
-FROM Asignacion a
-JOIN Asignacion a2 ON a.paciente_id = a2.paciente_id
-WHERE a.horaEgreso IS NULL
-AND a.horaIngreso IS NOT NULL
-AND a2.horaIngreso IS NULL
-AND a2.horaEgreso IS NULL
-AND a2.motivoTraslado IS NOT NULL;  
-
 /*------ Mostrar reservas SOLICITADAS por traslado (a2) con la internacion vigente (a)------*/
-SELECT a.id as a1, a2.id as a2
+SELECT a.id as a1, a.cama_id , a2.id as a2, a2.cama_id 
 FROM Cama c  
 JOIN Sala sal ON c.sala_id = sal.id
 JOIN Sector as sec ON sal.sector_id = sec.id
@@ -181,6 +171,22 @@ JOIN Piso as p ON sec.piso_id = p.id
 JOIN Usuario as i ON p.institucion_id = i.id
 JOIN Asignacion a ON a.cama_id = c.id
 JOIN Asignacion a2 ON a.paciente_id = a2.paciente_id
+WHERE i.id= "2"
+AND a.horaEgreso IS NULL
+AND a.horaIngreso IS NOT NULL
+AND a2.horaIngreso IS NULL
+AND a2.horaEgreso IS NULL
+AND a2.motivoTraslado IS NOT NULL;  
+
+/*------ Mostrar reservas A RECIBIR por traslado (a2) con la internacion vigente (a)------*/
+SELECT a.id as a1, a.cama_id , a2.id as a2, a2.cama_id 
+FROM Cama c  
+JOIN Sala sal ON c.sala_id = sal.id
+JOIN Sector as sec ON sal.sector_id = sec.id
+JOIN Piso as p ON sec.piso_id = p.id 
+JOIN Usuario as i ON p.institucion_id = i.id
+JOIN Asignacion as a2 ON a2.cama_id = c.id
+JOIN Asignacion as a ON a.paciente_id = a2.paciente_id
 WHERE i.id= "2" 
 AND a.horaEgreso IS NULL
 AND a.horaIngreso IS NOT NULL

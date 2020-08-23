@@ -170,7 +170,7 @@ code {
 										<c:when
 											test="${pisoDetallado.getListaCamasDisponibles().size() == 0}">
 											<span style="margin-left: 4px;"> <img alt=""
-												src="img/cama-gr.png" style="width: 35px">
+												src="img/cama-ocup-ver.png" style="width: 35px">
 											</span>
 										</c:when>
 
@@ -207,19 +207,46 @@ code {
 							<div class="col my-2">
 
 								<div class="row" style="display: block">
-									<p class="text-right my-2">${pisoDetallado.getListaCamasOcupadas().size()}
-										camas ocupadas</p>
+									<c:choose>
+										<c:when
+											test="${pisoDetallado.getListaCamasOcupadas().size() == 0}">
+											<p class="text-right mb-2">Ninguna cama ocupada</p>
+										</c:when>
+										<c:when
+											test="${pisoDetallado.getListaCamasOcupadas().size() == 1}">
+											<p class="text-right mb-2">${pisoDetallado.getListaCamasOcupadas().size()}
+												cama ocupada</p>
+										</c:when>
+										<c:otherwise>
+											<p class="text-right mb-2">${pisoDetallado.getListaCamasOcupadas().size()}
+												camas ocupadas</p>
+										</c:otherwise>
+									</c:choose>
 								</div>
 
 								<div class="row flex-row-reverse">
 
-									<c:forEach items="${pisoDetallado.getListaCamasOcupadas()}"
-										var="cama" end="7">
-										<span class="d-flex flex-row-reverse"
-											style="margin-left: 4px;"> <img alt=""
-											src="img/cama-ro.png" style="width: 35px">
-										</span>
-									</c:forEach>
+									<c:choose>
+
+										<c:when
+											test="${pisoDetallado.getListaCamasOcupadas().size() == 0}">
+											<span style="margin-left: 4px;"> <img alt=""
+												src="img/cama-ocup-ro.png" style="width: 35px">
+											</span>
+										</c:when>
+
+										<c:otherwise>
+
+											<c:forEach items="${pisoDetallado.getListaCamasOcupadas()}"
+												var="cama" end="7">
+												<span class="d-flex flex-row-reverse"
+													style="margin-left: 4px;"> <img alt=""
+													src="img/cama-ro.png" style="width: 35px">
+												</span>
+											</c:forEach>
+
+										</c:otherwise>
+									</c:choose>
 
 									<c:if
 										test="${pisoDetallado.getListaCamasOcupadas().size() > 8}">
@@ -239,19 +266,46 @@ code {
 							<div class="col">
 
 								<div class="row" style="display: block">
-									<p class="text-right my-2">${pisoDetallado.getListaCamasReservadas().size()}
-										camas reservadas</p>
+									<c:choose>
+										<c:when
+											test="${pisoDetallado.getListaCamasReservadas().size() == 0}">
+											<p class="text-right mb-2">Ninguna cama reservada</p>
+										</c:when>
+										<c:when
+											test="${pisoDetallado.getListaCamasReservadas().size() == 1}">
+											<p class="text-right mb-2">${pisoDetallado.getListaCamasReservadas().size()}
+												cama reservada</p>
+										</c:when>
+										<c:otherwise>
+											<p class="text-right mb-2">${pisoDetallado.getListaCamasReservadas().size()}
+												camas reservadas</p>
+										</c:otherwise>
+									</c:choose>
 								</div>
 
 								<div class="row flex-row-reverse">
 
-									<c:forEach items="${pisoDetallado.getListaCamasReservadas()}"
-										var="cama" end="7">
-										<span class="d-flex flex-row-reverse"
-											style="margin-left: 4px;"> <img alt=""
-											src="img/cama-am.png" style="width: 35px">
-										</span>
-									</c:forEach>
+									<c:choose>
+
+										<c:when
+											test="${pisoDetallado.getListaCamasReservadas().size() == 0}">
+											<span style="margin-left: 4px;"> <img alt=""
+												src="img/cama-ocup-am.png" style="width: 35px">
+											</span>
+										</c:when>
+
+										<c:otherwise>
+
+											<c:forEach items="${pisoDetallado.getListaCamasReservadas()}"
+												var="cama" end="7">
+												<span class="d-flex flex-row-reverse"
+													style="margin-left: 4px;"> <img alt=""
+													src="img/cama-ro.png" style="width: 35px">
+												</span>
+											</c:forEach>
+
+										</c:otherwise>
+									</c:choose>
 
 									<c:if
 										test="${pisoDetallado.getListaCamasReservadas().size() > 8}">
