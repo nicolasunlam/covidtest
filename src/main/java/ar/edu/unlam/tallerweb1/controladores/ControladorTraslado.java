@@ -202,6 +202,7 @@ public class ControladorTraslado {
     	asignacionAReservar.setCama(cama);
     	asignacionAReservar.setPaciente(paciente);
     	asignacionAReservar.setHoraReserva(horaReserva);
+    	asignacionAReservar.setMotivoTraslado(motivoTraslado);
     	asignacionAReservar.setUrgenciaTraslado(urgencia);
     	
 		servicioInternacion.registrarInternacion(asignacionAReservar);
@@ -258,7 +259,7 @@ public class ControladorTraslado {
 		Long idInstitucion = (long) request.getSession().getAttribute("ID");
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
-		List<AsignacionDoble> traslados = servicioAsignacion.asignacionesReservadasConAsignacionActualPorInstitucion(institucion);
+		List<AsignacionDoble> traslados = servicioAsignacion.reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(institucion);
 		model.put("traslados", traslados);
 		
 		for (AsignacionDoble asignacionDoble : traslados) {
@@ -272,55 +273,6 @@ public class ControladorTraslado {
 		}
 		
 		return new ModelAndView("trasladosSolicitados", model);
-			
-	}
-	
-	@RequestMapping("trasladosParaRecibir")
-	public ModelAndView trasladosParaRecibir(
-			
-			@RequestParam Long idPaciente,
-			@RequestParam TipoCama tipoCama,
-			@RequestParam TipoSala tipoSala,
-			@RequestParam MotivoTraslado motivoTraslado,
-			@RequestParam String urgencia,
-			HttpServletRequest request
-			
-			) {
-
-    	ModelMap model = new ModelMap();
-		
-    	/*---------- Validaciones -----------*/
-    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
-		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-    	/*-----------------------------------*/
-
-    	model.put("tipoCama", tipoCama);
-    	model.put("tipoSala", tipoSala);
-    	model.put("motivoTraslado", motivoTraslado);
-    	model.put("urgencia", urgencia);
-    	
-    	Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
-    	if(paciente == null) {
-			return new ModelAndView("redirect:/listaPacienteInternados");	
-		}
-    	model.put("paciente", paciente);
-		
-		Long idInstitucion = (long) request.getSession().getAttribute("ID");
-		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
-		
-		List<InstitucionDistanciaSalasCamas> listaInstituciones = servicioInstitucion.obtenerInstitucionesConDistanciaYDisponibilidadDeCamasPorTipoDeSala(institucion, tipoCama, tipoSala);
-		model.put("listaInstituciones", listaInstituciones);
-		
-		return new ModelAndView("trasladosParaRecibir", model);
 			
 	}
 	
@@ -406,6 +358,49 @@ public class ControladorTraslado {
 		servicioNotificacion.registrarNotificacion(notificacionTraslado );
 		
 		return new ModelAndView("redirect:/verMensajesEnviados");	
+			
+	}
+	
+
+	@RequestMapping("trasladosParaRecibir")
+	public ModelAndView trasladosParaRecibir(
+			
+			HttpServletRequest request
+			
+			) {
+
+    	ModelMap model = new ModelMap();
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if(rol != null) {
+			model.put("rol", rol.name());	
+		}
+    	model.put("armarHeader", servicioAtajo.armarHeader(request));
+    	/*-----------------------------------*/
+    	Long idInstitucion = (long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		List<AsignacionDoble> traslados = servicioAsignacion.reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(institucion);
+		model.put("traslados", traslados);
+		
+		for (AsignacionDoble asignacionDoble : traslados) {
+			
+			Double latitud1 = asignacionDoble.getAsignacionActual().getCama().getSala().getSector().getPiso().getInstitucion().getLatitud();
+			Double longitud1 = asignacionDoble.getAsignacionActual().getCama().getSala().getSector().getPiso().getInstitucion().getLongitud();
+			Double latitud2 = asignacionDoble.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getLatitud();
+			Double longitud2 = asignacionDoble.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getLongitud();
+			
+			asignacionDoble.setDistancia(servicioMapa.calcularDistanciaEntreDosPuntos(latitud1, longitud1, latitud2, longitud2));
+		}
+		
+		return new ModelAndView("trasladosParaRecibir", model);
 			
 	}
 }

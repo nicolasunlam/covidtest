@@ -19,10 +19,27 @@ public interface ServicioAsignacion {
 
     List<Asignacion> obtenerAsignacionesActuales();
 
+    /*-------------------------------- RESERVAS --------------------------------*/
+    
 	Asignacion consultarReservaAsignacionPaciente(Paciente paciente);
 
-	List<Asignacion> asignacionesReservadasPorInstitucion(Institucion institucion);
+    /*--------- RESERVAS SOLICITADAS -------*/
 
-	List<AsignacionDoble> asignacionesReservadasConAsignacionActualPorInstitucion(Institucion institucion);
+	List<AsignacionDoble> reservasSolicitadasConAsignacionActualPorInstitucion(Institucion institucion);
+
+	List<AsignacionDoble> reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(Institucion institucion);
+
+	List<AsignacionDoble> reservasSolicitadasPorInternacionConAsignacionActualPorInstitucion(
+			Institucion institucion);
+
+    /*--------- RESERVAS A RECIBIR -------*/
+
+	List<Asignacion> reservasARecibirPorInstitucion(Institucion institucion);
+
+	List<AsignacionDoble> reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(Institucion institucion);
+
+	List<AsignacionDoble> reservasARecibirPorInternacionConAsignacionActualPorInstitucion(Institucion institucion);
+
+	List<AsignacionDoble> reservasARecibirConAsignacionActualPorInstitucion(Institucion institucion);
 
 }

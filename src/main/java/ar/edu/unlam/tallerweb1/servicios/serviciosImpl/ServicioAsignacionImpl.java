@@ -50,22 +50,54 @@ public class ServicioAsignacionImpl implements ServicioAsignacion {
         return repositorioAsignacion.obtenerAsignacionesActuales();
     }
 
+    /*----------------------------------- RESERVAS ----------------------------------*/
+
     @Override
     public Asignacion consultarReservaAsignacionPaciente(Paciente paciente) {
 
         return repositorioAsignacion.consultarReservaAsignacionPaciente(paciente);
     }
 
-    @Override
-    public List<Asignacion> asignacionesReservadasPorInstitucion(Institucion institucion) {
+    /*-------- RESERVAS A SOLICITADAS ----------*/
 
-        return repositorioAsignacion.asignacionesReservadasPorInstitucion(institucion);
-    }
+	@Override
+	public List<AsignacionDoble> reservasSolicitadasConAsignacionActualPorInstitucion(Institucion institucion) {
+		 return repositorioAsignacion.reservasSolicitadasConAsignacionActualPorInstitucion(institucion);
+	}
 
-    @Override
-    public List<AsignacionDoble> asignacionesReservadasConAsignacionActualPorInstitucion(Institucion institucion) {
+	@Override
+	public List<AsignacionDoble> reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(
+			Institucion institucion) {
+		 return repositorioAsignacion.reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(institucion);
+	}
 
-        return repositorioAsignacion.asignacionesReservadasConAsignacionActualPorInstitucion(institucion);
-    }
+	@Override
+	public List<AsignacionDoble> reservasSolicitadasPorInternacionConAsignacionActualPorInstitucion(
+			Institucion institucion) {
+		 return repositorioAsignacion.reservasSolicitadasPorInternacionConAsignacionActualPorInstitucion(institucion);
+	}
+
+    /*-------- RESERVAS A RECIBIR ----------*/
+
+	@Override
+	public List<Asignacion> reservasARecibirPorInstitucion(Institucion institucion) {
+		 return repositorioAsignacion.reservasARecibirPorInstitucion(institucion);
+	}
+
+	@Override
+	public List<AsignacionDoble> reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(Institucion institucion) {
+		 return repositorioAsignacion.reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(institucion);
+	}
+
+	@Override
+	public List<AsignacionDoble> reservasARecibirPorInternacionConAsignacionActualPorInstitucion(
+			Institucion institucion) {
+		 return repositorioAsignacion.reservasARecibirPorInternacionConAsignacionActualPorInstitucion(institucion);
+	}
+
+	@Override
+	public List<AsignacionDoble> reservasARecibirConAsignacionActualPorInstitucion(Institucion institucion) {
+		 return repositorioAsignacion.reservasARecibirConAsignacionActualPorInstitucion(institucion);
+	}
 
 }

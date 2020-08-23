@@ -313,11 +313,12 @@ VALUES ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro siste
 	   ("Recordatorio", '2020-04-02 01:00:00.000000', "Se le recuerda que ...", 6, 2),
        ("Recordatorio", '2020-04-02 01:00:00.000000', "Muchas gracias.", 2, 6);
        
-/* ----- RESERVA ----- */
-INSERT INTO asignacion(id, horaReserva, horaEgreso, motivoEgreso, cama_id, paciente_id, autorizada, urgenciaTraslado)
-VALUES (16, '2020-05-01 01:00:00.000000', null, null, 43, 31, null, "Alta"),
-	   (17, '2020-05-05 01:00:00.000000', null, null, 44, 33, null, "Alta"),
-	   (18, '2020-05-05 01:00:00.000000', null, null, 16, 25, true, "Alta"),
-	   (19, '2020-05-05 01:00:00.000000', null, null, 17, 26, false, "Alta"),
-	   (20, '2020-05-05 01:00:00.000000', null, null, 25, 27, null, "Alta"),
-	   (21, '2020-05-05 01:00:00.000000', null, null, 48, 35, true, "Alta");
+/* ----- RESERVA POR TRASLADO ----- */
+INSERT INTO asignacion(id, horaReserva, motivoTraslado, horaEgreso, motivoEgreso, cama_id, paciente_id, autorizada, urgenciaTraslado)
+VALUES (16, '2020-05-01 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 43, 31, null, "Media"),
+	   (17, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 44, 33, null, "Media"),
+	   (18, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 16, 25, true, "Media"),
+	   (19, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 17, 26, false, "Media"),
+	   (20, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 25, 27, null, "Media"),
+	   (21, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 48, 35, true, "Media");
+       
