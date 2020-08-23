@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,12 +23,14 @@ import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoCama;
 import ar.edu.unlam.tallerweb1.modelo.TipoSala;
+import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble;
 import ar.edu.unlam.tallerweb1.modelo.listas.InstitucionDistanciaSalasCamas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsignacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInternacion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMapa;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMotivoTraslado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioNotificacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
@@ -57,6 +60,8 @@ public class ControladorTraslado {
 	private ServicioNotificacion servicioNotificacion;
 	@Autowired
 	private ServicioAsignacion servicioAsignacion;
+	@Autowired
+	private ServicioMapa servicioMapa;
 	
 	@RequestMapping("trasladar")
 	public ModelAndView trasladar(
@@ -197,6 +202,7 @@ public class ControladorTraslado {
     	asignacionAReservar.setCama(cama);
     	asignacionAReservar.setPaciente(paciente);
     	asignacionAReservar.setHoraReserva(horaReserva);
+    	asignacionAReservar.setUrgenciaTraslado(urgencia);
     	
 		servicioInternacion.registrarInternacion(asignacionAReservar);
     	
@@ -226,8 +232,8 @@ public class ControladorTraslado {
 			
 	}
 
-	@RequestMapping("trasladosPedidos")
-	public ModelAndView trasladosPedidos(
+	@RequestMapping("trasladosSolicitados")
+	public ModelAndView trasladosSolicitados(
 			
 			HttpServletRequest request
 			
@@ -252,10 +258,20 @@ public class ControladorTraslado {
 		Long idInstitucion = (long) request.getSession().getAttribute("ID");
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
-		List<Asignacion> traslados = servicioAsignacion.asignacionesReservadasPorInstitucion(institucion);
+		List<AsignacionDoble> traslados = servicioAsignacion.asignacionesReservadasConAsignacionActualPorInstitucion(institucion);
 		model.put("traslados", traslados);
 		
-		return new ModelAndView("trasladosPedidos", model);
+		for (AsignacionDoble asignacionDoble : traslados) {
+			
+			Double latitud1 = asignacionDoble.getAsignacionActual().getCama().getSala().getSector().getPiso().getInstitucion().getLatitud();
+			Double longitud1 = asignacionDoble.getAsignacionActual().getCama().getSala().getSector().getPiso().getInstitucion().getLongitud();
+			Double latitud2 = asignacionDoble.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getLatitud();
+			Double longitud2 = asignacionDoble.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getLongitud();
+			
+			asignacionDoble.setDistancia(servicioMapa.calcularDistanciaEntreDosPuntos(latitud1, longitud1, latitud2, longitud2));
+		}
+		
+		return new ModelAndView("trasladosSolicitados", model);
 			
 	}
 	
@@ -307,7 +323,90 @@ public class ControladorTraslado {
 		return new ModelAndView("trasladosParaRecibir", model);
 			
 	}
-	//	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd, MMMM, yyyy HH:mm");
+	
+	@RequestMapping(value = "eliminarAsignacion", method = RequestMethod.POST)
+	public ModelAndView eliminarAsignacion(
+			
+			@RequestParam Long idAsignacion,
+			HttpServletRequest request
+			
+			) {
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	/*-----------------------------------*/
+    	
+    	Asignacion asignacionAEliminar = servicioAsignacion.consultarAsignacionPorId(idAsignacion);
+    	if(asignacionAEliminar == null) {
+			return new ModelAndView("redirect:/listaPacienteInternados");	
+		}
+    	
+    	servicioAsignacion.eliminarAsignacion(asignacionAEliminar);
+		
+		return new ModelAndView("redirect:/listaPacientesInternados");
+			
+	}
 
+	@RequestMapping(value = "trasladoEnCurso", method = RequestMethod.POST)
+	public ModelAndView notificarTrasladoEnCurso(
+			
+			@RequestParam Long idAsignacion,
+			@RequestParam Double distancia,
+			HttpServletRequest request
+			
+			) {
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	/*-----------------------------------*/
+    	
+    	Asignacion asignacionReservada = servicioAsignacion.consultarAsignacionPorId(idAsignacion);
+    	if(asignacionReservada == null) {
+			return new ModelAndView("redirect:/listaPacienteInternados");	
+		}
+    	
+		Long idInstitucion = (long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		Institucion institucionATrasladar = servicioInstitucion.obtenerInstitucionPorId(asignacionReservada.getCama()
+				.getSala().getSector().getPiso().getInstitucion().getId());
+		
+		Paciente paciente = asignacionReservada.getPaciente();
+		Cama cama = asignacionReservada.getCama();
+		
+		String asunto = "Traslado En Curso";
+		String msg = "Se le informa que el paciente "
+			        + paciente.getApellido() + ", " + paciente.getNombre() 
+			        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
+	        		+ " está siendo trasladado desde la institución " + institucion.getNombre() 
+			        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()
+			        + " a " + Math.round(distancia) + " km de distancia "
+			        + " hasta su institución para realizar la internación correspondiente en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
+			        + " de la sala de " + cama.getSala().getDescripcion() 
+			        + " de " + cama.getSala().getTipoSala().getDescripcion() + " ."; 
+		
+		LocalDateTime hora = LocalDateTime.now();
+		
+		Notificacion notificacionTraslado = new Notificacion();
+		notificacionTraslado.setRemitente(institucion);
+		notificacionTraslado.setDestinatario(institucionATrasladar);
+		notificacionTraslado.setFechaHora(hora);
+		notificacionTraslado.setAsunto(asunto);
+		notificacionTraslado.setMsg(msg);
+		servicioNotificacion.registrarNotificacion(notificacionTraslado );
+		
+		return new ModelAndView("redirect:/verMensajesEnviados");	
+			
+	}
 }
 

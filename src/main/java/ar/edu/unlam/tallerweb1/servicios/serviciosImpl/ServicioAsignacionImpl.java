@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
+import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsignacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsignacion;
 
@@ -31,6 +32,12 @@ public class ServicioAsignacionImpl implements ServicioAsignacion {
 
         repositorioAsignacion.actualizarAsignacion(asignacion);
     }
+    
+
+	@Override
+	public void eliminarAsignacion(Asignacion asignacion) {
+		 repositorioAsignacion.eliminarAsignacion(asignacion);	
+		 }
 
     @Override
     public Asignacion consultarAsignacionPorId(Long nro) {
@@ -54,4 +61,11 @@ public class ServicioAsignacionImpl implements ServicioAsignacion {
 
         return repositorioAsignacion.asignacionesReservadasPorInstitucion(institucion);
     }
+
+    @Override
+    public List<AsignacionDoble> asignacionesReservadasConAsignacionActualPorInstitucion(Institucion institucion) {
+
+        return repositorioAsignacion.asignacionesReservadasConAsignacionActualPorInstitucion(institucion);
+    }
+
 }

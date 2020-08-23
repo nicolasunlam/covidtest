@@ -304,7 +304,7 @@ INSERT INTO asignacion(id, horaIngreso, horaEgreso, motivoEgreso, cama_id, pacie
 VALUES (12, '2020-01-01 01:00:00.000000', null, null, 40, 28),
 	   (13, '2020-02-01 01:00:00.000000', null, null, 41, 29),
        (14, '2020-03-01 01:00:00.000000', null, null, 42, 30),
-	   (15, '2020-04-01 01:00:00.000000', null, null, 43, 31);
+	   (15, '2020-04-01 01:00:00.000000', null, null, 9, 31);
        
 /* ----- NOTIFICACIONES----- */
 INSERT INTO notificacion(asunto, fechaHora, msg, destinatario_id, remitente_id)
@@ -314,6 +314,10 @@ VALUES ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro siste
        ("Recordatorio", '2020-04-02 01:00:00.000000', "Muchas gracias.", 2, 6);
        
 /* ----- RESERVA ----- */
-INSERT INTO asignacion(id, horaReserva, horaEgreso, motivoEgreso, cama_id, paciente_id)
-VALUES (16, '2020-05-01 01:00:00.000000', null, null, 9, 32),
-	   (17, '2020-05-05 01:00:00.000000', null, null, 45, 33);
+INSERT INTO asignacion(id, horaReserva, horaEgreso, motivoEgreso, cama_id, paciente_id, autorizada, urgenciaTraslado)
+VALUES (16, '2020-05-01 01:00:00.000000', null, null, 43, 31, null, "Alta"),
+	   (17, '2020-05-05 01:00:00.000000', null, null, 44, 33, null, "Alta"),
+	   (18, '2020-05-05 01:00:00.000000', null, null, 16, 25, true, "Alta"),
+	   (19, '2020-05-05 01:00:00.000000', null, null, 17, 26, false, "Alta"),
+	   (20, '2020-05-05 01:00:00.000000', null, null, 25, 27, null, "Alta"),
+	   (21, '2020-05-05 01:00:00.000000', null, null, 48, 35, true, "Alta");

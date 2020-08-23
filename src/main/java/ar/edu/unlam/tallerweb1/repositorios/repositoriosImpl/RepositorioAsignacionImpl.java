@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
+import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble;
 
 import java.util.List;
 
@@ -42,6 +43,13 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
 
     }
 
+    @Override
+    public void eliminarAsignacion(Asignacion asignacion) {
+
+        sessionFactory.getCurrentSession().remove(asignacion);
+
+    }
+    
     @SuppressWarnings({ "deprecation" })
     public Asignacion consultarAsignacionPorId(Long nro) {
 
@@ -69,7 +77,7 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
                 .uniqueResult();
     }
 
-    @SuppressWarnings({ "deprecation", "unchecked" })
+    @SuppressWarnings({"unchecked" })
     @Override
     public List<Asignacion> asignacionesReservadasPorInstitucion(Institucion institucion) {
 
@@ -83,6 +91,30 @@ public class RepositorioAsignacionImpl implements RepositorioAsignacion {
 					+ "WHERE i = :institucion " 
 					+ "AND a.horaReserva IS NOT NULL "
 					+ "AND a.horaIngreso IS NULL ";
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("institucion", institucion);
+
+		return query.getResultList();
+    }
+    
+    @SuppressWarnings({"unchecked" })
+    @Override
+    public List<AsignacionDoble> asignacionesReservadasConAsignacionActualPorInstitucion(Institucion institucion) {
+
+		String hql = "SELECT new ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble(a, a2) " 
+					+ "FROM Cama as c " 
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec " 
+					+ "JOIN Piso as p ON sec.piso = p "
+					+ "JOIN Institucion as i ON p.institucion = i " 
+					+ "JOIN Asignacion as a ON a.cama = c "
+					+ "JOIN Asignacion a2 ON a.paciente = a2.paciente "
+					+ "WHERE i = :institucion " 
+					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.horaIngreso IS NOT NULL "
+					+ "AND a2.horaIngreso IS NULL "
+					+ "AND a2.horaEgreso IS NULL ";  
 
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("institucion", institucion);

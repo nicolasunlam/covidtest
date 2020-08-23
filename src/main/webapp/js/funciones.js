@@ -78,3 +78,11 @@ function elegirCama(idRadio, tipoCama, idInstitucion, tipoSala){
 	document.getElementById(concatenado).innerHTML = tipoSala;
 
 }
+
+$(document).ready(function(){
+  $("#autorizado").on("onclick", function() {
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text() == "En espera")
+    });
+  });
+});
