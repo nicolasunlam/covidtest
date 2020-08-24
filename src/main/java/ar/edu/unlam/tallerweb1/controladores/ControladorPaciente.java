@@ -566,19 +566,21 @@ public class ControladorPaciente {
 	} 
 	
 	@RequestMapping(value = "/guardarCambios", method = RequestMethod.POST)
-	public String formularioGuardarCambios(@ModelAttribute("paciente") Paciente paciente) {
+	public String guardarEvento(@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
+		
+		Long id = (Long) request.getSession().getAttribute("ID");
 
-		//Long id = (long) request.getSession().getAttribute("ID");
-		Paciente buscado = servicioPaciente.consultarPacientePorId(paciente.getId());
-		servicioPaciente.actualizarPaciente(buscado);
-		return "redirect:/MisDatos"; 
+		Paciente p = servicioPaciente.consultarPacientePorId(id);
+		servicioPaciente.actualizarPaciente(p);
+		return "redirect:/MisDatos";
+	}
 
 		//		 public String editsave(@ModelAttribute("emp") Emp emp){    
 //		        dao.update(emp);    
 //		        return "redirect:/viewemp"; 
 
 	
-	}
+	
 	
 //	@ModelAttribute
 //	public void addingCommonObjects(Model model1) {

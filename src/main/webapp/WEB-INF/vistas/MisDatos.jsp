@@ -52,30 +52,41 @@ p.lead {
 
                 <div class="form-group"> --%>
 
-<form method="post" action="guardarCambios" modelAttribute="paciente">
+<%-- <form method="post" action="guardarCambios" modelAttribute="paciente"> --%>
+<%-- <form:form action="guardarCambios" method="post" modelAttribute="paciente">
 <div class="form-group">
     
-    <input type="hidden" name="id" path="id" class="form-control" id="id" aria-describedby="id" placeholder="${paciente.getId()}">
+    <input type="hidden" name="id" class="form-control" id="id" aria-describedby="id" placeholder="${paciente.getId()}">
     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
   <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" path="nombre" class="form-control" id="nombre" aria-describedby="nombre" placeholder="${paciente.getNombre()}">
+    <input type="text" name="nombre" class="form-control" id="nombre" aria-describedby="nombre" placeholder="${paciente.getNombre()}">
     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
   <div class="form-group">
     <label for="apellido">Apellido</label>
-    <input type="text" name="apellido" path="apellido"  class="form-control" id="apellido" placeholder="${paciente.getApellido()}">
+    <input type="text" name="apellido" class="form-control" id="apellido" placeholder="${paciente.getApellido()}">
   </div>
  <div class="form-group">
     <label for="exampleInputEmail1">Correo electrónico</label>
-    <input type="email" name="email" path="email" class="form-control" id="email" aria-describedby="email" placeholder="${paciente.getEmail()}">
+    <input type="email" name="email" class="form-control" id="email" aria-describedby="email" placeholder="${paciente.getEmail()}">
     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
   <button type="submit" class="btn btn-primary">Guardar cambios</button>
-</form>
+  </form:form> --%>
+<%-- </form> --%>
 
-<%-- <form class="form-inline">
+	<form:form action="guardarCambios" method="POST"
+		modelAttribute="paciente">
+		<form:input path="id" type="hidden" class="form-control input" />
+		<form:input path="nombre" type="text" class="form-control input" />
+		<form:input path="apellido" type="text" class="form-control input" />
+		<form:input path="email" type="email" class="form-control input" />
+		<button class="btn btn-warning buscar input" Type="Submit" />Guardar</button>
+	</form:form>
+
+	<%-- <form class="form-inline">
   <div class="form-group mb-2">
     <label for="staticEmail2" class="sr-only">Email</label>
     <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
