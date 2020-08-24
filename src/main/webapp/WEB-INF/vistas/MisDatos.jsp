@@ -52,19 +52,24 @@ p.lead {
 
                 <div class="form-group"> --%>
 
-<form method="post" action="guardarCambios">
+<form method="post" action="guardarCambios" modelAttribute="paciente">
+<div class="form-group">
+    
+    <input type="hidden" name="id" path="id" class="form-control" id="id" aria-describedby="id" placeholder="${paciente.getId()}">
+    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+  </div>
   <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" class="form-control" id="nombre" aria-describedby="nombre" placeholder="${paciente.getNombre()}">
+    <input type="text" name="nombre" path="nombre" class="form-control" id="nombre" aria-describedby="nombre" placeholder="${paciente.getNombre()}">
     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
   <div class="form-group">
     <label for="apellido">Apellido</label>
-    <input type="text" class="form-control" id="apellido" placeholder="${paciente.getApellido()}">
+    <input type="text" name="apellido" path="apellido"  class="form-control" id="apellido" placeholder="${paciente.getApellido()}">
   </div>
  <div class="form-group">
     <label for="exampleInputEmail1">Correo electrónico</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="${paciente.getEmail()}">
+    <input type="email" name="email" path="email" class="form-control" id="email" aria-describedby="email" placeholder="${paciente.getEmail()}">
     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
   </div>
   <button type="submit" class="btn btn-primary">Guardar cambios</button>
