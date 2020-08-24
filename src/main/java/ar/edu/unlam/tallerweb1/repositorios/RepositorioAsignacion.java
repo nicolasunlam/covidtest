@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
+import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDistancia;
 import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble;
 
 import java.util.List;
@@ -27,12 +28,12 @@ public interface RepositorioAsignacion {
 
 	List<AsignacionDoble> reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(Institucion institucion);
 
-	List<AsignacionDoble> reservasSolicitadasPorInternacionConAsignacionActualPorInstitucion(
-			Institucion institucion);
+//	List<AsignacionDistancia> reservasSolicitadasPorInternacionPorInstitucion(
+//			Institucion institucion);
 
 	List<AsignacionDoble> reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(Institucion institucion);
 
-	List<AsignacionDoble> reservasARecibirPorInternacionConAsignacionActualPorInstitucion(Institucion institucion);
+	List<AsignacionDistancia> reservasARecibirPorInternacionPorInstitucion(Institucion institucion);
 
 	List<AsignacionDoble> reservasARecibirConAsignacionActualPorInstitucion(Institucion institucion);
 

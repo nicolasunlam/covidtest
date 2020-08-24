@@ -102,6 +102,7 @@ public class RepositorioPacienteImpl implements RepositorioPaciente {
     	
     	List<Asignacion> asignacionesVigentes = sessionFactory.getCurrentSession().createCriteria(Asignacion.class)
 								                .add(Restrictions.isNull("motivoEgreso"))
+								                .add(Restrictions.isNotNull("horaIngreso"))
 								                .list();
     	
     	List<Paciente> pacientesInternadosPorInstitucion = new ArrayList<Paciente>();

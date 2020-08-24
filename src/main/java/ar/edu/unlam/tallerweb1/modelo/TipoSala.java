@@ -7,8 +7,8 @@ public enum TipoSala {
 	TERAPIA_INTERMEDIA("Terapia Intermedia", 2), 
 	TERAPIA_COMUN("Terapia común", 3),
 	AISLAMIENTO("Aislamiento", 4),
-	HABITACION("Habitacion", 5), 
-	AULA("Aula", 5);
+	AULA("Aula", 5),
+	HABITACION("Habitacion", 5);
 	
     private final String descripcion;
     private final Integer prioridad;
