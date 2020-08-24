@@ -103,10 +103,11 @@ public class ControladorInstitucion {
 	@RequestMapping("/detalleRegistroInstitucion")
 	public ModelAndView validarRegistroInstitucion(
 
-			HttpServletRequest request, @ModelAttribute("usuario") Institucion institucion,
-			@RequestParam(value = "calle") String calle, @RequestParam(value = "numero") Integer numero,
-			@RequestParam(value = "nombreLocalidad") String nombreLocalidad,
-			@RequestParam(value = "nombrePartido") String nombrePartido
+			HttpServletRequest request, @ModelAttribute("usuario") Institucion institucion
+//			
+//			@RequestParam(value = "calle") String calle, @RequestParam(value = "numero") Integer numero,
+//			@RequestParam(value = "nombreLocalidad") String nombreLocalidad,
+//			@RequestParam(value = "nombrePartido") String nombrePartido
 
 	) {
 
@@ -133,26 +134,26 @@ public class ControladorInstitucion {
 
 			servicioInstitucion.registrarInstitucion(institucion);
 
-			Domicilio domicilio = new Domicilio();
+//			Domicilio domicilio = new Domicilio();
+//
+//			domicilio.setCalle(calle);
+//			domicilio.setNumero(numero);
+//			servicioDomicilio.registrarDomicilio(domicilio);
+//			institucion.setDomicilio(domicilio);
+//			Localidad localidad = servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad);
+//			domicilio.setLocalidad(localidad);
+//			Partido partido = servicioPartido.obtenerPartidoPorNombre(nombrePartido);
+//			localidad.setPartido(partido);
+//			servicioInstitucion.actualizarInstitucion(institucion);
+//			servicioDomicilio.actualizarDomicilio(domicilio);
+//			servicioLocalidad.actualizarLocalidad(localidad);
 
-			domicilio.setCalle(calle);
-			domicilio.setNumero(numero);
-			servicioDomicilio.registrarDomicilio(domicilio);
-			institucion.setDomicilio(domicilio);
-			Localidad localidad = servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad);
-			domicilio.setLocalidad(localidad);
-			Partido partido = servicioPartido.obtenerPartidoPorNombre(nombrePartido);
-			localidad.setPartido(partido);
-			servicioInstitucion.actualizarInstitucion(institucion);
-			servicioDomicilio.actualizarDomicilio(domicilio);
-			servicioLocalidad.actualizarLocalidad(localidad);
-
-			return new ModelAndView("listaInstituciones", model);
+			return new ModelAndView("mapaInstitucion", model);
 		} else {
 
 			model.put("error", "Ya existe un usuario registrado con su mail o cuit");
 
-			return new ModelAndView("registrarInstitucion", model);
+			return new ModelAndView("detalleRegistroInstitucion", model);
 		}
 	}
 
@@ -780,9 +781,7 @@ public class ControladorInstitucion {
 	}
 
 	@RequestMapping("/verPiso")
-	public ModelAndView verPiso(
-			HttpServletRequest request, 
-			@RequestParam Long idPiso,
+	public ModelAndView verPiso(HttpServletRequest request, @RequestParam Long idPiso,
 			@RequestParam(value = "registro", required = false) Boolean registro) {
 
 		ModelMap model = new ModelMap();
@@ -804,13 +803,33 @@ public class ControladorInstitucion {
 		if (registro != null) {
 			model.put("registro", registro);
 		}
-		
+
 		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
 
 		PisoConSectores pisoConSectores = servicioPiso.pisoConSectoresSalasYCamas(piso);
 		model.put("pisoConSectores", pisoConSectores);
 
 		return new ModelAndView("verPiso", model);
+	}
+
+	@RequestMapping("/mapa-institucion")
+	public ModelAndView mapaInstitucion(HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		return new ModelAndView("mapaInstitucion", model);
 	}
 
 }

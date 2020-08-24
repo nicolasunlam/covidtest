@@ -60,7 +60,7 @@ public class ControladorMapa {
 
 		return new ModelAndView("mapaPaciente", model);
 	}
-	
+
 	@RequestMapping("/validarMapa")
 	public ModelAndView validarMapa(HttpServletRequest request, @RequestParam(value = "latitud") Double latitud,
 			@RequestParam(value = "longitud") Double longitud, @RequestParam(value = "calle") String calle,
@@ -151,6 +151,61 @@ public class ControladorMapa {
 		model.put("distancia", distancia);
 
 		return new ModelAndView("calcularDistanciaEntreDosPuntos", model);
+	}
+
+	@RequestMapping("/validarMapaInstitucion")
+	public ModelAndView validarMapaInstitucion(HttpServletRequest request, @RequestParam(value = "latitud") Double latitud,
+			@RequestParam(value = "longitud") Double longitud, @RequestParam(value = "calle") String calle,
+			@RequestParam(value = "numero") Integer numero,
+			@RequestParam(value = "nombreLocalidad") String nombreLocalidad,
+			@RequestParam(value = "nombrePartido") String nombrePartido) {
+		ModelMap model = new ModelMap();
+
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		Long id = (Long) request.getSession().getAttribute("ID_INSTITUCION");
+		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
+
+		usuario.setLatitud(latitud);
+		usuario.setLongitud(longitud);
+
+		Domicilio domicilio = new Domicilio();
+		domicilio.setCalle(calle);
+		domicilio.setNumero(numero);
+		servicioDomicilio.registrarDomicilio(domicilio);
+		usuario.setDomicilio(domicilio);
+
+		Localidad localidad = new Localidad();
+		Partido partido = new Partido();
+
+		if (servicioPartido.obtenerPartidoPorNombre(nombrePartido) == null) {
+			servicioPartido.registrarPartido(partido);
+			partido.setNombrePartido(nombrePartido);
+			localidad.setPartido(partido);
+		} else {
+			partido = servicioPartido.obtenerPartidoPorNombre(nombrePartido);
+			localidad.setPartido(partido);
+		}
+
+		if (servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad) == null) {
+			servicioLocalidad.registrarLocalidad(localidad);
+			localidad.setNombreLocalidad(nombreLocalidad);
+			domicilio.setLocalidad(localidad);
+		} else {
+			localidad = servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad);
+			domicilio.setLocalidad(localidad);
+		}
+
+		servicioLocalidad.actualizarLocalidad(localidad);
+		servicioDomicilio.actualizarDomicilio(domicilio);
+
+		servicioUsuario.actualizarUsuario(usuario);
+
+		return new ModelAndView("validarMapa", model);
 	}
 
 }

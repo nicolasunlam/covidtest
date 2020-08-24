@@ -11,11 +11,6 @@
 
 <script>
 	window.onload = function() {
-		alert(${cantidadTotalCamas});		
-		alert(${cantidadCamasDisponibles});
-		alert(${cantidadCamasOcupadas});
-		alert(${cantidadCamasReservadas});
-		
 
 		//Grafico de barras - Cantidad de camas ocupadas
  		var chart = new CanvasJS.Chart(

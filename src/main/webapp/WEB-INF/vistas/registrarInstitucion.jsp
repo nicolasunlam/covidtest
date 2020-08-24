@@ -46,7 +46,7 @@
 					<div class="validation"></div>
 				</div>
 
-				<div class="form-row">
+				<!-- <div class="form-row">
 					<div class="form-group col-9">
 						<label for="calle" class="h6 my-3">Calle <span
 							class="text-primary font-weight-bold">*</span></label> <input type="text"
@@ -62,14 +62,14 @@
 							id="numero" data-rule="minlen:1"
 							data-msg="Ingrese número de CUIT valido" required />
 					</div>
-				</div>
+				</div> -->
 
 				<%--<div class="form-row my-4">
                     <label for="nombreLocalidad">Localidad <span class="text-primary font-weight-bold">*</span></label>
                     <input type="text" class="form-control" id="nombreLocalidad" name="nombreLocalidad" required>
                 </div>--%>
 
-				<div class="form-group">
+				<!-- 				<div class="form-group">
 					<label for="nombreLocalidad" class="h6 my-3">Localidad <span
 						class="text-primary font-weight-bold">*</span></label> <select
 						name="nombreLocalidad" id="nombreLocalidad"
@@ -139,9 +139,9 @@
 						<option id="William C. Morris" class="partido6"
 							name="William C. Morris">William C. Morris
 					</select>
-				</div>
+				</div> -->
 
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label for="nombrePartido" class="h6 my-3">Partido <span
 						class="text-primary font-weight-bold">*</span></label> <select
 						name="nombrePartido" id="nombrePartido"
@@ -171,7 +171,7 @@
 						<option id="vicenteLopezMunicipio" name="Vicente López">Vicente
 							López
 					</select>
-				</div>
+				</div> -->
 
 				<!-- <div class="form-group">
                     <label for="cantidadCamas" class="h6 my-3">Cantidad de camas<span
@@ -199,10 +199,9 @@
 						data-msg="Ingrese una contraseña valida" />
 					<div class="validation"></div>
 				</div>
-				
+
 				<input type="hidden" name="idAdmin"
-						class="form-control br-radius-zero" id="idAdmin" value="${idAdmin}"
-						/>
+					class="form-control br-radius-zero" id="idAdmin" value="${idAdmin}" />
 
 				<br>
 				<div class="form-action">
@@ -254,7 +253,7 @@
         var cod = document.getElementById("nombreLocalidad").value;
         //alert(cod);
 
-        if (cod == "Munro" || cod == "Villa Martelli"|| cod == "Vicente López"){
+        /* if (cod == "Munro" || cod == "Villa Martelli"|| cod == "Vicente López"){
             document.getElementById("hurlinghamMunicipio").style.display = "none";
             document.getElementById("ituzaingoMunicipio").style.display = "none";
             document.getElementById("laMatanzaMunicipio").style.display = "none";
@@ -443,7 +442,7 @@
             document.getElementById("sanIsidroMunicipio").style.display = "none";
             document.getElementById("vicenteLopezMunicipio").style.display = "none";
             document.getElementById("laMatanzaMunicipio").style.display = "none";
-        }
+        } */
 
         /* Para obtener el texto
         var combo = document.getElementById("nombreLocalidad");
