@@ -11,7 +11,9 @@
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-<div class="jumbotron mt-4">
+<div class="container">
+
+<div class="jumbotron mt-5">
 
 	<article class="row">
 
@@ -207,6 +209,9 @@ function explodePie (e) {
 	</div>
 </div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+</div>
+
 </main>
 
 <script src="js/dashboard.js"></script>

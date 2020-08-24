@@ -364,12 +364,8 @@ public class ControladorAdmin {
 		}
     	model.put("armarHeader", servicioAtajo.armarHeader(request));
     	/*-----------------------------------*/
-
-		Long idInstitucion = (long) request.getSession().getAttribute("ID");
-		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
-		List<AsignacionDistancia> asignaciones = servicioAsignacion.reservasARecibirPorInternacionPorInstitucion(institucion);
-		model.put("asignaciones", asignaciones);
+		List<AsignacionDistancia> asignaciones = servicioAsignacion.reservasSolicitadasPorInternacionPorAdmin();
 		
 		for (AsignacionDistancia asignacion : asignaciones) {
 			
@@ -380,6 +376,8 @@ public class ControladorAdmin {
 			
 			asignacion.setDistancia(servicioMapa.calcularDistanciaEntreDosPuntos(latitud1, longitud1, latitud2, longitud2));
 		}
+		
+		model.put("asignaciones", asignaciones);
 		
 		return new ModelAndView("asignacionesSolicitadas", model);
 			
@@ -494,18 +492,19 @@ public class ControladorAdmin {
     	Long idInstitucion = (long) request.getSession().getAttribute("ID");
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
-		List<AsignacionDoble> traslados = servicioAsignacion.reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(institucion);
-		model.put("traslados", traslados);
+		List<AsignacionDistancia> asignaciones = servicioAsignacion.reservasARecibirPorInternacionPorInstitucion(institucion);
 		
-		for (AsignacionDoble asignacionDoble : traslados) {
+		for (AsignacionDistancia asignacion : asignaciones) {
 			
-			Double latitud1 = asignacionDoble.getAsignacionActual().getCama().getSala().getSector().getPiso().getInstitucion().getLatitud();
-			Double longitud1 = asignacionDoble.getAsignacionActual().getCama().getSala().getSector().getPiso().getInstitucion().getLongitud();
-			Double latitud2 = asignacionDoble.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getLatitud();
-			Double longitud2 = asignacionDoble.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getLongitud();
+			Double latitud1 = asignacion.getAsignacion().getCama().getSala().getSector().getPiso().getInstitucion().getLatitud();
+			Double longitud1 = asignacion.getAsignacion().getCama().getSala().getSector().getPiso().getInstitucion().getLongitud();
+			Double latitud2 = asignacion.getAsignacion().getPaciente().getLatitud();
+			Double longitud2 = asignacion.getAsignacion().getPaciente().getLongitud();
 			
-			asignacionDoble.setDistancia(servicioMapa.calcularDistanciaEntreDosPuntos(latitud1, longitud1, latitud2, longitud2));
+			asignacion.setDistancia(servicioMapa.calcularDistanciaEntreDosPuntos(latitud1, longitud1, latitud2, longitud2));
 		}
+		
+		model.put("asignaciones", asignaciones);
 		
 		return new ModelAndView("asignacionesParaRecibir", model);
 			

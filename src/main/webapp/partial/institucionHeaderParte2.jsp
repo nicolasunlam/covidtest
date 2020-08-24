@@ -50,7 +50,7 @@
 <body>
 
 	<nav
-		class="navbar sticky-top navbar-expand-lg navbar-dark bg-white border-bottom">
+		class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary border-bottom">
 
 		<button
 			class="navbar-toggler position-absolute-left d-md-none collapsed"
@@ -58,12 +58,12 @@
 			aria-controls="sidebarMenu" aria-expanded="false"
 			aria-label="Toggle navigation">
 
-			<img src="img/toggler.svg" width="35" height="35"
+			<img src="img/toggler-blanco.svg" width="35" height="35"
 				class="d-inline-block align-middle" alt="logo">
 
 		</button>
 
-		<a class="navbar-brand text-primary d-flex mr-0 bg-white"
+		<a class="navbar-brand text-light d-flex mr-0 bg-primary"
 			style="box-shadow: none;"
 			href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
@@ -77,16 +77,15 @@
 			<c:if test='${rol == null}'>
 						"home"
 						</c:if>> <img
-			src="img/iso-azul.svg" width="50" height="50"
+			src="img/iso-blanco.svg" width="50" height="50"
 			class="d-inline-block align-top" alt="iso"> <img
-			src="img/logo-azul.svg" width="80" height="50"
+			src="img/logo-blanco.svg" width="80" height="50"
 			class="d-inline-block align-top" alt="asignar">
 		</a>
 
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item ml-4 active"><a
-					class="nav-link text-primary"
+				<li class="nav-item ml-4 active"><a class="nav-link text-white"
 					href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
 						</c:if>
@@ -117,10 +116,10 @@
 		<c:if test="${rol != null}">
 			<div class="btn-group">
 				<button type="button"
-					class="btn btn-outline-white dropdown-toggle"
+					class="btn btn-outline-white dropdown-toggle text-white"
 					data-toggle="dropdown" data-display="static" aria-haspopup="true"
 					aria-expanded="false">
-					usuario.getEmail() <img src="img/avatar.svg" width="35"
+					usuario.getEmail() <img src="img/avatar-blanco.svg" width="35"
 						height="35" class="d-inline-block align-middle" alt="cuenta">
 				</button>
 				<div class="dropdown-menu dropdown-menu-lg-right">
@@ -140,37 +139,104 @@
 				class="col-md-3 col-lg-2 d-md-block sidebar collapse">
 				<div class="sidebar-sticky pt-3">
 					<ul class="nav flex-column">
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="bienvenido"> <span data-feather="home"></span> Panel
-						</a></li>
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="disponibilidadCamas"> <span data-feather="inbox"></span>
-								Disponibilidad Camas
-						</a></li>
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="listaPacientesInternados"> <span data-feather="users"></span>
-								Pacientes Internados
-						</a></li>
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="posiblesinfectados"> <span data-feather="users"></span>
-								Lista de Espera
-						</a></li>
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="consultarPaciente"> <span data-feather="search"></span>
-								Consultar paciente
-						</a></li>
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="internarPaciente"> <span data-feather="user-plus"></span>
-								Internar paciente
-						</a></li>
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="egresarPaciente"> <span data-feather="user-minus"></span>
-								Egresar paciente
-						</a></li>
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="listaPacientesInfectados"> <span data-feather="users"></span>
-								Pacientes Infectados
-						</a></li>
+
+						<li class="nav-item mt-3 mb-3 d-flex mx-3">
+							<div class="py-1 text-primary">
+								<span data-feather="home"></span>
+							</div>
+							<div id="accordion">
+								<div class="">
+									<div class="" id="headingOne">
+										<h5 class="mb-0">
+											<button class="btn text-primary py-0" data-toggle="collapse"
+												data-target="#collapseOne" aria-expanded="true"
+												aria-controls="collapseOne" style="box-shadow: none">
+												Mi Institución</button>
+										</h5>
+									</div>
+
+									<div id="collapseOne" class="collapse"
+										aria-labelledby="headingOne" data-parent="#accordion">
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark"
+												href="pisosInstitucion"> <span
+												data-feather="users"></span> Pisos
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="sectoresInstitucion">
+												<span data-feather="users"></span> Sectores
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="salasInstitucion">
+												<span data-feather="search"></span> Salas
+											</a>
+										</div>
+
+
+									</div>
+								</div>
+						</li>
+
+						<li class="nav-item mt-3 mb-3 d-flex mx-3">
+							<div class="py-1 text-primary">
+								<span data-feather="home"></span>
+							</div>
+
+							<div id="accordion">
+								<div class="">
+									<div class="" id="headingTwo">
+										<h5 class="mb-0">
+											<button class="btn text-primary py-0" data-toggle="collapse"
+												data-target="#collapseTwo" aria-expanded="true"
+												aria-controls="collapseTwo" style="box-shadow: none">
+												Pacientes</button>
+										</h5>
+									</div>
+
+									<div id="collapseTwo" class="collapse "
+										aria-labelledby="headingOne" data-parent="#accordion">
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark"
+												href="listaPacientesInternados"> <span
+												data-feather="users"></span> Pacientes Internados
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="posiblesinfectados">
+												<span data-feather="users"></span> Lista de Espera
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="consultarPaciente">
+												<span data-feather="search"></span> Consultar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="internarPaciente">
+												<span data-feather="user-plus"></span> Internar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="egresarPaciente">
+												<span data-feather="user-minus"></span> Egresar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark"
+												href="listaPacientesInfectados"> <span
+												data-feather="users"></span> Pacientes Infectados
+											</a>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</li>
+
+
 						<li class="nav-item mt-3 mb-3"><a class="nav-link"
 							href="consultarAsignacion"> <span data-feather="search"></span>
 								Consultar Asignación

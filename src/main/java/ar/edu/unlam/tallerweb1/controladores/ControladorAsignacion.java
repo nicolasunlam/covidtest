@@ -18,6 +18,8 @@ import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.MotivoEgreso;
+import ar.edu.unlam.tallerweb1.modelo.MotivoIngreso;
+import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
@@ -26,6 +28,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInstitucion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioInternacion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioNotificacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
 
 @Controller
@@ -37,17 +40,19 @@ public class ControladorAsignacion {
 	private ServicioInternacion servicioInternacion;
 	private ServicioInstitucion servicioInstitucion;
 	private ServicioAtajo servicioAtajo;
+	private ServicioNotificacion servicioNotificacion;
 	
 	@Inject
 	public ControladorAsignacion(ServicioAsignacion servicioAsignacion, ServicioPaciente servicioPaciente, 
 			  ServicioCama servicioCama, ServicioInternacion servicioInternacion,
-			  ServicioInstitucion servicioInstitucion, ServicioAtajo servicioAtajo) {
+			  ServicioInstitucion servicioInstitucion, ServicioAtajo servicioAtajo, ServicioNotificacion servicioNotificacion) {
 	this.servicioAsignacion = servicioAsignacion;
 	this.servicioPaciente = servicioPaciente;
 	this.servicioCama = servicioCama;
 	this.servicioInternacion = servicioInternacion;
 	this.servicioInstitucion = servicioInstitucion;
 	this.servicioAtajo = servicioAtajo;
+	this.servicioNotificacion = servicioNotificacion;
 	}
 	
 	/*Consultar la asignación de un paciente por su nro y tipo de Documento*/
@@ -628,4 +633,157 @@ public class ControladorAsignacion {
         return new ModelAndView("detalleEgreso", model);
     }
 	
+	@RequestMapping(value = "eliminarAsignacion", method = RequestMethod.POST)
+	public ModelAndView eliminarAsignacion(
+			
+			@RequestParam Long idAsignacion,
+			HttpServletRequest request
+			
+			) {
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	/*-----------------------------------*/
+    	
+    	Asignacion asignacionAEliminar = servicioAsignacion.consultarAsignacionPorId(idAsignacion);
+    	if(asignacionAEliminar == null) {
+			return new ModelAndView("redirect:/listaPacienteInternados");	
+		}
+    	
+    	servicioAsignacion.eliminarAsignacion(asignacionAEliminar);
+		
+		return new ModelAndView("redirect:/listaPacientesInternados");
+			
+	}
+
+	@RequestMapping(value = "rechazarAsignacion", method = RequestMethod.POST)
+	public ModelAndView rechazarAsignacion(
+			
+			@RequestParam Long idAsignacion,
+			@RequestParam Integer distancia,
+			@RequestParam String motivoRechazo,
+			HttpServletRequest request
+			
+			) {
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	/*-----------------------------------*/
+    	
+    	Asignacion asignacionARechazar = servicioAsignacion.consultarAsignacionPorId(idAsignacion);
+    	if(asignacionARechazar == null) {
+			return new ModelAndView("redirect:/listaPacienteInternados");	
+		}
+    	
+    	asignacionARechazar.setAutorizada(false);
+    	servicioAsignacion.actualizarAsignacion(asignacionARechazar);
+		
+    	Long idInstitucion = (long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		Institucion institucionAAsignar = servicioInstitucion.obtenerInstitucionPorId(asignacionARechazar.getCama()
+				.getSala().getSector().getPiso().getInstitucion().getId());
+		
+		Paciente paciente = asignacionARechazar.getPaciente();
+		Cama cama = asignacionARechazar.getCama();
+
+		String asunto = "Asignación Denegada";
+		String msg = "Se le informa que han denegado la asignación del paciente "
+				        + paciente.getApellido() + ", " + paciente.getNombre() 
+				        + " (" + paciente.getTipoDocumento().getDescripcion() + ": "  + paciente.getNumeroDocumento() + ") " 
+		        		+ " en la institución " + institucionAAsignar.getNombre() 
+				        + " ubicada en la localidad de " + institucionAAsignar.getDomicilio().getLocalidad().getNombreLocalidad()
+				        + " a " + Math.round(distancia) + " km de distancia "
+				        + " para realizar la internación correspondiente en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
+				        + " de la sala de " + cama.getSala().getDescripcion() 
+				        + " de " + cama.getSala().getTipoSala().getDescripcion() + " ."
+				        + "Motivo del rechazo: " + motivoRechazo; 		
+		
+		LocalDateTime hora = LocalDateTime.now();
+		
+		Notificacion notificacionTraslado = new Notificacion();
+		notificacionTraslado.setRemitente(institucionAAsignar);
+		notificacionTraslado.setDestinatario(institucion);
+		notificacionTraslado.setFechaHora(hora);
+		notificacionTraslado.setAsunto(asunto);
+		notificacionTraslado.setMsg(msg);
+		servicioNotificacion.registrarNotificacion(notificacionTraslado );
+		
+		return new ModelAndView("redirect:/asignacionesParaRecibir");
+			
+	}
+	
+
+	@RequestMapping(value = "internarPorAsignacion", method = RequestMethod.POST)
+	public ModelAndView internarPorTraslado(
+			
+			@RequestParam Long idAsignacion,
+			@RequestParam Double distancia,
+			HttpServletRequest request
+			
+			) {
+		
+    	/*---------- Validaciones -----------*/
+    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	/*-----------------------------------*/
+    	
+    	Asignacion asignacion = servicioAsignacion.consultarAsignacionPorId(idAsignacion);
+    	
+    	if(asignacion == null) {
+			return new ModelAndView("redirect:/listaPacienteInternados");	
+		}
+    	
+		LocalDateTime hora = LocalDateTime.now();
+    	
+		asignacion.setMotivoIngreso(MotivoIngreso.ENFERMO);
+		asignacion.setHoraIngreso(hora);
+    	servicioAsignacion.actualizarAsignacion(asignacion);
+    	
+		Long idInstitucion = (long) request.getSession().getAttribute("ID");
+		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		Institucion institucionAInternar = servicioInstitucion.obtenerInstitucionPorId(asignacion.getCama()
+				.getSala().getSector().getPiso().getInstitucion().getId());
+		
+		Paciente paciente = asignacion.getPaciente();
+		Cama cama = asignacion.getCama();
+		
+		String asunto = "Asignación Realizada";
+		String msg = "Se le informa que se ha realizado exitosamente la asignación del paciente "
+			        + paciente.getApellido() + ", " + paciente.getNombre() 
+			        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
+	        		+ " en la institución " + institucionAInternar.getNombre() 
+			        + " ubicada en la localidad de " + institucionAInternar.getDomicilio().getLocalidad().getNombreLocalidad()
+			        + " a " + Math.round(distancia) + " km de distancia "
+			        + " la internación correspondiente en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
+			        + " de la sala de " + cama.getSala().getDescripcion() 
+			        + " de " + cama.getSala().getTipoSala().getDescripcion() + " ."; 
+		
+		Notificacion notificacionTraslado = new Notificacion();
+		notificacionTraslado.setRemitente(institucionAInternar);
+		notificacionTraslado.setDestinatario(institucion);
+		notificacionTraslado.setFechaHora(hora);
+		notificacionTraslado.setAsunto(asunto);
+		notificacionTraslado.setMsg(msg);
+		servicioNotificacion.registrarNotificacion(notificacionTraslado );
+		
+		return new ModelAndView("redirect:/verMensajesEnviados");	
+			
+	}
+
 }

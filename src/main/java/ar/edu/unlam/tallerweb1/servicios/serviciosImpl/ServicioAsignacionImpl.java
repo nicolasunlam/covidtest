@@ -18,87 +18,83 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioAsignacion;
 @Transactional
 public class ServicioAsignacionImpl implements ServicioAsignacion {
 
-    @Autowired
-    private RepositorioAsignacion repositorioAsignacion;
+	@Autowired
+	private RepositorioAsignacion repositorioAsignacion;
 
+	@Override
+	public Asignacion consultarAsignacionPacienteInternado(Paciente paciente) {
 
-    @Override
-    public Asignacion consultarAsignacionPacienteInternado(Paciente paciente) {
+		return repositorioAsignacion.consultarAsignacionPacienteInternado(paciente);
+	}
 
-        return repositorioAsignacion.consultarAsignacionPacienteInternado(paciente);
-    }
+	@Override
+	public void actualizarAsignacion(Asignacion asignacion) {
 
-    @Override
-    public void actualizarAsignacion(Asignacion asignacion) {
-
-        repositorioAsignacion.actualizarAsignacion(asignacion);
-    }
-    
+		repositorioAsignacion.actualizarAsignacion(asignacion);
+	}
 
 	@Override
 	public void eliminarAsignacion(Asignacion asignacion) {
-		 repositorioAsignacion.eliminarAsignacion(asignacion);	
-		 }
+		repositorioAsignacion.eliminarAsignacion(asignacion);
+	}
 
-    @Override
-    public Asignacion consultarAsignacionPorId(Long nro) {
+	@Override
+	public Asignacion consultarAsignacionPorId(Long nro) {
 
-        return repositorioAsignacion.consultarAsignacionPorId(nro);
-    }
+		return repositorioAsignacion.consultarAsignacionPorId(nro);
+	}
 
-    @Override
-    public List<Asignacion> obtenerAsignacionesActuales() {
-        return repositorioAsignacion.obtenerAsignacionesActuales();
-    }
+	@Override
+	public List<Asignacion> obtenerAsignacionesActuales() {
+		return repositorioAsignacion.obtenerAsignacionesActuales();
+	}
 
-    /*----------------------------------- RESERVAS ----------------------------------*/
+	/*----------------------------------- RESERVAS ----------------------------------*/
 
-    @Override
-    public Asignacion consultarReservaAsignacionPaciente(Paciente paciente) {
+	@Override
+	public Asignacion consultarReservaAsignacionPaciente(Paciente paciente) {
 
-        return repositorioAsignacion.consultarReservaAsignacionPaciente(paciente);
-    }
+		return repositorioAsignacion.consultarReservaAsignacionPaciente(paciente);
+	}
 
-    /*-------- RESERVAS A SOLICITADAS ----------*/
+	/*-------- RESERVAS A SOLICITADAS ----------*/
 
 	@Override
 	public List<AsignacionDoble> reservasSolicitadasConAsignacionActualPorInstitucion(Institucion institucion) {
-		 return repositorioAsignacion.reservasSolicitadasConAsignacionActualPorInstitucion(institucion);
+		return repositorioAsignacion.reservasSolicitadasConAsignacionActualPorInstitucion(institucion);
 	}
 
 	@Override
 	public List<AsignacionDoble> reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(
 			Institucion institucion) {
-		 return repositorioAsignacion.reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(institucion);
+		return repositorioAsignacion.reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(institucion);
 	}
 
-//	@Override
-//	public List<AsignacionDistancia> reservasSolicitadasPorInternacionPorInstitucion(
-//			Institucion institucion) {
-//		 return repositorioAsignacion.reservasSolicitadasPorInternacionPorInstitucion(institucion);
-//	}
+	@Override
+	public List<AsignacionDistancia> reservasSolicitadasPorInternacionPorAdmin() {
+		return repositorioAsignacion.reservasSolicitadasPorInternacionPorAdmin();
+	}
 
-    /*-------- RESERVAS A RECIBIR ----------*/
+	/*-------- RESERVAS A RECIBIR ----------*/
 
 	@Override
 	public List<Asignacion> reservasARecibirPorInstitucion(Institucion institucion) {
-		 return repositorioAsignacion.reservasARecibirPorInstitucion(institucion);
+		return repositorioAsignacion.reservasARecibirPorInstitucion(institucion);
 	}
 
 	@Override
 	public List<AsignacionDoble> reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(Institucion institucion) {
-		 return repositorioAsignacion.reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(institucion);
+		return repositorioAsignacion.reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(institucion);
 	}
 
 	@Override
-	public List<AsignacionDistancia> reservasARecibirPorInternacionPorInstitucion(
-			Institucion institucion) {
-		 return repositorioAsignacion.reservasARecibirPorInternacionPorInstitucion(institucion);
+	public List<AsignacionDistancia> reservasARecibirPorInternacionPorInstitucion(Institucion institucion) {
+		return repositorioAsignacion.reservasARecibirPorInternacionPorInstitucion(institucion);
 	}
 
 	@Override
 	public List<AsignacionDoble> reservasARecibirConAsignacionActualPorInstitucion(Institucion institucion) {
-		 return repositorioAsignacion.reservasARecibirConAsignacionActualPorInstitucion(institucion);
+		return repositorioAsignacion.reservasARecibirConAsignacionActualPorInstitucion(institucion);
 	}
 
 }

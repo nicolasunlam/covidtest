@@ -25,149 +25,151 @@
 	<h6 class="mb-5">Vea en detalle todas las asignaciones solicitadas
 		por la operadora central para internar pacientes en su institución</h6>
 
-	<div
-		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom w-50">
-		<h5 class="">Opiciones de filtrado</h5>
 
-	</div>
-	<p class="mb-3">Realice el filtrado de la tabla para ver la
-		información que necesita con mayor comodidad</p>
+	<c:if test="${asignaciones.size() == 0}">
+		<h5 class="mb-4">No tiene asignaciones</h5>
+	</c:if>
 
-	<div class="my-3">
-		<span class="text-success h6">Completado</span><input class="mr-4"
-			" type="radio" name="estado" id="autorizado"> <span
-			class="text-warning h6">En curso </span><input class="mr-4"
-			" type="radio" name="estado" id="espera"> <span
-			class="text-danger h6">Rechazado </span><input class="mr-4"
-			" type="radio" name="estado" id="denegado"> <span class="h6">Todos
-		</span><input class="mr-4" " type="radio" name="estado" id="restaurar">
-	</div>
+	<c:if test="${asignaciones.size() != 0}">
 
-	<div class="table-responsive">
+		<div
+			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom w-50">
+			<h5 class="">Opiciones de filtrado</h5>
 
-		<table id="myTable"
-			class="table table-bordered table-hover responsive nowrap text-center">
+		</div>
+		<p class="mb-3">Realice el filtrado de la tabla para ver la
+			información que necesita con mayor comodidad</p>
 
-			<tr class="una bg-white">
+		<div class="my-3">
+			<span class="text-success h6">Para Autorizar </span><input class="mr-4"
+				" type="radio" name="estado" id="autorizado"> <span
+				class="text-danger h6">Rechazado </span><input class="mr-4"
+				" type="radio" name="estado" id="denegado"> <span class="h6">Todos
+			</span><input class="mr-4" " type="radio" name="estado" id="restaurar">
+		</div>
 
-				<th style="vertical-align: middle; width: 16%"
-					class="border border-secondary"
-					onmouseover="this.style.backgroundColor='#dee2e6 ';"
-					onmouseout="this.style.backgroundColor='white';">PACIENTE A
-					RECIBIR<img style="margin-top: 0.40rem;"
-					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
-					width="10px" height="">
+		<div class="table-responsive">
 
-				</th>
+			<table id="myTable"
+				class="table table-bordered table-hover responsive nowrap text-center">
 
-				<th style="vertical-align: middle; width: 16%"
-					class="border border-secondary"
-					onmouseover="this.style.backgroundColor='#dee2e6 ';"
-					onmouseout="this.style.backgroundColor='white';">FECHA DE
-					RESERVA<img style="margin-top: 0.40rem;"
-					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
-					width="10px" height="">
+				<tr class="una bg-white">
 
-				</th>
+					<th style="vertical-align: middle; width: 16%"
+						class="border border-secondary"
+						onmouseover="this.style.backgroundColor='#dee2e6 ';"
+						onmouseout="this.style.backgroundColor='white';">PACIENTE A
+						RECIBIR<img style="margin-top: 0.40rem;"
+						class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+						width="10px" height="">
 
-				<th style="vertical-align: middle; width: 12%"
-					class="border border-secondary"
-					onmouseover="this.style.backgroundColor='#dee2e6';"
-					onmouseout="this.style.backgroundColor='white';">DISTANCIA<img
-					style="margin-top: 0.40rem;"
-					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
-					width="10px" height="">
+					</th>
 
-				</th>
+					<th style="vertical-align: middle; width: 16%"
+						class="border border-secondary"
+						onmouseover="this.style.backgroundColor='#dee2e6 ';"
+						onmouseout="this.style.backgroundColor='white';">FECHA DE
+						RESERVA<img style="margin-top: 0.40rem;"
+						class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+						width="10px" height="">
 
-				<th style="vertical-align: middle; width: 12%"
-					class="border border-secondary"
-					onmouseover="this.style.backgroundColor='#dee2e6';"
-					onmouseout="this.style.backgroundColor='white';">URGENCIA <img
-					style="margin-top: 0.40rem;"
-					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
-					width="10px" height="">
+					</th>
 
-				</th>
+					<th style="vertical-align: middle; width: 12%"
+						class="border border-secondary"
+						onmouseover="this.style.backgroundColor='#dee2e6';"
+						onmouseout="this.style.backgroundColor='white';">DISTANCIA<img
+						style="margin-top: 0.40rem;"
+						class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+						width="10px" height="">
 
-				<th style="vertical-align: middle; width: 12%"
-					class="border border-secondary"
-					onmouseover="this.style.backgroundColor='#dee2e6';"
-					onmouseout="this.style.backgroundColor='white';">ESTADO <img
-					style="margin-top: 0.40rem;"
-					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
-					width="10px" height="">
+					</th>
 
-				</th>
+					<th style="vertical-align: middle; width: 12%"
+						class="border border-secondary"
+						onmouseover="this.style.backgroundColor='#dee2e6';"
+						onmouseout="this.style.backgroundColor='white';">URGENCIA <img
+						style="margin-top: 0.40rem;"
+						class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+						width="10px" height="">
 
-				<th style="vertical-align: middle; width: 14%"
-					class="border border-secondary"
-					onmouseover="this.style.backgroundColor='#dee2e6';"
-					onmouseout="this.style.backgroundColor='white';">ACCIÓN</th>
-			</tr>
+					</th>
 
-			<c:forEach items="${traslados}" var="traslado">
+					<th style="vertical-align: middle; width: 12%"
+						class="border border-secondary"
+						onmouseover="this.style.backgroundColor='#dee2e6';"
+						onmouseout="this.style.backgroundColor='white';">ESTADO <img
+						style="margin-top: 0.40rem;"
+						class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+						width="10px" height="">
 
-				<tr
-					<c:if test="${traslado.getAsignacionReservada().getAutorizada() == true}">
-		            		class="table-success autorizado"
+					</th>
+
+					<th style="vertical-align: middle; width: 14%"
+						class="border border-secondary"
+						onmouseover="this.style.backgroundColor='#dee2e6';"
+						onmouseout="this.style.backgroundColor='white';">ACCIÓN</th>
+				</tr>
+
+				<c:forEach items="${asignaciones}" var="asignacion">
+
+					<tr
+						<c:if test="${asignacion.getAsignacion().getAutorizada() != false}">
+		            		class=" autorizado"
 		               	</c:if>
-					<c:if test="${traslado.getAsignacionReservada().getAutorizada() == false}">
+		               	<c:if test="${asignacion.getAsignacion().getAutorizada() == false}">
 		            		class="table-danger denegado"
-		               	</c:if>
-					<c:if test="${traslado.getAsignacionReservada().getAutorizada() == null}">
-		            		class="espera"
 		               	</c:if>>
 
-					<form action="procesarTraslado" method="GET">
+						<form action="internarPorAsignacion" method="POST">
+						
+						<input name="idAsignacion"
+										value="${asignacion.getAsignacion().getId()}" hidden>
+									<input name="distancia" value="${Math.round(asignacion.getDistancia())}"
+										hidden>
 
-						<td style="vertical-align: middle;"><c:out
-								value="${traslado.getAsignacionActual().getPaciente().getApellido()}, 
-								${traslado.getAsignacionActual().getPaciente().getNombre()}" /></td>
+							<td style="vertical-align: middle;"><c:out
+									value="${asignacion.getAsignacion().getPaciente().getApellido()}, 
+								${asignacion.getAsignacion().getPaciente().getNombre()}" /></td>
 
-						<td style="vertical-align: middle;"><fmt:parseDate
-								value="${ traslado.getAsignacionReservada().getHoraReserva() }"
-								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-							<fmt:formatDate pattern="dd/MM/yyyy 'a las' HH:mm 'horas.'"
-								value="${ parsedDateTime }" /></td>
+							<td style="vertical-align: middle;"><fmt:parseDate
+									value="${ asignacion.getAsignacion().getHoraReserva() }"
+									pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+								<fmt:formatDate pattern="dd/MM/yyyy 'a las' HH:mm 'horas.'"
+									value="${ parsedDateTime }" /></td>
 
-						<td style="vertical-align: middle;"><c:out
-								value="${Math.round(asignacion.getDistancia())} Km" /></td>
+							<td style="vertical-align: middle;"><c:out
+									value="${Math.round(asignacion.getDistancia())} Km" /></td>
 
-						<td style="vertical-align: middle;">${asignacion.getAsignacion().getUrgencia()}</td>
+							<td style="vertical-align: middle;">${asignacion.getAsignacion().getUrgencia()}</td>
 
-						<td style="vertical-align: middle;"><c:if
-								test="${asignacion.getAsignacion().getHoraIngreso() != null}">
+							<td style="vertical-align: middle;"><c:if
+									test="${asignacion.getAsignacion().getHoraIngreso() != null}">
 		            		Completado
 		               	</c:if> <c:if
-								test="${asignacion.getAsignacion().getAutorizada() == false}">
+									test="${asignacion.getAsignacion().getAutorizada() == false}">
 		            		Rechazado
 		               	</c:if> <c:if
-								test="${asignacion.getAsignacion().getHoraIngreso() == null &&
+									test="${asignacion.getAsignacion().getHoraIngreso() == null &&
 					 asignacion.getAsignacion().getAutorizada() == true}">
 		            		En curso
 		               	</c:if></td>
 
-						<td style="vertical-align: middle;">
-							<!-- Button trigger modal --> <c:if
-								test="${asignacion.getAsignacion().getAutorizada() == false}">
+							<td style="vertical-align: middle;">
+								<!-- Button trigger modal --> <c:if
+									test="${asignacion.getAsignacion().getAutorizada() == false}">
 
-								<div class="d-flex justify-content-between flex-wrap">
+
 									<button type="button"
 										class="btn btn-outline-primary mb-lg-2 mb-xl-0"
 										style="width: 103px" data-toggle="modal"
 										data-target="#modalDetalle${asignacion.getAsignacion().getId()}">
 										Ver Detalle</button>
 
-									<button type="button" class="btn btn-outline-danger"
-										style="width: 103px" data-toggle="modal"
-										data-target="#modalRechazar${asignacion.getAsignacion().getId()}">
-										Rechazar</button>
-								</div>
-							</c:if> <c:if
-								test="${asignacion.getAsignacion().getAutorizada() != false}">
+								</c:if> <c:if
+									test="${asignacion.getAsignacion().getAutorizada() != false}">
 
-								<div class="d-flex justify-content-between flex-wrap">
+
 
 									<button type="button" data-toggle="modal" style="width: 103px"
 										data-target="#modalAsignar${asignacion.getAsignacion().getId()}"
@@ -178,180 +180,208 @@
 		            		 class="btn btn-outline-secondary mb-lg-2 mb-xl-0" disabled
 		              		 	</c:if>>Internar</button>
 
-									<button type="button" class="btn btn-outline-primary"
+									<button type="button" class="btn btn-outline-primary mt-2"
 										style="width: 103px" data-toggle="modal"
 										data-target="#modalDetalle${asignacion.getAsignacion().getId()}">
 										Ver Detalle</button>
-								</div>
-								<div>
+
 									<button type="button" class="btn btn-outline-danger mt-2"
 										style="width: 103px" data-toggle="modal"
 										data-target="#modalRechazar${asignacion.getAsignacion().getId()}">
 										Rechazar</button>
+
+
+								</c:if>
+
+							</td>
+
+						</form>
+
+					</tr>
+
+					<!-- Start Modal -->
+					<div class="modal fade"
+						id="modalAsignar${asignacion.getAsignacion().getId()}"
+						tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg"
+							role="document">
+							<div class="modal-content  px-3">
+								<div class="modal-header pb-2">
+									<h5 class="modal-title" id="exampleModalLongTitleUno">Realizar
+										asignación</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span class="bg-white" aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body text-left">
+
+									<p class="p mt-2 mb-4">
+										Realizar internación del paciente <strong>
+											${asignacion.getAsignacion().getPaciente().getNombre()}
+											${asignacion.getAsignacion().getPaciente().getApellido()} </strong> de
+										numero de documento <strong>
+											${asignacion.getAsignacion().getPaciente().getNumeroDocumento()}
+											(${asignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()})
+										</strong> en la <strong> cama
+											${asignacion.getAsignacion().getCama().getDescripcion()}
+											(${asignacion.getAsignacion().getCama().getTipoCama().getDescripcion()})
+										</strong> en la <strong> sala
+											${asignacion.getAsignacion().getCama().getSala().getDescripcion()}
+											(${asignacion.getAsignacion().getCama().getSala().getTipoSala().getDescripcion()})</strong>
+										de su institución.
+									</p>
+
+									<p class="mb-0 font-weight-lighter">Al apretar "Internar"
+										se hará efectiva la internación y se enviará una notificación
+										a la operadora central.</p>
 								</div>
 
-							</c:if>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-outline-primary"
+										data-dismiss="modal">Volver</button>
+									<form action="internarPorAsignacion" method="post">
 
-						</td>
-
-					</form>
-
-				</tr>
-
-				<!-- Start Modal -->
-				<div class="modal fade"
-					id="modalTrasladar${asignacion.getAsignacion().getId()}"
-					tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered modal-lg"
-						role="document">
-						<div class="modal-content  px-3">
-							<div class="modal-header pb-2">
-								<h5 class="modal-title" id="exampleModalLongTitleUno">Realizar
-									asignación</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span class="bg-white" aria-hidden="true">&times;</span>
-								</button>
+										<input name="idAsignacion"
+											value="${asignacion.getAsignacion().getId()}" hidden>
+										<input name="distancia" value="${asignacion.getDistancia()}"
+											hidden>
+										<button type="submit" class="btn btn-outline-success">Internar</button>
+									</form>
+								</div>
 							</div>
-							<div class="modal-body text-left">
+						</div>
+					</div>
+					<!-- End Modal -->
 
-								<p class="p mt-2 mb-4">
-									Realizar internación del paciente <strong>
-										${asignacion.getAsignacion().getPaciente().getNombre()}
-										${asignacion.getAsignacion().getPaciente().getApellido()} </strong> de
-									numero de documento <strong>
-										${asignacion.getAsignacion().getPaciente().getNumeroDocumento()}
-										(${asignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()})
-									</strong> en la <strong> cama
-										${asignacion.getAsignacion().getCama().getDescripcion()}
-										(${asignacion.getAsignacion().getCama().getTipoCama().getDescripcion()})
-									</strong> en la <strong> sala
-										${asignacion.getAsignacion().getCama().getSala().getDescripcion()}
-										(${asignacion.getAsignacion().getCama().getSala().getTipoSala().getDescripcion()})</strong>
-									de su institución.
-								</p>
 
-								<p class="mb-0 font-weight-lighter">Al apretar "Internar" se
-									hará efectiva la internación y se enviará una notificación a la
-									operadora central.</p>
+					<!-- Start Modal -->
+					<div class="modal fade"
+						id="modalDetalle${asignacion.getAsignacion().getId()}"
+						tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg"
+							role="document">
+							<div class="modal-content  px-3">
+								<div class="modal-header pb-2">
+									<h5 class="modal-title" id="exampleModalLongTitleUno">Detalle
+										de la asignación</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span class="bg-white" aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body text-left">
+
+									<p class="p mt-2 mb-4">
+										Reserva de asignación realizada el día <strong> <fmt:parseDate
+												value="${ asignacion.getAsignacion().getHoraReserva() }"
+												pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime"
+												type="both" /> <fmt:formatDate
+												pattern="dd 'de' MMMM 'a las' HH:mm 'horas'"
+												value="${ parsedDateTime }" />
+										</strong> para internar al paciente <strong>
+											${asignacion.getAsignacion().getPaciente().getNombre()}
+											${asignacion.getAsignacion().getPaciente().getApellido()} </strong> de
+										numero de documento <strong>
+											${asignacion.getAsignacion().getPaciente().getNumeroDocumento()}
+											(${asignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()})
+										</strong> en la <strong> cama
+											${asignacion.getAsignacion().getCama().getDescripcion()}
+											(${asignacion.getAsignacion().getCama().getTipoCama().getDescripcion()})
+										</strong> en la <strong> sala
+											${asignacion.getAsignacion().getCama().getSala().getDescripcion()}
+											(${asignacion.getAsignacion().getCama().getSala().getTipoSala().getDescripcion()})</strong>
+										de su institución.
+									</p>
+
+									<p class="mb-0 font-weight-lighter">Aprete el botón
+										"Volver" para regresar a la lista de traslados</p>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-outline-primary"
+										data-dismiss="modal">Volver</button>
+
+								</div>
 							</div>
+						</div>
+					</div>
+					<!-- End Modal -->
 
-							<div class="modal-footer">
-								<button type="button" class="btn btn-outline-primary"
-									data-dismiss="modal">Volver</button>
-								<form action="procesarAsignacion" method="post">
+					<!-- Start Modal -->
+					<div class="modal fade"
+						id="modalRechazar${asignacion.getAsignacion().getId()}"
+						tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-lg"
+							role="document">
+							<div class="modal-content  px-3">
+								<div class="modal-header pb-2">
+									<h5 class="modal-title" id="exampleModalLongTitleUno">Rechazar
+										solicitud de traslado</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span class="bg-white" aria-hidden="true">&times;</span>
+									</button>
+								</div>
+
+								<form action="rechazarAsignacion" method="post">
 
 									<input name="idAsignacion"
 										value="${asignacion.getAsignacion().getId()}" hidden>
-									<input name="distancia" value="${asignacion.getDistancia()}"
+									<input name="distancia" value="${Math.round(asignacion.getDistancia())}"
 										hidden>
-									<button type="submit" class="btn btn-outline-success">Internar</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- End Modal -->
+
+									<div class="modal-body text-left">
+
+										<p class="p mt-2 mb-4">¿Está seguro/a que desea rechazar
+											la asignación solicitada por la operadora?</p>
+
+										<div class="my-4">
+											<label for="validationCustom01">Motivo de rechazo:</label>
+											<textarea name="motivoRechazo" class="form-control"
+												id="validationCustom01" required="required"
+												placeholder="Describa el motivo del rechazo a la asignación reservada por la operadora..."></textarea>
+										</div>
+
+										<div class="custom-control custom-checkbox mb-3">
+
+											<input type="checkbox" class="custom-control-input"
+												id="customControlValidation${asignacion.getAsignacion().getId()}" required="required"> <label
+												class="custom-control-label font-weight-lighter"
+												for="customControlValidation${asignacion.getAsignacion().getId()}">Asumo la
+												responsabilidad del siguiente rechazo de internación.</label>
+											<div class="invalid-feedback">Acepte los términos
+												primero.</div>
+										</div>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-outline-primary"
+											data-dismiss="modal">Volver</button>
+
+										<button type="submit" class="btn btn-outline-danger">Rechzar
+											asignación</button>
 
 
-				<!-- Start Modal -->
-				<div class="modal fade"
-					id="modalDetalle${asignacion.getAsignacion().getId()}"
-					tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered modal-lg"
-						role="document">
-						<div class="modal-content  px-3">
-							<div class="modal-header pb-2">
-								<h5 class="modal-title" id="exampleModalLongTitleUno">Detalle
-									de la asignación</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span class="bg-white" aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body text-left">
+									</div>
 
-								<p class="p mt-2 mb-4">
-									Reserva de asignación realizada el día <strong> <fmt:parseDate
-											value="${ asignacion.getAsignacion().getHoraReserva() }"
-											pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-										<fmt:formatDate pattern="dd 'de' MMMM 'a las' HH:mm 'horas'"
-											value="${ parsedDateTime }" />
-									</strong> para internar al paciente <strong>
-										${asignacion.getAsignacion().getPaciente().getNombre()}
-										${asignacion.getAsignacion().getPaciente().getApellido()} </strong> de
-									numero de documento <strong>
-										${asignacion.getAsignacion().getPaciente().getNumeroDocumento()}
-										(${asignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()})
-									</strong> en la <strong> cama
-										${asignacion.getAsignacion().getCama().getDescripcion()}
-										(${asignacion.getAsignacion().getCama().getTipoCama().getDescripcion()})
-									</strong> en la <strong> sala
-										${asignacion.getAsignacion().getCama().getSala().getDescripcion()}
-										(${asignacion.getAsignacion().getCama().getSala().getTipoSala().getDescripcion()})</strong>
-									de su institución.
-								</p>
-
-								<p class="mb-0 font-weight-lighter">Aprete el botón "Volver"
-									para regresar a la lista de traslados</p>
-							</div>
-
-							<div class="modal-footer">
-								<button type="button" class="btn btn-outline-primary"
-									data-dismiss="modal">Volver</button>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- End Modal -->
-
-				<!-- Start Modal -->
-				<div class="modal fade"
-					id="modalEliminar${asignacion.getAsignacion().getId()}"
-					tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content  px-3">
-							<div class="modal-header pb-2">
-								<h5 class="modal-title" id="exampleModalLongTitleUno">Rechazar
-									solicitud de traslado</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span class="bg-white" aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body text-left">
-
-								<p class="p mt-2 mb-4">¿Está seguro/a que desea rechazar el
-									traslado solicitado?</p>
-
-								<p class="mb-0 font-weight-lighter text-danger">Usted asume la responsabilidad del siguiente rechazo de internación.</p>
-							</div>
-
-							<div class="modal-footer">
-								<button type="button" class="btn btn-outline-primary"
-									data-dismiss="modal">Volver</button>
-
-								<form action="eliminarAsignacion" method="post">
-									<input name="idAsignacion"
-										value="${asignacion.getAsignacion().getId()}" hidden>
-									<button type="submit" class="btn btn-outline-danger">Rechzar internación</button>
 								</form>
 
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- End Modal -->
+					<!-- End Modal -->
 
-			</c:forEach>
+				</c:forEach>
 
 
-		</table>
-	</div>
+			</table>
+		</div>
+
+	</c:if>
 
 	<div class="col-xl-3 col-lg-5 col-md-8 col-sm-12">
 
@@ -369,14 +399,16 @@
 
 			</div>
 
-			<div class="">
+			<c:if test="${asignaciones.size() != 0}">
+				<div class="">
 
-				<a href="">
-					<button type="button" class="btn btn-outline-danger">
-						Cancelar</button>
-				</a>
+					<a href="">
+						<button type="button" class="btn btn-outline-danger">
+							Cancelar</button>
+					</a>
 
-			</div>
+				</div>
+			</c:if>
 
 		</div>
 	</div>
@@ -426,5 +458,7 @@
 <script src="js/sort.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>

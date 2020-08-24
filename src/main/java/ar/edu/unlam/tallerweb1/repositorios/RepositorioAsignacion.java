@@ -10,15 +10,15 @@ import java.util.List;
 
 public interface RepositorioAsignacion {
 
-    Asignacion consultarAsignacionPacienteInternado(Paciente paciente);
+	Asignacion consultarAsignacionPacienteInternado(Paciente paciente);
 
-    void actualizarAsignacion(Asignacion asignacion);
+	void actualizarAsignacion(Asignacion asignacion);
 
 	void eliminarAsignacion(Asignacion asignacion);
 
-    Asignacion consultarAsignacionPorId(Long nro);
+	Asignacion consultarAsignacionPorId(Long nro);
 
-    List<Asignacion> obtenerAsignacionesActuales();
+	List<Asignacion> obtenerAsignacionesActuales();
 
 	Asignacion consultarReservaAsignacionPaciente(Paciente paciente);
 
@@ -28,8 +28,7 @@ public interface RepositorioAsignacion {
 
 	List<AsignacionDoble> reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(Institucion institucion);
 
-//	List<AsignacionDistancia> reservasSolicitadasPorInternacionPorInstitucion(
-//			Institucion institucion);
+	List<AsignacionDistancia> reservasSolicitadasPorInternacionPorAdmin();
 
 	List<AsignacionDoble> reservasARecibirPorTrasladoConAsignacionActualPorInstitucion(Institucion institucion);
 

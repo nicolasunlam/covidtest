@@ -278,34 +278,7 @@ public class ControladorTraslado {
 			
 	}
 	
-	@RequestMapping(value = "eliminarAsignacion", method = RequestMethod.POST)
-	public ModelAndView eliminarAsignacion(
-			
-			@RequestParam Long idAsignacion,
-			HttpServletRequest request
-			
-			) {
-		
-    	/*---------- Validaciones -----------*/
-    	if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	/*-----------------------------------*/
-    	
-    	Asignacion asignacionAEliminar = servicioAsignacion.consultarAsignacionPorId(idAsignacion);
-    	if(asignacionAEliminar == null) {
-			return new ModelAndView("redirect:/listaPacienteInternados");	
-		}
-    	
-    	servicioAsignacion.eliminarAsignacion(asignacionAEliminar);
-		
-		return new ModelAndView("redirect:/listaPacientesInternados");
-			
-	}
-
+	
 	@RequestMapping(value = "decidirTraslado", method = RequestMethod.POST)
 	public ModelAndView decidirTraslado(
 			

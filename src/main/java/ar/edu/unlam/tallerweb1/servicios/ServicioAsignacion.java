@@ -10,30 +10,29 @@ import java.util.List;
 
 public interface ServicioAsignacion {
 
-    public Asignacion consultarAsignacionPacienteInternado(Paciente paciente);
+	public Asignacion consultarAsignacionPacienteInternado(Paciente paciente);
 
-    public void actualizarAsignacion(Asignacion asignacion);
+	public void actualizarAsignacion(Asignacion asignacion);
 
-    public Asignacion consultarAsignacionPorId(Long nro);
+	public Asignacion consultarAsignacionPorId(Long nro);
 
 	public void eliminarAsignacion(Asignacion asignacion);
 
-    List<Asignacion> obtenerAsignacionesActuales();
+	List<Asignacion> obtenerAsignacionesActuales();
 
-    /*-------------------------------- RESERVAS --------------------------------*/
-    
+	/*-------------------------------- RESERVAS --------------------------------*/
+
 	Asignacion consultarReservaAsignacionPaciente(Paciente paciente);
 
-    /*--------- RESERVAS SOLICITADAS -------*/
+	/*--------- RESERVAS SOLICITADAS -------*/
 
 	List<AsignacionDoble> reservasSolicitadasConAsignacionActualPorInstitucion(Institucion institucion);
 
 	List<AsignacionDoble> reservasSolicitadasPorTrasladoConAsignacionActualPorInstitucion(Institucion institucion);
 
-//	List<AsignacionDistancia> reservasSolicitadasPorInternacionPorInstitucion(
-//			Institucion institucion);
+	List<AsignacionDistancia> reservasSolicitadasPorInternacionPorAdmin();
 
-    /*--------- RESERVAS A RECIBIR -------*/
+	/*--------- RESERVAS A RECIBIR -------*/
 
 	List<Asignacion> reservasARecibirPorInstitucion(Institucion institucion);
 

@@ -79,185 +79,213 @@ code {
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-	<c:if test="${registro == true}">
-		<div class="alert alert-success alert-dismissible fade show"
-			role="alert">
-			<h5 class="text-center">
-				¡Camas agregadas <strong>satisfactoriamente</strong>!
-			</h5>
-			<button type="button" class="close" data-dismiss="alert"
-				aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-	</c:if>
+<c:if test="${registro == true}">
+	<div class="alert alert-success alert-dismissible fade show"
+		role="alert">
+		<h5 class="text-center">
+			¡Camas agregadas <strong>satisfactoriamente</strong>!
+		</h5>
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</c:if>
 
 
-	<div class="container px-5">
+<div class="container px-5">
+
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="">
+			<c:if test="${pisoConSectores.getPiso().getNumeroPiso() == 0}">Planta Baja
+                                    </c:if>
+
+			<c:if test="${pisoConSectores.getPiso().getNumeroPiso() != 0}">
+                                        Piso ${pisoConSectores.getPiso().getId()}
+                                    </c:if>
+		</h2>
+		<a type="button" class="btn btn-outline-success"
+			href="crearSector?idPiso=${pisoConSectores.getPiso().getId()}"
+			style="width: 134px"> Agregar Sector</a>
+	</div>
+	<h6 class="mb-5">Vea en detalle un las salas y camas del piso de
+		su institución</h6>
+
+	<c:forEach items="${pisoConSectores.getListaDeSectores()}" var="sector">
 
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<h2 class="">
-				<c:if test="${pisoDetallado.getPiso().getNumeroPiso() == 0}">Planta Baja
-                                    </c:if>
+			<h4 class="text-left mt-2">
 
-				<c:if test="${pisoDetallado.getPiso().getNumeroPiso() != 0}">
-                                        Piso ${pisoDetallado.getPiso().getNumeroPiso()}
-                                    </c:if>
-			</h2>
-			<a type="button" class="btn btn-outline-success"
-				href="crearSector?idPiso=${pisoConSectores.getPiso().getId()}">
-				Agregar Sector</a>
-		</div>
-		<h6 class="mb-5">Vea en detalle un las salas y camas del piso de
-			su institución</h6>
-
-		<c:forEach items="${pisoConSectores.getListaDeSectores()}"
-			var="sector">
-
-			<div
-				class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-				<h4 class="text-left mt-4">
-
-					<c:if test="${pisoConSectores.getListaDeSectores().size() == 0}">
-						<div class="card shadow my-5 mx-2">
-							<div class="card-header bg-danger text-white text-center">
-								<h3 class="text-center">No hay sectores registrados en este
-									piso</h3>
-								<img src="img/no-stopping.png" style="width: 100px;"
-									class="mt-4"></img>
-							</div>
-						</div>
-					</c:if>
-
-					<c:if test="${pisoDetallado.getPiso().getNumeroPiso() != 0}">
-                                        Sector de
-				${sector.getSector().getDescripcion()}
-                                    </c:if>
-				</h4>
-				<a type="button" class="btn btn-outline-success"
-					href="crearSala?idSector=${sector.getSector().getId()}">
-					Agregar Sala</a>
-			</div>
-
-			<c:forEach items="${sector.getListaDeSalas()}" var="sala">
-
-				<div
-					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h5 class="">Sala ${sala.getSala().getDescripcion()}
-						(${sala.getSala().getTipoSala().getDescripcion()})</h5>
-
-
-
-					<a type="button" class="btn btn-outline-success"
-						href="crearCamas?idSala=${sala.getSala().getId()}"> Agregar
-						Camas</a>
-				</div>
-
-				<c:if test="${sala.getListaDeCamasConAsignacion().size() == 0}">
+				<c:if test="${pisoConSectores.getListaDeSectores().size() == 0}">
 					<div class="card shadow my-5 mx-2">
-						<div class="card-header bg-danger text-white text-center">
-							<h4 class="text-center">No hay camas registradas en esta
-								sala</h4>
+						<div class="card-header text-white text-center">
+							<h3 class="text-center">No hay sectores registrados en este
+								piso</h3>
 							<img src="img/no-stopping.png" style="width: 100px;" class="mt-4"></img>
 						</div>
 					</div>
 				</c:if>
 
+				<c:if test="${pisoDetallado.getPiso().getNumeroPiso() != 0}">
+                                        Sector de
+				${sector.getSector().getDescripcion()}
+                                    </c:if>
+			</h4>
+			<a type="button" class="btn btn-outline-success"
+				href="crearSala?idSector=${sector.getSector().getId()}"
+				style="width: 134px"> Agregar Sala</a>
+		</div>
+		<h6 class="mb-5">Vea el detalle del sector
+			${sector.getSector().getDescripcion()}</h6>
+
+		<c:forEach items="${sector.getListaDeSalas()}" var="sala">
+
+			<div
+				class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2 mb-3 border-bottom">
+				<h5 class="">Sala ${sala.getSala().getDescripcion()}
+					(${sala.getSala().getTipoSala().getDescripcion()})</h5>
 
 
-				<div class=" d-flex flex-row flex-wrap my-3">
 
-					<c:if test="${sala.getListaDeCamasConAsignacion().size() != 0}">
-						<c:forEach items="${sala.getListaDeCamasConAsignacion()}"
-							var="camaConAsignacion">
+				<a type="button" class="btn btn-outline-success"
+					href="crearCamas?idSala=${sala.getSala().getId()}"
+					style="width: 134px"> Agregar Camas</a>
+			</div>
+			<h6 class="mb-5">
+				Vea el detalle de la sala ${sala.getSala().getDescripcion()} de <span
+					class="text-lowercase">${sala.getSala().getTipoSala().getDescripcion()}</span>
+			</h6>
 
-							<a class="btn btn-outline-dark m-2"
-								onclick="javascript:mostrarInfo(this, 'informacionCama${camaConAsignacion.getCama().getId()}', 'imagenCama${camaConAsignacion.getCama().getId()}')">
+			<c:if test="${sala.getListaDeCamasConAsignacion().size() == 0}">
+				<div class="card shadow my-5 mx-2">
+					<div class="card-header text-center">
+						<h4 class="text-center">No hay camas registradas en esta sala</h4>
+						<img src="img/no-stopping.png" style="width: 100px;" class="mt-4"></img>
+					</div>
+				</div>
+			</c:if>
 
-								<div class="mt-1 p-4">
-
-									<h5 class="text-center mb-4 " style="font-weight: bold;">Cama
-										${camaConAsignacion.getCama().getDescripcion()}</h5>
 
 
-									<c:if test="${camaConAsignacion.getAsignacion() == null}">
+			<div class=" d-flex flex-row flex-wrap my-3"
+				style="margin-left: -6px; margin-right: -6px">
 
+				<c:if test="${sala.getListaDeCamasConAsignacion().size() != 0}">
+					<c:forEach items="${sala.getListaDeCamasConAsignacion()}"
+						var="camaConAsignacion">
+
+						<a class="btn btn-outline-light m-2 p-0"
+							style="border-color: #dee2e6; width: 195px"
+							onclick="javascript:mostrarInfo(this, 'informacionCama${camaConAsignacion.getCama().getId()}', 'imagenCama${camaConAsignacion.getCama().getId()}')">
+
+							<div class="bg-light py-2 px-2">
+
+
+
+								<h5 class="text-center m-3">Cama
+									${camaConAsignacion.getCama().getDescripcion()}</h5>
+
+							</div>
+
+							<div class="my-4 px-3 text-center">
+
+								<c:if test="${camaConAsignacion.getAsignacion() == null}">
+
+
+									<img id="imagenCama${camaConAsignacion.getCama().getId()}"
+										src="img/cama-ver-grande.svg" style="width: 120px;" class=""></img>
+
+									<div class="text-right"
+										id="informacionCama${camaConAsignacion.getCama().getId()}"
+										hidden>
+										<p class="text-left">Tipo Cama:
+											${camaConAsignacion.getCama().getTipoCama().getDescripcion()}</p>
+										<img src="img/cama-ver-grande.svg" style="width: 60px;"
+											class=""></img>
+									</div>
+
+								</c:if>
+
+								<c:if test="${camaConAsignacion.getAsignacion() != null}">
+									<c:if
+										test="${camaConAsignacion.getAsignacion().getHoraIngreso() != null}">
 
 										<img id="imagenCama${camaConAsignacion.getCama().getId()}"
-											src="img/cama-ver.png" style="width: 115px;" class=""></img>
+											src="img/cama-ro-grande.svg" style="width: 120px;" class=""></img>
 
-										<div style="width: 115px;"
+										<div class="text-right" style="font-size: 0.8rem;"
 											id="informacionCama${camaConAsignacion.getCama().getId()}"
 											hidden>
-											<p>Tipo Cama:
+											<p class="text-left">Tipo Cama:
 												${camaConAsignacion.getCama().getTipoCama().getDescripcion()}</p>
-											<img src="img/cama-ver.png" style="width: 30px;" class=""></img>
+											<p class="text-left mb-0">Ocupada por:
+												${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
+												${camaConAsignacion.getAsignacion().getPaciente().getApellido()}</p>
+
+											<p class="text-left">${camaConAsignacion.getAsignacion().getPaciente().getNumeroDocumento()}
+												(${camaConAsignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()}).</p>
+
+											<div class="d-flex justify-content-between">
+												<button class="btn btn-outline-danger btn-sm">Ver detalle</button>
+												<div class="mt-1">
+													<img src="img/cama-ro.png"
+														style="width: 30px;" ></img>
+												</div>
+											</div>
 										</div>
 
+
+									</c:if>
+									<c:if
+										test="${camaConAsignacion.getAsignacion().getHoraIngreso() == null}">
+
+										<img id="imagenCama${camaConAsignacion.getCama().getId()}"
+											src="img/cama-am-grande.svg" style="width: 120px;" class=""></img>
+
+										<div class="text-right" style="font-size: 0.8rem;"
+											id="informacionCama${camaConAsignacion.getCama().getId()}"
+											hidden>
+											<p class="text-left">Tipo Cama:
+												${camaConAsignacion.getCama().getTipoCama().getDescripcion()}</p>
+											<p class="text-left mb-0">Reservada para:
+												${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
+												${camaConAsignacion.getAsignacion().getPaciente().getApellido()}</p>
+
+											<p class="text-left">${camaConAsignacion.getAsignacion().getPaciente().getNumeroDocumento()}
+												(${camaConAsignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()}).</p>
+
+											<div class="d-flex justify-content-between">
+												<button class="btn btn-outline-warning btn-sm">Ver detalle</button>
+												<div class="mt-1">
+													<img src="img/cama-am.png"
+														style="width: 30px;" ></img>
+												</div>
+											</div>
+										</div>
+
+
 									</c:if>
 
-									<c:if test="${camaConAsignacion.getAsignacion() != null}">
-										<c:if
-											test="${camaConAsignacion.getAsignacion().getHoraIngreso() != null}">
+								</c:if>
+							</div>
 
-											<%-- <h6 class="">Ocupada por
-												${camaConAsignacion.getAsignacion().getPaciente().getNombre()}</h6> --%>
-											<img id="imagenCama${camaConAsignacion.getCama().getId()}"
-												src="img/cama-ro.png" style="width: 115px;" class=""></img>
+						</a>
 
-											<div style="width: 115px;"
-												id="informacionCama${camaConAsignacion.getCama().getId()}"
-												hidden>
-												<p>Tipo Cama:
-													${camaConAsignacion.getCama().getTipoCama().getDescripcion()}</p>
-												<p>Ocupada por:
-													${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
-													${camaConAsignacion.getAsignacion().getPaciente().getApellido()}</p>
-												<img src="img/cama-ro.png" style="width: 30px;" class=""></img>
-											</div>
+					</c:forEach>
+				</c:if>
 
-
-										</c:if>
-										<c:if
-											test="${camaConAsignacion.getAsignacion().getHoraIngreso() == null}">
-
-											<%-- <h6 class="">Reservada para
-												${camaConAsignacion.getAsignacion().getPaciente().getNombre()}</h6> --%>
-											<img id="imagenCama${camaConAsignacion.getCama().getId()}"
-												src="img/cama-am.png" style="width: 115px;" class=""></img>
-
-											<div style="width: 115px;"
-												id="informacionCama${camaConAsignacion.getCama().getId()}"
-												hidden>
-												<p>Tipo Cama:
-													${camaConAsignacion.getCama().getTipoCama().getDescripcion()}</p>
-												<p>Reservado para:
-													${camaConAsignacion.getAsignacion().getPaciente().getNombre()}
-													${camaConAsignacion.getAsignacion().getPaciente().getApellido()}</p>
-												<img src="img/cama-am.png" style="width: 30px;" class=""></img>
-											</div>
-
-
-										</c:if>
-									</c:if>
-								</div>
-
-							</a>
-
-						</c:forEach>
-					</c:if>
-
-				</div>
+			</div>
 
 
 
-
-			</c:forEach>
 
 		</c:forEach>
 
-	</div>
+	</c:forEach>
+
+</div>
 </main>
 
 
