@@ -1,64 +1,137 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="icon" href="img/iso-azul-blanco.svg"> 
+<link rel="icon" href="img/iso-azul-blanco.svg">
 
-<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+<link href="css/bootstrap.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="css/dashboard.css" rel="stylesheet">
+			
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/bootstrap.blunde.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
 
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
-        <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    
-    <!-- Este link que esta abajo es para importar iconos -->
-    <link
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet">
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
+#navbar-top:hover {
+	text-decoration: none;
+}
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-    <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
+.bg-primary {
+	background-color: #0099ff;
+}
+</style>
+
 </head>
+
 <body>
-<nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
-    <%--    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">COVIDTEST</a>--%>
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="home">
-        <img src="img/share2.png" width="35" height="35" class="d-inline-block align-top" alt="logo">
-        AsignAR
-    </a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
-            data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <!--   <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
-    <ul class="navbar-nav px-3">
-    	<li class="nav-item text-nowrap">
-				<c:if test="${rol == null}">
-				<a href="login" class="btn btn-dark ml-5" role="button"
-					aria-disabled="true">Iniciar Sesión</a>
-				</c:if>	
-				<c:if test="${rol != null}">				
-				<a href="logout" class="btn btn-dark ml-5" role="button"
-					aria-disabled="true">Salir</a>
-				</c:if>
-       </li>
-  	</ul>
-</nav>
+
+	<nav
+		class="navbar sticky-top navbar-expand-lg navbar-dark bg-white border-bottom">
+
+		<button
+			class="navbar-toggler position-absolute-left d-md-none collapsed"
+			type="button" data-toggle="collapse" data-target="#sidebarMenu"
+			aria-controls="sidebarMenu" aria-expanded="false"
+			aria-label="Toggle navigation">
+
+			<img src="img/toggler.svg" width="35" height="35"
+				class="d-inline-block align-middle" alt="logo">
+
+		</button>
+
+		<a class="navbar-brand text-primary d-flex mr-0 bg-white"
+			style="box-shadow: none;"
+			href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+			<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+			<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+			<c:if test='${rol == null}'>
+						"home"
+						</c:if>> <img
+			src="img/iso-azul.svg" width="50" height="50"
+			class="d-inline-block align-top" alt="iso"> <img
+			src="img/logo-azul.svg" width="80" height="50"
+			class="d-inline-block align-top" alt="asignar">
+		</a>
+
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item ml-4 active"><a
+					class="nav-link text-primary"
+					href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+					<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+					<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+					<c:if test='${rol == null}'>
+						"home"
+						</c:if>>Inicio
+						<span class="sr-only">(current)</span>
+				</a> <c:if test='${rol == "PACIENTE"}'>
+						<li class="nav-item ml-4"><a class="btn btn-outline-info"
+							role="button" href="verMensajes">Ver mis Mensajes </a></li>
+					</c:if>
+			</ul>
+		</div>
+
+
+		<c:if test="${rol == null}">
+
+			<a href="login" class="dropdown-item" role="button"
+				aria-disabled="true">Iniciar Sesión</a>
+		</c:if>
+
+		<c:if test="${rol != null}">
+			<div class="btn-group">
+				<button type="button"
+					class="btn btn-outline-white dropdown-toggle"
+					data-toggle="dropdown" data-display="static" aria-haspopup="true"
+					aria-expanded="false">
+					usuario.getEmail() <img src="img/avatar.svg" width="35"
+						height="35" class="d-inline-block align-middle" alt="cuenta">
+				</button>
+				<div class="dropdown-menu dropdown-menu-lg-right">
+					<button class="dropdown-item" type="button">Mi cuenta</button>
+
+					<a href="logout" class="dropdown-item" role="button"
+						aria-disabled="true">Cerrar sesión</a>
+
+				</div>
+			</div>
+		</c:if>
+	</nav>
 
 <div class="container-fluid">
 
