@@ -205,9 +205,17 @@ public class ControladorMapa {
 
 		servicioUsuario.actualizarUsuario(usuario);
 
+		List<Institucion> listaInstituciones = servicioInstitucion.obtenerListaInstituciones();
+
+		Long idAdmin = (Long) request.getSession().getAttribute("ID");
+
+		model.put("idAdmin", idAdmin);
+		model.put("listaInstituciones", listaInstituciones);
+
 		model.put("idInstitucion", idInstitucion);
 
-		return new ModelAndView("mapita", model);
+		// return new ModelAndView("listaInstituciones", model);
+		return new ModelAndView("redirect:/listaInstituciones?idAdmin=" + idAdmin);
 	}
 
 }
