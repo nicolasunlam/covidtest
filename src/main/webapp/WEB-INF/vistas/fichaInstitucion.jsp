@@ -91,7 +91,7 @@
 			<h3 class="font-weight-bolder">Correo electrónico</h3>
 			<h4>${email}</h4>
 			<h3 class="font-weight-bolder mt-5">Dirección</h3>
-			<h4>${calle} ${numero}, ${localidad}</h4>
+			<h4>${calle}${numero},${localidad}</h4>
 		</div>
 		<div class="col-1"></div>
 		<div class="col-5" id="map"></div>
@@ -112,22 +112,22 @@
 
 <div class="container-fluid pl-3 my-5 text-left">
 	<div class="row my-4">
-<div class="col-3">
-      		<c:if test="${camasDisponibles > 0}">
+		<div class="col-3">
+			<c:if test="${camasDisponibles > 0}">
 				<h4 class="d-inline mr-3">Hay disponibilidad</h4>
-				<img  src="img/right.png" width="35"
-				height="35" alt="Generic placeholder image" class="d-inline">
-		    </c:if>
-		   	<c:if test="${camasDisponibles <= 0}">
+				<img src="img/right.png" width="35" height="35"
+					alt="Generic placeholder image" class="d-inline">
+			</c:if>
+			<c:if test="${camasDisponibles <= 0}">
 				<h4 class="d-inline mr-3">No hay disponibilidad</h4>
-				<img  src="img/right.png" width="35"
-				height="35" alt="Generic placeholder image" class="d-inline">
-		    </c:if>
+				<img src="img/right.png" width="35" height="35"
+					alt="Generic placeholder image" class="d-inline">
+			</c:if>
 
 		</div>
 		<div class="col-2"></div>
 		<div class="col-5">
-			<h4>${distancia} kms.</h4>
+			<h4>${distancia}kms.</h4>
 			<p id="latitudInstitucion" style="display: none;">${latitudInstitucion}</p>
 			<p id="longitudInstitucion" style="display: none;">${longitudInstitucion}</p>
 			<p id="latitudPaciente" style="display: none;">${latitudPaciente}</p>
@@ -158,41 +158,38 @@
 	var latitudPaciente = document.getElementById('latitudPaciente').innerHTML;
 	var longitudPaciente = document.getElementById('longitudPaciente').innerHTML;
 
-	var map = L.map('map').setView([ latitudInstitucion, longitudInstitucion ], 11);
-	
-    let iconMarker = L.icon({
-        iconUrl: 'img/red-cross.png',
+	var map = L.map('map').setView([ latitudInstitucion, longitudInstitucion ],
+			11);
 
-    });
+	/*let iconMarker = L.icon({
+	    iconUrl: 'img/red-cross.png',
 
-	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+	});*/
+
+	L
+			.tileLayer(
+					'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 					{
 						attribution : '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
 					}).addTo(map);
 
-	marker = new L.marker([ latitudInstitucion, longitudInstitucion ], { icon: iconMarker })
-	.bindPopup(nombreInstitucion)
-	.addTo(map);
-	
-	markerPaciente = new L.marker([ latitudPaciente, longitudPaciente ])
-	.bindPopup("Su ubicación")
-	.addTo(map);
-	
-	/* var circle = L.circle([latitudInstitucion, longitudInstitucion], {
-	    color: 'red',
-	    fillColor: '#f03',
-	    fillOpacity: 0.5,
-	    radius: 10
-	}).addTo(map); */
-	
-	
- /*    var polylinePoints = [
-        [latitudInstitucion, longitudInstitucion],
-        [latitudPaciente, longitudPaciente]
-      ];            
-      
-      var polyline = L.polyline(polylinePoints).addTo(map);  */ 
+	marker = new L.marker([ latitudInstitucion, longitudInstitucion ])
+			.bindPopup(nombreInstitucion).addTo(map);
 
+	markerPaciente = new L.marker([ latitudPaciente, longitudPaciente ])
+			.bindPopup("Su ubicación").addTo(map);
+
+	var circle = L.circle([ latitudInstitucion, longitudInstitucion ], {
+		color : 'red',
+		fillColor : '#f03',
+		fillOpacity : 0.5,
+		radius : 20
+	}).addTo(map);
+
+	var polylinePoints = [ [ latitudInstitucion, longitudInstitucion ],
+			[ latitudPaciente, longitudPaciente ] ];
+
+	var polyline = L.polyline(polylinePoints).addTo(map);
 </script>
 <!-- Footer -->
 <footer
