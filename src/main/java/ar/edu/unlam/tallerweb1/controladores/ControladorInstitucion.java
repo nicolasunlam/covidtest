@@ -134,6 +134,8 @@ public class ControladorInstitucion {
 
 			servicioInstitucion.registrarInstitucion(institucion);
 
+			Long idInstitucion = institucion.getId();
+
 //			Domicilio domicilio = new Domicilio();
 //
 //			domicilio.setCalle(calle);
@@ -148,6 +150,7 @@ public class ControladorInstitucion {
 //			servicioDomicilio.actualizarDomicilio(domicilio);
 //			servicioLocalidad.actualizarLocalidad(localidad);
 
+			model.put("idInstitucion", idInstitucion);
 			return new ModelAndView("mapaInstitucion", model);
 		} else {
 

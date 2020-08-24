@@ -154,10 +154,11 @@ public class ControladorMapa {
 	}
 
 	@RequestMapping("/validarMapaInstitucion")
-	public ModelAndView validarMapaInstitucion(HttpServletRequest request, @RequestParam(value = "latitud") Double latitud,
-			@RequestParam(value = "longitud") Double longitud, @RequestParam(value = "calle") String calle,
-			@RequestParam(value = "numero") Integer numero,
+	public ModelAndView validarMapaInstitucion(HttpServletRequest request,
+			@RequestParam(value = "latitud") Double latitud, @RequestParam(value = "longitud") Double longitud,
+			@RequestParam(value = "calle") String calle, @RequestParam(value = "numero") Integer numero,
 			@RequestParam(value = "nombreLocalidad") String nombreLocalidad,
+			@RequestParam(value = "idInstitucion") Long idInstitucion,
 			@RequestParam(value = "nombrePartido") String nombrePartido) {
 		ModelMap model = new ModelMap();
 
@@ -167,8 +168,7 @@ public class ControladorMapa {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		Long id = (Long) request.getSession().getAttribute("ID_INSTITUCION");
-		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
+		Usuario usuario = servicioUsuario.consultarUsuarioPorId(idInstitucion);
 
 		usuario.setLatitud(latitud);
 		usuario.setLongitud(longitud);
@@ -205,7 +205,9 @@ public class ControladorMapa {
 
 		servicioUsuario.actualizarUsuario(usuario);
 
-		return new ModelAndView("validarMapa", model);
+		model.put("idInstitucion", idInstitucion);
+
+		return new ModelAndView("mapita", model);
 	}
 
 }
