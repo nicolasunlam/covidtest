@@ -117,8 +117,8 @@ public class RepositorioPacienteImpl implements RepositorioPaciente {
 
     @Override
     public void actualizarPaciente(Paciente paciente) {
-        sessionFactory.getCurrentSession().saveOrUpdate(paciente);
-       // sessionFactory.getCurrentSession().update(paciente);
+        //sessionFactory.getCurrentSession().saveOrUpdate(paciente);
+        sessionFactory.getCurrentSession().update(paciente);
     }
     
 

@@ -6,9 +6,10 @@
 
 
 
+
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
-<title>Inserte titulo aquí</title>
+<title>Instituciones</title>
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
@@ -17,6 +18,8 @@
 <div class="container m-5">
 
 	<h2>Instituciones mas cercanas</h2>
+	
+	<p>La lista puede ser ordenada haciendo "click" en el encabezado de cada columna.</p>
 
 	<table id="myTable"
 		class="table table-bordered table-hover responsive nowrap text-center align-middle">
@@ -51,7 +54,7 @@
 							name="idInstitucion"
 							value="${instituciones.getUsuario().getId()}"> <input
 							class="btn btn-primary" type="submit"
-							value="Ver detalle institucion">
+							value="Ver detalle institucion" style="margin-right: 145px">
 
 					</form>
 

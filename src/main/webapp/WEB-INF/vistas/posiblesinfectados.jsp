@@ -49,11 +49,8 @@
 
 								
 
-								<td class="align-middle"><button type="button"
-										class="btn btn-secondary" style="margin-top: 5px; margin-left: 5px ">Egresar</button> <%-- <a
-									class="btn btn-warning"
-									href="<c:url value='/crearMensaje/${paciente.getId()}'/>"
-									role="button"> Enviar Mensaje</a> --%>
+								<td class="align-middle"><a href="asignar?idPaciente=${paciente.getId()}"
+										class="btn btn-outline-success" style="margin-top: 5px; margin-left: 5px ">Asignar Cama</a> 
 
 									<div class="float-right" style="margin-right: 25px; margin-top: 5px; margin-left: -30px">
 										<form action="crearMensaje" method=post>
@@ -61,7 +58,7 @@
 
 											<input class="invisible" type="hidden" id="id" name="id"
 												value="${paciente.getId()}"> <input
-												class="btn btn-primary" type="submit" value="Enviar Mensaje">
+												class="btn btn-outline-primary" type="submit" value="Enviar Mensaje">
 
 
 											<%-- <input type="hidden" id="id" name="id"

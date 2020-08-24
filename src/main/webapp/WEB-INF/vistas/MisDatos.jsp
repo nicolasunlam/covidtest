@@ -53,38 +53,43 @@ p.lead {
                 <div class="form-group"> --%>
 
 <%-- <form method="post" action="guardarCambios" modelAttribute="paciente"> --%>
-<%-- <form:form action="guardarCambios" method="post" modelAttribute="paciente">
-<div class="form-group">
-    
-    <input type="hidden" name="id" class="form-control" id="id" aria-describedby="id" placeholder="${paciente.getId()}">
-    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-  </div>
-  <div class="form-group">
-    <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" class="form-control" id="nombre" aria-describedby="nombre" placeholder="${paciente.getNombre()}">
-    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-  </div>
-  <div class="form-group">
-    <label for="apellido">Apellido</label>
-    <input type="text" name="apellido" class="form-control" id="apellido" placeholder="${paciente.getApellido()}">
-  </div>
- <div class="form-group">
-    <label for="exampleInputEmail1">Correo electrónico</label>
-    <input type="email" name="email" class="form-control" id="email" aria-describedby="email" placeholder="${paciente.getEmail()}">
-    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-  </div>
-  <button type="submit" class="btn btn-primary">Guardar cambios</button>
-  </form:form> --%>
-<%-- </form> --%>
-
 	<form:form action="guardarCambios" method="POST"
+		modelAttribute="usuario">
+		<div class="form-group">
+
+			<input type="hidden" name="id" class="form-control" id="id"
+				aria-describedby="id" path="id" placeholder="${usuario.getId()}">
+			<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre</label> <input type="text" name="nombre"
+				class="form-control" id="nombre" path="nombre" aria-describedby="nombre"
+				placeholder="${usuario.getNombre()}">
+			<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+		</div>
+		<div class="form-group">
+			<label for="apellido">Apellido</label> <input type="text"
+				name="apellido" class="form-control" id="apellido" path="apellido"
+				placeholder="${usuario.getApellido()}">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputEmail1">Correo electrónico</label> <input
+				type="email" name="email" path="email" class="form-control" id="email"
+				aria-describedby="email" placeholder="${usuario.getEmail()}">
+			<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+		</div>
+		<button type="submit" class="btn btn-primary">Guardar cambios</button>
+	</form:form>
+	<%-- </form> --%>
+
+	<%-- <form:form action="guardarCambios" method="POST"
 		modelAttribute="paciente">
 		<form:input path="id" type="hidden" class="form-control input" />
 		<form:input path="nombre" type="text" class="form-control input" />
 		<form:input path="apellido" type="text" class="form-control input" />
 		<form:input path="email" type="email" class="form-control input" />
 		<button class="btn btn-warning buscar input" Type="Submit" />Guardar</button>
-	</form:form>
+	</form:form> --%>
 
 	<%-- <form class="form-inline">
   <div class="form-group mb-2">

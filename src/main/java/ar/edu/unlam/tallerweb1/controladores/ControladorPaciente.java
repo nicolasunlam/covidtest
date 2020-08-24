@@ -61,7 +61,6 @@ public class ControladorPaciente {
 	@Autowired
 	ServicioMapa servicioMapa;
 
-	
 	/* Pantalla de bienvenido al paciente cuando inicia sesión */
 	@RequestMapping("bienvenidoPaciente")
 	public ModelAndView irAbienvenido(HttpServletRequest request) {
@@ -91,8 +90,6 @@ public class ControladorPaciente {
 
 		return new ModelAndView("bienvenidoPaciente", model);
 	}
-	
-	
 
 	@RequestMapping("/registrarPaciente")
 	public ModelAndView registrarPaciente(HttpServletRequest request) {
@@ -510,12 +507,12 @@ public class ControladorPaciente {
 
 		return new ModelAndView("listapacientes2", model);
 	}
-	
+
 	@RequestMapping("/pacienteDistancia")
-	public ModelAndView pacienteDistancia (HttpServletRequest request) {
-		
+	public ModelAndView pacienteDistancia(HttpServletRequest request) {
+
 		ModelMap model = new ModelMap();
-		
+
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
 			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
@@ -537,13 +534,14 @@ public class ControladorPaciente {
 
 		return new ModelAndView("pacienteDistancia", model);
 	}
+
 	//////////////////////////////////////////
-	//Acceder y Modificar Datos Desde Paciente
+	// Acceder y Modificar Datos Desde Paciente
 	//////////////////////////////////////////
 	@RequestMapping("/MisDatos")
 	public ModelAndView verMisDatos(HttpServletRequest request) {
 		ModelMap model = new ModelMap();
-		
+
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
 			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
@@ -558,30 +556,50 @@ public class ControladorPaciente {
 
 		Long id = (long) request.getSession().getAttribute("ID");
 
+		Usuario u = servicioPaciente.consultarPacientePorId(id);
+		model.put("usuario", u);
 
-		Paciente p = servicioPaciente.consultarPacientePorId(id);
-		model.put("paciente", p);
-		
 		return new ModelAndView("MisDatos", model);
-	} 
-	
-	@RequestMapping(value = "/guardarCambios", method = RequestMethod.POST)
-	public String guardarEvento(@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
-		
-		Long id = (Long) request.getSession().getAttribute("ID");
-
-		Paciente p = servicioPaciente.consultarPacientePorId(id);
-		servicioPaciente.actualizarPaciente(p);
-		return "redirect:/MisDatos";
 	}
+//	
+//	@RequestMapping(value = "/guardarCambios", method = RequestMethod.POST)
+//	public String guardarEvento(@ModelAttribute("usuario") Usuario usuario) {
 
-		//		 public String editsave(@ModelAttribute("emp") Emp emp){    
+	@RequestMapping(path = "/guardarCambios")
+	public ModelAndView guardarCambios(
+			@RequestParam(value = "mail", required = false) String mail, HttpServletRequest request) {
+		
+		ModelMap model = new ModelMap();
+	       
+        if(servicioAtajo.validarInicioDeSesion(request) != null) {
+            return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+        }
+        if(servicioAtajo.validarPermisoAPagina(request) != null) {
+            return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+        }
+        Rol rol = (Rol) request.getSession().getAttribute("ROL");
+        if(rol != null) {
+            model.put("rol", rol.name());   
+        }
+        model.put("armarHeader", servicioAtajo.armarHeader(request));
+        
+        Long id = (long) request.getSession().getAttribute("ID");
+        
+        //servicioUsuario.actualizarUsuario(usuario);
+        return new ModelAndView("redirect:/MisDatos");
+	}
+	
+	
+
+//			@RequestMapping("/validarMapaInstitucion")
+//			public ModelAndView validarMapaInstitucion(HttpServletRequest request,
+//					@RequestParam(value = "latitud") Double latitud, @RequestParam(value = "longitud") Double longitud{
+	// Long id = (Long) request.getSession().getAttribute("ID");
+	// Paciente p = servicioPaciente.consultarPacientePorId(paciente.getId());
+	// public String editsave(@ModelAttribute("emp") Emp emp){
 //		        dao.update(emp);    
 //		        return "redirect:/viewemp"; 
 
-	
-	
-	
 //	@ModelAttribute
 //	public void addingCommonObjects(Model model1) {
 //		model1.addAttribute(attributeName, attributeValue)
@@ -594,7 +612,7 @@ public class ControladorPaciente {
 //	 
 //	    return mav;
 //	}
-	
+
 	@RequestMapping("/fichaInstitucion")
 	public ModelAndView fichaInstitucion(HttpServletRequest request) {
 
@@ -615,7 +633,6 @@ public class ControladorPaciente {
 		return new ModelAndView("fichaInstitucion", model);
 	}
 
-	
 	/* ----- Getters and Setters ----- */
 	public ServicioPaciente getServicioPaciente() {
 		return servicioPaciente;
@@ -696,7 +713,7 @@ public class ControladorPaciente {
 	public void setServicioInstitucion(ServicioInstitucion servicioInstitucion) {
 		this.servicioInstitucion = servicioInstitucion;
 	}
-	
+
 	/*-----------Validaciones--------------*/
 //    if (servicioAtajo.validarInicioDeSesion(request) != null) {
 //        return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
@@ -709,7 +726,6 @@ public class ControladorPaciente {
 //        model.put("rol", rol.name());
 //    }
 //    model.put("armarHeader", servicioAtajo.armarHeader(request));
-    /*-----------------------------------*/
-	
-}
+	/*-----------------------------------*/
 
+}

@@ -34,9 +34,9 @@ p.lead {
 
 		<p class="lead mb-0">
 			<a class="btn btn-light btn-lg text-primary " role="button"
-				href="">Generar permiso</a>
+				href="generarPermiso">Generar permiso</a>
 			<a class="btn btn-light btn-lg text-danger " role="button"
-				href="">Pedir atención médica</a>
+				href="pacienteDistancia">Instituciones Sugeridas</a>
 				<a class="btn btn-light btn-lg text-success " role="button"
 				href="MisDatos">Mis Datos</a>
 		</p>
