@@ -50,7 +50,7 @@
 <body>
 
 	<nav
-		class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary border-bottom">
+		class="navbar sticky-top navbar-expand-lg navbar-dark bg-white border-bottom">
 
 		<button
 			class="navbar-toggler position-absolute-left d-md-none collapsed"
@@ -63,7 +63,7 @@
 
 		</button>
 
-		<a class="navbar-brand text-light d-flex mr-0 bg-primary"
+		<a class="navbar-brand text-primary d-flex mr-0 bg-white"
 			style="box-shadow: none;"
 			href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
@@ -77,15 +77,15 @@
 			<c:if test='${rol == null}'>
 						"home"
 						</c:if>> <img
-			src="img/iso-blanco.svg" width="50" height="50"
+			src="img/iso-azul.svg" width="50" height="50"
 			class="d-inline-block align-top" alt="iso"> <img
-			src="img/logo-blanco.svg" width="80" height="50"
+			src="img/logo-azul.svg" width="80" height="50"
 			class="d-inline-block align-top" alt="asignar">
 		</a>
 
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item ml-4 active"><a class="nav-link text-white"
+				<li class="nav-item ml-4 active"><a class="nav-link text-primary"
 					href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
 						</c:if>
@@ -116,14 +116,15 @@
 		<c:if test="${rol != null}">
 			<div class="btn-group">
 				<button type="button"
-					class="btn btn-outline-white dropdown-toggle text-white"
+					class="btn btn-outline-white dropdown-toggle"
 					data-toggle="dropdown" data-display="static" aria-haspopup="true"
 					aria-expanded="false">
-					usuario.getEmail() <img src="img/avatar-blanco.svg" width="35"
+					usuario.getEmail() <img src="img/avatar.svg" width="35"
 						height="35" class="d-inline-block align-middle" alt="cuenta">
 				</button>
 				<div class="dropdown-menu dropdown-menu-lg-right">
-					<button class="dropdown-item" type="button">Mi cuenta</button>
+					<a href="MisDatos" class="dropdown-item" role="button"
+						aria-disabled="true">Mi cuenta</a>
 
 					<a href="logout" class="dropdown-item" role="button"
 						aria-disabled="true">Cerrar sesión</a>

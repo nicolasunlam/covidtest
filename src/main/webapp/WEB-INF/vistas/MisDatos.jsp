@@ -20,164 +20,140 @@ p.lead {
 	font-size: 1.05rem;
 }
 </style>
-        
-       
 
+<c:if test='${rol != "PACIENTE"}'>
+	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+</c:if>
 
-            <div class="container">
-            
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h4 class="h4">Mis Datos</h4>
-            </div>
+<div class="container">
 
-               <%--  <div>
-
-				<h6>Nombre del Paciente: ${paciente.getApellido()}, ${paciente.getNombre()}</h6>
-			
-				<h6 class="">Documento: ${paciente.getNumeroDocumento()} (${paciente.getTipoDocumento().name()})</h6>
-			
-				<h6 class="">Correo electrónico: ${paciente.getEmail()}</h6>
-
-                    <br>
-
- 
-                  
-
-                    <a href="consultarPaciente" class="btn btn-sm btn-outline-secondary">Volver atrás</a>
-                    
-                    <a href="bienvenido" class="btn btn-sm btn-outline-secondary">Inicio</a>
-
-                </div>
-
-
-                <div class="form-group"> --%>
-
-<%-- <form method="post" action="guardarCambios" modelAttribute="paciente"> --%>
-	<form:form action="guardarCambios" method="POST"
-		modelAttribute="usuario">
-		<div class="form-group">
-
-			<input type="hidden" name="id" class="form-control" id="id"
-				aria-describedby="id" path="id" placeholder="${usuario.getId()}">
-			<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-		</div>
-		<div class="form-group">
-			<label for="nombre">Nombre</label> <input type="text" name="nombre"
-				class="form-control" id="nombre" path="nombre" aria-describedby="nombre"
-				placeholder="${usuario.getNombre()}">
-			<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-		</div>
-		<div class="form-group">
-			<label for="apellido">Apellido</label> <input type="text"
-				name="apellido" class="form-control" id="apellido" path="apellido"
-				placeholder="${usuario.getApellido()}">
-		</div>
-		<div class="form-group">
-			<label for="exampleInputEmail1">Correo electrónico</label> <input
-				type="email" name="email" path="email" class="form-control" id="email"
-				aria-describedby="email" placeholder="${usuario.getEmail()}">
-			<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-		</div>
-		<button type="submit" class="btn btn-primary">Guardar cambios</button>
-	</form:form>
-	<%-- </form> --%>
-
-	<%-- <form:form action="guardarCambios" method="POST"
-		modelAttribute="paciente">
-		<form:input path="id" type="hidden" class="form-control input" />
-		<form:input path="nombre" type="text" class="form-control input" />
-		<form:input path="apellido" type="text" class="form-control input" />
-		<form:input path="email" type="email" class="form-control input" />
-		<button class="btn btn-warning buscar input" Type="Submit" />Guardar</button>
-	</form:form> --%>
-
-	<%-- <form class="form-inline">
-  <div class="form-group mb-2">
-    <label for="staticEmail2" class="sr-only">Email</label>
-    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
-  </div>
-  <div class="form-group mx-sm-3 mb-2">
-    <label for="inputPassword2" class="sr-only">Password</label>
-    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-  <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-</form> --%>
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="">Mis Datos</h2>
+		<a href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+			<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+			<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+			<c:if test='${rol == null}'>
+						"home"
+						</c:if>>
+			<button type="button" class="btn btn-outline-success">
+				Volver atrás</button>
+		</a>
 
 	</div>
-    </div>
+	<h6 class="mb-5">Vea sus datos en detalle y realice alguna
+		actualización de los mismos si es necesario</h6>
 
 
+	<form action="guardarCambios" method="POST">
 
-    
-<!-- Footer -->
-<footer class="page-footer font-small mdb-color pt-4">
+		<input name="idUsuario" type="hidden" value="${usuario.getId()}">
 
-	<!-- Footer Links -->
-	<div
-		class="bg-whiteborder border-top border-bottom text-center text-md-left">
-		<div class="container">
-			<!-- Footer links -->
-			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start text-center text-md-left mt-3 pb-3">
+		<div
+			class="form-row d-flex justify-content-between flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
 
-				<hr class="w-100 clearfix d-md-none">
+			<div class="col-lg-1 col-md-2 col-sm-4">
 
-				<!-- Grid column -->
-				<div class="col-md-4 col-lg-3 col-xl-3 pl-md-0 mt-3">
-					
-					<h6 class="lead mb-4 text-center">
-						<strong>Enlaces útiles</strong>
-					<img src="img/iso-azul.svg" width="25" height=""
-						class=" " alt="">
-					</h6>
-					<p class="lead mt-3 text-center">
-						<a href="https://www.argentina.gob.ar/salud/coronavirus-COVID-19">Ministerio
-							de Salud</a>
-					</p class="lead">
-					<p class="lead text-center">
-						<a href="pacienteDistancia">Hospitales y establecimientos de
-							salud</a>
-					</p>
+				<label for="" class=""> <img alt="" src="img/avatar.svg"
+					width="100%" height="85px" style="min-width:">
+				</label>
+			</div>
+
+			<div class="col">
+
+				<div class="">
+					<label for="" class="h5">${usuario.getApellido()},
+						${usuario.getNombre()}</label>
 				</div>
-
-
-				<div class="col-md-4 col-lg-3 col-xl-3 mt-3">
-					<h6 class="lead mb-4 text-center">
-						<strong>Ayuda teléfonica</strong>
-					</h6>
-					<p class="lead text-center">
-						<i class="fas fa-home"></i> Llamá al <strong>120</strong>, es
-						gratuito desde cualquier lugar del país y te atienden las 24
-						horas.
-					</p>
-
-
+				<div class="">
+					<label for="" class="h6 ">${usuario.getTipoDocumento().name()}:
+						${usuario.getNumeroDocumento()}</label>
 				</div>
-
-				<!-- Grid column -->
-				<div class="col-md-4 col-lg-3 col-xl-3 pr-lg-0 mt-3">
-
-					<h6 class="lead mb-4 text-center">
-						<strong>Whatsapp</strong>
-					</h6>
-
-					<p class="lead text-center">
-						Escribí "Hola" al <strong>+54 9 11 2256-0566</strong> para que
-						encuentres respuestas a las preguntas más frecuentes y recibas
-						consejos de prevención.
-					</p>
-
-
+				<div class="">
+					<label for="" class="h6 ">${usuario.getEmail()}</label>
 				</div>
 
 			</div>
 		</div>
-	</div>
 
-	<!-- Footer Links -->
+		<div class="form-group">
 
-</footer>
-<!-- Footer -->
+			<input type="hidden" name="id" class="form-control" id="id"
+				aria-describedby="id" path="id" placeholder="${usuario.getId()}">
+		</div>
+		<div class="form-group">
+			<label for="nombre">Nombre</label> <input type="text" name="nombre"
+				class="form-control" id="nombre" path="nombre"
+				aria-describedby="nombre" placeholder="${usuario.getNombre()}">
+
+		</div>
+
+		<c:if test='${rol == "PACIENTE"}'>
+			<div class="form-group">
+				<label for="apellido">Apellido</label> <input type="text"
+					name="apellido" class="form-control" id="apellido" path="apellido"
+					placeholder="${usuario.getApellido()}">
+			</div>
+		</c:if>
+		<div class="form-group">
+			<label for="exampleInputEmail1">Correo electrónico</label> <input
+				type="email" name="email" path="email" class="form-control"
+				id="email" aria-describedby="email"
+				placeholder="${usuario.getEmail()}">
+		</div>
+
+		<div class="form-group">
+
+			<h6>Contraseña de la cuenta</h6>
+
+			<input type="text" name="password"
+				class="form-control br-radius-zero" id="password"
+				placeholder="Ingrese una contraseña" data-rule="minlen:1"
+				data-msg="Ingrese una contraseña valida" required />
+			<div class="validation"></div>
+
+			<h6 class="mt-4">Nueva contraseña</h6>
+
+			<input type="text" name="password"
+				class="form-control br-radius-zero" id="password"
+				placeholder="Ingrese una contraseña" data-rule="minlen:1"
+				data-msg="Ingrese una contraseña valida" required />
+			<div class="validation"></div>
+
+			<h6 class="mt-4">Repita la nueva contraseña</h6>
+
+			<input type="text" name="password"
+				class="form-control br-radius-zero" id="password"
+				placeholder="Ingrese una contraseña" data-rule="minlen:1"
+				data-msg="Ingrese una contraseña valida" required />
+			<div class="validation"></div>
+
+		</div>
+
+		<div class="form-group">
+			<label for="exampleInputCalle">Dirección</label> <input type="calle"
+				name="calle" path="calle" class="form-control" id="email"
+				aria-describedby="email" placeholder="${usuario.getEmail()}">
+
+			<label for="exampleInputNumero">Localidad</label> <input type="email"
+				name="email" path="email" class="form-control" id="email"
+				aria-describedby="email" placeholder="${usuario.getEmail()}">
+		</div>
+		<button type="submit" class="btn btn-primary">Guardar cambios</button>
+	</form>
+
+</div>
+
+<c:if test='${rol != "PACIENTE"}'>
+	</main>
+</c:if>
+
 
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="../assets/dist/js/bootstrap.bundle.js"></script>
