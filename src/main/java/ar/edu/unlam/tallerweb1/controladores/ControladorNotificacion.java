@@ -145,8 +145,8 @@ public class ControladorNotificacion {
 	}
 
 	//Ver mensajes Recibidos
-	@RequestMapping(path = "/verMensajes", method = RequestMethod.GET)
-	public ModelAndView verMensajes(
+	@RequestMapping(path = "/verMensajesRecibidos", method = RequestMethod.GET)
+	public ModelAndView verMensajesRecibidos(
 			
 			HttpServletRequest request) {
 
@@ -172,7 +172,7 @@ public class ControladorNotificacion {
 		
 		model.put("list", list);
 		
-		return new ModelAndView("verMensajes", model);
+		return new ModelAndView("verMensajesRecibidos", model);
 	}
 	//Lista Mensajes enviador por la Institucion
 	@RequestMapping(path = "/verMensajesEnviados", method = RequestMethod.GET)
@@ -202,7 +202,7 @@ public class ControladorNotificacion {
 		
 		model.put("list", list);
 		
-		return new ModelAndView("verMensajes", model);
+		return new ModelAndView("verMensajesEnviados", model);
 	}
 	
 	@RequestMapping(value = "/verDetalleMensaje/{id}")

@@ -69,10 +69,16 @@ public class RepositorioCamaImpl implements RepositorioCama {
 	@Override
 	public List<Cama> obtenerTotalDeCamasOcupadas() {
 
-		String hql = "SELECT c " + "FROM Cama as c " + "JOIN Sala as sal ON c.sala = sal "
-				+ "JOIN Sector as sec ON sal.sector = sec " + "JOIN Piso as p ON sec.piso = p "
-				+ "JOIN Institucion as i ON p.institucion = i " + "JOIN Asignacion as a ON a.cama = c "
-				+ "WHERE a.cama = c " + "AND a.horaEgreso IS NULL ";
+		String hql = "SELECT c " 
+				+ "FROM Cama as c " 
+				+ "JOIN Sala as sal ON c.sala = sal "
+				+ "JOIN Sector as sec ON sal.sector = sec " 
+				+ "JOIN Piso as p ON sec.piso = p "
+				+ "JOIN Institucion as i ON p.institucion = i " 
+				+ "JOIN Asignacion as a ON a.cama = c "
+				+ "WHERE a.cama = c " 
+				+ "AND a.horaEgreso IS NULL "
+				+ "AND a.horaIngreso IS NOT NULL ";
 
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 
