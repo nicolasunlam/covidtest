@@ -9,166 +9,173 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-<style>
-#inputTipoInstitucion, #inputNombre, #inputCUIT {
-	background-image: url('/css/searchicon.png');
-	/* Add a search icon to input */
-	background-position: 10px 12px; /* Position the search icon */
-	background-repeat: no-repeat; /* Do not repeat the icon image */
-	width: 100%; /* Full-width */
-	font-size: 16px; /* Increase font-size */
-	padding: 12px 20px 12px 40px; /* Add some padding */
-	border: 1px solid #ddd; /* Add a grey border */
-	margin-bottom: 12px; /* Add some space below the input */
-}
-
-#myTable {
-	border-collapse: collapse; /* Collapse borders */
-	width: 100%; /* Full-width */
-	border: 1px solid #ddd; /* Add a grey border */
-	font-size: 18px; /* Increase font-size */
-}
-
-#myTable th, #myTable td {
-	text-align: left; /* Left-align text */
-	padding: 12px; /* Add padding */
-}
-
-#myTable tr {
-	/* Add a bottom border to all table rows */
-	border-bottom: 1px solid #ddd;
-}
-
-#myTable tr.header, #myTable tr:hover {
-	/* Add a grey background color to the table header and on hover */
-	background-color: #f1f1f1;
-}
-</style>
-
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-	<div class="container-fluid">
+<div class="container">
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="">Instituciones Registradas</h2>
+		<a href="registrarInstitucion?idAdmin=${idAdmin}"
+			class="btn btn-success"> Registrar Institución</a>
 
-		<h2 class="my-5">Lista de Instituciones</h2>
+	</div>
+	<h6 class="mb-5">Vea todas las instituciones en el sistema
+		asignar.</h6>
 
-		<div class="row">
-
-			<div class="col-3">
-				<h5 class="mt-5 mb-3">Nombre</h5>
-				<input type="text" id="inputNombre"
-					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorNombre()" placeholder="Ingrese nombre a buscar">
-			</div>
-			<div class="col-3">
-				<h5 class="mt-5 mb-3">Tipo institución</h5>
-				<input type="text" id="inputTipoInstitucion"
-					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorTipoInstitucion()"
-					placeholder="Ingrese tipo institución a buscar">
-			</div>
-			<div class="col-3">
-				<h5 class="mt-5 mb-3">CUIT</h5>
-				<input type="text" id="inputCUIT"
-					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorCUIT()" placeholder="Ingrese CUIT a buscar">
-			</div>
-
-			<div class="col-3 text-center">
-				<h5 class="mt-5 mb-3">Registrar Institución</h5>
-				<a href="registrarInstitucion?idAdmin=${idAdmin}"
-					class="btn btn-success w-50"><i class="fa fa-hospital-o fa-3x"></i></a>
-			</div>
-
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h5 class="">Opiciones de filtrado</h5>
+		<div class="">
+			<a href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+				<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+				<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+				<c:if test='${rol == null}'>
+						"home"
+						</c:if>>
+				<button type="button" class="btn btn-primary">Volver atrás</button>
+			</a>
 		</div>
-		<a href="panel">Volver a panel</a>
 
-		<table id="myTable"
-			class="table table-bordered responsive nowrap align-middle">
-			<tr class="text-center align-middle" style="cursor: pointer;">
-				<th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';" id="nombreTabla">Nombre
-					<i class="fa fa-sort"></i>
-				</th>
-
-				<th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">Tipo
-					Institución <i class="fa fa-sort"></i>
-				</th>
-
-				<th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">CUIT <i
-					class="fa fa-sort"></i></th>
-
-				<!-- <th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">Camas Totales
-					<i class="fa fa-sort"></i>
-				</th> -->
-
-				<th scope="col"
-					onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-					onmouseout="this.style.backgroundColor='white';">Acciones</th>
-
-			</tr>
-			<c:forEach items="${listaInstituciones}" var="instituciones">
-
-				<tr onmouseover="this.style.backgroundColor='AliceBlue';"
-					onmouseout="this.style.backgroundColor='white';">
-					<td class="align-middle"><c:out
-							value="${instituciones.getNombre()}" /></td>
-
-					<td class="align-middle"><c:out
-							value="${instituciones.getTipo().name()}" /></td>
-
-					<td class="align-middle"><c:out
-							value="${instituciones.getNumeroDocumento()}" /></td>
-					<%-- <td class="align-middle"><c:out
-							value="${instituciones.getCantidadCamas()}" /></td> --%>
-					<td class="d-flex justify-content-between"><a
-						href="listarPisos?idInstitucion=${instituciones.getId()}" class="btn btn-primary my-3">Detalle
-							Institución</a> <a
-						href="listaPacientesInternadosDeInstitucion?idInstitucion=${instituciones.getId()}"
-						class="btn btn-primary my-3">Ver Pacientes</a>
-						<div class="mt-3">
+	</div>
+	<p class="mb-4">Realice el filtrado de la tabla para ver la
+		información que necesita con mayor comodidad</p>
 
 
-							<form action="crearMensajeParaInstitucion" method=post>
+	<div class="my-3">
+		<span class=" h6">Hospital </span><input class="mr-4" " type="radio"
+			name="estado" id="hospital"> <span class=" h6">Hotel </span><input
+			class="mr-4" " type="radio" name="estado" id="hotel"> <span
+			class=" h6">Universidad </span><input class="mr-4" " type="radio"
+			name="estado" id="universidad"> <span class=" h6">Club
+		</span><input class="mr-4" " type="radio" name="estado" id="club"> <span
+			class="h6">Restaurar </span><input class="mr-4" " type="radio"
+			name="estado" id="restaurar">
+	</div>
 
+	<div class="form-row mb-3">
+		<div class="col-md-12 col-lg-6">
+			<label for="exampleInputEmail1">Nombre de la Institución</label> <input
+				type="text" name="" class="form-control" id="inputNombre"
+				aria-describedby="email"
+				placeholder="Ingrese el nombre de la institución a buscar..."
+				onkeyup="filtrarPorNombre()">
+		</div>
 
-								<input class="invisible" type="hidden" id="id" name="id"
-									value="${instituciones.getId()}"> <input
-									class="btn btn-primary" type="submit" value="Enviar Mensaje">
-
-							</form>
-						</div></td>
-			</c:forEach>
-		</table>
+		<div class="col-md-12 col-lg-6 ">
+			<label for="exampleInputEmail1">CIUT de la Institución</label> <input
+				type="text" name="" class="form-control" id="inputCUIT"
+				aria-describedby="email"
+				placeholder="Ingrese el CUIT de la institución a buscar..."
+				onkeyup="filtrarPorCUIT()">
+		</div>
 
 	</div>
 
+	<div class="table-responsive">
+
+		<table id="myTable"
+			class="table table-bordered table-hover responsive nowrap text-center">
+			<tr class="text-center align-middle">
+
+				<th style="vertical-align: middle; width: 16%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6 ';"
+					onmouseout="this.style.backgroundColor='white';">NOMBRE
+					INSTITUCIÓN<img style="margin-top: 0.40rem;"
+					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+					width="10px" height="">
+
+				</th>
+
+				<th style="vertical-align: middle; width: 12%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6 ';"
+					onmouseout="this.style.backgroundColor='white';">CUIT <img
+					style="margin-top: 0.40rem;"
+					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+					width="10px" height="">
+
+				</th>
+
+				<th style="vertical-align: middle; width: 15%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6';"
+					onmouseout="this.style.backgroundColor='white';">UBICACIÓN <img
+					style="margin-top: 0.40rem;"
+					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+					width="10px" height="">
+
+				</th>
+
+				<th style="vertical-align: middle; width: 20%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6';"
+					onmouseout="this.style.backgroundColor='white';">MAIL DE
+					CONTACTO<img style="margin-top: 0.40rem;"
+					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+					width="10px" height="">
+
+				</th>
+
+				<th style="vertical-align: middle; width: 14%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6';"
+					onmouseout="this.style.backgroundColor='white';">ACCIÓN</th>
+			</tr>
+
+			<c:forEach items="${listaInstituciones}" var="institucion">
+
+				<tr
+					<c:if test="${institucion.getTipo().getDescripcion() == 'Hospital'}">
+		            		class="hospital"
+		               	</c:if>
+					<c:if test="${institucion.getTipo().getDescripcion() == 'Hotel' }">
+		            		class="hotel"
+		               	</c:if>
+					<c:if test="${institucion.getTipo().getDescripcion() == 'Club'}">
+		            		class="club"
+		               	</c:if>
+					<c:if test="${institucion.getTipo().getDescripcion() == 'Universidad' }">
+		            		class="universidad"
+		               	</c:if>>
+
+
+					<td class="align-middle"><c:out
+							value="${institucion.getNombre()}" /></td>
+
+					<td class="align-middle"><c:out
+							value="${institucion.getNumeroDocumento()}" /></td>
+
+					<td class="align-middle"><c:out
+							value="${institucion.getDomicilio().getCalle()} ${institucion.getDomicilio().getNumero()}, 
+							${institucion.getDomicilio().getLocalidad().getNombreLocalidad()}" /></td>
+
+
+					<td class="align-middle"><c:out
+							value="${institucion.getEmail()}" /></td>
+
+
+					<td><a class="btn btn-outline-primary mb-2"
+						href="detalleInstitucion?idInstitucion=${institucion.getId()}"
+						role="button">Ver detalle</a>
+			</c:forEach>
+
+		</table>
+	</div>
+
+	<a href="admin" class="btn btn-primary mt-3"> Volver atrás</a>
+
+</div>
+
 </main>
 
-</div>
-</div>
-
-</main>
-
-
-
-</div>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script>
-	window.jQuery
-			|| document
-					.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')
-</script>
-<script src="../assets/dist/js/bootstrap.bundle.js"></script>
+<script src="js/bootstrap.bundle.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script
@@ -194,6 +201,37 @@
 </script>
 
 <script>
+	$('#restaurar').click(function() {
+		$('.hospital').slideDown();
+		$('.club').slideDown();
+		$('.universidad').slideDown();
+		$('.hotel').slideDown();
+	});
+	$('#hospital').click(function() {
+		$('.hospital').slideDown();
+		$('.club').slideUp();
+		$('.universidad').slideUp();
+		$('.hotel').slideUp();
+	});
+	$('#club').click(function() {
+		$('.hospital').slideUp();
+		$('.club').slideDown();
+		$('.universidad').slideUp();
+		$('.hotel').slideUp();
+	});
+	$('#universidad').click(function() {
+		$('.hospital').slideUp();
+		$('.club').slideDown();
+		$('.universidad').slideUp();
+		$('.hotel').slideUp();
+	});
+	$('#hotel').click(function() {
+		$('.hospital').slideUp();
+		$('.club').slideUp();
+		$('.universidad').slideUp();
+		$('.hotel').slideDown();
+	});
+
 	function filtrarPorNombre() {
 		// Declare variables
 		var input, filter, table, tr, td, i, txtValue;

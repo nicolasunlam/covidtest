@@ -101,12 +101,16 @@
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
+<div class="container">
 
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h1>Reportes</h1>
+		<h2 class="">Reportes</h2>
+		<a href="admin" class="btn btn-outline-success"> Volver</a>
 
 	</div>
+	<h6 class="mb-5">Vea en detalle las estadísticas más relevantes</h6>
+
 	<div class="">
 		<div class="row container-chart">
 			<div class="col"></div>
@@ -137,15 +141,10 @@
 		</div>
 	</div>
 
-</main>
-
-</div>
 </div>
 
 </main>
 
-</div>
-</div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>

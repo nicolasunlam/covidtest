@@ -13,7 +13,7 @@
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <style>
 #map {
-	height: 50em;
+	height: 30em;
 	width: 100%;
 }
 </style>
@@ -29,97 +29,113 @@
 <link rel="stylesheet" type="text/css"
 	href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 my-5">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-	<div class="container-fluid">
+<div class="container">
 
-		<div class="card text-white bg-dark mb-3">
-			<div class="card-header">
-				<h1 class="text-center">Ingrese la dirección de la institución
-					y luego confirme la misma</h1>
-			</div>
-			<div class="card-body m-0 p-0 text-dark">
-				<div id="map" class="border border-dark"></div>
-				<div class="container-fluid my-3">
-					<div class="row">
-						<div class="col-4"></div>
-						<div class="col-4 text-center">
-							<button type="button" class="btn btn-warning btn-lg"
-								data-toggle="modal" data-target="#modalMapa">Confirmar
-								dirección</button>
-						</div>
-						<div class="col-4"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modal -->
-		<div class="modal fade" id="modalMapa" tabindex="-1" role="dialog"
-			aria-labelledby="modalMapaLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header text-center">
-						<h5 class="modal-title text-center" id="modalMapaLabel">¿Desea
-							confirmar la dirección ingresada?</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form action="validarMapaInstitucion" method="POST"
-						modelAttribute="usuario">
-						<div class="modal-body">
-
-							<p class="text-center">Recuerde que la información consignada
-								precedentemente reviste carácter de Declaración Jurada. Su
-								omisión o falsedad procederá al rechazo de la inscripción en
-								este sitio web, sin perjuicio de las sanciones que le pudiera
-								corresponder.</p>
-
-							<div class="form-group">
-								<input type="hidden" class="form-control" id="latitud"
-									name="latitud">
-							</div>
-							<div class="form-group">
-								<input type="hidden" class="form-control" id="longitud"
-									name="longitud">
-							</div>
-							<div class="form-group">
-								<input type="hidden" class="form-control" id="calle"
-									name="calle">
-							</div>
-							<div class="form-group">
-								<input type="hidden" class="form-control" id="numero"
-									name="numero">
-							</div>
-							<div class="form-group">
-								<input type="hidden" class="form-control" id="nombreLocalidad"
-									name="nombreLocalidad">
-							</div>
-							<div class="form-group">
-								<input type="hidden" class="form-control" id="nombrePartido"
-									name="nombrePartido">
-							</div>
-
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary">Confirmar</button>
-							<button type="reset" class="btn btn-secondary"
-								data-dismiss="modal">Cancelar</button>
-						</div>
-
-						<input type="hidden" name="idInstitucion"
-							class="form-control br-radius-zero" id="idInstitucion"
-							value="${idInstitucion}" />
-					</form>
-				</div>
-			</div>
-		</div>
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+		<h2 class="">Registro institución</h2>
+		<a href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+			<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+			<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+			<c:if test='${rol == null}'>
+						"home"
+						</c:if>>
+			<button type="button" class="btn btn-outline-success">
+				Volver atrás</button>
+		</a>
 
 	</div>
+	<h6 class="mb-4">Registre una institución para que pueda unirse al
+		programa "asignar".</h6>
 
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom w-50">
+		<h5 class="">Dirección de la institución</h5>
+	</div>
 
+	<p>Ingrese la dirección de la institución y luego confirme la misma</p>
+
+	<div class=" m-0 p-0 ">
+		<div id="map" class=""></div>
+
+	</div>
+	<div class="" style="position: fixed; margin-top: -3rem;">
+		<button type="button" class="btn btn-warning btn-lg"
+			data-toggle="modal" data-target="#modalMapa">Confirmar
+			dirección</button>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="modalMapa" tabindex="-1" role="dialog"
+		aria-labelledby="modalMapaLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<h5 class="modal-title text-center" id="modalMapaLabel">¿Desea
+						confirmar la dirección ingresada?</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form action="validarMapaInstitucion" method="POST"
+					modelAttribute="usuario">
+					<div class="modal-body">
+
+						<p class="">Recuerde que la información consignada
+							precedentemente reviste carácter de Declaración Jurada. Su
+							omisión o falsedad procederá al rechazo de la inscripción en este
+							sitio web, sin perjuicio de las sanciones que le pudiera
+							corresponder.</p>
+
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="latitud"
+								name="latitud">
+						</div>
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="longitud"
+								name="longitud">
+						</div>
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="calle" name="calle">
+						</div>
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="numero"
+								name="numero">
+						</div>
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="nombreLocalidad"
+								name="nombreLocalidad">
+						</div>
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="nombrePartido"
+								name="nombrePartido">
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Confirmar</button>
+						<button type="reset" class="btn btn-secondary"
+							data-dismiss="modal">Cancelar</button>
+					</div>
+
+					<input type="hidden" name="idInstitucion"
+						class="form-control br-radius-zero" id="idInstitucion"
+						value="${idInstitucion}" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
 </main>
 
 

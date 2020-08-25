@@ -30,7 +30,7 @@
 					<h6>${mensaje5}</h6>
 					
                     <br>
-                    <a href="inicio" class="btn btn-sm btn-outline-secondary">Inicio</a>
+                    <a href="admin" class="btn btn-sm btn-outline-secondary">Inicio</a>
 					
        
         </div>

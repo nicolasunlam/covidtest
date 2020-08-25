@@ -9,7 +9,7 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-<div class="container">
+<div class="container mb-5">
 
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -136,7 +136,7 @@
 						</c:if></td>
 
 					<td class="align-middle"><c:out
-							value="${institucion.getUsuario().getNombre()} km" /></td>
+							value="${institucion.getUsuario().getNombre()}" /></td>
 
 
 					<td><a class="btn btn-outline-primary mb-2"
