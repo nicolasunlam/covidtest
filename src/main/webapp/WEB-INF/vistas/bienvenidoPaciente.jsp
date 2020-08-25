@@ -35,7 +35,7 @@ p.lead {
 
 		<p class="lead mb-0">
 			<a class="btn btn-light btn-lg text-primary " role="button"
-				href="generarPermiso">Generar permiso</a> <a
+				href="generarPermiso?idPaciente=${idPaciente}">Generar permiso</a> <a
 				class="btn btn-light btn-lg text-danger " role="button"
 				href="pacienteDistancia">Instituciones Sugeridas</a> <a
 				class="btn btn-light btn-lg text-success " role="button"

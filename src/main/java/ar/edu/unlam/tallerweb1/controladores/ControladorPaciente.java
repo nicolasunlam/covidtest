@@ -91,7 +91,12 @@ public class ControladorPaciente {
 		Long idPaciente = paciente.getId();
 
 		model.put("nombre", nombre);
-		model.put("idPaciente", idPaciente);
+
+		if (request.getSession().getAttribute("ID") != null) {
+			model.put("idPaciente", idPaciente);
+		} else {
+			model.put("idPaciente", -1);
+		}
 
 		return new ModelAndView("bienvenidoPaciente", model);
 	}
@@ -558,7 +563,7 @@ public class ControladorPaciente {
 			model.put("rol", rol.name());
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
+
 		Long id = (long) request.getSession().getAttribute("ID");
 
 		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
@@ -568,87 +573,85 @@ public class ControladorPaciente {
 	}
 
 	@RequestMapping(path = "/guardarCambios")
-	public ModelAndView guardarCambios(
-			@RequestParam(value = "mail", required = false) String mail, 
-			@RequestParam(value = "contrasenia", required = false) String contrasenia, 
-			@RequestParam(value = "contraseniaNueva", required = false) String contraseniaNueva, 
-			@RequestParam(value = "contraseniaNuevaRepetida", required = false) String contraseniaNuevaRepetida, 
-			@RequestParam(value = "latitud", required = false) Double latitud, 
+	public ModelAndView guardarCambios(@RequestParam(value = "mail", required = false) String mail,
+			@RequestParam(value = "contrasenia", required = false) String contrasenia,
+			@RequestParam(value = "contraseniaNueva", required = false) String contraseniaNueva,
+			@RequestParam(value = "contraseniaNuevaRepetida", required = false) String contraseniaNuevaRepetida,
+			@RequestParam(value = "latitud", required = false) Double latitud,
 			@RequestParam(value = "latitud", required = false) Double longitud,
 			@RequestParam(value = "calle", required = false) String calle,
 			@RequestParam(value = "numero", required = false) Integer numero,
 			@RequestParam(value = "nombreLocalidad", required = false) String nombreLocalidad,
-			@RequestParam(value = "nombrePartido", required = false) String nombrePartido,
-			HttpServletRequest request) {
-		
+			@RequestParam(value = "nombrePartido", required = false) String nombrePartido, HttpServletRequest request) {
+
 		ModelMap model = new ModelMap();
-	       
-        if(servicioAtajo.validarInicioDeSesion(request) != null) {
-            return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-        }
-        if(servicioAtajo.validarPermisoAPagina(request) != null) {
-            return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-        }
-        Rol rol = (Rol) request.getSession().getAttribute("ROL");
-        if(rol != null) {
-            model.put("rol", rol.name());   
-        }
-        model.put("armarHeader", servicioAtajo.armarHeader(request));
-        
-        Long id = (long) request.getSession().getAttribute("ID");
-        
-        Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
-        
-        if(mail != null) {
-            usuario.setEmail(mail);   
-        }
-        
-        if(contrasenia != null && contraseniaNueva != null && contraseniaNuevaRepetida != null) {
-        	
-        	if(contrasenia == usuario.getPassword() && contraseniaNueva == contraseniaNuevaRepetida) {
-                usuario.setPassword(contraseniaNueva);
-            } 
-        }
-        
-        if(latitud != null) {
-        	
-        	usuario.setLatitud(latitud);
-            usuario.setLongitud(longitud);   
-			
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		Long id = (long) request.getSession().getAttribute("ID");
+
+		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
+
+		if (mail != null) {
+			usuario.setEmail(mail);
+		}
+
+		if (contrasenia != null && contraseniaNueva != null && contraseniaNuevaRepetida != null) {
+
+			if (contrasenia == usuario.getPassword() && contraseniaNueva == contraseniaNuevaRepetida) {
+				usuario.setPassword(contraseniaNueva);
+			}
+		}
+
+		if (latitud != null) {
+
+			usuario.setLatitud(latitud);
+			usuario.setLongitud(longitud);
+
 			Partido partido = new Partido();
-			
-			if(servicioPartido.obtenerPartidoPorNombre(nombrePartido) != null) {
+
+			if (servicioPartido.obtenerPartidoPorNombre(nombrePartido) != null) {
 				partido = servicioPartido.obtenerPartidoPorNombre(nombrePartido);
-			}else {
+			} else {
 				partido.setNombrePartido(nombrePartido);
 				servicioPartido.registrarPartido(partido);
 			}
-			
+
 			Localidad localidad = new Localidad();
-			
-			if(servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad) != null) {
+
+			if (servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad) != null) {
 				localidad = servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad);
-			}else {
+			} else {
 				localidad.setNombreLocalidad(nombreLocalidad);
 				localidad.setPartido(partido);
 				servicioLocalidad.registrarLocalidad(localidad);
 			}
-			
+
 			Domicilio domicilio = usuario.getDomicilio();
-			
+
 			domicilio.setCalle(calle);
 			domicilio.setNumero(numero);
 			domicilio.setLocalidad(localidad);
-			
-			servicioDomicilio.actualizarDomicilio(domicilio);
-			
-			usuario.setDomicilio(domicilio);
-			 
-        }
-        
-        servicioUsuario.actualizarUsuario(usuario);
 
-        return new ModelAndView("redirect:/MisDatos");
+			servicioDomicilio.actualizarDomicilio(domicilio);
+
+			usuario.setDomicilio(domicilio);
+
+		}
+
+		servicioUsuario.actualizarUsuario(usuario);
+
+		return new ModelAndView("redirect:/MisDatos");
 	}
 
 	@RequestMapping("/fichaInstitucion")

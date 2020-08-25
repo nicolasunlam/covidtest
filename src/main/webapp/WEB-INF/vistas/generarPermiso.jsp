@@ -9,18 +9,29 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-<div class="progress my-1">
-	<div class="progress-bar bg-success" role="progressbar"
-		style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-		aria-valuemax="100">75%</div>
-</div>
+<c:if test='${otorgarPermiso==false}'>
+	<div class="progress my-1">
+		<div class="progress-bar bg-success" role="progressbar"
+			style="width: 100%" aria-valuenow="100" aria-valuemin="0"
+			aria-valuemax="100">100%</div>
+	</div>
+</c:if>
+
+<c:if test='${otorgarPermiso}'>
+	<div class="progress my-1">
+		<div class="progress-bar bg-success" role="progressbar"
+			style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+			aria-valuemax="100">75%</div>
+	</div>
+</c:if>
 
 <div class="container my-5">
 
-	<c:if test='${otorgarPermiso}'>
-		<h1 class="text-center my-5">Por su estado, lo recomendable es
-			aislarse en su domicilio. Por lo tanto, no es posible generar un
-			permiso de circulación.</h1>
+	<c:if test='${otorgarPermiso==false}'>
+		<h1 class="text-center mt-5 mb-3">En este momento no es posible
+			generar un permiso de circulación.</h1>
+		<h1 class="text-center mb-5">Debido a su estado, lo recomendable
+			es que permanezca 14 días aislado/a en su domicilio.</h1>
 		<div class="text-center my-5">
 			<img src="img/stay-at-home.png" class="rounded"
 				alt="permiso denegado" width="200">
@@ -30,7 +41,84 @@
 
 </div>
 
-<c:if test='${otorgarPermiso} == false'>
+<c:if test='${otorgarPermiso}'>
+
+	<div class="container-fluid my-5">
+		<div class="row">
+
+			<div class="col-2"></div>
+
+			<div class="col-8">
+
+				<div class="card border-dark mb-3">
+					<div class="card-header">
+						<h3 class="text-center my-2">Por favor, seleccione el motivo
+							para su excepción</h3>
+						<p class="mt-4 text-right">
+							(<span class="text-primary font-weight-bold">*</span>) Campos
+							obligatorios
+						</p>
+					</div>
+					<div class="card-body text-dark">
+						<form action="validarPermiso" method="POST"
+							class="d-flex justify-content-center flex-column justify-content-center">
+
+							<div class="form-row my-4">
+								<label for="motivo">Motivo del permiso <span
+									class="text-primary font-weight-bold">*</span></label> <select
+									name="motivo" id="motivo" class="form-control br-radius-zero"
+									required>
+									<option id="motivo1">Por emergencias, situaciones
+										imprevistas o urgencias; para asistir a turnos médicos, hacer
+										trámites impostergables o mudarse (24 horas)
+									<option id="motivo2">Para asistir a familiares, a
+										persona mayor o a personas con discapacidad; para
+										padres/madres separados que deben trasladar hijos o hijas (24
+										horas)
+									<option id="motivo3">Para hacer tratamiento médico
+										prolongado
+									<option id="motivo4">Para entrenamiento de deportista
+										de representación nacional de una federación autorizada
+									<option id="motivo5">Sos trabajador de la salud o del
+										Estado
+									<option id="motivo6">Trabajás en un servicio
+										considerado esencial o en un medio de comunicación
+									<option id="motivo7">Sos personal de comercio,
+										bancario, de servicios financieros, profesional liberal
+										(contador, abogado), trabajador industrial, de deportes
+										autorizados
+									<option id="motivo8">Trabajás en mantenimiento de
+										infraestructura, transporte de personas y mercaderías,
+										telecomunicaciones, obras públicas, privadas o energéticas
+									<option id="motivo9">Trabajás asistiendo a personas
+										menores, mayores o con discapacidad
+									<option id="motivo10">Alguna otra actividad exceptuada
+
+
+
+									
+								</select>
+							</div>
+
+							<div class="text-center">
+								<button type="submit"
+									class="btn btn-primary text-center mt-5 w-50">Enviar</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-2"></div>
+
+		</div>
+	</div>
+
+</c:if>
+
+<c:if test='${usuarioNoRegistrado}'>
 
 	<h3 class="text-center my-3">Complete los siguientes datos y
 		genere su permiso de circulacion</h3>
@@ -38,9 +126,9 @@
 	<div class="container-fluid my-5">
 		<div class="row">
 
-			<div class="col-4"></div>
+			<div class="col-2"></div>
 
-			<div class="col-4">
+			<div class="col-8">
 
 				<div class="card border-dark mb-3">
 					<div class="card-header">
@@ -195,10 +283,39 @@
 									class="text-primary font-weight-bold">*</span></label> <select
 									name="motivo" id="motivo" class="form-control br-radius-zero"
 									required>
-									<option id="motivo1">Asistencia a un adulto mayor
-									<option id="motivo2">Turno médico
-									<option id="motivo3">Trámite
-									<option id="motivo4">Trabajo escencial
+									<option id="motivo1">Por emergencias, situaciones
+										imprevistas o urgencias; para asistir a turnos médicos, hacer
+										trámites impostergables o mudarse (24 horas)
+									<option id="motivo2">Para asistir a familiares, a
+										persona mayor o a personas con discapacidad; para
+										padres/madres separados que deben trasladar hijos o hijas (24
+										horas)
+									<option id="motivo3">Para hacer tratamiento médico
+										prolongado
+									<option id="motivo4">Para entrenamiento de deportista
+										de representación nacional de una federación autorizada
+									<option id="motivo5">Sos trabajador de la salud o del
+										Estado
+									<option id="motivo6">Trabajás en un servicio
+										considerado esencial o en un medio de comunicación
+									<option id="motivo7">Sos personal de comercio,
+										bancario, de servicios financieros, de mutuales o cooperativas
+										de crédito, profesional liberal (contador, abogado),
+										trabajador industrial, de deportes autorizados o de casas
+										particulares
+									<option id="motivo8">Trabajás en mantenimiento de
+										infraestructura, transporte de personas y mercaderías,
+										telecomunicaciones, obras públicas, privadas o energéticas
+									<option id="motivo9">Trabajás asistiendo a personas
+										menores, mayores o con discapacidad
+									<option id="motivo10">Alguna otra actividad exceptuada
+
+
+
+
+
+
+									
 								</select>
 							</div>
 
@@ -213,12 +330,13 @@
 
 			</div>
 
-			<div class="col-4"></div>
+			<div class="col-2"></div>
 
 		</div>
 	</div>
 
 </c:if>
+
 
 
 

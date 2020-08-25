@@ -58,7 +58,8 @@
 
 		</button>
 
-		<a class="navbar-brand text-primary bg-white d-flex mr-0" style="box-shadow: none"
+		<a class="navbar-brand text-primary bg-white d-flex mr-0"
+			style="box-shadow: none"
 			href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
 						</c:if>
@@ -100,7 +101,7 @@
 				<c:if test="${permiso == true}">
 					<li class="nav-item ml-3" id="botonPermiso"><a
 						class="nav-link btn btn-outline-success active"
-						href="generarPermiso">Generar Permiso </a></li>
+						href="generarPermiso?idPaciente=-1">Generar Permiso </a></li>
 				</c:if>
 				</li>
 
@@ -117,28 +118,25 @@
 		</c:if>
 		<c:if test="${rol != null}">
 			<div class="btn-group">
-				<button type="button"
-					class="btn btn-outline-white dropdown-toggle"
+				<button type="button" class="btn btn-outline-white dropdown-toggle"
 					data-toggle="dropdown" data-display="static" aria-haspopup="true"
 					aria-expanded="false">
-					
-	<%
-               String usuario = (String) request.getSession().getAttribute("MAIL").toString();
-               
-                  String paramName = (String)usuario;
-                  out.print("<tr><td>" + paramName + "</td>\n");
-               
-            %>
 
-<img src="img/avatar.svg" width="35"
-						height="35" class="d-inline-block align-middle" alt="cuenta">
+					<%
+						String usuario = (String) request.getSession().getAttribute("MAIL").toString();
+
+					String paramName = (String) usuario;
+					out.print("<tr><td>" + paramName + "</td>\n");
+					%>
+
+					<img src="img/avatar.svg" width="35" height="35"
+						class="d-inline-block align-middle" alt="cuenta">
 				</button>
 				<div class="dropdown-menu dropdown-menu-lg-right">
 					<a href="MisDatos" class="dropdown-item" role="button"
-						aria-disabled="true">Mi cuenta</a>
-
-					<a href="logout" class="dropdown-item" role="button"
-						aria-disabled="true">Cerrar sesión</a>
+						aria-disabled="true">Mi cuenta</a> <a href="logout"
+						class="dropdown-item" role="button" aria-disabled="true">Cerrar
+						sesión</a>
 
 				</div>
 			</div>
