@@ -172,7 +172,7 @@ public class ControladorNotificacion {
 		
 		model.put("list", list);
 		
-		return new ModelAndView("verMensajesRecibidos", model);
+		return new ModelAndView("verMensajes", model);
 	}
 	//Lista Mensajes enviador por la Institucion
 	@RequestMapping(path = "/verMensajesEnviados", method = RequestMethod.GET)

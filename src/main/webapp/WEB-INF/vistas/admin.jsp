@@ -166,7 +166,7 @@ function explodePie (e) {
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-<div class="jumbotron">
+<div class="jumbotron mt-4">
 
 	<article class="row">
 
@@ -174,7 +174,7 @@ function explodePie (e) {
 			<h1 class="display-4">Bienvenido/a</h1>
 			<p class="my-4 lead">Desde aquí acceda a las opciones principales
 				de: ADMINISTRADOR</p>
-			<a class="btn btn-outline-primary" href="verMensajes" role="button">Ver
+			<a class="btn btn-outline-primary" href="verMensajesRecibidos" role="button">Ver
 				Mensajes Recibidos</a> <a class="btn btn-outline-primary"
 				href="verMensajesEnviados" role="button">Ver Mensajes Enviados</a>
 			<hr class="my-4">
@@ -195,7 +195,7 @@ function explodePie (e) {
 
 </div>
 
-
+<!-- 
 <div class="row">
 	<div class="col-lg col-md-6">
 		<div  id="chartContainerBarras"
@@ -205,7 +205,7 @@ function explodePie (e) {
 		<div id="chartContainer2"
 			style="height: 370px; width: 100%;"></div>
 	</div>
-</div>
+</div> -->
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="js/dashboard.js"></script>
 <script src="js/bootstrap.min.js"></script>

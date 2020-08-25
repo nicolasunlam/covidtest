@@ -23,7 +23,7 @@
 				${nombre}</p>
 			<p class="lead">La institución ${nombre} posee ${camas} camas en
 				total.</p>
-			<a class="btn btn-outline-primary" href="verMensajes" role="button">Ver
+			<a class="btn btn-outline-primary" href="verMensajesRecibidos" role="button">Ver
 				Mensajes Recibidos</a> <a class="btn btn-outline-primary"
 				href="verMensajesEnviados" role="button">Ver Mensajes Enviados</a>
 			<hr class="my-4">
@@ -80,9 +80,9 @@ var chart = new CanvasJS.Chart("chartContainer", {
         indexLabelFontSize: 16,
         indexLabel: "{label} - {y}%",
 		dataPoints: [
-            {y: porcentaje1, label: "Ocupadas", color:"#f72e1d", exploded: true},
-            {y: porcentaje2, label: "Disponibles", color: "#2bcb0b"},
-            {y: porcentaje3, label: "Reservadas", color: "#fcf516"}
+            {y: porcentaje1, label: "Ocupadas", color:"#dc3545", exploded: true},
+            {y: porcentaje2, label: "Disponibles", color: "#28a745"},
+            {y: porcentaje3, label: "Reservadas", color: "#ffc107"}
 		]
 	}]
 });
@@ -197,7 +197,7 @@ function explodePie (e) {
     }
 
 </script>
-
+<!-- 
 <div class="row">
 	<div class="col-lg col-md-6">
 		<div  id="chartContainerBarras"
@@ -207,7 +207,9 @@ function explodePie (e) {
 		<div id="chartContainer2"
 			style="height: 370px; width: 100%;"></div>
 	</div>
-</div>
+</div> -->
+
+
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 </div>

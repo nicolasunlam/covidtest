@@ -25,13 +25,12 @@
 
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<h2 class="">Mensajes Enviados</h2>
-
-			<a href="verMensajesRecibidos" class="btn btn-outline-success">
-				Ver Mensajes Recibidos</a>
+			<h2 class="">Mensajes Recibidos</h2>
+			<a href="verMensajesEnviados" class="btn btn-outline-success">
+				Ver Mensajes Enviados</a>
 
 		</div>
-		<h6 class="mb-5">Vea en detalle los mensajes enviados</h6>
+		<h6 class="mb-5">Vea en detalle los mensajes recibidos</h6>
 
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -59,12 +58,12 @@
 		<p class="mb-3">Realice el filtrado de la tabla para ver la
 			información que necesita con mayor comodidad</p>
 
+
 		<div class="my-3">
-			<span class=" h6">Paciente </span><input class="mr-4"
-				" type="radio" name="estado" id="paciente"> <span
-				class=" h6">Institucion </span><input class="mr-4"
-				" type="radio" name="estado" id="institucion"> <span
-				class="h6">Todos </span><input class="mr-4" " type="radio"
+			<span class=" h6">Paciente </span><input class="mr-4" " type="radio"
+				name="estado" id="paciente"> <span class=" h6">Institucion
+			</span><input class="mr-4" " type="radio" name="estado" id="institucion">
+			<span class="h6">Todos </span><input class="mr-4" " type="radio"
 				name="estado" id="restaurar">
 		</div>
 
@@ -77,14 +76,13 @@
 					<th style="vertical-align: middle; width: 12%"
 						class="border border-secondary"
 						onmouseover="this.style.backgroundColor='#dee2e6 ';"
-						onmouseout="this.style.backgroundColor='white';">PARA<img
+						onmouseout="this.style.backgroundColor='white';">DE<img
 						style="margin-top: 0.40rem;"
 						class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
 						width="10px" height="">
 
 					</th>
-					
-					
+
 					<th style="vertical-align: middle; width: 15%"
 						class="border border-secondary"
 						onmouseover="this.style.backgroundColor='#dee2e6';"
@@ -115,7 +113,6 @@
 
 					</th>
 
-
 					<th style="vertical-align: middle; width: 12%"
 						class="border border-secondary"
 						onmouseover="this.style.backgroundColor='#dee2e6';"
@@ -140,13 +137,18 @@
 		               	</c:if>
 						<c:if test="${notificacion.getDestinatario().getRol() == 'INSTITUCION'}">
 		            		class="institucion"
-		               	</c:if>
-		               	>
+		               	</c:if>>
 
 						<td class="align-middle"><c:if
-								test='${notificacion.getDestinatario().getRol() == "PACIENTE"}'>
-						${notificacion.getDestinatario().getApellido()}, 
-						</c:if> ${notificacion.getDestinatario().getNombre()}</td>
+								test='${notificacion.getRemitente().getRol() == "PACIENTE"}'>
+						${notificacion.getRemitente().getApellido()}, 
+						</c:if> ${notificacion.getRemitente().getNombre()}</td>
+
+						<td class="align-middle"><fmt:parseDate
+								value="${notificacion.getFechaHora()}"
+								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+							<fmt:formatDate pattern="dd/MM/yyyy ' - ' HH:mm 'h.'"
+								value="${ parsedDateTime }" /></td>
 
 						<td class="align-middle"><c:out
 								value="${notificacion.getAsunto()}" /></td>
@@ -157,12 +159,6 @@
 						</c:if>
 
 						</td>
-
-						<td class="align-middle"><fmt:parseDate
-								value="${notificacion.getFechaHora()}"
-								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-							<fmt:formatDate pattern="dd/MM/yyyy 'a las' HH:mm 'horas.'"
-								value="${ parsedDateTime }" /></td>
 
 						<td class="align-middle"><c:out
 								value="${notificacion.getRemitente().getRol().name()}" /></td>
