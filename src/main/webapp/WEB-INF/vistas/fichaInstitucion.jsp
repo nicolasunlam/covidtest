@@ -133,10 +133,10 @@
 				<c:if test="${Math.round(distancia) < 9 }">
 							
 								${fn:substring(distancia, 0, 3)}
-							km
+							
 						</c:if>
 				<c:if test="${Math.round(distancia) > 9}">
-							${Math.round(distancia)} km
+							${Math.round(distancia)} 
 						</c:if>
 				kms.
 			</h4>
@@ -146,8 +146,21 @@
 			<p id="longitudPaciente" style="display: none;">${longitudPaciente}</p>
 			<p id="nombreInstitucion" style="display: none;">${nombre}</p>
 		</div>
-		<button type="button" class="btn btn-outline-primary">
-					Volver atrás</button>
+		
+		<a href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+				<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+				<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+				<c:if test='${rol == null}'>
+						"home"
+						</c:if> class="btn btn-primary">
+					Volver atrás</a>
+					
 	</div>
 </div>
 </div>

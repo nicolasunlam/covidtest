@@ -116,6 +116,9 @@
 					<c:if test="${Math.round(institucion.getDistancia()) >2 && 
 					Math.round(institucion.getDistancia()) <= 5 }">
 		            		class="cinco"
+		               	</c:if>
+		               	<c:if test="${Math.round(institucion.getDistancia()) >5}">
+		            		class="lejos"
 		               	</c:if>>
 
 
@@ -152,14 +155,17 @@
 	$('#restaurar').click(function() {
 		$('.dos').slideDown();
 		$('.cinco').slideDown();
+		$('.lejos').slideDown();
 	});
 	$('#dos').click(function() {
-		$('.dos').slideUp();
-		$('.cinco').slideDown();
+		$('.dos').slideDown();
+		$('.cinco').slideUp();
+		$('.lejos').slideUp();
 	});
 	$('#cinco').click(function() {
-		$('.cinco').slideUp();
-		$('.dos').slideDown();
+		$('.cinco').slideDown();
+		$('.dos').slideUp();
+		$('.lejos').slideUp();
 	});
 </script>
 
