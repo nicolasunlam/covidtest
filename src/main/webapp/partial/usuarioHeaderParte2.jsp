@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.io.*,java.util.*"%>
+
 
 <link rel="icon" href="img/iso-azul-blanco.svg">
 
@@ -121,7 +121,16 @@
 					class="btn btn-outline-white dropdown-toggle"
 					data-toggle="dropdown" data-display="static" aria-haspopup="true"
 					aria-expanded="false">
-					usuario.getEmail() <img src="img/avatar.svg" width="35"
+					
+	<%
+               String usuario = (String) request.getSession().getAttribute("MAIL").toString();
+               
+                  String paramName = (String)usuario;
+                  out.print("<tr><td>" + paramName + "</td>\n");
+               
+            %>
+
+<img src="img/avatar.svg" width="35"
 						height="35" class="d-inline-block align-middle" alt="cuenta">
 				</button>
 				<div class="dropdown-menu dropdown-menu-lg-right">

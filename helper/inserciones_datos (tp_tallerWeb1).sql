@@ -101,9 +101,9 @@ VALUES ("INSTITUCION", "Institucion", 2, "Fundación Favaloro", "favaloro@email.
 
 /* ----- PACIENTE AUTOTEST POSITIVOS----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud, esFumador, tieneDiabetes, tieneEmbarazo, tieneEnfCardiologica, tieneEnfHepatica, tieneEnfRenal, tieneEnfRespiratoria)
-VALUES("PACIENTE", "Paciente", 6, "Alejandro", "Rodriguez", "alejandro@email.com", "1234", "1", "DNI", 2, true, null, 4, 45, -34.72840647959868, -52.71369019379556, false, false, false, false, false, false, true),
-      ("PACIENTE", "Paciente", 7, "Alejandra", "Rodriguez", "alejandra@email.com", "1234", "2", "DNI", 3, true, null, 4, 87, -34.72840647959868, -52.82369019379556, false, false, false, false, true, false, false),
-	  ("PACIENTE", "Paciente", 8, "Alan", "Rodriguez", "alan@email.com", "1234", "3", "DNI", 4, true, null, 4, 54, -34.72840647959868, -58.61369019379556, false, false, false, false, true, false, false),
+VALUES("PACIENTE", "Paciente", 6, "Alejandro", "Rodriguez", "alejandro@email.com", "1234", "1", "DNI", 2, true, null, 4, 45, -34.5264222, -58.7340333, false, false, false, false, false, false, false),
+      ("PACIENTE", "Paciente", 7, "Alejandra", "Rodriguez", "alejandra@email.com", "1234", "2", "DNI", 3, true, null, 4, 87, -34.5299653,-58.4779705, false, false, false, false, true, false, false),
+	  ("PACIENTE", "Paciente", 8, "Alan", "Rodriguez", "alan@email.com", "1234", "3", "DNI", 4, true, null, 4, 54, -34.5299653,-58.4779705, false, false, false, false, true, false, false),
       ("PACIENTE", "Paciente", 9, "Ana", "Rodriguez", "ana@email.com", "1234", "4", "DNI", 3, true, null, 3, 64, -34.72840647959868, -58.61369019379556, false, true, true, true, false, false, false),
       ("PACIENTE", "Paciente", 10, "Carlos", "Gómez", "carlos@email.com", "1234", "32100100", "DNI", 3, true, null, 1, 54, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
       ("PACIENTE", "Paciente", 11, "Carla", "Gómez", "carla@email.com", "1234", "32110100", "DNI", 3, true, null, 1, 88, -34.72840647959868, -58.61369019379556, true, true, true, false, true, true, true);
@@ -326,7 +326,7 @@ VALUES (12, '2020-01-01 01:00:00.000000', null, null, 40, 28),
 INSERT INTO notificacion(asunto, fechaHora, msg, destinatario_id, remitente_id)
 VALUES ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro sistema de asignación de camas.", 6, 2),
 	   ("Bienvenido", '2020-04-01 01:00:00.000000', "Bienvenido  a nuestro sistema de asignación de camas.", 7, 2),
-	   ("Recordatorio", '2020-04-02 01:00:00.000000', "Se le recuerda que ...", 6, 2),
+	   ("Recordatorio", '2020-04-02 01:00:00.000000', "Se le recuerda que no recuerda.", 6, 2),
        ("Recordatorio", '2020-04-02 01:00:00.000000', "Muchas gracias.", 2, 6);
        
 /* ----- RESERVAS POR TRASLADO ----- */

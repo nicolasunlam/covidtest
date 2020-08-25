@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
-
-
+<%@page pageEncoding="UTF-8"%>
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
@@ -13,146 +9,167 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
+<div class="container">
+
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="">Instituciones más cercanas</h2>
+		<a href="verMensajesRecibidos" class="btn btn-outline-success">
+			Ver Mensajes Recibidos</a>
+
+	</div>
+	<h6 class="mb-5">Vea las instituciones más cercanas a su domicilio
+		y la distancia hasta las mismas</h6>
+
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h5 class="">Opiciones de filtrado</h5>
+		<div class="">
+			<a href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+				<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+				<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+				<c:if test='${rol == null}'>
+						"home"
+						</c:if>>
+				<button type="button" class="btn btn-outline-primary">
+					Volver atrás</button>
+			</a>
+		</div>
+
+	</div>
+	<p class="mb-3">Realice el filtrado de la tabla para ver la
+		información que necesita con mayor comodidad</p>
 
 
-<div class="container m-5">
+	<div class="my-3">
+		<span class=" h6">Hasta 2 km </span><input class="mr-4" " type="radio"
+			name="estado" id="dos"> <span class=" h6">Hasta 5 km </span><input
+			class="mr-4" " type="radio" name="estado" id="cinco"> <span
+			class="h6">Restaurar </span><input class="mr-4" " type="radio"
+			name="estado" id="restaurar">
+	</div>
 
-	<h2>Instituciones mas cercanas</h2>
-	
-	<p>La lista puede ser ordenada haciendo "click" en el encabezado de cada columna.</p>
+	<div class="table-responsive">
 
-	<table id="myTable"
-		class="table table-bordered table-hover responsive nowrap text-center align-middle">
-		<tr class="text-center align-middle">
-			<th scope="col">Nombre</th>
+		<table id="myTable"
+			class="table table-bordered table-hover responsive nowrap text-center">
+			<tr class="text-center align-middle">
 
-			<th scope="col">Distancia</th>
+				<th style="vertical-align: middle; width: 12%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6 ';"
+					onmouseout="this.style.backgroundColor='white';">NOMBRE
+					INSTITUCIÓN<img style="margin-top: 0.40rem;"
+					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+					width="10px" height="">
 
-			<td th scope="col">Ver detalle</td>
+				</th>
 
+				<th style="vertical-align: middle; width: 15%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6';"
+					onmouseout="this.style.backgroundColor='white';">UBICACIÓN <img
+					style="margin-top: 0.40rem;"
+					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+					width="10px" height="">
 
+				</th>
 
-		</tr>
-		<c:forEach items="${listaInstituciones}" var="instituciones">
+				<th style="vertical-align: middle; width: 15%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6 ';"
+					onmouseout="this.style.backgroundColor='white';">DISTANCIA<img
+					style="margin-top: 0.40rem;"
+					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+					width="10px" height="">
 
-			<tr>
-				<td class="align-middle"><c:out
-						value="${instituciones.getUsuario().getNombre()}" /></td>
+				</th>
 
-				<td class="align-middle"><c:out
-						value="${fn:substring(instituciones.getDistancia(), 0, 5)} km" /></td>
+				<th style="vertical-align: middle; width: 20%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6';"
+					onmouseout="this.style.backgroundColor='white';">MAIL DE
+					CONTACTO<img style="margin-top: 0.40rem;"
+					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
+					width="10px" height="">
 
-				<td>
-					<div class="float-right"
-						style="margin-right: 20px; margin-top: 5px; /* margin-left: -30px"
-						* />
+				</th>
 
-					<form action="detalleInstitucion">
-
-
-						<input class="invisible" type="hidden" id="idInstitucion"
-							name="idInstitucion"
-							value="${instituciones.getUsuario().getId()}"> <input
-							class="btn btn-primary" type="submit"
-							value="Ver detalle institucion" style="margin-right: 145px">
-
-					</form>
-
-				</td>
-		</c:forEach>
-	</table>
-
-	<%-- <table
-			class="table table-bordered table-hover responsive nowrap text-center align-middle">
-			<tr>
-				<td th scope="col">Nombre</td>
-				<td th scope="col">Distancia</td>
-				<td th scope="col">Ver detalle</td>
-			<tr>
-				<td class="align-middle">${nombre1}</td>
-				<td class="align-middle">${distancia1}KM</td>
-				<td>
-				<div class="float-right" style="margin-right: 20px; margin-top: 5px; /* margin-left: -30px" */>
-										
-										<form action="detalleInstitucion">
-
-
-											<input class="invisible" type="hidden" id="idInstitucion" name="idInstitucion"
-												value="${id1}"> <input
-												class="btn btn-primary" type="submit" value="Ver detalle institucion">
-
-										</form>
-										
-								</td>
-				
-			</tr>
-			<tr>
-				<td class="align-middle">${nombre2}</td>
-				<td class="align-middle">${distancia2}KM</td>
-				<td>
-				<div class="float-right" style="margin-right: 20px; margin-top: 5px; /* margin-left: -30px" */>
-										
-										<form action="detalleInstitucion">
-
-
-											<input class="invisible" type="hidden" id="idInstitucion" name="idInstitucion"
-												value="${id2}"> <input
-												class="btn btn-primary" type="submit" value="Ver detalle institucion">
-
-										</form>
-										
-								</td>
-			</tr>
-			<tr>
-				<td class="align-middle">${nombre3}</td>
-				<td class="align-middle">${distancia3}KM</td>
-				<td>
-				<div class="float-right" style="margin-right: 20px; margin-top: 5px; /* margin-left: -30px" */>
-										
-										<form action="detalleInstitucion">
-
-
-											<input class="invisible" type="hidden" id="idInstitucion" name="idInstitucion"
-												value="${id3}"> <input
-												class="btn btn-primary" type="submit" value="Ver detalle institucion">
-
-										</form>
-										
-								</td>
+				<th style="vertical-align: middle; width: 14%"
+					class="border border-secondary"
+					onmouseover="this.style.backgroundColor='#dee2e6';"
+					onmouseout="this.style.backgroundColor='white';">ACCIÓN</th>
 			</tr>
 
-		</table> --%>
+			<c:forEach items="${listaInstituciones}" var="institucion">
 
+				<tr
+					<c:if test="${Math.round(institucion.getDistancia()) <= 2}">
+		            		class="dos table-info"
+		               	</c:if>
+					<c:if test="${Math.round(institucion.getDistancia()) >2 && 
+					Math.round(institucion.getDistancia()) <= 5 }">
+		            		class="cinco"
+		               	</c:if>>
+
+
+					<td class="align-middle"><c:out
+							value="${institucion.getUsuario().getNombre()}" /></td>
+
+					<td class="align-middle"><c:out
+							value="${institucion.getUsuario().getDomicilio().getCalle()} ${institucion.getUsuario().getDomicilio().getNumero()}, 
+							${institucion.getUsuario().getDomicilio().getLocalidad().getNombreLocalidad()}" /></td>
+
+					<td class="align-middle"><c:if
+							test="${Math.round(institucion.getDistancia()) < 9 }">
+							
+								${fn:substring(institucion.getDistancia(), 0, 3)}
+							km
+						</c:if> <c:if test="${Math.round(institucion.getDistancia()) > 9}">
+							${Math.round(institucion.getDistancia())} km
+						</c:if></td>
+
+					<td class="align-middle"><c:out
+							value="${institucion.getUsuario().getNombre()} km" /></td>
+
+
+					<td><a class="btn btn-outline-primary mb-2"
+						href="detalleInstitucion?idInstitucion=${institucion.getUsuario().getId()}"
+						role="button">Ver detalle</a> <a class="btn btn-outline-success"
+						href="" role="button">Responder</a></td>
+			</c:forEach>
+
+		</table>
+	</div>
 </div>
 
-</main>
+<script>
+	$('#restaurar').click(function() {
+		$('.dos').slideDown();
+		$('.cinco').slideDown();
+	});
+	$('#dos').click(function() {
+		$('.dos').slideUp();
+		$('.cinco').slideDown();
+	});
+	$('#cinco').click(function() {
+		$('.cinco').slideUp();
+		$('.dos').slideDown();
+	});
+</script>
 
-
-</div>
-</div>
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
 <script src="js/sort.js"></script>
+<script src="js/bootstrap.bundle.js"></script>
+<script src="js/feather.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/dashboard.js"></script>
+
+
 </body>
 </html>
-
-
-
-
-
-
-
-

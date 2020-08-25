@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
@@ -11,17 +12,28 @@
 
 <body>
 
-<h1>${nombre}</h1>
-<h2>${email}</h2>
-<h2>${calle} ${numero} , ${localidad}</h2>
-<h2>Distancia : ${distancia}Km</h2>
-<h3>Cantidad de camas : ${camas} 
-<br>
-Camas disponibles : ${camasDisponibles}</h3>
+	<h1>${nombre}</h1>
+	<h2>${email}</h2>
+	<h2>${calle}${numero}, ${localidad}</h2>
+	<h2>
+		Distancia :
+		<c:if test="${Math.round(distancia) < 9 }">
+							
+								${fn:substring(distancia, 0, 3)}
+							km
+						</c:if>
+		<c:if test="${Math.round(distancia) > 9}">
+							${Math.round(distancia)} km
+						</c:if>
+	</h2>
+	<h3>
+		Cantidad de camas : ${camas} <br> Camas disponibles :
+		${camasDisponibles}
+	</h3>
 
 
 
-	
+
 
 
 </body>

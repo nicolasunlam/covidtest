@@ -87,6 +87,8 @@ public class ControladorLogin {
 			model.put("rol", rol.name());	
 		}
 		
+		request.getSession().setAttribute("MAIL", usuarioBuscado.getEmail());
+		
 		if (usuarioBuscado.getRol() == Rol.INSTITUCION) {
 			request.getSession().setAttribute("ID", usuarioBuscado.getId());
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
@@ -133,6 +135,7 @@ public class ControladorLogin {
 			HttpServletRequest request) {
 		request.getSession().removeAttribute("ID");
 		request.getSession().removeAttribute("ROL");
+		request.getSession().removeAttribute("MAIL");
 		
 		return new ModelAndView("redirect:/home");
 	}
