@@ -11,6 +11,10 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
+<c:if test='${rol != "PACIENTE"}'>
+	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+</c:if>
+
 <div class="container">
 
 	<c:if test="${list.size() <= 0}">
@@ -202,6 +206,11 @@
 	</div>
 
 </div>
+
+
+<c:if test='${rol != "PACIENTE"}'>
+	</main>
+</c:if>
 
 <script>
 	$('#restaurar').click(function() {

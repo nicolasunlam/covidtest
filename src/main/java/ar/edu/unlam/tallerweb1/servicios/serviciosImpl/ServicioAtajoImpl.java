@@ -129,10 +129,6 @@ public class ServicioAtajoImpl implements ServicioAtajo {
 
 		/* HEADER SIMPLE SIN PANEL */
 		if (request.getRequestURI().contains("/covidtest/home")
-				|| request.getRequestURI().contains("/covidtest/homeAdmin")
-				|| request.getRequestURI().contains("/covidtest/admin")
-				|| request.getRequestURI().contains("/covidtest/enviarMensaje")
-				|| request.getRequestURI().contains("/covidtest/verMensajes")
 				|| request.getRequestURI().contains("/covidtest/autoTest")
 				|| request.getRequestURI().contains("/covidtest/validarTest")
 				|| request.getRequestURI().contains("/covidtest/testPositivo")
@@ -143,7 +139,6 @@ public class ServicioAtajoImpl implements ServicioAtajo {
 				|| request.getRequestURI().contains("/covidtest/permisoDenegado")
 				|| request.getRequestURI().contains("/covidtest/enfermedades")
 				|| request.getRequestURI().contains("/covidtest/validarEnfermedades")
-				|| request.getRequestURI().contains("/covidtest/bienvenido")
 				|| request.getRequestURI().contains("/covidtest/bienvenidoPaciente")
 				|| request.getRequestURI().contains("/covidtest/denied")
 				|| request.getRequestURI().contains("/covidtest/detalleRegistroPaciente")) {

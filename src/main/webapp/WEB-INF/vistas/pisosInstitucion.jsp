@@ -300,7 +300,7 @@ code {
 												var="cama" end="7">
 												<span class="d-flex flex-row-reverse"
 													style="margin-left: 4px;"> <img alt=""
-													src="img/cama-ro.png" style="width: 35px">
+													src="img/cama-am.png" style="width: 35px">
 												</span>
 											</c:forEach>
 

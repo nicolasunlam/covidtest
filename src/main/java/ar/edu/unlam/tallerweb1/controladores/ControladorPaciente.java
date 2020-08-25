@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Cama;
+import ar.edu.unlam.tallerweb1.modelo.Domicilio;
+import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -569,6 +572,11 @@ public class ControladorPaciente {
 			@RequestParam(value = "contraseñaNueva", required = false) String contraseñaNueva, 
 			@RequestParam(value = "contraseñaNuevaRepetida", required = false) String contraseñaNuevaRepetida, 
 			@RequestParam(value = "latitud", required = false) Double latitud, 
+			@RequestParam(value = "latitud", required = false) Double longitud,
+			@RequestParam(value = "calle", required = false) String calle,
+			@RequestParam(value = "numero", required = false) Integer numero,
+			@RequestParam(value = "nombreLocalidad", required = false) String nombreLocalidad,
+			@RequestParam(value = "nombrePartido", required = false) String nombrePartido,
 			HttpServletRequest request) {
 		
 		ModelMap model = new ModelMap();
@@ -598,6 +606,42 @@ public class ControladorPaciente {
         	if(contraseña == usuario.getPassword() && contraseñaNueva == contraseñaNuevaRepetida) {
                 usuario.setPassword(contraseñaNueva);
             } 
+        }
+        
+        if(latitud != null) {
+        	
+        	usuario.setLatitud(latitud);
+            usuario.setLongitud(longitud);   
+			
+			Partido partido = new Partido();
+			
+			if(servicioPartido.obtenerPartidoPorNombre(nombrePartido) != null) {
+				partido = servicioPartido.obtenerPartidoPorNombre(nombrePartido);
+			}else {
+				partido.setNombrePartido(nombrePartido);
+				servicioPartido.registrarPartido(partido);
+			}
+			
+			Localidad localidad = new Localidad();
+			
+			if(servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad) != null) {
+				localidad = servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad);
+			}else {
+				localidad.setNombreLocalidad(nombreLocalidad);
+				localidad.setPartido(partido);
+				servicioLocalidad.registrarLocalidad(localidad);
+			}
+			
+			Domicilio domicilio = usuario.getDomicilio();
+			
+			domicilio.setCalle(calle);
+			domicilio.setNumero(numero);
+			domicilio.setLocalidad(localidad);
+			
+			servicioDomicilio.actualizarDomicilio(domicilio);
+			
+			usuario.setDomicilio(domicilio);
+			 
         }
         
         servicioUsuario.actualizarUsuario(usuario);

@@ -53,8 +53,6 @@ p.lead {
 
 	<form action="guardarCambios" method="POST">
 
-		<input name="idUsuario" type="hidden" value="${usuario.getId()}">
-
 		<div
 			class="form-row d-flex justify-content-between flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
 
@@ -68,8 +66,9 @@ p.lead {
 			<div class="col">
 
 				<div class="">
-					<label for="" class="h5">${usuario.getApellido()},
-						${usuario.getNombre()}</label>
+					<label for="" class="h5"><c:if test='${rol == "PACIENTE"}'>
+					${usuario.getApellido()},
+					</c:if> ${usuario.getNombre()}</label>
 				</div>
 				<div class="">
 					<label for="" class="h6 ">${usuario.getTipoDocumento().name()}:
@@ -82,70 +81,267 @@ p.lead {
 			</div>
 		</div>
 
-		<div class="form-group">
+		<div
+			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h5 class="">Actualizar mis datos</h5>
 
-			<input type="hidden" name="id" class="form-control" id="id"
-				aria-describedby="id" path="id" placeholder="${usuario.getId()}">
+
+		</div>
+		<p class="mb-5">Renueve sus datos como su mail o contraseña</p>
+
+		<div class="form-group">
+			<div class="col-md-12 col-lg-6 pl-0">
+				<label for="exampleInputEmail1">Correo electrónico</label> <input
+					type="email" name="mail" class="form-control" id="email"
+					aria-describedby="email" placeholder="${usuario.getEmail()}"
+					disabled>
+			</div>
+			
+			<div class="custom-control custom-checkbox mt-4 mb-5">
+
+				<input type="checkbox" class="custom-control-input"
+					onclick="javascript:cambiarMail()" id="customControlValidation1">
+				<label class="custom-control-label font-weight-lighter"
+					for="customControlValidation1">Deseo cambiar mi correo
+					electrónico.</label>
+			</div>
+			
+			
 		</div>
 		<div class="form-group">
-			<label for="nombre">Nombre</label> <input type="text" name="nombre"
-				class="form-control" id="nombre" path="nombre"
-				aria-describedby="nombre" placeholder="${usuario.getNombre()}">
 
+			
+			<script type="text/javascript">
+			function cambiarMail() {
+				
+				var activar = document.getElementById("email");
+				
+				var checkActivador = document.getElementById("customControlValidation1");
+				
+				if (checkActivador.checked == true) {
+					activar.disabled = false;
+					
+					activar.required = true;
+					
+				} else {
+					activar.disabled = true;
+					
+					activar.required = false;
+				}
+			}
+			
+			function cambiarContraseña() {
+				
+				var activar = document.getElementById("contraseña");
+				var activar2 = document.getElementById("contraseñaNueva");
+				var activar3 = document.getElementById("contraseñaNuevaRepetida");
+				
+				var checkActivador = document.getElementById("customControlValidation2");
+				
+				if (checkActivador.checked == true) {
+					activar.disabled = false;
+					activar2.disabled = false;
+					activar3.disabled = false;
+					
+					activar.required = true;
+					activar2.required = true;
+					activar3.required = true;
+					
+				} else {
+					activar.disabled = true;
+					activar2.disabled = true;
+					activar3.disabled = true;
+					
+					activar.required = false;
+					activar2.required = false;
+					activar3.required = false;
+				}
+			}
+			</script>
+
+			<div class="col-md-12 col-lg-6 pl-0 ">
+
+				<h6>Contraseña de la cuenta</h6>
+
+				<input type="password" name="contraseña"
+					class="form-control br-radius-zero contraseñas" id="contraseña"
+					placeholder="Ingrese su actual contraseña" data-rule="minlen:1"
+					data-msg="Ingrese una contraseña valida" disabled />
+				<div class="validation"></div>
+			</div>
+		</div>
+
+		<div class="row mb-4">
+
+
+			<div class="col-6">
+				<h6 class="">Nueva contraseña</h6>
+
+				<input type="password" name="contraseñaNueva"
+					class="form-control br-radius-zero contraseñas"
+					id="contraseñaNueva" placeholder="Ingrese su nueva contraseña"
+					data-rule="minlen:1" data-msg="Ingrese una contraseña valida"
+					disabled />
+				<div class="validation"></div>
+			</div>
+			<div class="col-6">
+				<h6 class="">Repita la nueva contraseña</h6>
+
+				<input type="password" name="contraseñaNuevaRepetida"
+					class="form-control br-radius-zero contraseñas"
+					id="contraseñaNuevaRepetida"
+					placeholder="Repita la nueva contraseña" data-rule="minlen:1"
+					data-msg="Ingrese una contraseña valida" disabled />
+				<div class="validation"></div>
+			</div>
+		</div>
+
+		<div class="custom-control custom-checkbox mb-5">
+
+			<input type="checkbox" class="custom-control-input"
+				onclick="javascript:cambiarContraseña()"
+				id="customControlValidation2"> <label
+				class="custom-control-label font-weight-lighter"
+				for="customControlValidation2">Deseo cambiar mi contraseña.</label>
 		</div>
 
 		<c:if test='${rol == "PACIENTE"}'>
-			<div class="form-group">
-				<label for="apellido">Apellido</label> <input type="text"
-					name="apellido" class="form-control" id="apellido" path="apellido"
-					placeholder="${usuario.getApellido()}">
+
+
+			<!-- Load Leaflet from CDN-->
+			<link rel="stylesheet"
+				href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+			<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+			<style>
+#map {
+	height: 30em;
+	width: 100%;
+}
+</style>
+
+			<!-- Load Esri Leaflet from CDN -->
+			<script
+				src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.2/esri-leaflet.js"></script>
+
+
+			<script
+				src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+			<link rel="stylesheet" type="text/css"
+				href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+
+			<div class=" mb-3">
+				<div class="">
+					<h6 class="">Domicilio</h6>
+				</div>
+				<div class=" m-0 p-0 ">
+					<div id="map" class=""></div>
+
+				</div>
 			</div>
+
+			<script>
+
+
+	var map = L.map('map').setView([ ${usuario.getLatitud()}, ${usuario.getLongitud()}],
+			16);
+
+	L.tileLayer(
+					'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+					{
+						attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+					}).addTo(map);
+
+	var greenIcon = L.icon({
+	    iconUrl: 'img/iso-azul.svg',
+	    shadowUrl: '',
+
+	    iconSize:     [38, 95], // size of the icon
+	    shadowSize:   [50, 64], // size of the shadow
+	    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+	    shadowAnchor: [8, 94],  // the same for the shadow
+	    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+	});
+	
+	L.marker([ ${usuario.getLatitud()}, ${usuario.getLongitud()}], {icon: greenIcon}).addTo(map)
+	.bindPopup('${usuario.getDomicilio().getCalle()} ${usuario.getDomicilio().getNumero()}, ${usuario.getDomicilio().getLocalidad().getNombreLocalidad()}')
+    .openPopup();
+	
+	var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+	var results = new L.LayerGroup().addTo(map);
+
+	let posicion;
+
+	searchControl.on('results', function(data) {
+		results.clearLayers();
+		for (var i = data.results.length - 1; i >= 0; i--) {
+			results.addLayer(L.marker(data.results[i].latlng));
+
+			posicion = data.results[i].latlng;
+			console.log(posicion.lat);
+			console.log(posicion.lng);
+			console.log(data.results[0].city);
+			console.log(data.results[0].subregion);
+			console.log(data.results[0]);
+
+			document.getElementById("latitud").value = posicion.lat;
+			document.getElementById("longitud").value = posicion.lng;
+
+			//Array con toda la información del domicilio (calle, altura, localidad, etc.)
+			var domicilioArray = data.results[0].text;
+			
+			//Array del domicilioArray separando elementos por las comas (la calle con su altura);
+			var calle = domicilioArray.split(",");
+			
+			//Separar por espacios;
+			var calleArray = calle[0].split(" ");
+			
+			//Último elemento del array (la altura de la calle);
+			var alturaCalle = calleArray[calleArray.length - 1];
+			
+			//Eliminar el último elemento del array (la altura de la calle);
+			calleArray.splice((calleArray.length - 1), 1);
+			
+			//Unir todos los elementos del array separándolos con un espacio;
+			var nombreCalle = calleArray.join(' ');
+			
+			console.log("Nombre de la calle: " + nombreCalle);
+			console.log("Altura de la calle: " + alturaCalle);
+			
+			document.getElementById("calle").value = nombreCalle;
+			document.getElementById("numero").value = alturaCalle;
+			document.getElementById("nombreLocalidad").value = data.results[0].city;
+			document.getElementById("nombrePartido").value = data.results[0].subregion;
+		}
+
+	});
+</script>
+
+
 		</c:if>
-		<div class="form-group">
-			<label for="exampleInputEmail1">Correo electrónico</label> <input
-				type="email" name="email" path="email" class="form-control"
-				id="email" aria-describedby="email"
-				placeholder="${usuario.getEmail()}">
-		</div>
 
-		<div class="form-group">
+		<div class="mt-4 mb-5">
 
-			<h6>Contraseña de la cuenta</h6>
+			<button type="submit" class="btn btn-success mr-2">Guardar
+				cambios</button>
 
-			<input type="text" name="password"
-				class="form-control br-radius-zero" id="password"
-				placeholder="Ingrese una contraseña" data-rule="minlen:1"
-				data-msg="Ingrese una contraseña valida" required />
-			<div class="validation"></div>
+			<a class="btn btn-danger"
+				href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+				<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+				<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+				<c:if test='${rol == null}'>
+						"home"
+						</c:if>>
 
-			<h6 class="mt-4">Nueva contraseña</h6>
-
-			<input type="text" name="password"
-				class="form-control br-radius-zero" id="password"
-				placeholder="Ingrese una contraseña" data-rule="minlen:1"
-				data-msg="Ingrese una contraseña valida" required />
-			<div class="validation"></div>
-
-			<h6 class="mt-4">Repita la nueva contraseña</h6>
-
-			<input type="text" name="password"
-				class="form-control br-radius-zero" id="password"
-				placeholder="Ingrese una contraseña" data-rule="minlen:1"
-				data-msg="Ingrese una contraseña valida" required />
-			<div class="validation"></div>
+				Cancelar</a>
 
 		</div>
-
-		<div class="form-group">
-			<label for="exampleInputCalle">Dirección</label> <input type="calle"
-				name="calle" path="calle" class="form-control" id="email"
-				aria-describedby="email" placeholder="${usuario.getEmail()}">
-
-			<label for="exampleInputNumero">Localidad</label> <input type="email"
-				name="email" path="email" class="form-control" id="email"
-				aria-describedby="email" placeholder="${usuario.getEmail()}">
-		</div>
-		<button type="submit" class="btn btn-primary">Guardar cambios</button>
 	</form>
 
 </div>
@@ -156,7 +352,7 @@ p.lead {
 
 
 <script src="js/jquery-3.5.1.min.js"></script>
-<script src="../assets/dist/js/bootstrap.bundle.js"></script>
+<script src="js/bootstrap.bundle.js"></script>
 
 </body>
 

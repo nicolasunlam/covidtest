@@ -58,7 +58,7 @@
 			aria-controls="sidebarMenu" aria-expanded="false"
 			aria-label="Toggle navigation">
 
-			<img src="img/toggler-blanco.svg" width="35" height="35"
+			<img src="img/toggler.svg" width="35" height="35"
 				class="d-inline-block align-middle" alt="logo">
 
 		</button>
@@ -83,9 +83,11 @@
 			class="d-inline-block align-top" alt="asignar">
 		</a>
 
+		
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item ml-4 active"><a class="nav-link text-primary"
+				<li class="nav-item ml-4 active"><a
+					class="nav-link text-primary"
 					href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
 						</c:if>
@@ -99,13 +101,15 @@
 						"home"
 						</c:if>>Inicio
 						<span class="sr-only">(current)</span>
-				</a> <c:if test='${rol == "PACIENTE"}'>
-						<li class="nav-item ml-4"><a class="btn btn-outline-info"
-							role="button" href="verMensajes">Ver mis Mensajes </a></li>
-					</c:if>
+				</a>
+				<li class="nav-item ml-3"><a class="btn btn-outline-success"
+					role="button" href="listaPacientesInternados">Pacientes internados</a></li>
+
+				<li class="nav-item ml-4"><a class="btn btn-outline-info"
+					role="button" href="verMensajesRecibidos">Ver mis Mensajes </a></li>
+
 			</ul>
 		</div>
-
 
 		<c:if test="${rol == null}">
 

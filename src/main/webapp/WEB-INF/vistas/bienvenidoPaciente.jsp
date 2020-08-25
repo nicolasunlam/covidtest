@@ -26,18 +26,19 @@ p.lead {
 	<div class="jumbotron mt-5"
 		style="background-image: linear-gradient(to right, #09f, #007bff); color: #fff;">
 		<h1 class="display-3 my-0">Bienvenido/a ${paciente.getNombre()}</h1>
-		<h6 class="lead mt-3 pb-1">Cuidate y cuida al resto usando nuestra aplicación</h6>
+		<h6 class="lead mt-3 pb-1">Cuidate y cuida al resto usando
+			nuestra aplicación</h6>
 		<hr class="my-4 bg-light">
 
-		<p class="">Accedé a todas las funcionalidades de nuestra aplicación.
-		</p>
+		<p class="">Accedé a todas las funcionalidades de nuestra
+			aplicación.</p>
 
 		<p class="lead mb-0">
 			<a class="btn btn-light btn-lg text-primary " role="button"
-				href="generarPermiso">Generar permiso</a>
-			<a class="btn btn-light btn-lg text-danger " role="button"
-				href="pacienteDistancia">Instituciones Sugeridas</a>
-				<a class="btn btn-light btn-lg text-success " role="button"
+				href="generarPermiso">Generar permiso</a> <a
+				class="btn btn-light btn-lg text-danger " role="button"
+				href="pacienteDistancia">Instituciones Sugeridas</a> <a
+				class="btn btn-light btn-lg text-success " role="button"
 				href="MisDatos">Mis Datos</a>
 		</p>
 	</div>
@@ -307,17 +308,17 @@ p.lead {
 		class="bg-whiteborder border-top border-bottom text-center text-md-left">
 		<div class="container">
 			<!-- Footer links -->
-			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start text-center text-md-left mt-3 pb-3">
+			<div
+				class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-start text-center text-md-left mt-3 pb-3">
 
 				<hr class="w-100 clearfix d-md-none">
 
 				<!-- Grid column -->
 				<div class="col-md-4 col-lg-3 col-xl-3 pl-md-0 mt-3">
-					
+
 					<h6 class="lead mb-4 text-center">
-						<strong>Enlaces útiles</strong>
-					<img src="img/iso-azul.svg" width="25" height=""
-						class=" " alt="">
+						<strong>Enlaces útiles</strong> <img src="img/iso-azul.svg"
+							width="25" height="" class=" " alt="">
 					</h6>
 					<p class="lead mt-3 text-center">
 						<a href="https://www.argentina.gob.ar/salud/coronavirus-COVID-19">Ministerio
@@ -369,7 +370,7 @@ p.lead {
 <!-- Footer -->
 
 <script src="js/jquery-3.5.1.min.js"></script>
-<script src="../assets/dist/js/bootstrap.bundle.js"></script>
+<script src="js/bootstrap.bundle.js"></script>
 
 </body>
 

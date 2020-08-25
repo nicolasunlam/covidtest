@@ -8,7 +8,7 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="css/dashboard.css" rel="stylesheet">
-			
+
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script
@@ -99,12 +99,16 @@
 						"home"
 						</c:if>>Inicio
 						<span class="sr-only">(current)</span>
-				</a> <c:if test='${rol == "PACIENTE"}'>
-						<li class="nav-item ml-4"><a class="btn btn-outline-info"
-							role="button" href="verMensajes">Ver mis Mensajes </a></li>
-					</c:if>
+				</a>
+				<li class="nav-item ml-3"><a class="btn btn-outline-success"
+					role="button" href="posiblesInfectados">Posibles infectados</a></li>
+
+				<li class="nav-item ml-4"><a class="btn btn-outline-info"
+					role="button" href="verMensajesRecibidos">Ver mis Mensajes </a></li>
+
 			</ul>
 		</div>
+
 
 
 		<c:if test="${rol == null}">
@@ -115,12 +119,11 @@
 
 		<c:if test="${rol != null}">
 			<div class="btn-group">
-				<button type="button"
-					class="btn btn-outline-white dropdown-toggle"
+				<button type="button" class="btn btn-outline-white dropdown-toggle"
 					data-toggle="dropdown" data-display="static" aria-haspopup="true"
 					aria-expanded="false">
-					usuario.getEmail() <img src="img/avatar.svg" width="35"
-						height="35" class="d-inline-block align-middle" alt="cuenta">
+					usuario.getEmail() <img src="img/avatar.svg" width="35" height="35"
+						class="d-inline-block align-middle" alt="cuenta">
 				</button>
 				<div class="dropdown-menu dropdown-menu-lg-right">
 					<button class="dropdown-item" type="button">Mi cuenta</button>
@@ -133,44 +136,36 @@
 		</c:if>
 	</nav>
 
-<div class="container-fluid">
+	<div class="container-fluid">
 
-    <div class="row">
-    
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-            <div class="sidebar-sticky pt-3">
-               
-                <ul class="nav flex-column">
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="admin">
-                            <span data-feather="home"></span>
-                            Home Admin
-                        </a>
-                    </li>
-                    
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="listaInstituciones">
-                            <span data-feather="users"></span>
-                            Lista de Instituciones
-                        </a>
-                    </li>
-                     
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="posiblesinfectados">
-                            <span data-feather="users"></span>
-                            Lista de Espera
-                        </a>
-                    </li>
-                    
-                    
-                   
-                    <li class="nav-item mt-3 mb-3">
-                        <a class="nav-link" href="grafico-pacientes">
-                            <span data-feather="bar-chart-2"></span>
-                            Reportes
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            
-        </nav>
+		<div class="row">
+
+			<nav id="sidebarMenu"
+				class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+				<div class="sidebar-sticky pt-3">
+
+					<ul class="nav flex-column">
+						<li class="nav-item mt-3 mb-3"><a class="nav-link"
+							href="admin"> <span data-feather="home"></span> Home Admin
+						</a></li>
+
+						<li class="nav-item mt-3 mb-3"><a class="nav-link"
+							href="listaInstituciones"> <span data-feather="users"></span>
+								Lista de Instituciones
+						</a></li>
+
+						<li class="nav-item mt-3 mb-3"><a class="nav-link"
+							href="posiblesinfectados"> <span data-feather="users"></span>
+								Lista de Espera
+						</a></li>
+
+
+
+						<li class="nav-item mt-3 mb-3"><a class="nav-link"
+							href="grafico-pacientes"> <span data-feather="bar-chart-2"></span>
+								Reportes
+						</a></li>
+					</ul>
+				</div>
+
+			</nav>
