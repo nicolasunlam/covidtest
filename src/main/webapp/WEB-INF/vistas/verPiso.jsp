@@ -102,15 +102,24 @@ code {
                                     </c:if>
 
 			<c:if test="${pisoConSectores.getPiso().getNumeroPiso() != 0}">
-                                        Piso ${pisoConSectores.getPiso().getId()}
+                                        Piso ${pisoConSectores.getPiso().getNumeroPiso()}
                                     </c:if>
 		</h2>
 		<a type="button" class="btn btn-outline-success"
-			href="crearSector?idPiso=${pisoConSectores.getPiso().getId()}"
+			href="crearSector?idPiso=${pisoConSectores.getPiso().getNumeroPiso()}"
 			style="width: 134px"> Agregar Sector</a>
 	</div>
 	<h6 class="mb-5">Vea en detalle un las salas y camas del piso de
 		su institución</h6>
+
+	<c:if test="${pisoConSectores.getListaDeSectores().size() == 0}">
+		<div class="card shadow my-5 mx-2">
+			<div class="card-header text-center">
+				<h4 class="text-center">No hay Sectores registrados en esta sala</h4>
+				<img src="img/no-stopping.png" style="width: 100px;" class="mt-4"></img>
+			</div>
+		</div>
+	</c:if>
 
 	<c:forEach items="${pisoConSectores.getListaDeSectores()}" var="sector">
 
@@ -228,10 +237,12 @@ code {
 												(${camaConAsignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()}).</p>
 
 											<div class="d-flex justify-content-between">
-												<button class="btn btn-outline-danger btn-sm">Ver detalle</button>
+												<form action="detalleAsignacion?idAsignacion=${camaConAsignacion.getAsignacion().getId()}">
+												<button type="submit" class="btn btn-outline-danger btn-sm">Ver
+													detalle</button>
+													</form>
 												<div class="mt-1">
-													<img src="img/cama-ro.png"
-														style="width: 30px;" ></img>
+													<img src="img/cama-ro.png" style="width: 30px;"></img>
 												</div>
 											</div>
 										</div>
@@ -257,10 +268,10 @@ code {
 												(${camaConAsignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()}).</p>
 
 											<div class="d-flex justify-content-between">
-												<button class="btn btn-outline-warning btn-sm">Ver detalle</button>
+												<button class="btn btn-outline-warning btn-sm">Ver
+													detalle</button>
 												<div class="mt-1">
-													<img src="img/cama-am.png"
-														style="width: 30px;" ></img>
+													<img src="img/cama-am.png" style="width: 30px;"></img>
 												</div>
 											</div>
 										</div>

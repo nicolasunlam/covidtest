@@ -13,52 +13,48 @@
 
 <div class="container">
 
-<div class="jumbotron mt-5">
+	<div class="jumbotron mt-5">
 
-	<article class="row">
+		<article class="row">
 
-		<div class="col-lg col-md-12">
-			<h1 class="display-3">Bienvenido/a</h1>
-			<p class="lead">Desde aquí acceda a las opciones principales de:
-				${nombre}</p>
-			<p class="lead">La institución ${nombre} posee ${camas} camas en
-				total.</p>
-			<a class="btn btn-outline-primary" href="verMensajesRecibidos" role="button">Ver
-				Mensajes Recibidos</a> <a class="btn btn-outline-primary"
-				href="verMensajesEnviados" role="button">Ver Mensajes Enviados</a>
-			<hr class="my-4">
-			<p class="lead">
-				<a class="btn btn-primary btn-lg" href="listaPacientesInternados"
-					role="submit"> Panel de Control</a>
-			</p>
-		</div>
-		<div class="col">
+			<div class="col-lg col-md-12">
+				<h1 class="display-3">Bienvenido/a</h1>
+				<p class="lead">Desde aquí acceda a las opciones principales de:
+					${nombre}</p>
+				<p class="lead">La institución ${nombre} posee ${camas} camas en
+					total.</p>
+				<a class="btn btn-outline-primary" href="verMensajesRecibidos"
+					role="button">Ver Mensajes Recibidos</a> <a
+					class="btn btn-outline-primary" href="verMensajesEnviados"
+					role="button">Ver Mensajes Enviados</a>
+				<hr class="my-4">
+				<p class="lead">
+					<a class="btn btn-primary btn-lg" href="listaPacientesInternados"
+						role="submit"> Panel de Control</a>
+				</p>
+			</div>
+			<div class="col">
 
-			<div class="mt-4">
-				<div class="container-chart">
-					<div id="chartContainer" style="width: 100%; height: 20em;"></div>
+				<div class="mt-4">
+					<div class="container-chart">
+						<div id="chartContainer" style="width: 100%; height: 20em;"></div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</article>
+		</article>
 
-</div>
+	</div>
 
-<script>
+	<script>
 window.onload = function () {
 	
 	 var total = ${cantidadCamasOcupadas} + ${cantidadCamasDisponibles} + ${cantidadCamasReservadas};
      
-     var porcentaje1 = (${cantidadCamasOcupadas} * 100 /
-     total)
-     ;
-     var porcentaje2 = (${cantidadCamasDisponibles} * 100 /
-     total)
-     ;
+     var porcentaje1 = Math.round((${cantidadCamasOcupadas} * 100 / total));
      
-     var porcentaje3 = (${cantidadCamasReservadas} * 100 /
-             total)
-             ;
+     var porcentaje2 = Math.round((${cantidadCamasDisponibles} * 100 /  total));
+     
+     var porcentaje3 = Math.round((${cantidadCamasReservadas} * 100 / total));
      
 var chart = new CanvasJS.Chart("chartContainer", {
 	exportEnabled: true,
@@ -80,8 +76,8 @@ var chart = new CanvasJS.Chart("chartContainer", {
         indexLabelFontSize: 16,
         indexLabel: "{label} - {y}%",
 		dataPoints: [
-            {y: porcentaje1, label: "Ocupadas", color:"#dc3545", exploded: true},
-            {y: porcentaje2, label: "Disponibles", color: "#28a745"},
+            {y: porcentaje1, label: "Ocupadas", color:"#dc3545"},
+            {y: porcentaje2, label: "Disponibles", color: "#28a745", exploded: true},
             {y: porcentaje3, label: "Reservadas", color: "#ffc107"}
 		]
 	}]
@@ -197,7 +193,7 @@ function explodePie (e) {
     }
 
 </script>
-<!-- 
+	<!-- 
 <div class="row">
 	<div class="col-lg col-md-6">
 		<div  id="chartContainerBarras"
@@ -210,7 +206,7 @@ function explodePie (e) {
 </div> -->
 
 
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 </div>
 

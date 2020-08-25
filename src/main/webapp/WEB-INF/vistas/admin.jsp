@@ -15,16 +15,11 @@ window.onload = function () {
 	
 	 var total = ${cantidadCamasOcupadas} + ${cantidadCamasDisponibles} + ${cantidadCamasReservadas};
      
-     var porcentaje1 = (${cantidadCamasOcupadas} * 100 /
-     total)
-     ;
-     var porcentaje2 = (${cantidadCamasDisponibles} * 100 /
-     total)
-     ;
+     var porcentaje1 = Math.round((${cantidadCamasOcupadas} * 100 / total));
      
-     var porcentaje3 = (${cantidadCamasReservadas} * 100 /
-             total)
-             ;
+     var porcentaje2 = Math.round((${cantidadCamasDisponibles} * 100 /  total));
+     
+     var porcentaje3 = Math.round((${cantidadCamasReservadas} * 100 / total));
      
 var chart = new CanvasJS.Chart("chartContainer", {
 	exportEnabled: true,
@@ -46,9 +41,9 @@ var chart = new CanvasJS.Chart("chartContainer", {
         indexLabelFontSize: 16,
         indexLabel: "{label} - {y}%",
 		dataPoints: [
-            {y: porcentaje1, label: "Ocupadas", color:"#f72e1d", exploded: true},
-            {y: porcentaje2, label: "Disponibles", color: "#2bcb0b"},
-            {y: porcentaje3, label: "Reservadas", color: "#fcf516"}
+            {y: porcentaje1, label: "Ocupadas", color:"#dc3545"},
+            {y: porcentaje2, label: "Disponibles", color: "#28a745", exploded: true},
+            {y: porcentaje3, label: "Reservadas", color: "#ffc107"}
 		]
 	}]
 });
@@ -174,9 +169,10 @@ function explodePie (e) {
 			<h1 class="display-4">Bienvenido/a</h1>
 			<p class="my-4 lead">Desde aquí acceda a las opciones principales
 				de: ADMINISTRADOR</p>
-			<a class="btn btn-outline-primary" href="verMensajesRecibidos" role="button">Ver
-				Mensajes Recibidos</a> <a class="btn btn-outline-primary"
-				href="verMensajesEnviados" role="button">Ver Mensajes Enviados</a>
+			<a class="btn btn-outline-primary" href="verMensajesRecibidos"
+				role="button">Ver Mensajes Recibidos</a> <a
+				class="btn btn-outline-primary" href="verMensajesEnviados"
+				role="button">Ver Mensajes Enviados</a>
 			<hr class="my-4">
 			<p class="lead">
 				<a class="btn btn-primary btn-lg" href="listaPacientesInternados"
@@ -205,14 +201,12 @@ function explodePie (e) {
 		<div id="chartContainer2"
 			style="height: 370px; width: 100%;"></div>
 	</div>
-</div> -->
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script src="js/dashboard.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/bootstrap.blunde.js"></script>
-<script src="js/jquery-3.5.1.min.js"></script>
-</main>
+</div> --> <script
+	src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> <script
+	src="js/dashboard.js"></script> <script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.js"></script> <script
+	src="js/bootstrap.blunde.js"></script> <script
+	src="js/jquery-3.5.1.min.js"></script> </main>
 
 </body>
 

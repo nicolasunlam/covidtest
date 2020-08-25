@@ -89,8 +89,12 @@ public class RepositorioCamaImpl implements RepositorioCama {
 	@Override
 	public List<Cama> obtenerTotalDeCamasDisponibles() {
 
-		String hql = "SELECT c " + "FROM Cama as c " + "WHERE c NOT IN (SELECT a.cama " + "FROM Asignacion as a "
-				+ "WHERE a.cama = c " + "AND a.horaEgreso IS NULL " + "AND a.horaIngreso IS NOT NULL)";
+		String hql = "SELECT c " 
+				+ "FROM Cama as c "
+				+ "WHERE c NOT IN (SELECT a.cama " 
+						+ "FROM Asignacion as a " 
+						+ "WHERE a.cama = c "
+						+ "AND a.horaEgreso IS NULL)";
 
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 
@@ -271,7 +275,7 @@ public class RepositorioCamaImpl implements RepositorioCama {
 					+ "JOIN Piso as p ON sec.piso = p "
 					+ "JOIN Asignacion as a ON a.cama = c "
 					+ "WHERE p = :piso " 
-					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.horaReserva IS NOT NULL "
 					+ "AND a.horaIngreso IS NULL "; 
 
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
