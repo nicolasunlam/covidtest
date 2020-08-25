@@ -146,9 +146,12 @@
 			<p id="longitudPaciente" style="display: none;">${longitudPaciente}</p>
 			<p id="nombreInstitucion" style="display: none;">${nombre}</p>
 		</div>
+		<button type="button" class="btn btn-outline-primary">
+					Volver atrás</button>
 	</div>
 </div>
 </div>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

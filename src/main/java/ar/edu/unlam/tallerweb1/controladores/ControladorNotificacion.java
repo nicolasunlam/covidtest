@@ -137,7 +137,7 @@ public class ControladorNotificacion {
 		servicioNotificacion.registrarNotificacion(notificacionNueva);
 		
 		if (request.getSession().getAttribute("ROL") == Rol.ADMIN) {
-			return new ModelAndView("redirect:/panel");
+			return new ModelAndView("redirect:/posiblesinfectados");
 
 		}
 		

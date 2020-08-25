@@ -141,8 +141,7 @@
 
 					<td><a class="btn btn-outline-primary mb-2"
 						href="detalleInstitucion?idInstitucion=${institucion.getUsuario().getId()}"
-						role="button">Ver detalle</a> <a class="btn btn-outline-success"
-						href="" role="button">Responder</a></td>
+						role="button">Ver detalle</a> 
 			</c:forEach>
 
 		</table>
