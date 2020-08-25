@@ -87,7 +87,7 @@ p.lead {
 
 
 		</div>
-		<p class="mb-5">Renueve sus datos como su mail o contraseña</p>
+		<p class="mb-5">Modifique su Email y Contraseña</p>
 
 		<div class="form-group">
 			<div class="col-md-12 col-lg-6 pl-0">
@@ -130,11 +130,11 @@ p.lead {
 				}
 			}
 			
-			function cambiarContraseña() {
+			function cambiarContrasenia() {
 				
-				var activar = document.getElementById("contraseña");
-				var activar2 = document.getElementById("contraseñaNueva");
-				var activar3 = document.getElementById("contraseñaNuevaRepetida");
+				var activar = document.getElementById("contrasenia");
+				var activar2 = document.getElementById("contraseniaNueva");
+				var activar3 = document.getElementById("contraseniaNuevaRepetida");
 				
 				var checkActivador = document.getElementById("customControlValidation2");
 				
@@ -163,9 +163,9 @@ p.lead {
 
 				<h6>Contraseña de la cuenta</h6>
 
-				<input type="password" name="contraseña"
-					class="form-control br-radius-zero contraseñas" id="contraseña"
-					placeholder="Ingrese su actual contraseña" data-rule="minlen:1"
+				<input type="password" name="contrasenia"
+					class="form-control br-radius-zero contraseñas" id="contrasenia"
+					placeholder="Ingrese su actual contrasenia" data-rule="minlen:1"
 					data-msg="Ingrese una contraseña valida" disabled />
 				<div class="validation"></div>
 			</div>
@@ -177,9 +177,9 @@ p.lead {
 			<div class="col-6">
 				<h6 class="">Nueva contraseña</h6>
 
-				<input type="password" name="contraseñaNueva"
+				<input type="password" name="contraseniaNueva"
 					class="form-control br-radius-zero contraseñas"
-					id="contraseñaNueva" placeholder="Ingrese su nueva contraseña"
+					id="contraseniaNueva" placeholder="Ingrese su nueva contraseña"
 					data-rule="minlen:1" data-msg="Ingrese una contraseña valida"
 					disabled />
 				<div class="validation"></div>
@@ -187,11 +187,11 @@ p.lead {
 			<div class="col-6">
 				<h6 class="">Repita la nueva contraseña</h6>
 
-				<input type="password" name="contraseñaNuevaRepetida"
+				<input type="password" name="contraseniaNuevaRepetida"
 					class="form-control br-radius-zero contraseñas"
-					id="contraseñaNuevaRepetida"
+					id="contraseniaNuevaRepetida"
 					placeholder="Repita la nueva contraseña" data-rule="minlen:1"
-					data-msg="Ingrese una contraseña valida" disabled />
+					data-msg="Ingrese una contraseña válida" disabled />
 				<div class="validation"></div>
 			</div>
 		</div>
@@ -199,7 +199,7 @@ p.lead {
 		<div class="custom-control custom-checkbox mb-5">
 
 			<input type="checkbox" class="custom-control-input"
-				onclick="javascript:cambiarContraseña()"
+				onclick="javascript:cambiarContrasenia()"
 				id="customControlValidation2"> <label
 				class="custom-control-label font-weight-lighter"
 				for="customControlValidation2">Deseo cambiar mi contraseña.</label>

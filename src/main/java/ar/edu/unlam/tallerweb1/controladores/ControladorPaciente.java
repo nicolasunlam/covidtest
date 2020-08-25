@@ -568,9 +568,9 @@ public class ControladorPaciente {
 	@RequestMapping(path = "/guardarCambios")
 	public ModelAndView guardarCambios(
 			@RequestParam(value = "mail", required = false) String mail, 
-			@RequestParam(value = "contraseña", required = false) String contraseña, 
-			@RequestParam(value = "contraseñaNueva", required = false) String contraseñaNueva, 
-			@RequestParam(value = "contraseñaNuevaRepetida", required = false) String contraseñaNuevaRepetida, 
+			@RequestParam(value = "contrasenia", required = false) String contrasenia, 
+			@RequestParam(value = "contraseniaNueva", required = false) String contraseniaNueva, 
+			@RequestParam(value = "contraseniaNuevaRepetida", required = false) String contraseniaNuevaRepetida, 
 			@RequestParam(value = "latitud", required = false) Double latitud, 
 			@RequestParam(value = "latitud", required = false) Double longitud,
 			@RequestParam(value = "calle", required = false) String calle,
@@ -601,10 +601,10 @@ public class ControladorPaciente {
             usuario.setEmail(mail);   
         }
         
-        if(contraseña != null && contraseñaNueva != null && contraseñaNuevaRepetida != null) {
+        if(contrasenia != null && contraseniaNueva != null && contraseniaNuevaRepetida != null) {
         	
-        	if(contraseña == usuario.getPassword() && contraseñaNueva == contraseñaNuevaRepetida) {
-                usuario.setPassword(contraseñaNueva);
+        	if(contrasenia == usuario.getPassword() && contraseniaNueva == contraseniaNuevaRepetida) {
+                usuario.setPassword(contraseniaNueva);
             } 
         }
         
