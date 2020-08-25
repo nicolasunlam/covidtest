@@ -670,26 +670,12 @@ public class ControladorInstitucion {
 	}
 
 	@RequestMapping("detalleInstitucion")
-	public ModelAndView detalleInstitucion(@RequestParam(value = "idInstitucion") Long idInstitucion,
+	public ModelAndView detalleInstitucion(
+			
+			@RequestParam(value = "idInstitucion") Long idInstitucion,
+			@RequestParam(value = "paciente", required = false) Boolean paciente,
 			HttpServletRequest request) {
 
-//    	Institucion institucion =servicioInstitucion.obtenerInstitucionPorId((Long) request.getSession().getAttribute("ID"));
-//    	
-//    	 for (int i = 0; i < cantidadDeCamas; i++) {
-//
-//             Cama cama = new Cama();
-//             cama.setInstitucion(institucion);
-//             cama.setTipoCama(tipoCama);
-//             cama.setTipoSala(tipoSala);
-//             
-//             
-//             int numeroCama = i+1;
-//             String descripcion = "" + numeroCama;
-//             cama.setDescripcion(descripcion);
-//
-//           
-//             servicioCama.registrarCama(cama);
-//         }
 		ModelMap model = new ModelMap();
 
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
@@ -704,21 +690,40 @@ public class ControladorInstitucion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		Long id = (Long) request.getSession().getAttribute("ID");
-		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
-
-		Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(usuario.getLatitud(), usuario.getLongitud(),
-				institucion.getLatitud(), institucion.getLongitud());
-
-		Integer camasDisponibles = servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion).size();
+		
 
 		Double latitudInstitucion = institucion.getLatitud();
 		Double longitudInstitucion = institucion.getLongitud();
-		Double latitudPaciente = usuario.getLatitud();
-		Double longitudPaciente = usuario.getLongitud();
+		
+		model.put("latitudInstitucion", latitudInstitucion);
+		model.put("longitudInstitucion", longitudInstitucion);
+		
+		if (paciente != null) {
+			Long id = (Long) request.getSession().getAttribute("ID");
+			Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
 
-		model.put("distancia", distancia);
+			Double distancia = servicioMapa.calcularDistanciaEntreDosPuntos(usuario.getLatitud(), usuario.getLongitud(),
+					institucion.getLatitud(), institucion.getLongitud());
+
+			Double latitudPaciente = usuario.getLatitud();
+			Double longitudPaciente = usuario.getLongitud();
+
+			model.put("distancia", distancia);
+
+			model.put("latitudPaciente", latitudPaciente);
+			model.put("longitudPaciente", longitudPaciente);
+		}
+		
+		Integer cantidadTotalCamas = servicioCama.obtenerCamas().size();
+		Integer cantidadCamasOcupadas = servicioCama.obtenerTotalDeCamasOcupadas().size();
+		Integer camasDisponibles = servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion).size();
+		Integer cantidadCamasReservadas = cantidadTotalCamas - (camasDisponibles + cantidadCamasOcupadas);
+
+		model.put("cantidadTotalCamas", cantidadTotalCamas);
+		model.put("cantidadCamasOcupadas", cantidadCamasOcupadas);
+		model.put("cantidadCamasReservadas", cantidadCamasReservadas);
+		
 		model.put("nombre", institucion.getNombre());
 		model.put("email", institucion.getEmail());
 		model.put("calle", institucion.getDomicilio().getCalle());
@@ -726,10 +731,6 @@ public class ControladorInstitucion {
 		model.put("localidad", institucion.getDomicilio().getLocalidad().getNombreLocalidad());
 		model.put("camas", servicioCama.obtenerCamasPorInstitucion(institucion).size());
 		model.put("camasDisponibles", camasDisponibles);
-		model.put("latitudInstitucion", latitudInstitucion);
-		model.put("longitudInstitucion", longitudInstitucion);
-		model.put("latitudPaciente", latitudPaciente);
-		model.put("longitudPaciente", longitudPaciente);
 
 		return new ModelAndView("fichaInstitucion", model);
 

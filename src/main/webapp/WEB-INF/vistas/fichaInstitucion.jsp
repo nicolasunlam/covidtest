@@ -61,93 +61,111 @@
 <link rel="stylesheet" type="text/css"
 	href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
 
+<c:if test='${rol != "PACIENTE"}'>
+	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+</c:if>
+
 <div class="container">
 
-<div class="container-fluid my-5 text-center">
-	<div class="row">
-		<div class="col-4"></div>
-		<div class="col-4">
-			<img src="img/hospital.png" class="rounded" alt="icono hospital"
-				width="250" height="250">
-			<h1 class="font-weight-bolder my-4">${nombre}</h1>
-		</div>
-		<div class="col-4"></div>
-	</div>
-</div>
-
-<div class="container-fluid pl-3 my-5 text-left border-top">
-	<div class="row my-4">
-		<div class="col-3">
-			<h2 class="font-weight-bolder">DATOS DE CONTACTO</h2>
-		</div>
-		<div class="col-2"></div>
-		<div class="col-5">
-			<h2 class="font-weight-bolder text-center">UBICACIÓN</h2>
+	<div class="container-fluid my-5 text-center">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4">
+				<img src="img/hospital.png" class="rounded" alt="icono hospital"
+					width="250" height="250">
+				<h1 class="font-weight-bolder my-4">${nombre}</h1>
+			</div>
+			<div class="col-4"></div>
 		</div>
 	</div>
-</div>
 
-<div class="container-fluid pl-3 my-5 text-left">
-	<div class="row my-4">
-		<div class="col-4">
-			<h3 class="font-weight-bolder">Correo electrónico</h3>
-			<h4>${email}</h4>
-			<h3 class="font-weight-bolder mt-5">Dirección</h3>
-			<h4>${calle}${numero},${localidad}</h4>
-		</div>
-		<div class="col-1"></div>
-		<div class="col-5" id="map"></div>
-	</div>
-</div>
-
-<div class="container-fluid pl-3 my-5 text-left border-top">
-	<div class="row my-4">
-		<div class="col-3">
-			<h2 class="font-weight-bolder">DISPONIBILIDAD DE CAMAS</h2>
-		</div>
-		<div class="col-2"></div>
-		<div class="col-5">
-			<h2 class="font-weight-bolder">DISTANCIA</h2>
+	<div class="container-fluid pl-3 my-5 text-left border-top">
+		<div class="row my-4">
+			<div class="col-3">
+				<h2 class="font-weight-bolder">DATOS DE CONTACTO</h2>
+			</div>
+			<div class="col-2"></div>
+			<div class="col-5">
+				<h2 class="font-weight-bolder text-center">UBICACIÓN</h2>
+			</div>
 		</div>
 	</div>
-</div>
 
-<div class="container-fluid pl-3 my-5 text-left">
-	<div class="row my-4">
-		<div class="col-3">
-			<c:if test="${camasDisponibles > 0}">
-				<h4 class="d-inline mr-3">Hay disponibilidad</h4>
-				<img src="img/right.png" width="35" height="35"
-					alt="Generic placeholder image" class="d-inline">
-			</c:if>
-			<c:if test="${camasDisponibles <= 0}">
-				<h4 class="d-inline mr-3">No hay disponibilidad</h4>
-				<img src="img/right.png" width="35" height="35"
-					alt="Generic placeholder image" class="d-inline">
+	<div class="container-fluid pl-3 my-5 text-left">
+		<div class="row my-4">
+			<div class="col-4">
+				<h3 class="font-weight-bolder">Correo electrónico</h3>
+				<h4>${email}</h4>
+				<h3 class="font-weight-bolder mt-5">Dirección</h3>
+				<h4>${calle}${numero},${localidad}</h4>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-5" id="map"></div>
+		</div>
+	</div>
+
+	<div class="container-fluid pl-3 my-5 text-left border-top">
+		<div class="row my-4">
+			<div class="col-3">
+				<h2 class="font-weight-bolder">DISPONIBILIDAD DE CAMAS</h2>
+			</div>
+			<div class="col-2"></div>
+
+			<c:if test='${rol == "PACIENTE"}'>
+
+				<div class="col-5">
+					<h2 class="font-weight-bolder">DISTANCIA</h2>
+				</div>
+
 			</c:if>
 
+
 		</div>
-		<div class="col-2"></div>
-		<div class="col-5">
-			<h4>
-				<c:if test="${Math.round(distancia) < 9 }">
+	</div>
+
+	<div class="container-fluid pl-3 my-5 text-left">
+		<div class="row my-4">
+			<div class="col-3">
+				<c:if test="${camasDisponibles > 0}">
+					<h4 class="d-inline mr-3">Hay disponibilidad</h4>
+					<img src="img/right.png" width="35" height="35"
+						alt="Generic placeholder image" class="d-inline">
+				</c:if>
+				<c:if test="${camasDisponibles <= 0}">
+					<h4 class="d-inline mr-3">No hay disponibilidad</h4>
+					<img src="img/right.png" width="35" height="35"
+						alt="Generic placeholder image" class="d-inline">
+				</c:if>
+
+			</div>
+			<div class="col-2"></div>
+			<div class="col-5">
+				<h4>
+				<c:if test='${rol == "PACIENTE"}'>
+
+					<c:if test="${Math.round(distancia) < 9 }">
 							
 								${fn:substring(distancia, 0, 3)}
 							
 						</c:if>
-				<c:if test="${Math.round(distancia) > 9}">
+					<c:if test="${Math.round(distancia) > 9}">
 							${Math.round(distancia)} 
 						</c:if>
-				kms.
-			</h4>
-			<p id="latitudInstitucion" style="display: none;">${latitudInstitucion}</p>
-			<p id="longitudInstitucion" style="display: none;">${longitudInstitucion}</p>
-			<p id="latitudPaciente" style="display: none;">${latitudPaciente}</p>
-			<p id="longitudPaciente" style="display: none;">${longitudPaciente}</p>
-			<p id="nombreInstitucion" style="display: none;">${nombre}</p>
-		</div>
-		
-		<a href=<c:if test='${rol == "ADMIN"}'>
+					kms.
+										
+				</c:if>
+				</h4>
+
+				<p id="latitudInstitucion" style="display: none;">${latitudInstitucion}</p>
+				<p id="longitudInstitucion" style="display: none;">${longitudInstitucion}</p>
+				<c:if test='${rol != "PACIENTE"}'>
+					<p id="latitudPaciente" style="display: none;">${latitudPaciente}</p>
+					<p id="longitudPaciente" style="display: none;">${longitudPaciente}</p>
+				</c:if>
+				<p id="nombreInstitucion" style="display: none;">${nombre}</p>
+			</div>
+
+			<a href=<c:if test='${rol == "ADMIN"}'>
 						"admin"
 						</c:if>
 				<c:if test='${rol == "INSTITUCION"}'>
@@ -158,13 +176,16 @@
 						</c:if>
 				<c:if test='${rol == null}'>
 						"home"
-						</c:if> class="btn btn-primary">
-					Volver atrás</a>
-					
+						</c:if>
+				class="btn btn-primary"> Volver atrás</a>
+
+		</div>
 	</div>
 </div>
-</div>
 
+<c:if test='${rol != "PACIENTE"}'>
+	</main>
+</c:if>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -180,12 +201,19 @@
 	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
 	crossorigin="anonymous"></script>
 <script>
+
+
 	var latitudInstitucion = document.getElementById('latitudInstitucion').innerHTML;
 	var longitudInstitucion = document.getElementById('longitudInstitucion').innerHTML;
 	var nombreInstitucion = document.getElementById('nombreInstitucion').innerHTML;
+	
+	if (${latitudPaciente} != null) {
+
 	var latitudPaciente = document.getElementById('latitudPaciente').innerHTML;
 	var longitudPaciente = document.getElementById('longitudPaciente').innerHTML;
-
+	
+	}
+	
 	var map = L.map('map').setView([ latitudInstitucion, longitudInstitucion ],
 			11);
 
@@ -204,8 +232,12 @@
 	marker = new L.marker([ latitudInstitucion, longitudInstitucion ])
 			.bindPopup(nombreInstitucion).addTo(map);
 
-	markerPaciente = new L.marker([ latitudPaciente, longitudPaciente ])
-			.bindPopup("Su ubicación").addTo(map);
+	if (${latitudPaciente}  != null) {
+
+		markerPaciente = new L.marker([ latitudPaciente, longitudPaciente ])
+		.bindPopup("Su ubicación").addTo(map);
+		}
+
 
 	var circle = L.circle([ latitudInstitucion, longitudInstitucion ], {
 		color : 'red',
@@ -214,10 +246,19 @@
 		radius : 20
 	}).addTo(map);
 
+	if (${latitudPaciente}  != null) {
+
 	var polylinePoints = [ [ latitudInstitucion, longitudInstitucion ],
 			[ latitudPaciente, longitudPaciente ] ];
 
 	var polyline = L.polyline(polylinePoints).addTo(map);
+	}else{
+		var polylinePoints = [ [ latitudInstitucion, longitudInstitucion  ];
+
+	var polyline = L.polyline(polylinePoints).addTo(map);
+	}
+
+
 </script>
 
 <%@ include file="../../partial/footer.jsp"%>
