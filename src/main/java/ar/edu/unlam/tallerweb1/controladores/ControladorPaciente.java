@@ -179,7 +179,7 @@ public class ControladorPaciente {
 			 */
 
 			String path = "http://localhost:" + request.getLocalPort();
-			servicioMail.SendEmail(paciente.getEmail(), "Confirmaciï¿½n de registro: AsignAr: " + paciente.getNombre(),
+			servicioMail.SendEmail(paciente.getEmail(), "Confirmación de registro: AsignAr: " + paciente.getNombre(),
 					path, pacienteBuscado);
 
 			return new ModelAndView("enfermedades", model);
