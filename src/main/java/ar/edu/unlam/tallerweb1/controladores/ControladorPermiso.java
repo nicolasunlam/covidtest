@@ -1,12 +1,15 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
+import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalidad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTest;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,10 +32,12 @@ public class ControladorPermiso {
     ServicioLocalidad servicioLocalidad;
     @Autowired
     ServicioTest servicioTest;
-	 
+    @Autowired
+    ServicioUsuario servicioUsuario;	 
 
     @RequestMapping("/generarPermiso")
-    public ModelAndView generarPermiso(HttpServletRequest request) {
+    public ModelAndView generarPermiso(HttpServletRequest request,
+    		@RequestParam(value= "idPaciente", required = false) Long idPaciente) {
     	
     	ModelMap model = new ModelMap();
 
@@ -40,6 +45,17 @@ public class ControladorPermiso {
 		if(rol != null) {
 			model.put("rol", rol.name());	
 		}
+		
+		if(rol.name()=="PACIENTE") {
+			Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
+
+			if(paciente.getInfectado() == null || paciente.getPosibleInfectado() == null) {
+				model.put("otorgarPermiso", true);
+			}else {
+				model.put("otorgarPermiso", false);
+			}
+		}
+		
     	model.put("armarHeader", servicioAtajo.armarHeader(request));
 
         return new ModelAndView("generarPermiso", model);

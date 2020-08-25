@@ -88,8 +88,10 @@ public class ControladorPaciente {
 		}
 		Paciente paciente = servicioPaciente.consultarPacientePorId(id);
 		String nombre = paciente.getNombre();
+		Long idPaciente = paciente.getId();
 
 		model.put("nombre", nombre);
+		model.put("idPaciente", idPaciente);
 
 		return new ModelAndView("bienvenidoPaciente", model);
 	}
