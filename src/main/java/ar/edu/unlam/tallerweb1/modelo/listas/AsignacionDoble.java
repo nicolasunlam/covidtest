@@ -17,6 +17,9 @@ public class AsignacionDoble {
 		this.asignacionActual = asignacionActual;
 	}
 
+	public AsignacionDoble() {
+	}
+
 	public Asignacion getAsignacionActual() {
 		return asignacionActual;
 	}

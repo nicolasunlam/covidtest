@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Domicilio;
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
@@ -25,7 +26,9 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble;
 import ar.edu.unlam.tallerweb1.modelo.listas.UsuarioDistancia;
+import ar.edu.unlam.tallerweb1.servicios.ServicioAsignacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
@@ -63,6 +66,8 @@ public class ControladorPaciente {
 	ServicioInstitucion servicioInstitucion;
 	@Autowired
 	ServicioMapa servicioMapa;
+	@Autowired
+	ServicioAsignacion servicioAsignacion;
 
 	/* Pantalla de bienvenido al paciente cuando inicia sesiï¿½n */
 	@RequestMapping("bienvenidoPaciente")
@@ -124,18 +129,7 @@ public class ControladorPaciente {
 	@RequestMapping("/detalleRegistroPaciente")
 	public ModelAndView validarRegistroPaciente(
 
-			@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request
-	/*
-	 * @RequestParam(value = "calle") String calle,
-	 * 
-	 * @RequestParam(value = "numero") Integer numero,
-	 * 
-	 * @RequestParam(value = "nombreLocalidad") String nombreLocalidad,
-	 * 
-	 * @RequestParam(value = "nombrePartido") String nombrePartido
-	 */
-
-	) {
+			@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
@@ -157,15 +151,13 @@ public class ControladorPaciente {
 
 			servicioPaciente.registrarPaciente(paciente);
 
-			// request.getSession().setAttribute("ROL", paciente.getRol());
-
 			String nombre = paciente.getNombre();
 			String documento = paciente.getNumeroDocumento();
 			String email = paciente.getEmail();
 			TipoDocumento tipoDocumento = paciente.getTipoDocumento();
 
 			Paciente pacienteBuscado = servicioPaciente.consultarPacientePorDoc(documento, tipoDocumento);
-			// Cambiar, posiblemente, a ID_USUARIO
+
 			request.getSession().setAttribute("ID_PACIENTE", pacienteBuscado.getId());
 
 			model.put("nombre", nombre);
@@ -173,20 +165,8 @@ public class ControladorPaciente {
 			model.put("tipoDocumento", tipoDocumento);
 			model.put("email", email);
 
-			/*
-			 * Domicilio domicilio = new Domicilio(); domicilio.setCalle(calle);
-			 * domicilio.setNumero(numero); servicioDomicilio.registrarDomicilio(domicilio);
-			 * paciente.setDomicilio(domicilio); Localidad localidad =
-			 * servicioLocalidad.obtenerLocalidadPorNombre(nombreLocalidad);
-			 * domicilio.setLocalidad(localidad); Partido partido =
-			 * servicioPartido.obtenerPartidoPorNombre(nombrePartido);
-			 * localidad.setPartido(partido); servicioPaciente.actualizarPaciente(paciente);
-			 * servicioDomicilio.actualizarDomicilio(domicilio);
-			 * servicioLocalidad.actualizarLocalidad(localidad);
-			 */
-
 			String path = "http://localhost:" + request.getLocalPort();
-			servicioMail.SendEmail(paciente.getEmail(), "Confirmación de registro: AsignAr: " + paciente.getNombre(),
+			servicioMail.SendEmail(paciente.getEmail(), "Confirmaciï¿½n de registro: AsignAr: " + paciente.getNombre(),
 					path, pacienteBuscado);
 
 			return new ModelAndView("enfermedades", model);
@@ -196,6 +176,51 @@ public class ControladorPaciente {
 
 			return new ModelAndView("registrarPaciente", model);
 		}
+	}
+
+	@RequestMapping("/registrarPacienteEnfermedades")
+	public ModelAndView registrarPacienteEnfermedades(
+
+			@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		if (paciente == null) {
+			return new ModelAndView("redirect:/denied");
+		}
+
+		if (servicioUsuario.consultarUsuarioPorEmail(paciente.getEmail()) != null && servicioPaciente
+				.consultarPacientePorDoc(paciente.getNumeroDocumento(), paciente.getTipoDocumento()) != null) {
+
+			model.put("error", "Ya existe un usuario registrado con su mail o documento");
+
+			return new ModelAndView("registrarPaciente", model);
+		}
+
+		paciente.setRol(Rol.PACIENTE);
+		servicioPaciente.registrarPaciente(paciente);
+
+		Paciente pacienteBuscado = servicioPaciente.consultarPacientePorId(paciente.getId());
+
+		model.put("paciente", paciente);
+
+		String path = "http://localhost:" + request.getLocalPort();
+		servicioMail.SendEmail(paciente.getEmail(), "ConfirmaciÃ³n de registro: AsignAr: " + paciente.getNombre(), path,
+				pacienteBuscado);
+
+		return new ModelAndView("registrarPacienteEnfermedades", model);
 	}
 
 	/* Consultar paciente por Nro y Tipo de Documento */
@@ -444,15 +469,15 @@ public class ControladorPaciente {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		List<Paciente> listaPacientesInternados = new ArrayList<Paciente>();
+		List<Paciente> listaPacientesInternadosSinReserva = new ArrayList<Paciente>();
 
 		if (request.getSession().getAttribute("ROL") == Rol.ADMIN) {
-			listaPacientesInternados = servicioPaciente.pacientesInternados();
+			listaPacientesInternadosSinReserva = servicioPaciente.pacientesInternados();
 		}
 
 		if (request.getSession().getAttribute("ROL") == Rol.INSTITUCION) {
 			Long id = (long) request.getSession().getAttribute("ID");
-			listaPacientesInternados = servicioPaciente.pacientesInternadosPorInstitucion(id);
+			listaPacientesInternadosSinReserva = servicioPaciente.pacientesInternadosPorInstitucion(id);
 		}
 
 		Boolean admin = false;
@@ -460,8 +485,25 @@ public class ControladorPaciente {
 			admin = true;
 		}
 
+		List<AsignacionDoble> listaPacientesInternadosConReserva = new ArrayList<AsignacionDoble>();
+
+		for (Paciente paciente : listaPacientesInternadosSinReserva) {
+
+			AsignacionDoble asignacionDoble = new AsignacionDoble();
+
+			asignacionDoble.setAsignacionActual(servicioAsignacion.consultarAsignacionPacienteInternado(paciente));
+			
+			Asignacion asignacionReservada = servicioAsignacion.consultarReservaAsignacionPaciente(paciente);
+			if (asignacionReservada != null) {
+
+				asignacionDoble.setAsignacionReservada(asignacionReservada);
+			}
+			
+			listaPacientesInternadosConReserva.add(asignacionDoble);
+		}
+
 		model.put("admin", admin);
-		model.put("listaPacientesInternados", listaPacientesInternados);
+		model.put("listaPacientesInternados", listaPacientesInternadosConReserva);
 
 		return new ModelAndView("listaPacientesInternados", model);
 	}
