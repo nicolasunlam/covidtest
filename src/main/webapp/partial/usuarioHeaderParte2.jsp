@@ -98,15 +98,13 @@
 				</a>
 				<li class="nav-item ml-3"><a class="btn btn-outline-success"
 					role="button" href="autoTest">Realizar test</a></li>
-				<c:if test="${permiso == true}">
-					<li class="nav-item ml-3" id="botonPermiso"><a
-						class="nav-link btn btn-outline-success active"
-						href="generarPermiso">Generar Permiso </a></li>
-				</c:if>
-				</li>
-
 				<li class="nav-item ml-4"><a class="btn btn-outline-info"
 					role="button" href="verMensajesRecibidos">Ver mis Mensajes </a></li>
+				<c:if test="${permiso == true}">
+					<li class="nav-item ml-3" id="botonPermiso"><a
+						class="btn btn-warning" href="generarPermiso">Generar Permiso
+					</a></li>
+				</c:if>
 
 			</ul>
 		</div>
