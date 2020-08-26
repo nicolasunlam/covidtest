@@ -180,7 +180,7 @@
 										</div>
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark" href="sectoresInstitucion">
-												<span data-feather="package"></span> Sectores
+												<span data-feather="square"></span> Sectores
 											</a>
 										</div>
 										<div class="card-body px-0">
@@ -277,7 +277,7 @@
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
-								<span data-feather="home"></span>
+								<span data-feather="log-in"></span>
 							</div>
 
 							<div id="accordion2">
@@ -300,7 +300,7 @@
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
-								<span data-feather="home"></span>
+								<span data-feather="log-out"></span>
 							</div>
 
 							<div id="accordion4">
@@ -336,7 +336,7 @@
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
-								<span data-feather="home"></span>
+								<span data-feather="bar-chart-2"></span>
 							</div>
 
 							<div id="accordion4">
