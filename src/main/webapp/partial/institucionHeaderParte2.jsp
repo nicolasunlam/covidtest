@@ -158,7 +158,7 @@
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
-								<span data-feather="home"></span>
+								<span data-feather=plus-square></span>
 							</div>
 							<div id="accordion">
 								<div class="">
@@ -175,17 +175,17 @@
 										aria-labelledby="headingOne" data-parent="#accordion">
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark" href="pisosInstitucion">
-												<span data-feather="users"></span> Pisos
+												<span data-feather="layers"></span> Pisos
 											</a>
 										</div>
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark" href="sectoresInstitucion">
-												<span data-feather="users"></span> Sectores
+												<span data-feather="package"></span> Sectores
 											</a>
 										</div>
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark" href="salasInstitucion">
-												<span data-feather="search"></span> Salas
+												<span data-feather="maximize"></span> Salas
 											</a>
 										</div>
 
@@ -253,7 +253,7 @@
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
-								<span data-feather="home"></span>
+								<span data-feather="user"></span>
 							</div>
 
 							<div id="accordion3">
@@ -263,7 +263,7 @@
 											<button class="btn text-primary py-0" data-toggle="collapse"
 												data-target="#collapseThree" aria-expanded="true"
 												aria-controls="collapseThree" style="box-shadow: none">
-												Pacientes</button>
+												Mis datos</button>
 										</h5>
 									</div>
 
@@ -272,35 +272,14 @@
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark"
 												href="listaPacientesInternados"> <span
-												data-feather="users"></span> Pacientes Internados
+												data-feather="lock"></span> Mi cuenta
 											</a>
 										</div>
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark" href="posiblesinfectados">
-												<span data-feather="users"></span> Lista de Espera
+												<span data-feather="inbox"></span> Mis mensajes
 											</a>
 										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="consultarPaciente">
-												<span data-feather="search"></span> Consultar paciente
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="internarPaciente">
-												<span data-feather="user-plus"></span> Internar paciente
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="egresarPaciente">
-												<span data-feather="user-minus"></span> Egresar paciente
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link" href="consultarAsignacion"> <span
-												data-feather="search"></span> Consultar Asignación
-											</a>
-										</div>
-
 
 									</div>
 								</div>

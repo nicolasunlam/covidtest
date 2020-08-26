@@ -39,89 +39,88 @@ public class ControladorNotificacion {
 	@Autowired
 	private ServicioInstitucion servicioInstitucion;
 	@Autowired
-	private ServicioAtajo servicioAtajo;	
+	private ServicioAtajo servicioAtajo;
 
-	@RequestMapping(value ="crearMensaje" , method=RequestMethod.POST)
-	public ModelAndView crearMensaje( 
-			
-		@RequestParam(value = "id", required = false) Long id,
-		HttpServletRequest request) {
+	@RequestMapping(value = "crearMensaje", method = RequestMethod.POST)
+	public ModelAndView crearMensaje(
+
+			@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
-		if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Paciente p = servicioPaciente.consultarPacientePorId(id);
 		Long idEmisor = (Long) request.getSession().getAttribute("ID");
-		
+
 		model.put("id", idEmisor);
 		model.put("p", p);
-		
-		return new ModelAndView("crearMensaje",model);
+
+		return new ModelAndView("crearMensaje", model);
 	}
-	
-	@RequestMapping(value ="crearMensajeParaInstitucion" , method=RequestMethod.POST)
-	public ModelAndView crearMensajeParaInstitucion( 
-			
-		@RequestParam(value = "id", required = false) Long id,
-		HttpServletRequest request) {
-		
+
+	@RequestMapping(value = "crearMensajeParaInstitucion", method = RequestMethod.POST)
+	public ModelAndView crearMensajeParaInstitucion(
+
+			@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
+
 		ModelMap model = new ModelMap();
 
-		if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-			
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
 		Institucion p = servicioInstitucion.obtenerInstitucionPorId(id);
 		Long idEmisor = (Long) request.getSession().getAttribute("ID");
-		
+
 		model.put("id", idEmisor);
 		model.put("p", p);
-		
-		return new ModelAndView("crearMensaje",model);
+
+		return new ModelAndView("crearMensaje", model);
 	}
-	//Button o Submit de Mensaje
+
+	// Button o Submit de Mensaje
 	@RequestMapping(value = "enviarMensaje", method = RequestMethod.POST)
 	public ModelAndView enviarMensaje(
-			
+
 			@RequestParam(value = "idEmisor", required = false) Long idEmisor,
 			@RequestParam(value = "idReceptor", required = false) Long idReceptor,
-			@RequestParam(value = "asunto", required = false)String asunto,
+			@RequestParam(value = "asunto", required = false) String asunto,
 			@RequestParam(value = "mensaje", required = false) String mensaje, HttpServletRequest request
-	
-			) {
+
+	) {
 
 		ModelMap model = new ModelMap();
 
-		if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Usuario destinatario = servicioUsuario.consultarUsuarioPorId(idReceptor);
 		Usuario remitente = servicioUsuario.consultarUsuarioPorId(idEmisor);
@@ -135,100 +134,101 @@ public class ControladorNotificacion {
 		notificacionNueva.setFechaHora(LocalDateTime.now());
 
 		servicioNotificacion.registrarNotificacion(notificacionNueva);
-		
+
 		if (request.getSession().getAttribute("ROL") == Rol.ADMIN) {
 			return new ModelAndView("redirect:/posiblesinfectados");
 
 		}
-		
+
 		return new ModelAndView("redirect:/bienvenido");
 	}
 
-	//Ver mensajes Recibidos
+	// Ver mensajes Recibidos
 	@RequestMapping(path = "/verMensajesRecibidos", method = RequestMethod.GET)
 	public ModelAndView verMensajesRecibidos(
-			
+
 			HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
-		if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
 		Long id = (Long) request.getSession().getAttribute("ID");
-		
+
 		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
-		
+
 		List<Notificacion> list = servicioNotificacion.buscarNotificacionPorId(usuario);
-		
+
 		model.put("list", list);
-		
+
 		return new ModelAndView("verMensajes", model);
 	}
-	//Lista Mensajes enviador por la Institucion
+
+	// Lista Mensajes enviador por la Institucion
 	@RequestMapping(path = "/verMensajesEnviados", method = RequestMethod.GET)
 	public ModelAndView verMensajesEnviados(
-			
+
 			HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
-		if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
-    	model.put("armarHeader", servicioAtajo.armarHeader(request));
-		
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
 		Long id = (Long) request.getSession().getAttribute("ID");
-		
+
 		Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
-		
+
 		List<Notificacion> list = servicioNotificacion.buscarNotificacionesEnviadasPorUsuario(usuario);
-		
+
 		model.put("list", list);
-		
+
 		return new ModelAndView("verMensajesEnviados", model);
 	}
-	
-	@RequestMapping(value = "/verDetalleMensaje/{id}")
-	public ModelAndView verDetalleMensaje(@PathVariable Long id, Model m, HttpServletRequest request) {
-		
+
+	@RequestMapping(value = "/verDetalleMensaje")
+	public ModelAndView verDetalleMensaje(@RequestParam(value = "id", required = false) Long id,
+			HttpServletRequest request) {
+
 		ModelMap model = new ModelMap();
-		
-		if(servicioAtajo.validarInicioDeSesion(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
-    	}
-    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
-    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-    	}
-    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
-		if(rol != null) {
-			model.put("rol", rol.name());	
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
-    	
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Notificacion not = servicioNotificacion.buscarNotificacionPorSuId(id);
-		m.addAttribute("notificacion", not);
-		
-		return new ModelAndView("verMensajesEnviados", model);
+		model.put("notificacion", not);
 
-	} 
-	
-	
+		return new ModelAndView("verDetalleMensaje", model);
+
+	}
+
 }

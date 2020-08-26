@@ -96,7 +96,7 @@ p.lead {
 					aria-describedby="email" placeholder="${usuario.getEmail()}"
 					disabled>
 			</div>
-			
+
 			<div class="custom-control custom-checkbox mt-4 mb-5">
 
 				<input type="checkbox" class="custom-control-input"
@@ -105,12 +105,12 @@ p.lead {
 					for="customControlValidation1">Deseo cambiar mi correo
 					electrónico.</label>
 			</div>
-			
-			
+
+
 		</div>
 		<div class="form-group">
 
-			
+
 			<script type="text/javascript">
 			function cambiarMail() {
 				
@@ -350,7 +350,8 @@ p.lead {
 	</main>
 </c:if>
 
-
+<script src="js/bootstrap.bundle.js"></script>
+<script src="js/dashboard.js"></script>
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
 

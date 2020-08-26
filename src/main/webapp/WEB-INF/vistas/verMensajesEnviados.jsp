@@ -39,7 +39,7 @@
 
 		<div
 			class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<h5 class="">Opiciones de filtrado</h5>
+			<h5 class="">Opciones de filtrado</h5>
 			<div class="">
 				<a
 					href=<c:if test='${rol == "ADMIN"}'>
