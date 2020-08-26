@@ -42,9 +42,6 @@
 	<h1>No está infectado</h1>
 </c:if> --%>
 
-
-
-
 <c:if
 	test='${(paciente.getInfectado() == null) && (paciente.getPosibleInfectado() == null)}'>
 	<h3 class="text-center my-3">Complete los siguientes datos y
@@ -69,7 +66,22 @@
 					<div class="card-body text-dark">
 						<form action="validarPermiso" method="POST"
 							class="d-flex justify-content-center flex-column justify-content-center">
-							<div class="form-row my-4">
+
+							<input type="hidden" value="${paciente.getNombre()}" name="nombre">
+							<input type="hidden" value="${paciente.getApellido()}" name="apellido">
+							<input type="hidden" value="${paciente.getEdad()}" name="edad">
+							<input type="hidden" value="${paciente.getEmail()}" name="email">
+							<input type="hidden" value="${paciente.getTipoDocumento()}" name="tipoDocumento">
+							<input type="hidden" value="${paciente.getNumeroDocumento()}" name="numeroDocumento">
+							
+<%-- 							<h1>${paciente.getNombre()}</h1>
+							<h1>${paciente.getApellido()}</h1>
+							<h1>${paciente.getEdad()}</h1>
+							<h1>${paciente.getEmail()}</h1>
+							<h1>${paciente.getTipoDocumento()}</h1>
+							<h1>${paciente.getNumeroDocumento()}</h1> --%>
+
+							<!-- <div class="form-row my-4">
 								<label for="nombre">Nombre <span
 									class="text-primary font-weight-bold">*</span></label> <input
 									type="text" class="form-control" id="nombre" name="nombre"
@@ -88,7 +100,7 @@
 									class="text-primary font-weight-bold">*</span></label> <input
 									type="number" class="form-control" id="edad" name="edad"
 									required>
-							</div>
+							</div> -->
 
 							<div class="form-group">
 								<label for="nombreLocalidad" class="h6 my-3">Localidad <span
@@ -174,7 +186,7 @@
 									espacios. Ej: 1530874512</small>
 							</div>
 
-							<div class="form-row my-4">
+							<!-- <div class="form-row my-4">
 								<label for="email">Correo electrónico <span
 									class="text-primary font-weight-bold">*</span></label> <input
 									type="text" class="form-control" id="email" name="email"
@@ -203,7 +215,7 @@
 										id="numeroDocumentoHelp" class="form-text text-muted">Sin
 										puntos ni espacios. Ej: 30758124</small>
 								</div>
-							</div>
+							</div> -->
 
 							<div class="form-row my-4">
 								<label for="motivo">Motivo del permiso <span
@@ -236,6 +248,9 @@
 									<option id="motivo9">Trabajás asistiendo a personas
 										menores, mayores o con discapacidad
 									<option id="motivo10">Alguna otra actividad exceptuada
+
+
+
 
 
 
