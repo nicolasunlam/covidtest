@@ -689,10 +689,10 @@ public class ControladorAsignacion {
     	servicioAsignacion.actualizarAsignacion(asignacionARechazar);
 		
     	Long idInstitucion = (long) request.getSession().getAttribute("ID");
-		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
-		Institucion institucionAAsignar = servicioInstitucion.obtenerInstitucionPorId(asignacionARechazar.getCama()
-				.getSala().getSector().getPiso().getInstitucion().getId());
+    	Institucion operadoraCentral = servicioInstitucion.obtenerInstitucionPorId((long) 1);
+		
+		Institucion institucionAAsignar = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
 		Paciente paciente = asignacionARechazar.getPaciente();
 		Cama cama = asignacionARechazar.getCama();
@@ -713,7 +713,7 @@ public class ControladorAsignacion {
 		
 		Notificacion notificacionTraslado = new Notificacion();
 		notificacionTraslado.setRemitente(institucionAAsignar);
-		notificacionTraslado.setDestinatario(institucion);
+		notificacionTraslado.setDestinatario(operadoraCentral);
 		notificacionTraslado.setFechaHora(hora);
 		notificacionTraslado.setAsunto(asunto);
 		notificacionTraslado.setMsg(msg);

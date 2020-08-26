@@ -120,7 +120,7 @@
 				aria-disabled="true">Iniciar Sesión</a>
 		</c:if>
 
-		 <c:if test="${rol != null}">
+		<c:if test="${rol != null}">
 			<div class="btn-group">
 				<button type="button" class="btn btn-outline-white dropdown-toggle"
 					data-toggle="dropdown" data-display="static" aria-haspopup="true"
@@ -196,63 +196,6 @@
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
-								<span data-feather="home"></span>
-							</div>
-
-							<div id="accordion2">
-								<div class="">
-									<div class="" id="headingTwo">
-										<h5 class="mb-0">
-											<button class="btn text-primary py-0" data-toggle="collapse"
-												data-target="#collapseTwo" aria-expanded="true"
-												aria-controls="collapseTwo" style="box-shadow: none">
-												Pacientes</button>
-										</h5>
-									</div>
-
-									<div id="collapseTwo" class="collapse "
-										aria-labelledby="headingOne" data-parent="#accordion2">
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark"
-												href="listaPacientesInternados"> <span
-												data-feather="users"></span> Pacientes Internados
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="posiblesinfectados">
-												<span data-feather="users"></span> Lista de Espera
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="consultarPaciente">
-												<span data-feather="search"></span> Consultar paciente
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="internarPaciente">
-												<span data-feather="user-plus"></span> Internar paciente
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="egresarPaciente">
-												<span data-feather="user-minus"></span> Egresar paciente
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark"
-												href="listaPacientesInfectados"> <span
-												data-feather="users"></span> Pacientes Infectados
-											</a>
-										</div>
-
-
-									</div>
-								</div>
-							</div>
-						</li>
-
-						<li class="nav-item mt-3 mb-3 d-flex mx-3">
-							<div class="py-1 text-primary">
 								<span data-feather="user"></span>
 							</div>
 
@@ -270,14 +213,14 @@
 									<div id="collapseThree" class="collapse "
 										aria-labelledby="headingThree" data-parent="#accordion3">
 										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark"
-												href="listaPacientesInternados"> <span
+											<a class="nav-link px-0 text-dark" href="MisDatos"> <span
 												data-feather="lock"></span> Mi cuenta
 											</a>
 										</div>
 										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="posiblesinfectados">
-												<span data-feather="inbox"></span> Mis mensajes
+											<a class="nav-link px-0 text-dark"
+												href="verMensajesRecibidos"> <span data-feather="inbox"></span>
+												Mis mensajes
 											</a>
 										</div>
 
@@ -287,38 +230,29 @@
 						</li>
 
 
+
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
 								<span data-feather="home"></span>
 							</div>
 
-							<div id="accordion4">
+							<div id="accordion6">
 								<div class="">
-									<div class="" id="headingFour">
+									<div class="" id="heading6">
 										<h5 class="mb-0">
 											<button class="btn text-primary py-0" data-toggle="collapse"
-												data-target="#collapseFour" aria-expanded="true"
-												aria-controls="collapseFour" style="box-shadow: none">
+												data-target="#collapse6" aria-expanded="true"
+												aria-controls="collapse6" style="box-shadow: none">
 												Pacientes</button>
 										</h5>
 									</div>
 
-									<div id="collapseFour" class="collapse "
-										aria-labelledby="headingFour" data-parent="#accordion4">
+									<div id="collapse6" class="collapse "
+										aria-labelledby="heading6" data-parent="#accordion6">
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark"
 												href="listaPacientesInternados"> <span
 												data-feather="users"></span> Pacientes Internados
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="posiblesinfectados">
-												<span data-feather="users"></span> Lista de Espera
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="consultarPaciente">
-												<span data-feather="search"></span> Consultar paciente
 											</a>
 										</div>
 										<div class="card-body px-0">
@@ -332,11 +266,68 @@
 											</a>
 										</div>
 										<div class="card-body px-0">
-											<a class="nav-link" href="grafico-pacientes"> <span
-												data-feather="bar-chart-2"></span> Reportes
+											<a class="nav-link px-0 text-dark" href="consultarPaciente">
+												<span data-feather="search"></span> Consultar paciente
 											</a>
 										</div>
+									</div>
+								</div>
+							</div>
+						</li>
 
+						<li class="nav-item mt-3 mb-3 d-flex mx-3">
+							<div class="py-1 text-primary">
+								<span data-feather="home"></span>
+							</div>
+
+							<div id="accordion2">
+								<div class="">
+									<div class="" id="headingTwo">
+										<h5 class="mb-0">
+											<a href="asignacionesParaRecibir">
+												<button class="btn text-primary py-0" data-toggle="collapse"
+													data-target="#collapseTwo" aria-expanded="true"
+													aria-controls="collapseTwo" style="box-shadow: none">
+													Asignaciones</button>
+											</a>
+										</h5>
+									</div>
+
+
+								</div>
+							</div>
+						</li>
+
+						<li class="nav-item mt-3 mb-3 d-flex mx-3">
+							<div class="py-1 text-primary">
+								<span data-feather="home"></span>
+							</div>
+
+							<div id="accordion4">
+								<div class="">
+									<div class="" id="headingFour">
+										<h5 class="mb-0">
+											<button class="btn text-primary py-0" data-toggle="collapse"
+												data-target="#collapseFour" aria-expanded="true"
+												aria-controls="collapseFour" style="box-shadow: none">
+												Traslados</button>
+										</h5>
+									</div>
+
+									<div id="collapseFour" class="collapse "
+										aria-labelledby="headingFour" data-parent="#accordion4">
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark"
+												href="trasladosSolicitados"> <span data-feather="users"></span>
+												Solicitados
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark"
+												href="trasladosParaRecibir"> <span
+												data-feather="user-plus"></span> Para recibir
+											</a>
+										</div>
 
 									</div>
 								</div>
@@ -352,13 +343,12 @@
 								<div class="">
 									<div class="" id="headingFive">
 										<h5 class="mb-0">
-										<a class="pt-0"
-												href="grafico-pacientes">
-											<button class="btn text-primary pt-0" data-toggle="collapse"
-												data-target="#collapseFive" aria-expanded="true"
-												aria-controls="collapseFive" style="box-shadow: none">
-												Reportes</button>
-												</a>
+											<a class="pt-0" href="grafico-pacientes">
+												<button class="btn text-primary pt-0" data-toggle="collapse"
+													data-target="#collapseFive" aria-expanded="true"
+													aria-controls="collapseFive" style="box-shadow: none">
+													Reportes</button>
+											</a>
 										</h5>
 									</div>
 
@@ -397,11 +387,12 @@
 										</div> -->
 
 
-									</div>
 								</div>
+
 							</div>
 						</li>
 
 					</ul>
 				</div>
-			</nav>
+		</div>
+		</nav>

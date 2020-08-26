@@ -20,15 +20,33 @@
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h2 class="">Traslados Solicitados</h2>
-
+		<a href="trasladosParaRecibir" class="btn btn-success">
+			Ver Traslados Para Recibir</a>
 	</div>
 	<h6 class="mb-5">Vea en detalle todos los traslados solicitadas
 		por su institución</h6>
 
 	<div
-		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom w-50">
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
 		<h5 class="">Opiciones de filtrado</h5>
-
+		<div class="">
+				<a
+					href=<c:if test='${rol == "ADMIN"}'>
+						"admin"
+						</c:if>
+					<c:if test='${rol == "INSTITUCION"}'>
+						"bienvenido"
+						</c:if>
+					<c:if test='${rol == "PACIENTE"}'>
+						"bienvenidoPaciente"
+						</c:if>
+					<c:if test='${rol == null}'>
+						"home"
+						</c:if>>
+					<button type="button" class="btn btn-primary">
+						Volver atrás</button>
+				</a>
+			</div>
 	</div>
 	<p class="mb-3">Realice el filtrado de la tabla para ver la
 		información que necesita con mayor comodidad</p>
@@ -181,12 +199,12 @@
 										
 										
 										<c:if test="${traslado.getAsignacionReservada().getAutorizada() == true}">
-			            					 class="btn btn-outline-success"
+			            					 class="btn btn-success"
 			              		 		</c:if>
 										
 										<c:if test="${traslado.getAsignacionReservada().getAutorizada() != true}">
 		 
-					            		 class="btn btn-outline-secondary" disabled
+					            		 class="btn btn-secondary" disabled
 					              		
 					              		 </c:if>>Trasladar</button>
 							</c:if>
@@ -466,5 +484,6 @@
 <script src="js/sort.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>
