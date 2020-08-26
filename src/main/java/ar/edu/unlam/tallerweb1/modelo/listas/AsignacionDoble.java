@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo.listas;
 
+import java.util.List;
+
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 
 public class AsignacionDoble {
@@ -7,6 +9,7 @@ public class AsignacionDoble {
 	private Asignacion asignacionActual;
 	private Asignacion asignacionReservada;
 	private Double distancia;
+	private List<String> enfermedades;
 	
 	public AsignacionDoble(Asignacion asignacionActual, Asignacion asignacionReservada) {
 		this.asignacionActual = asignacionActual;
@@ -39,6 +42,14 @@ public class AsignacionDoble {
 
 	public void setDistancia(Double distancia) {
 		this.distancia = distancia;
+	}
+
+	public List<String> getEnfermedades() {
+		return enfermedades;
+	}
+
+	public void setEnferemedades(List<String> enfermedades) {
+		this.enfermedades = enfermedades;
 	}
 
 }

@@ -538,7 +538,8 @@ public class ControladorPaciente {
 			AsignacionDoble asignacionDoble = new AsignacionDoble();
 
 			asignacionDoble.setAsignacionActual(servicioAsignacion.consultarAsignacionPacienteInternado(paciente));
-
+			asignacionDoble.setEnferemedades(servicioPaciente.obtenerListaDeEnfermedadesDeUnPaciente(paciente));;
+			
 			Asignacion asignacionReservada = servicioAsignacion.consultarReservaAsignacionPaciente(paciente);
 			if (asignacionReservada != null) {
 
