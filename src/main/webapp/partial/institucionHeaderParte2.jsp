@@ -85,7 +85,7 @@
 			class="d-inline-block align-top" alt="asignar">
 		</a>
 
-		
+
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item ml-4 active"><a
@@ -105,7 +105,8 @@
 						<span class="sr-only">(current)</span>
 				</a>
 				<li class="nav-item ml-3"><a class="btn btn-outline-success"
-					role="button" href="listaPacientesInternados">Pacientes internados</a></li>
+					role="button" href="listaPacientesInternados">Pacientes
+						internados</a></li>
 
 				<li class="nav-item ml-4"><a class="btn btn-outline-info"
 					role="button" href="verMensajesRecibidos">Ver mis Mensajes </a></li>
@@ -121,29 +122,26 @@
 
 		<c:if test="${rol != null}">
 			<div class="btn-group">
-				<button type="button"
-					class="btn btn-outline-white dropdown-toggle"
+				<button type="button" class="btn btn-outline-white dropdown-toggle"
 					data-toggle="dropdown" data-display="static" aria-haspopup="true"
 					aria-expanded="false">
-					
 
-	<%
-               String usuario = (String) request.getSession().getAttribute("MAIL").toString();
-               
-                  String paramName = (String)usuario;
-                  out.print("<tr><td>" + paramName + "</td>\n");
-               
-            %>
 
-<img src="img/avatar.svg" width="35"
-						height="35" class="d-inline-block align-middle" alt="cuenta">
+					<%
+						String usuario = (String) request.getSession().getAttribute("MAIL").toString();
+
+							String paramName = (String) usuario;
+							out.print("<tr><td>" + paramName + "</td>\n");
+					%>
+
+					<img src="img/avatar.svg" width="35" height="35"
+						class="d-inline-block align-middle" alt="cuenta">
 				</button>
 				<div class="dropdown-menu dropdown-menu-lg-right">
 					<a href="MisDatos" class="dropdown-item" role="button"
-						aria-disabled="true">Mi cuenta</a>
-
-					<a href="logout" class="dropdown-item" role="button"
-						aria-disabled="true">Cerrar sesión</a>
+						aria-disabled="true">Mi cuenta</a> <a href="logout"
+						class="dropdown-item" role="button" aria-disabled="true">Cerrar
+						sesión</a>
 
 				</div>
 			</div>
@@ -156,6 +154,7 @@
 				class="col-md-3 col-lg-2 d-md-block sidebar collapse">
 				<div class="sidebar-sticky pt-3">
 					<ul class="nav flex-column">
+
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
@@ -175,9 +174,8 @@
 									<div id="collapseOne" class="collapse"
 										aria-labelledby="headingOne" data-parent="#accordion">
 										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark"
-												href="pisosInstitucion"> <span
-												data-feather="users"></span> Pisos
+											<a class="nav-link px-0 text-dark" href="pisosInstitucion">
+												<span data-feather="users"></span> Pisos
 											</a>
 										</div>
 										<div class="card-body px-0">
@@ -201,7 +199,7 @@
 								<span data-feather="home"></span>
 							</div>
 
-							<div id="accordion">
+							<div id="accordion2">
 								<div class="">
 									<div class="" id="headingTwo">
 										<h5 class="mb-0">
@@ -213,7 +211,7 @@
 									</div>
 
 									<div id="collapseTwo" class="collapse "
-										aria-labelledby="headingOne" data-parent="#accordion">
+										aria-labelledby="headingOne" data-parent="#accordion2">
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark"
 												href="listaPacientesInternados"> <span
@@ -253,15 +251,175 @@
 							</div>
 						</li>
 
+						<li class="nav-item mt-3 mb-3 d-flex mx-3">
+							<div class="py-1 text-primary">
+								<span data-feather="home"></span>
+							</div>
 
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="consultarAsignacion"> <span data-feather="search"></span>
-								Consultar Asignación
-						</a></li>
-						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="grafico-pacientes"> <span data-feather="bar-chart-2"></span>
-								Reportes
-						</a></li>
+							<div id="accordion3">
+								<div class="">
+									<div class="" id="headingThree">
+										<h5 class="mb-0">
+											<button class="btn text-primary py-0" data-toggle="collapse"
+												data-target="#collapseThree" aria-expanded="true"
+												aria-controls="collapseThree" style="box-shadow: none">
+												Pacientes</button>
+										</h5>
+									</div>
+
+									<div id="collapseThree" class="collapse "
+										aria-labelledby="headingThree" data-parent="#accordion3">
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark"
+												href="listaPacientesInternados"> <span
+												data-feather="users"></span> Pacientes Internados
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="posiblesinfectados">
+												<span data-feather="users"></span> Lista de Espera
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="consultarPaciente">
+												<span data-feather="search"></span> Consultar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="internarPaciente">
+												<span data-feather="user-plus"></span> Internar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="egresarPaciente">
+												<span data-feather="user-minus"></span> Egresar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link" href="consultarAsignacion"> <span
+												data-feather="search"></span> Consultar Asignación
+											</a>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="nav-item mt-3 mb-3 d-flex mx-3">
+							<div class="py-1 text-primary">
+								<span data-feather="home"></span>
+							</div>
+
+							<div id="accordion4">
+								<div class="">
+									<div class="" id="headingFour">
+										<h5 class="mb-0">
+											<button class="btn text-primary py-0" data-toggle="collapse"
+												data-target="#collapseFour" aria-expanded="true"
+												aria-controls="collapseFour" style="box-shadow: none">
+												Pacientes</button>
+										</h5>
+									</div>
+
+									<div id="collapseFour" class="collapse "
+										aria-labelledby="headingFour" data-parent="#accordion4">
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark"
+												href="listaPacientesInternados"> <span
+												data-feather="users"></span> Pacientes Internados
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="posiblesinfectados">
+												<span data-feather="users"></span> Lista de Espera
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="consultarPaciente">
+												<span data-feather="search"></span> Consultar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="internarPaciente">
+												<span data-feather="user-plus"></span> Internar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="egresarPaciente">
+												<span data-feather="user-minus"></span> Egresar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link" href="grafico-pacientes"> <span
+												data-feather="bar-chart-2"></span> Reportes
+											</a>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</li>
+
+						<li class="nav-item mt-3 mb-3 d-flex mx-3">
+							<div class="py-1 text-primary">
+								<span data-feather="home"></span>
+							</div>
+
+							<div id="accordion4">
+								<div class="">
+									<div class="" id="headingFive">
+										<h5 class="mb-0">
+											<button class="btn text-primary py-0" data-toggle="collapse"
+												data-target="#collapseFive" aria-expanded="true"
+												aria-controls="collapseFive" style="box-shadow: none">
+												Pacientes</button>
+										</h5>
+									</div>
+
+									<div id="collapseFive" class="collapse "
+										aria-labelledby="headingFive" data-parent="#accordion4">
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark"
+												href="listaPacientesInternados"> <span
+												data-feather="users"></span> Pacientes Internados
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="posiblesinfectados">
+												<span data-feather="users"></span> Lista de Espera
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="consultarPaciente">
+												<span data-feather="search"></span> Consultar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="internarPaciente">
+												<span data-feather="user-plus"></span> Internar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="egresarPaciente">
+												<span data-feather="user-minus"></span> Egresar paciente
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link" href="grafico-pacientes"> <span
+												data-feather="bar-chart-2"></span> Reportes
+											</a>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</li>
+
 					</ul>
 				</div>
 			</nav>
