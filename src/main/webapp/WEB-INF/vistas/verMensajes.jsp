@@ -170,12 +170,15 @@
 
 						<td><a class="btn btn-outline-primary mb-2"
 							href="verDetalleMensaje?id=${notificacion.getId()}" role="button">Ver
-								Mensaje</a> <a class="btn btn-outline-success" href="" role="button">Responder</a></td>
+								Mensaje</a>
+								
+							<a class="btn btn-outline-success" href="responderAPaciente?id=${notificacion.getRemitente().getId()}" role="button">Responder</a></td>
 
 						</form>
 						</div>
 
 						</td>
+						<%-- <td>"${notificacion.getRemitente().getId()}"</td> --%>
 				</c:forEach>
 
 			</table>
@@ -201,6 +204,8 @@
 				<button type="button" class="btn btn-outline-primary">
 					Volver atrás</button>
 			</a>
+			
+			
 		</div>
 
 	</div>

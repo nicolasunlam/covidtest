@@ -68,6 +68,34 @@ public class ControladorNotificacion {
 
 		return new ModelAndView("crearMensaje", model);
 	}
+	
+	@RequestMapping(value = "responderAPaciente", method = RequestMethod.GET)
+	public ModelAndView responderAPaciente(
+
+			@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+
+		Paciente p = servicioPaciente.consultarPacientePorId(id);
+		Long idPaciente = (Long) request.getSession().getAttribute("ID");
+
+		model.put("id", idPaciente);
+		model.put("p", p);
+
+		return new ModelAndView("crearMensaje", model);
+	}
 
 	@RequestMapping(value = "crearMensajeParaInstitucion", method = RequestMethod.POST)
 	public ModelAndView crearMensajeParaInstitucion(
