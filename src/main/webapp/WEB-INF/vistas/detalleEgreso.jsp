@@ -46,7 +46,7 @@
 			<div
 			class="pt-3 pb-2">
 	
-			<a href="panel" class="btn btn-primary">Inicio</a>
+			<a href="listaPacientesInternados" class="btn btn-primary">Inicio</a>
 	
 		</div>
 	
