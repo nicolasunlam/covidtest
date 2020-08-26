@@ -242,7 +242,7 @@
 					</div>
 
 					<div class="">
-						<button type="" class="btn btn-outline-danger">Cancelar</button>
+						<a href="posiblesinfectados" type="" class="btn btn-outline-danger">Cancelar</a>
 					</div>
 
 				</div>
