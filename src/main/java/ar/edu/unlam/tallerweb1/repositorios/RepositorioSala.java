@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
@@ -21,5 +22,11 @@ public interface RepositorioSala {
 	List<SalaCantidad> obtenerSalasConCantidadDeCamasDisponiblesDeUnaInstitucion(Institucion institucion);
 
 	List<Sala> listarSalasPorPiso(Piso piso);
+
+	List<Cama> listarCamasOcupadasPorSala(Sala sala);
+
+	List<Cama> listarCamasReservadasPorSala(Sala sala);
+
+	List<Cama> listarCamasDisponiblesPorSala(Sala sala);
 
 }

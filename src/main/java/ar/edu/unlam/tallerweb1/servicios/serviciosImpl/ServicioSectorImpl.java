@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
 import ar.edu.unlam.tallerweb1.modelo.Sector;
@@ -61,6 +62,21 @@ public class ServicioSectorImpl implements ServicioSector {
 		sectorConSalas.setListaDeSalas(listaSalasConDetalle);
 
 		return sectorConSalas;
+	}
+
+	@Override
+	public List<Cama> listarCamasDisponiblesPorSector(Sector sector) {
+		return repositorioSector.listarCamasDisponiblesPorSector(sector);
+	}
+
+	@Override
+	public List<Cama> listarCamasReservadasPorSector(Sector sector) {
+		return repositorioSector.listarCamasReservadasPorSector(sector);
+	}
+
+	@Override
+	public List<Cama> listarCamasOcupadasPorSector(Sector sector) {
+		return repositorioSector.listarCamasOcupadasPorSector(sector);
 	}
 
 }

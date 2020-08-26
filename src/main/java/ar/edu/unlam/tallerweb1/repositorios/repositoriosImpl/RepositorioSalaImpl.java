@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
@@ -100,4 +101,60 @@ public class RepositorioSalaImpl implements RepositorioSala {
 		return query.getResultList();
 	}
 	
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Cama> listarCamasOcupadasPorSala(Sala sala) {
+
+		String hql = "SELECT c " 
+					+ "FROM Cama as c " 
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Asignacion as a ON a.cama = c "
+					+ "WHERE sal = :sala " 
+					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.horaIngreso IS NOT NULL "; 
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("sala", sala);
+
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Cama> listarCamasReservadasPorSala(Sala sala) {
+
+		String hql = "SELECT c " 
+					+ "FROM Cama as c " 
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Asignacion as a ON a.cama = c "
+					+ "WHERE sal = :sala " 
+					+ "AND a.horaReserva IS NOT NULL "
+					+ "AND a.horaIngreso IS NULL "; 
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("sala", sala);
+
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Cama> listarCamasDisponiblesPorSala(Sala sala) {
+
+		String hql = "SELECT c " 
+					+ "FROM Cama as c "
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "WHERE sal = :sala " 
+					+ "AND c NOT IN (SELECT a.cama " 
+							+ "FROM Asignacion as a " 
+							+ "WHERE a.cama = c "
+							+ "AND a.horaEgreso IS NULL)";
+					
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("sala", sala);
+	
+		return query.getResultList();
+	
+	}
 }

@@ -5,7 +5,7 @@
 <%@ page import="java.io.*,java.util.*"%>
 
 
-<link rel="icon" href="img/iso-azul-blanco.svg">
+<link rel="icon" href="img/iso-azul.svg">
 
 <link href="css/bootstrap.css" rel="stylesheet">
 <!-- Custom styles for this template -->
@@ -120,7 +120,7 @@
 				aria-disabled="true">Iniciar Sesión</a>
 		</c:if>
 
-		<c:if test="${rol != null}">
+		 <c:if test="${rol != null}">
 			<div class="btn-group">
 				<button type="button" class="btn btn-outline-white dropdown-toggle"
 					data-toggle="dropdown" data-display="static" aria-haspopup="true"
@@ -352,14 +352,17 @@
 								<div class="">
 									<div class="" id="headingFive">
 										<h5 class="mb-0">
-											<button class="btn text-primary py-0" data-toggle="collapse"
+										<a class="pt-0"
+												href="grafico-pacientes">
+											<button class="btn text-primary pt-0" data-toggle="collapse"
 												data-target="#collapseFive" aria-expanded="true"
 												aria-controls="collapseFive" style="box-shadow: none">
-												Pacientes</button>
+												Reportes</button>
+												</a>
 										</h5>
 									</div>
 
-									<div id="collapseFive" class="collapse "
+									<!-- <div id="collapseFive" class="collapse "
 										aria-labelledby="headingFive" data-parent="#accordion4">
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark"
@@ -391,7 +394,7 @@
 											<a class="nav-link" href="grafico-pacientes"> <span
 												data-feather="bar-chart-2"></span> Reportes
 											</a>
-										</div>
+										</div> -->
 
 
 									</div>

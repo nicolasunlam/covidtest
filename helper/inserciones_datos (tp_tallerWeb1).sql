@@ -186,10 +186,10 @@ VALUES (1, "Cirujia", NULL, 1),
        (16, "Quemaduras", NULL, 15),
        
        /*MÁS SECTORES PARA FAVALORO*/
-       (17, "Cirujia", NULL, 2),
-	   (18, "Internación", NULL, 3),
-       (19, "Radiografías", NULL, 3),
-       (20, "Quemaduras", NULL, 3);
+       (17, "Análisis", NULL, 2),
+	   (18, "Traumatología", NULL, 3),
+       (19, "Guardia", NULL, 3),
+       (20, "Dermatología", NULL, 3);
        
 INSERT INTO sala(id, descripcion, tipoSala, sector_id)
 		/*FAVALORO*/
@@ -338,8 +338,8 @@ VALUES
 	   (18, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 48, 23, true, "Media"),
        
        /*RECIBE EL HOSP. FAVALORO*/
-	   (19, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 14, 21, true, "Media"),
-	   (20, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 15, 30, false, "Media"),
+	   (19, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 13, 21, true, "Media"),
+	   (20, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 14, 30, false, "Media"),
 	   (21, '2020-05-05 01:00:00.000000', "FALTA_DE_MAQUINARIA", null, null, 15, 26, null, "Media"),
        
        /*RECIBE EL HOSP. SANTOJIANNI*/       

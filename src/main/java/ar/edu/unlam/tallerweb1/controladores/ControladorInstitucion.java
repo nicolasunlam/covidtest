@@ -29,6 +29,8 @@ import ar.edu.unlam.tallerweb1.modelo.TipoSector;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.listas.PisoConSectores;
 import ar.edu.unlam.tallerweb1.modelo.listas.PisoDetallado;
+import ar.edu.unlam.tallerweb1.modelo.listas.SalaDetallada;
+import ar.edu.unlam.tallerweb1.modelo.listas.SectorDetallado;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCama;
 import ar.edu.unlam.tallerweb1.servicios.ServicioDomicilio;
@@ -561,8 +563,8 @@ public class ControladorInstitucion {
 		return new ModelAndView("pisosInstitucion", model);
 	}
 
-	@RequestMapping("/listarSectoresPorPiso")
-	public ModelAndView listarSectoresPorPiso(HttpServletRequest request, @RequestParam(value = "idPiso") Long idPiso) {
+	@RequestMapping("/sectoresInstitucion")
+	public ModelAndView sectoresInstitucion(HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
@@ -576,24 +578,46 @@ public class ControladorInstitucion {
 		if (rol != null) {
 			model.put("rol", rol.name());
 		}
+
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
-
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 
-		Piso piso = servicioPiso.buscarPisoPorId(idPiso);
+		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
+		List<SectorDetallado> listaSectoresDetallados = new ArrayList<SectorDetallado>();
 
-		List<Sector> listaSectoresPorPiso = servicioSector.consultarSectoresPorPiso(piso);
+		for (int i = 0; i < listaPisos.size(); i++) {
 
-		model.put("listaSectoresPorPiso", listaSectoresPorPiso);
+			List<Sector> listaSectores = servicioSector.consultarSectoresPorPiso(listaPisos.get(i));
+
+			for (Sector sector : listaSectores) {
+
+				List<Sala> listaSalas = servicioSala.listarSalasPorSector(sector);
+				List<Cama> listaCamasOcupadas = servicioSector.listarCamasOcupadasPorSector(sector);
+				List<Cama> listaCamasReservadas = servicioSector.listarCamasReservadasPorSector(sector);
+				List<Cama> listaCamasDisponibles = servicioSector.listarCamasDisponiblesPorSector(sector);
+
+				SectorDetallado sectorDetallado = new SectorDetallado();
+
+				sectorDetallado.setSector(sector);
+				sectorDetallado.setListaSalas(listaSalas);
+				sectorDetallado.setListaCamasOcupadas(listaCamasOcupadas);
+				sectorDetallado.setListaCamasReservadas(listaCamasReservadas);
+				sectorDetallado.setListaCamasDisponibles(listaCamasDisponibles);
+
+				listaSectoresDetallados.add(sectorDetallado);
+			}
+
+		}
+
+		model.put("listaSectoresDetallados", listaSectoresDetallados);
 
 		return new ModelAndView("sectoresInstitucion", model);
 	}
 
-	@RequestMapping("/listarSalasPorSector")
-	public ModelAndView listarSalasPorSector(HttpServletRequest request,
-			@RequestParam(value = "idSector") Long idSector) {
+	@RequestMapping("/salasInstitucion")
+	public ModelAndView salasInstitucion(HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
@@ -607,17 +631,47 @@ public class ControladorInstitucion {
 		if (rol != null) {
 			model.put("rol", rol.name());
 		}
+
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Long idInstitucion = (Long) request.getSession().getAttribute("ID");
-
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 
-		Sector sector = servicioSector.buscarSectorPorId(idSector);
+		List<Piso> listaPisos = servicioPiso.listarPisosPorInstitucion(institucion);
+		List<SalaDetallada> listaSalasDetallados = new ArrayList<SalaDetallada>();
 
-		List<Sala> listaSalasPorSector = servicioSala.listarSalasPorSector(sector);
+		
+		for (int i = 0; i < listaPisos.size(); i++) {
 
-		model.put("listaSalasPorSector", listaSalasPorSector);
+			List<Sector> listaSectores = servicioSector.consultarSectoresPorPiso(listaPisos.get(i));
+
+			for (Sector sector : listaSectores) {
+
+				List<Sala> listaSalas = servicioSala.listarSalasPorSector(sector);
+				
+				for (Sala sala : listaSalas) {			
+					
+					
+					List<Cama> listaCamasOcupadas = servicioSala.listarCamasOcupadasPorSala(sala);
+					List<Cama> listaCamasReservadas = servicioSala.listarCamasReservadasPorSala(sala);
+					List<Cama> listaCamasDisponibles = servicioSala.listarCamasDisponiblesPorSala(sala);
+
+					SalaDetallada salaDetallada = new SalaDetallada();
+
+					salaDetallada.setSala(sala);
+					salaDetallada.setListaSalas(listaSalas);
+					salaDetallada.setListaCamasOcupadas(listaCamasOcupadas);
+					salaDetallada.setListaCamasReservadas(listaCamasReservadas);
+					salaDetallada.setListaCamasDisponibles(listaCamasDisponibles);
+
+					listaSalasDetallados.add(salaDetallada);
+				}
+
+			}
+
+		}
+
+		model.put("listaSalasDetallados", listaSalasDetallados);
 
 		return new ModelAndView("salasInstitucion", model);
 	}
@@ -671,9 +725,8 @@ public class ControladorInstitucion {
 
 	@RequestMapping("detalleInstitucion")
 	public ModelAndView detalleInstitucion(
-			
-			@RequestParam(value = "idInstitucion") Long idInstitucion,
-			HttpServletRequest request) {
+
+			@RequestParam(value = "idInstitucion") Long idInstitucion, HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
@@ -690,14 +743,13 @@ public class ControladorInstitucion {
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
-		
 
 		Double latitudInstitucion = institucion.getLatitud();
 		Double longitudInstitucion = institucion.getLongitud();
-		
+
 		model.put("latitudInstitucion", latitudInstitucion);
 		model.put("longitudInstitucion", longitudInstitucion);
-		
+
 		if (rol == Rol.PACIENTE) {
 			Long id = (Long) request.getSession().getAttribute("ID");
 			Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
@@ -713,7 +765,7 @@ public class ControladorInstitucion {
 			model.put("latitudPaciente", latitudPaciente);
 			model.put("longitudPaciente", longitudPaciente);
 		}
-		
+
 		Integer cantidadTotalCamas = servicioCama.obtenerCamas().size();
 		Integer cantidadCamasOcupadas = servicioCama.obtenerTotalDeCamasOcupadas().size();
 		Integer camasDisponibles = servicioCama.obtenerCamasDisponiblesPorInstitucion(institucion).size();
@@ -722,7 +774,7 @@ public class ControladorInstitucion {
 		model.put("cantidadTotalCamas", cantidadTotalCamas);
 		model.put("cantidadCamasOcupadas", cantidadCamasOcupadas);
 		model.put("cantidadCamasReservadas", cantidadCamasReservadas);
-		
+
 		model.put("nombre", institucion.getNombre());
 		model.put("email", institucion.getEmail());
 		model.put("calle", institucion.getDomicilio().getCalle());

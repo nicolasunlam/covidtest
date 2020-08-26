@@ -3,7 +3,7 @@
 <%@ page import="java.io.*,java.util.*"%>
 
 
-<link rel="icon" href="img/iso-azul-blanco.svg">
+<link rel="icon" href="img/iso-azul.svg">
 
 <link href="css/bootstrap.css" rel="stylesheet">
 <!-- Custom styles for this template -->

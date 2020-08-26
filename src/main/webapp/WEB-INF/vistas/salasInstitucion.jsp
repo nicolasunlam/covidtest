@@ -5,7 +5,7 @@
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
-<title>AsignAR</title>
+<title>Sectores</title>
 
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
@@ -13,6 +13,8 @@
 	crossorigin="anonymous">
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
+
+
 
 <style>
 #inputTipoInstitucion, #inputNombre, #inputCUIT {
@@ -50,143 +52,278 @@
 }
 
 .callout {
-  padding: 20px;
-  margin: 20px 0;
-  border: 1px solid #eee;
-  border-left-width: 5px;
-  border-radius: 3px;
-  border-left-color: #428bca;
-  h4 {
-    margin-top: 0;
-    margin-bottom: 5px;
-  }
-  p:last-child {
-    margin-bottom: 0;
-  }
-  code {
-    border-radius: 3px;
-  }
-  & + .bs-callout {
-    margin-top: -5px;
-  }
+	padding: 20px;
+	margin: 20px 0;
+	border: 1px solid #eee;
+	border-left-width: 5px;
+	border-radius: 3px;
+	border-left-color: #428bca; h4 { margin-top : 0;
+	margin-bottom: 5px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+
+code {
+	border-radius: 3px;
+}
+
+&
++
+.bs-callout {
+	margin-top: -5px;
+}
 }
 </style>
 
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
-	<div class="container-fluid">
-
-		<h2 class="my-5">Lista de Salas</h2>
-
-		<div class="row">
-
-			<div class="col-3">
-				<h5 class="mt-5 mb-3">Número</h5>
-				<input type="text" id="inputNombre"
-					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorNombre()" placeholder="Ingrese número a buscar">
-			</div>
-			<div class="col-3">
-				<h5 class="mt-5 mb-3">Descripción</h5>
-				<input type="text" id="inputTipoInstitucion"
-					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorTipoInstitucion()"
-					placeholder="Ingrese descripción a buscar">
-			</div>
-			<div class="col-3">
-				<h5 class="mt-5 mb-3">Tipo</h5>
-				<input type="text" id="inputCUIT"
-					class="mb-5 bg-light border border-secondary"
-					onkeyup="filtrarPorCUIT()" placeholder="Ingrese tipo a buscar">
-			</div>
-
-			<div class="col-3 text-center">
-				<h5 class="mt-5 mb-3">Registrar Sala</h5>
-				<div class="mt-3">
-
-					<input class="invisible" type="hidden" id="id" name="id"
-						value="${sala.getId()}"> <a href="crearSector"
-						class="btn btn-outline-success rounded  w-50" type="submit"><i
-						class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
-
-				</div>
+<div class="container px-5">
 
 
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="col-6"></div>
-				<div class="col-3"></div>
-			</div>
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h2 class="">Sectores</h2>
+		<a type="button" class="btn btn-outline-success" href="crearSector">
+			Agregar sector</a>
+	</div>
+	<h6 class="mb-5">Vea en detalle todos los sectores de su
+		institución</h6>
 
-			<table id="myTable"
-				class="table table-bordered responsive nowrap align-middle">
-				<tr class="text-center align-middle" style="cursor: pointer;">
-					<th scope="col"
-						onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-						onmouseout="this.style.backgroundColor='white';" id="nombreTabla">Descripción
-						<i class="fa fa-sort"></i>
-					</th>
+	<div class=" my-5 px-0">
+		<c:forEach items="${listaSalasDetallados}" var="sala">
 
-					<th scope="col"
-						onmouseover="this.style.backgroundColor='DeepSkyBlue';"
-						onmouseout="this.style.backgroundColor='white';">Acciones</th>
+			<div class="callout callout-primary py-4">
 
-				</tr>
-				<c:forEach items="${listaSalasPorSector}" var="sala">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mx-3">
 
-					<tr onmouseover="this.style.backgroundColor='AliceBlue';"
-						onmouseout="this.style.backgroundColor='white';">
-						<td class="align-middle"><c:out value="${sala.getId()}" /></td>
+					<div class="col">
 
-						<td class="text-center">
-							<div class="mt-3">
+						<div class="row">
 
+							<div class="col">
+								<h4 class="mb-4">Sala ${sala.getSala().getDescripcion()}</h4>
 
-								<form action="listarSalasPorSector" method=get>
+								<p class="font-weight-bold my-2">
 
+									<c:if
+										test="${sala.getSala().getSector().getPiso().getNumeroPiso() == 0}">
+										Planta Baja
+									</c:if>
 
-									<input class="invisible" type="hidden" id="idSala"
-										name="idSala" value="${sala.getId()}"> <input
-										class="btn btn-primary" type="submit" value="Detalle Sala">
+									<c:if
+										test="${sala.getSala().getSector().getPiso().getNumeroPiso() != 0}">
+										Piso ${sala.getSala().getSector().getPiso().getNumeroPiso()}
+									</c:if>
+								</p>
 
-								</form>
+								<p class="font-weight-bold my-2">
+									Sector ${sala.getSala().getSector().getDescripcion()}
+									</p>
+								<p class="my-2">Cantidad de salas:
+									${sala.getListaSalas().size()}</p>
+								<p>Cantidad de camas: ${sala.getListaCamasOcupadas().size() 
+									+ sala.getListaCamasReservadas().size() 
+									+ sala.getListaCamasDisponibles().size()}</p>
 							</div>
-						</td>
-				</c:forEach>
-			</table>
+						</div>
 
-		</div>
+						<div class="pl-3 row">
+							<form action="verPiso" method=get class="mt-4 mb-0">
+								<input class="invisible" type="hidden" id="id" name="idPiso"
+									value="${sala.getSala().getSector().getPiso().getId()}">
+								<input class="btn btn-outline-primary" type="submit"
+									value="Ver detalle sala">
+							</form>
 
-		<%-- 		<div class="container justify-content-md-center bg-primary my-5 w-25">
-			<div class="row">
-				<div class="col-3 bg-white"></div>
-				<div class="col-6 text-center">
-					<i class="fa fa-h-square fa-3x mt-2 mb-2" aria-hidden="true"></i>
+						</div>
+
+					</div>
+
+					<div class="d-flex align-items-end flex-column col mr-3">
+
+						<div class="row">
+
+							<div class="col">
+
+								<div class="row" style="display: block">
+
+									<c:choose>
+										<c:when test="${sala.getListaCamasDisponibles().size() == 0}">
+											<p class="text-right mb-2">Ninguna cama disponible</p>
+										</c:when>
+										<c:when test="${sala.getListaCamasDisponibles().size() == 1}">
+											<p class="text-right mb-2">${sala.getListaCamasDisponibles().size()}
+												cama disponible</p>
+										</c:when>
+										<c:otherwise>
+											<p class="text-right mb-2">${sala.getListaCamasDisponibles().size()}
+												camas disponibles</p>
+										</c:otherwise>
+									</c:choose>
+
+								</div>
+
+								<div class="row flex-row-reverse">
+
+									<c:choose>
+
+										<c:when test="${sala.getListaCamasDisponibles().size() == 0}">
+											<span style="margin-left: 4px;"> <img alt=""
+												src="img/cama-ocup-ver.png" style="width: 35px">
+											</span>
+										</c:when>
+
+										<c:otherwise>
+
+											<c:forEach items="${sala.getListaCamasDisponibles()}"
+												var="cama" end="7">
+												<span style="margin-left: 4px;"> <img alt=""
+													src="img/cama-ver.png" style="width: 35px">
+												</span>
+											</c:forEach>
+
+										</c:otherwise>
+									</c:choose>
+
+
+									<c:if test="${sala.getListaCamasDisponibles().size() > 8}">
+										<span class="text-success" style="margin-left: 4px;">
+											<p class="h5 mb-0">+
+												${sala.getListaCamasDisponibles().size() - 8}</p>
+										</span>
+									</c:if>
+
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col my-2">
+
+								<div class="row" style="display: block">
+									<c:choose>
+										<c:when test="${sala.getListaCamasOcupadas().size() == 0}">
+											<p class="text-right mb-2">Ninguna cama ocupada</p>
+										</c:when>
+										<c:when test="${sala.getListaCamasOcupadas().size() == 1}">
+											<p class="text-right mb-2">${sala.getListaCamasOcupadas().size()}
+												cama ocupada</p>
+										</c:when>
+										<c:otherwise>
+											<p class="text-right mb-2">${sala.getListaCamasOcupadas().size()}
+												camas ocupadas</p>
+										</c:otherwise>
+									</c:choose>
+								</div>
+
+								<div class="row flex-row-reverse">
+
+									<c:choose>
+
+										<c:when test="${sala.getListaCamasOcupadas().size() == 0}">
+											<span style="margin-left: 4px;"> <img alt=""
+												src="img/cama-ocup-ro.png" style="width: 35px">
+											</span>
+										</c:when>
+
+										<c:otherwise>
+
+											<c:forEach items="${sala.getListaCamasOcupadas()}" var="cama"
+												end="7">
+												<span class="d-flex flex-row-reverse"
+													style="margin-left: 4px;"> <img alt=""
+													src="img/cama-ro.png" style="width: 35px">
+												</span>
+											</c:forEach>
+
+										</c:otherwise>
+									</c:choose>
+
+									<c:if test="${sala.getListaCamasOcupadas().size() > 8}">
+										<span class="text-success" style="margin-left: 4px;">
+											<p class="h5 mb-0">+
+												${sala.getListaCamasOcupadas().size() - 8}</p>
+										</span>
+									</c:if>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col">
+
+								<div class="row" style="display: block">
+									<c:choose>
+										<c:when test="${sala.getListaCamasReservadas().size() == 0}">
+											<p class="text-right mb-2">Ninguna cama reservada</p>
+										</c:when>
+										<c:when test="${sala.getListaCamasReservadas().size() == 1}">
+											<p class="text-right mb-2">${sala.getListaCamasReservadas().size()}
+												cama reservada</p>
+										</c:when>
+										<c:otherwise>
+											<p class="text-right mb-2">${sala.getListaCamasReservadas().size()}
+												camas reservadas</p>
+										</c:otherwise>
+									</c:choose>
+								</div>
+
+								<div class="row flex-row-reverse">
+
+									<c:choose>
+
+										<c:when test="${sala.getListaCamasReservadas().size() == 0}">
+											<span style="margin-left: 4px;"> <img alt=""
+												src="img/cama-ocup-am.png" style="width: 35px">
+											</span>
+										</c:when>
+
+										<c:otherwise>
+
+											<c:forEach items="${sala.getListaCamasReservadas()}"
+												var="cama" end="7">
+												<span class="d-flex flex-row-reverse"
+													style="margin-left: 4px;"> <img alt=""
+													src="img/cama-am.png" style="width: 35px">
+												</span>
+											</c:forEach>
+
+										</c:otherwise>
+									</c:choose>
+
+									<c:if test="${sala.getListaCamasReservadas().size() > 8}">
+										<span class="text-success" style="margin-left: 4px;">
+											<p class="h5 mb-0">+
+												${sala.getListaCamasReservadas().size() - 8}</p>
+										</span>
+									</c:if>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
 				</div>
-				<div class="col-3 bg-white"></div>
 			</div>
+		</c:forEach>
 
-			<c:forEach items="${listaPisos}" var="piso">
-				<div class="bg-light my-2">
-					<h3 class="text-center">${piso.getId()}</h3>
-				</div>
-			</c:forEach>
-			<div class="bg-primary text-center" style="height: 5px;"></div>
-		</div> --%>
-</main>
-
-</div>
-</div>
-
+	</div>
 </main>
 
 
 
-</div>
-</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
@@ -205,6 +342,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
 <script src="js/sort.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js">
+	
+</script>
 
 </body>
 </html>

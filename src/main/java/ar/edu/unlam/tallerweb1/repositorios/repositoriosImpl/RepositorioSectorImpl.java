@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.Query;
 
+import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPiso;
@@ -64,6 +65,65 @@ public class RepositorioSectorImpl implements RepositorioSector {
     query.setParameter("piso", piso);
     
     return query.getResultList();
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Cama> listarCamasOcupadasPorSector(Sector sector) {
+
+		String hql = "SELECT c " 
+					+ "FROM Cama as c " 
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec "
+					+ "JOIN Asignacion as a ON a.cama = c "
+					+ "WHERE sec = :sector " 
+					+ "AND a.horaEgreso IS NULL "
+					+ "AND a.horaIngreso IS NOT NULL "; 
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("sector", sector);
+
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Cama> listarCamasReservadasPorSector(Sector sector) {
+
+		String hql = "SELECT c " 
+					+ "FROM Cama as c " 
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec "
+					+ "JOIN Asignacion as a ON a.cama = c "
+					+ "WHERE sec = :sector " 
+					+ "AND a.horaReserva IS NOT NULL "
+					+ "AND a.horaIngreso IS NULL "; 
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("sector", sector);
+
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Cama> listarCamasDisponiblesPorSector(Sector sector) {
+
+		String hql = "SELECT c " 
+					+ "FROM Cama as c "
+					+ "JOIN Sala as sal ON c.sala = sal "
+					+ "JOIN Sector as sec ON sal.sector = sec "
+					+ "WHERE sec = :sector "
+					+ "AND c NOT IN (SELECT a.cama " 
+							+ "FROM Asignacion as a " 
+							+ "WHERE a.cama = c "
+							+ "AND a.horaEgreso IS NULL)";
+					
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("sector", sector);
+	
+		return query.getResultList();
+	
 	}
 
 }

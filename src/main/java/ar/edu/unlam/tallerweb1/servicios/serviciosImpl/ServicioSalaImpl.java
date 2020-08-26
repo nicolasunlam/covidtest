@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Sala;
@@ -88,6 +89,21 @@ public class ServicioSalaImpl implements ServicioSala {
 	@Override
 	public List<Sala> listarSalasPorPiso(Piso piso) {
 		return repositorioSala.listarSalasPorPiso(piso);
+	}
+
+	@Override
+	public List<Cama> listarCamasOcupadasPorSala(Sala sala) {
+		return repositorioSala.listarCamasOcupadasPorSala(sala);
+	}
+
+	@Override
+	public List<Cama> listarCamasReservadasPorSala(Sala sala) {
+		return repositorioSala.listarCamasReservadasPorSala(sala);
+	}
+
+	@Override
+	public List<Cama> listarCamasDisponiblesPorSala(Sala sala) {
+		return repositorioSala.listarCamasDisponiblesPorSala(sala);
 	}
 
 }
