@@ -5,7 +5,7 @@
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
-<title>Inserte titulo aquí</title>
+<title>Crear Mensaje</title>
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 

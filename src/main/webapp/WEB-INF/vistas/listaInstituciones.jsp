@@ -161,9 +161,29 @@
 							value="${institucion.getEmail()}" /></td>
 
 
-					<td><a class="btn btn-outline-primary mb-2"
+					<td>
+					
+					<a class="btn btn-outline-primary mb-2"
 						href="detalleInstitucion?idInstitucion=${institucion.getId()}"
 						role="button">Ver detalle</a>
+
+
+
+							<form action="crearMensajeParaInstitucion" method=post>
+
+
+								<input class="invisible" type="hidden" id="id" name="id"
+									value="${institucion.getId()}"> <input
+									class="btn btn-outline-primary" type="submit"
+									value="Enviar Mensaje">
+
+
+
+							</form>
+
+						</td>
+						
+						
 			</c:forEach>
 
 		</table>

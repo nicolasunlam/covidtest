@@ -98,7 +98,7 @@ public class ControladorNotificacion {
 		
 		return new ModelAndView("crearMensaje",model);
 	}
-	
+	//Button o Submit de Mensaje
 	@RequestMapping(value = "enviarMensaje", method = RequestMethod.POST)
 	public ModelAndView enviarMensaje(
 			
@@ -213,5 +213,7 @@ public class ControladorNotificacion {
 		return "verDetalleMensaje";
 
 	} 
+	
+	
 	
 }
