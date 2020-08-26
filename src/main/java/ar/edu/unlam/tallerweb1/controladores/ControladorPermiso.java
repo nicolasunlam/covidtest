@@ -44,6 +44,10 @@ public class ControladorPermiso {
 		if (rol != null) {
 			model.put("rol", rol.name());
 		}
+		
+		Paciente paciente = servicioPaciente.consultarPacientePorId((Long) request.getSession().getAttribute("ID"));
+		//Long id = paciente.getId();
+		model.put("paciente", paciente);
 
 //		if (rol.name() == "PACIENTE") {
 //			Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
