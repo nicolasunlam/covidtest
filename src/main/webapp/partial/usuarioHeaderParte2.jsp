@@ -101,7 +101,7 @@
 				<c:if test="${permiso == true}">
 					<li class="nav-item ml-3" id="botonPermiso"><a
 						class="nav-link btn btn-outline-success active"
-						href="generarPermiso?idPaciente=-1">Generar Permiso </a></li>
+						href="generarPermiso">Generar Permiso </a></li>
 				</c:if>
 				</li>
 

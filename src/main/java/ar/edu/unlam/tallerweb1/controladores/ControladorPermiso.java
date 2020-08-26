@@ -45,19 +45,16 @@ public class ControladorPermiso {
 			model.put("rol", rol.name());
 		}
 
-		if (idPaciente == -1) {
-			model.put("usuarioNoRegistrado", true);
-		} else {
-			if (rol.name() == "PACIENTE") {
-				Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
-
-				if (paciente.getInfectado() == null || paciente.getPosibleInfectado() == null) {
-					model.put("otorgarPermiso", true);
-				} else {
-					model.put("otorgarPermiso", false);
-				}
-			}
-		}
+//		if (rol.name() == "PACIENTE") {
+//			Paciente paciente = servicioPaciente.consultarPacientePorId(idPaciente);
+//
+//			if (paciente.getInfectado()) {
+//				model.put("infectado", 0);
+//			} else {
+//				model.put("infectado", 1);
+//			}
+//
+//		}
 
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 

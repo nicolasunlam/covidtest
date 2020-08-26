@@ -9,21 +9,13 @@
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
-<c:if test='${otorgarPermiso==false}'>
-	<div class="progress my-1">
-		<div class="progress-bar bg-success" role="progressbar"
-			style="width: 100%" aria-valuenow="100" aria-valuemin="0"
-			aria-valuemax="100">100%</div>
-	</div>
-</c:if>
 
-<c:if test='${otorgarPermiso}'>
-	<div class="progress my-1">
-		<div class="progress-bar bg-success" role="progressbar"
-			style="width: 75%" aria-valuenow="75" aria-valuemin="0"
-			aria-valuemax="100">75%</div>
-	</div>
-</c:if>
+<div class="progress my-1">
+	<div class="progress-bar bg-success" role="progressbar"
+		style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+		aria-valuemax="100">75%</div>
+</div>
+
 
 <div class="container my-5">
 
@@ -41,301 +33,229 @@
 
 </div>
 
-<c:if test='${otorgarPermiso}'>
-
-	<div class="container-fluid my-5">
-		<div class="row">
-
-			<div class="col-2"></div>
-
-			<div class="col-8">
-
-				<div class="card border-dark mb-3">
-					<div class="card-header">
-						<h3 class="text-center my-2">Por favor, seleccione el motivo
-							para su excepción</h3>
-						<p class="mt-4 text-right">
-							(<span class="text-primary font-weight-bold">*</span>) Campos
-							obligatorios
-						</p>
-					</div>
-					<div class="card-body text-dark">
-						<form action="validarPermiso" method="POST"
-							class="d-flex justify-content-center flex-column justify-content-center">
-
-							<div class="form-row my-4">
-								<label for="motivo">Motivo del permiso <span
-									class="text-primary font-weight-bold">*</span></label> <select
-									name="motivo" id="motivo" class="form-control br-radius-zero"
-									required>
-									<option id="motivo1">Por emergencias, situaciones
-										imprevistas o urgencias; para asistir a turnos médicos, hacer
-										trámites impostergables o mudarse (24 horas)
-									<option id="motivo2">Para asistir a familiares, a
-										persona mayor o a personas con discapacidad; para
-										padres/madres separados que deben trasladar hijos o hijas (24
-										horas)
-									<option id="motivo3">Para hacer tratamiento médico
-										prolongado
-									<option id="motivo4">Para entrenamiento de deportista
-										de representación nacional de una federación autorizada
-									<option id="motivo5">Sos trabajador de la salud o del
-										Estado
-									<option id="motivo6">Trabajás en un servicio
-										considerado esencial o en un medio de comunicación
-									<option id="motivo7">Sos personal de comercio,
-										bancario, de servicios financieros, profesional liberal
-										(contador, abogado), trabajador industrial, de deportes
-										autorizados
-									<option id="motivo8">Trabajás en mantenimiento de
-										infraestructura, transporte de personas y mercaderías,
-										telecomunicaciones, obras públicas, privadas o energéticas
-									<option id="motivo9">Trabajás asistiendo a personas
-										menores, mayores o con discapacidad
-									<option id="motivo10">Alguna otra actividad exceptuada
 
 
 
-									
-								</select>
-							</div>
+<h3 class="text-center my-3">Complete los siguientes datos y genere
+	su permiso de circulacion</h3>
 
-							<div class="text-center">
-								<button type="submit"
-									class="btn btn-primary text-center mt-5 w-50">Enviar</button>
-							</div>
+<div class="container-fluid my-5">
+	<div class="row">
 
-						</form>
-					</div>
+		<div class="col-2"></div>
+
+		<div class="col-8">
+
+			<div class="card border-dark mb-3">
+				<div class="card-header">
+					<h3 class="text-center my-2">Complete el formulario con sus
+						datos</h3>
+					<p class="mt-4 text-right">
+						(<span class="text-primary font-weight-bold">*</span>) Campos
+						obligatorios
+					</p>
 				</div>
+				<div class="card-body text-dark">
+					<form action="validarPermiso" method="POST"
+						class="d-flex justify-content-center flex-column justify-content-center">
+						<div class="form-row my-4">
+							<label for="nombre">Nombre <span
+								class="text-primary font-weight-bold">*</span></label> <input
+								type="text" class="form-control" id="nombre" name="nombre"
+								required>
+						</div>
 
-			</div>
+						<div class="form-row my-4">
+							<label for="apellido">Apellido <span
+								class="text-primary font-weight-bold">*</span></label> <input
+								type="text" class="form-control" id="apellido" name="apellido"
+								required>
+						</div>
 
-			<div class="col-2"></div>
+						<div class="form-row my-4">
+							<label for="edad">Edad <span
+								class="text-primary font-weight-bold">*</span></label> <input
+								type="number" class="form-control" id="edad" name="edad"
+								required>
+						</div>
 
-		</div>
-	</div>
+						<div class="form-group">
+							<label for="nombreLocalidad" class="h6 my-3">Localidad <span
+								class="text-primary font-weight-bold">*</span></label> <select
+								name="nombreLocalidad" id="nombreLocalidad"
+								class="form-control br-radius-zero" required>
+								<option id="Banfield" name="Banfield">Banfield
+								<option id="Beccar" name="Beccar">Beccar
+								<option id="Carlos Spegazzini" name="Carlos Spegazzini">Carlos
+									Spegazzini
+								<option id="Canning" name="Canning">Canning
+								<option id="Castelar" name="Castelar">Castelar
+								<option id="Don Torcuato" name="Don Torcuato">Don
+									Torcuato
+								<option id="El Palomar" name="El Palomar">El Palomar
+								<option id="General Pacheco" name="General Pacheco">General
+									Pacheco
+								<option id="Gregorio de Laferrere" name="Gregorio de Laferrere">Gregorio
+									de Laferrere
+								<option id="Haedo" name="Haedo">Haedo
+								<option id="Hurlingham" name="Hurlingham">Hurlingham
+								<option id="Isidro Casanova" name="Isidro Casanova">Isidro
+									Casanova
+								<option id="José María Ezeiza" name="José María Ezeiza">José
+									María Ezeiza
+								<option id="La Reja" name="La Reja">La Reja
+								<option id="La Tablada" name="La Tablada">La Tablada
+								<option id="Lomas del Mirador" name="Lomas del Mirador">Lomas
+									del Mirador
+								<option id="Martínez" name="Martínez">Martínez
+								<option id="Moreno" name="Moreno">Moreno
+								<option id="Morón" name="Morón">Morón
+								<option id="Munro" name="Munro">Munro
+								<option id="Paso del Rey" name="Paso del Rey">Paso del
+									Rey
+								<option id="San Isidro" name="San Isidro">San Isidro
+								<option id="San Justo" name="San Justo">San Justo
+								<option id="Tigre" name="Tigre">Tigre
+								<option id="Trujui" name="Trujui">Trujui
+								<option id="Udaondo" name="Udaondo">Udaondo
+								<option id="Valentín Alsina" name="Valentín Alsina">Valentín
+									Alsina
+								<option id="Vicente López" name="Vicente López">Vicente
+									López
+								<option id="Victoria" name="Victoria">Victoria
+								<option id="Villa Fiorito" name="Villa Fiorito">Villa
+									Fiorito
+								<option id="Villa Martelli" name="Villa Martelli">Villa
+									Martelli
+								<option id="Villa Sarmiento" name="Villa Sarmiento">Villa
+									Sarmiento
+								<option id="Wilde" name="Wilde">Wilde
+								<option id="William C. Morris" name="William C. Morris">William
+									C. Morris
+							</select> <small id="localidadHelp" class="form-text text-muted">Seleccione
+								la localidad en donde reside actualmente</small>
+						</div>
 
-</c:if>
-
-<c:if test='${usuarioNoRegistrado}'>
-
-	<h3 class="text-center my-3">Complete los siguientes datos y
-		genere su permiso de circulacion</h3>
-
-	<div class="container-fluid my-5">
-		<div class="row">
-
-			<div class="col-2"></div>
-
-			<div class="col-8">
-
-				<div class="card border-dark mb-3">
-					<div class="card-header">
-						<h3 class="text-center my-2">Complete el formulario con sus
-							datos</h3>
-						<p class="mt-4 text-right">
-							(<span class="text-primary font-weight-bold">*</span>) Campos
-							obligatorios
-						</p>
-					</div>
-					<div class="card-body text-dark">
-						<form action="validarPermiso" method="POST"
-							class="d-flex justify-content-center flex-column justify-content-center">
-							<div class="form-row my-4">
-								<label for="nombre">Nombre <span
+						<div class="form-row my-4">
+							<div class="form-group col-6">
+								<label for="calle">Calle <span
 									class="text-primary font-weight-bold">*</span></label> <input
-									type="text" class="form-control" id="nombre" name="nombre"
-									required>
+									type="text" name="calle" class="form-control br-radius-zero"
+									id="calle" required /> <small id="calleHelp"
+									class="form-text text-muted">Ingrese la calle en donde
+									reside actualmente</small>
 							</div>
-
-							<div class="form-row my-4">
-								<label for="apellido">Apellido <span
+							<div class="form-group col-6">
+								<label for="numeroCalle">Número <span
 									class="text-primary font-weight-bold">*</span></label> <input
-									type="text" class="form-control" id="apellido" name="apellido"
-									required>
+									type="number" name="numeroCalle"
+									class="form-control br-radius-zero" id="numeroCalle"
+									data-msg="Ingrese número de calle válido" required />
 							</div>
+						</div>
 
-							<div class="form-row my-4">
-								<label for="edad">Edad <span
-									class="text-primary font-weight-bold">*</span></label> <input
-									type="number" class="form-control" id="edad" name="edad"
-									required>
-							</div>
+						<div class="form-row my-4">
+							<label for="telefono">Teléfono <span
+								class="text-primary font-weight-bold">*</span></label> <input type="tel"
+								class="form-control" id="telefono" name="telefono" required>
+							<small id="numeroTelefonoHelp" class="form-text text-muted">Sin
+								puntos guiones ni espacios. Ej: 1530874512</small>
+						</div>
 
-							<div class="form-group">
-								<label for="nombreLocalidad" class="h6 my-3">Localidad <span
+						<div class="form-row my-4">
+							<label for="email">Correo electrónico <span
+								class="text-primary font-weight-bold">*</span></label> <input
+								type="text" class="form-control" id="email" name="email"
+								required> <small id="emailHelp"
+								class="form-text text-muted">Ej: maria@email.com</small>
+						</div>
+
+						<div class="form-row my-4">
+							<div class="form-group col-6">
+								<label for="tipoDocumento">Tipo Documento <span
 									class="text-primary font-weight-bold">*</span></label> <select
-									name="nombreLocalidad" id="nombreLocalidad"
+									name="tipoDocumento" id="tipoDocumento"
 									class="form-control br-radius-zero" required>
-									<option id="Banfield" name="Banfield">Banfield
-									<option id="Beccar" name="Beccar">Beccar
-									<option id="Carlos Spegazzini" name="Carlos Spegazzini">Carlos
-										Spegazzini
-									<option id="Canning" name="Canning">Canning
-									<option id="Castelar" name="Castelar">Castelar
-									<option id="Don Torcuato" name="Don Torcuato">Don
-										Torcuato
-									<option id="El Palomar" name="El Palomar">El Palomar
-									<option id="General Pacheco" name="General Pacheco">General
-										Pacheco
-									<option id="Gregorio de Laferrere" name="Gregorio de Laferrere">Gregorio
-										de Laferrere
-									<option id="Haedo" name="Haedo">Haedo
-									<option id="Hurlingham" name="Hurlingham">Hurlingham
-									<option id="Isidro Casanova" name="Isidro Casanova">Isidro
-										Casanova
-									<option id="José María Ezeiza" name="José María Ezeiza">José
-										María Ezeiza
-									<option id="La Reja" name="La Reja">La Reja
-									<option id="La Tablada" name="La Tablada">La Tablada
-									<option id="Lomas del Mirador" name="Lomas del Mirador">Lomas
-										del Mirador
-									<option id="Martínez" name="Martínez">Martínez
-									<option id="Moreno" name="Moreno">Moreno
-									<option id="Morón" name="Morón">Morón
-									<option id="Munro" name="Munro">Munro
-									<option id="Paso del Rey" name="Paso del Rey">Paso del
-										Rey
-									<option id="San Isidro" name="San Isidro">San Isidro
-									<option id="San Justo" name="San Justo">San Justo
-									<option id="Tigre" name="Tigre">Tigre
-									<option id="Trujui" name="Trujui">Trujui
-									<option id="Udaondo" name="Udaondo">Udaondo
-									<option id="Valentín Alsina" name="Valentín Alsina">Valentín
-										Alsina
-									<option id="Vicente López" name="Vicente López">Vicente
-										López
-									<option id="Victoria" name="Victoria">Victoria
-									<option id="Villa Fiorito" name="Villa Fiorito">Villa
-										Fiorito
-									<option id="Villa Martelli" name="Villa Martelli">Villa
-										Martelli
-									<option id="Villa Sarmiento" name="Villa Sarmiento">Villa
-										Sarmiento
-									<option id="Wilde" name="Wilde">Wilde
-									<option id="William C. Morris" name="William C. Morris">William
-										C. Morris
-								</select> <small id="localidadHelp" class="form-text text-muted">Seleccione
-									la localidad en donde reside actualmente</small>
-							</div>
-
-							<div class="form-row my-4">
-								<div class="form-group col-6">
-									<label for="calle">Calle <span
-										class="text-primary font-weight-bold">*</span></label> <input
-										type="text" name="calle" class="form-control br-radius-zero"
-										id="calle" required /> <small id="calleHelp"
-										class="form-text text-muted">Ingrese la calle en donde
-										reside actualmente</small>
-								</div>
-								<div class="form-group col-6">
-									<label for="numeroCalle">Número <span
-										class="text-primary font-weight-bold">*</span></label> <input
-										type="number" name="numeroCalle"
-										class="form-control br-radius-zero" id="numeroCalle"
-										data-msg="Ingrese número de calle válido" required />
-								</div>
-							</div>
-
-							<div class="form-row my-4">
-								<label for="telefono">Teléfono <span
-									class="text-primary font-weight-bold">*</span></label> <input
-									type="tel" class="form-control" id="telefono" name="telefono"
-									required> <small id="numeroTelefonoHelp"
-									class="form-text text-muted">Sin puntos guiones ni
-									espacios. Ej: 1530874512</small>
-							</div>
-
-							<div class="form-row my-4">
-								<label for="email">Correo electrónico <span
-									class="text-primary font-weight-bold">*</span></label> <input
-									type="text" class="form-control" id="email" name="email"
-									required> <small id="emailHelp"
-									class="form-text text-muted">Ej: maria@email.com</small>
-							</div>
-
-							<div class="form-row my-4">
-								<div class="form-group col-6">
-									<label for="tipoDocumento">Tipo Documento <span
-										class="text-primary font-weight-bold">*</span></label> <select
-										name="tipoDocumento" id="tipoDocumento"
-										class="form-control br-radius-zero" required>
-										<option id="tipoDocumentoDNI">DNI
-										<option id="tipoDocumentoPasaporte">PASAPORTE
-										<option id="tipoDocumentoLibretaCivica">LIBRETA
-											CÍVICA
-									</select>
-								</div>
-								<div class="form-group col-6">
-									<label for="numeroDocumento">Número de documento <span
-										class="text-primary font-weight-bold">*</span></label> <input
-										type="text" name="numeroDocumento"
-										class="form-control br-radius-zero" id="numeroDocumento"
-										data-msg="Ingrese número de documento válido" required /> <small
-										id="numeroDocumentoHelp" class="form-text text-muted">Sin
-										puntos ni espacios. Ej: 30758124</small>
-								</div>
-							</div>
-
-							<div class="form-row my-4">
-								<label for="motivo">Motivo del permiso <span
-									class="text-primary font-weight-bold">*</span></label> <select
-									name="motivo" id="motivo" class="form-control br-radius-zero"
-									required>
-									<option id="motivo1">Por emergencias, situaciones
-										imprevistas o urgencias; para asistir a turnos médicos, hacer
-										trámites impostergables o mudarse (24 horas)
-									<option id="motivo2">Para asistir a familiares, a
-										persona mayor o a personas con discapacidad; para
-										padres/madres separados que deben trasladar hijos o hijas (24
-										horas)
-									<option id="motivo3">Para hacer tratamiento médico
-										prolongado
-									<option id="motivo4">Para entrenamiento de deportista
-										de representación nacional de una federación autorizada
-									<option id="motivo5">Sos trabajador de la salud o del
-										Estado
-									<option id="motivo6">Trabajás en un servicio
-										considerado esencial o en un medio de comunicación
-									<option id="motivo7">Sos personal de comercio,
-										bancario, de servicios financieros, de mutuales o cooperativas
-										de crédito, profesional liberal (contador, abogado),
-										trabajador industrial, de deportes autorizados o de casas
-										particulares
-									<option id="motivo8">Trabajás en mantenimiento de
-										infraestructura, transporte de personas y mercaderías,
-										telecomunicaciones, obras públicas, privadas o energéticas
-									<option id="motivo9">Trabajás asistiendo a personas
-										menores, mayores o con discapacidad
-									<option id="motivo10">Alguna otra actividad exceptuada
-
-
-
-
+									<option id="tipoDocumentoDNI">DNI
+									<option id="tipoDocumentoPasaporte">PASAPORTE
+									<option id="tipoDocumentoLibretaCivica">LIBRETA CÍVICA
 
 
 									
 								</select>
 							</div>
-
-							<div class="text-center">
-								<button type="submit"
-									class="btn btn-primary text-center mt-5 w-50">Enviar</button>
+							<div class="form-group col-6">
+								<label for="numeroDocumento">Número de documento <span
+									class="text-primary font-weight-bold">*</span></label> <input
+									type="text" name="numeroDocumento"
+									class="form-control br-radius-zero" id="numeroDocumento"
+									data-msg="Ingrese número de documento válido" required /> <small
+									id="numeroDocumentoHelp" class="form-text text-muted">Sin
+									puntos ni espacios. Ej: 30758124</small>
 							</div>
+						</div>
 
-						</form>
-					</div>
+						<div class="form-row my-4">
+							<label for="motivo">Motivo del permiso <span
+								class="text-primary font-weight-bold">*</span></label> <select
+								name="motivo" id="motivo" class="form-control br-radius-zero"
+								required>
+								<option id="motivo1">Por emergencias, situaciones
+									imprevistas o urgencias; para asistir a turnos médicos, hacer
+									trámites impostergables o mudarse (24 horas)
+								<option id="motivo2">Para asistir a familiares, a
+									persona mayor o a personas con discapacidad; para padres/madres
+									separados que deben trasladar hijos o hijas (24 horas)
+								<option id="motivo3">Para hacer tratamiento médico
+									prolongado
+								<option id="motivo4">Para entrenamiento de deportista
+									de representación nacional de una federación autorizada
+								<option id="motivo5">Sos trabajador de la salud o del
+									Estado
+								<option id="motivo6">Trabajás en un servicio
+									considerado esencial o en un medio de comunicación
+								<option id="motivo7">Sos personal de comercio,
+									bancario, de servicios financieros, de mutuales o cooperativas
+									de crédito, profesional liberal (contador, abogado), trabajador
+									industrial, de deportes autorizados o de casas particulares
+								<option id="motivo8">Trabajás en mantenimiento de
+									infraestructura, transporte de personas y mercaderías,
+									telecomunicaciones, obras públicas, privadas o energéticas
+								<option id="motivo9">Trabajás asistiendo a personas
+									menores, mayores o con discapacidad
+								<option id="motivo10">Alguna otra actividad exceptuada
+
+
+
+
+
+
+
+
+
+
+
+
+								
+							</select>
+						</div>
+
+						<div class="text-center">
+							<button type="submit"
+								class="btn btn-primary text-center mt-5 w-50">Enviar</button>
+						</div>
+
+					</form>
 				</div>
-
 			</div>
 
-			<div class="col-2"></div>
-
 		</div>
-	</div>
 
-</c:if>
+		<div class="col-2"></div>
+
+	</div>
+</div>
+
 
 
 
