@@ -132,6 +132,23 @@ code {
 		</div>
 	</div>
 
+	<div
+		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+		<h5 class="">Disponibilidad de Camas</h5>
+
+	</div>
+	<p class="mb-3">Vea la cantidad de camas reservadas, ocupadas y disponibles</p>
+
+	<div class="callout callout-primary py-4">
+		<div class="row container-chart">
+			<div class="col"></div>
+			<div class="col-6">
+				<div id="chartContainer" style="height: 20em; width: 100%;"></div>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+
 </div>
 
 </main>
@@ -252,7 +269,47 @@ code {
         $('.canvasjs-chart-toolbar button').css('width', '50px');
         $('.canvasjs-chart-toolbar button').css('height', '50px');
 
+    
+        var total = ${cantidadCamasOcupadas} + ${cantidadCamasDisponibles} + ${cantidadCamasReservadas};
+        
+        var porcentaje4 = Math.round((${cantidadCamasOcupadas} * 100 / total));
+        
+        var porcentaje5 = Math.round((${cantidadCamasDisponibles} * 100 /  total));
+        
+        var porcentaje6 = Math.round((${cantidadCamasReservadas} * 100 / total));
+        
+   var chart = new CanvasJS.Chart("chartContainer", {
+   	exportEnabled: true,
+   	animationEnabled: true,
+   	title:{
+   		text: "Disponiblidad de camas",
+   			fontFamily: "calibri light"
+   	},
+   	legend:{
+   		cursor: "pointer",
+   		itemclick: explodePie
+   	},
+   	data: [{
+   		type: "pie",                startAngle: 25,
+           toolTipContent: "<b>{label}</b>: {y}%",
+           showInLegend: "true",
+           legendText: "{label}",
+           indexLabelFontSize: 16,
+           indexLabel: "{label} - {y}%",
+   		dataPoints: [
+               {y: porcentaje4, label: "Ocupadas", color:"#dc3545"},
+               {y: porcentaje5, label: "Disponibles", color: "#28a745", exploded: true},
+               {y: porcentaje6, label: "Reservadas", color: "#ffc107"}
+   		]
+   	}]
+   });
+   chart.render();
+
+   $('.canvasjs-chart-toolbar button>img').replaceWith('<img src="img/download.svg" alt="imagen cambiada" width="25px" height="25px">');
+   $('.canvasjs-chart-toolbar button').css('width', '50px');
+   $('.canvasjs-chart-toolbar button').css('height', '50px');
     }
+    
 
 </script>
 

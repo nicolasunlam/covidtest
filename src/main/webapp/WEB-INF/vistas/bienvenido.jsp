@@ -9,6 +9,16 @@
 
 <jsp:include page="../../partial/institucionHeaderParte2.jsp" />
 
+<style>
+.canvasjs-chart-toolbar button {
+	cursor: pointer;
+	box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.8);
+	color: #fff;
+	background-color: #0099ff;
+	border-color: #0099ff;
+}
+
+</style>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 
 <div class="container">
@@ -84,6 +94,9 @@ var chart = new CanvasJS.Chart("chartContainer", {
 });
 chart.render();
 
+$('.canvasjs-chart-toolbar button>img').replaceWith('<img src="img/download.svg" alt="imagen cambiada" width="25px" height="25px">');
+$('.canvasjs-chart-toolbar button').css('width', '50px');
+$('.canvasjs-chart-toolbar button').css('height', '50px');
 
 function explodePie (e) {
 	if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
@@ -120,7 +133,10 @@ function explodePie (e) {
 
  chart.render();
 
-
+ 
+ $('.canvasjs-chart-toolbar button>img').replaceWith('<img src="img/download.svg" alt="imagen cambiada" width="25px" height="25px">');
+ $('.canvasjs-chart-toolbar button').css('width', '50px');
+ $('.canvasjs-chart-toolbar button').css('height', '50px');
 
  var chart = new CanvasJS.Chart("chartContainer2", {
  	animationEnabled: true,
@@ -179,7 +195,11 @@ function explodePie (e) {
  	}]
  });
  chart.render();
-
+ 
+ $('.canvasjs-chart-toolbar button>img').replaceWith('<img src="img/download.svg" alt="imagen cambiada" width="25px" height="25px">');
+ $('.canvasjs-chart-toolbar button').css('width', '50px');
+ $('.canvasjs-chart-toolbar button').css('height', '50px');
+ 
  function toggleDataSeries(e) {
  	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
  		e.dataSeries.visible = false;

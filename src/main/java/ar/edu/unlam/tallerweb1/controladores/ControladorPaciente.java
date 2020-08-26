@@ -19,10 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Asignacion;
 import ar.edu.unlam.tallerweb1.modelo.Cama;
 import ar.edu.unlam.tallerweb1.modelo.Domicilio;
+import ar.edu.unlam.tallerweb1.modelo.Institucion;
 import ar.edu.unlam.tallerweb1.modelo.Localidad;
 import ar.edu.unlam.tallerweb1.modelo.Notificacion;
 import ar.edu.unlam.tallerweb1.modelo.Paciente;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelo.Piso;
 import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -38,6 +40,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioMail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMapa;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPaciente;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPiso;
 import ar.edu.unlam.tallerweb1.servicios.ServicioTest;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 
@@ -68,6 +71,8 @@ public class ControladorPaciente {
 	ServicioMapa servicioMapa;
 	@Autowired
 	ServicioAsignacion servicioAsignacion;
+	@Autowired
+	ServicioPiso servicioPiso;
 
 	/* Pantalla de bienvenido al paciente cuando inicia sesi�n */
 	@RequestMapping("bienvenidoPaciente")
@@ -327,17 +332,40 @@ public class ControladorPaciente {
 		Integer cantidadPacientesInfectados = servicioPaciente.pacientesInfectados().size();
 		Integer cantidadPacientesNoInfectados = cantidadPacientes - cantidadPacientesInfectados;
 
-		List<Cama> camasOcupadas = servicioCama.obtenerTotalDeCamasOcupadas();
-		Integer cantidadCamasOcupadas = camasOcupadas.size();
-
-		List<Cama> camasDisponibles = servicioCama.obtenerTotalDeCamasDisponibles();
-		Integer cantidadCamasDisponibles = camasDisponibles.size();
-
 		model.put("cantidadPacientes", cantidadPacientes);
 		model.put("cantidadPacientesInfectados", cantidadPacientesInfectados);
 		model.put("cantidadPacientesNoInfectados", cantidadPacientesNoInfectados);
+
+		Integer cantidadCamasReservadas = 0;
+		Integer cantidadCamasOcupadas = 0;
+		Integer cantidadCamasDisponibles = 0;
+		
+		if (rol == Rol.INSTITUCION) {
+
+			Long id = (Long) request.getSession().getAttribute("ID");
+			Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(id);
+			List<Piso> pisosInstitucion = servicioPiso.listarPisosPorInstitucion(institucion);
+
+			for (Piso piso : pisosInstitucion) {
+				cantidadCamasReservadas += servicioCama.listarCamasReservadasPorPiso(piso).size();
+				cantidadCamasDisponibles += servicioCama.listarCamasDisponiblesPorPiso(piso).size();
+				cantidadCamasOcupadas += servicioCama.listarCamasOcupadasPorPiso(piso).size();
+			}
+
+		}
+
+		if (rol == Rol.ADMIN) {
+ 
+			cantidadCamasOcupadas = servicioCama.obtenerTotalDeCamasOcupadas().size();
+			cantidadCamasDisponibles = servicioCama.obtenerTotalDeCamasDisponibles().size();
+			Integer totalCamas = servicioCama.obtenerCamas().size();
+			cantidadCamasReservadas = totalCamas - (cantidadCamasOcupadas + cantidadCamasReservadas);
+
+		}
+
 		model.put("cantidadCamasOcupadas", cantidadCamasOcupadas);
 		model.put("cantidadCamasDisponibles", cantidadCamasDisponibles);
+		model.put("cantidadCamasReservadas", cantidadCamasReservadas);
 
 		return new ModelAndView("grafico-pacientes", model);
 	}
@@ -492,13 +520,13 @@ public class ControladorPaciente {
 			AsignacionDoble asignacionDoble = new AsignacionDoble();
 
 			asignacionDoble.setAsignacionActual(servicioAsignacion.consultarAsignacionPacienteInternado(paciente));
-			
+
 			Asignacion asignacionReservada = servicioAsignacion.consultarReservaAsignacionPaciente(paciente);
 			if (asignacionReservada != null) {
 
 				asignacionDoble.setAsignacionReservada(asignacionReservada);
 			}
-			
+
 			listaPacientesInternadosConReserva.add(asignacionDoble);
 		}
 
