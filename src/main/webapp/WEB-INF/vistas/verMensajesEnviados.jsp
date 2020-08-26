@@ -173,7 +173,7 @@
 
 
 						<td><a class="btn btn-outline-primary mb-2"
-							href="verDetalleMensaje/${notificacion.getId()}" role="button">Ver
+							href="verDetalleMensaje?id=${notificacion.getId()}" role="button">Ver
 								Mensaje</a> <a class="btn btn-outline-success" href="" role="button">Responder</a></td>
 
 						</form>
