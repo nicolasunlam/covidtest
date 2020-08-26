@@ -29,6 +29,7 @@ import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.TipoDocumento;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionDoble;
+import ar.edu.unlam.tallerweb1.modelo.listas.AsignacionPaciente;
 import ar.edu.unlam.tallerweb1.modelo.listas.UsuarioDistancia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsignacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAtajo;
@@ -413,8 +414,25 @@ public class ControladorPaciente {
 		if (request.getSession().getAttribute("ROL") == Rol.ADMIN) {
 			admin = true;
 		}
+		
+		List<AsignacionPaciente> listaPosiblesInfectadosConReserva = new ArrayList<AsignacionPaciente>();
 
-		model.put("posiblesInfectados", posiblesInfectados);
+		for (Paciente paciente : posiblesInfectados) {
+
+			AsignacionPaciente asignacionPaciente = new AsignacionPaciente();
+			
+			asignacionPaciente.setEnfermedades(servicioPaciente.obtenerListaDeEnfermedadesDeUnPaciente(paciente));
+			asignacionPaciente.setPaciente(paciente);
+			
+			Asignacion asignacionReservada = servicioAsignacion.consultarReservaAsignacionPaciente(paciente);
+			if (asignacionReservada != null) {
+				asignacionPaciente.setAsignacion(asignacionReservada);
+			}
+
+			listaPosiblesInfectadosConReserva.add(asignacionPaciente);
+		}
+
+		model.put("posiblesInfectados", listaPosiblesInfectadosConReserva);
 		model.put("admin", admin);
 
 		return new ModelAndView("posiblesinfectados", model);

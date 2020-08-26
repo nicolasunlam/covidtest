@@ -695,6 +695,9 @@ public class ControladorAsignacion {
 		Institucion institucionAAsignar = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
 		
 		Paciente paciente = asignacionARechazar.getPaciente();
+		paciente.setPosibleInfectado(true);
+		servicioPaciente.actualizarPaciente(paciente);
+		
 		Cama cama = asignacionARechazar.getCama();
 
 		String asunto = "Asignación Denegada";
@@ -725,7 +728,7 @@ public class ControladorAsignacion {
 	
 
 	@RequestMapping(value = "internarPorAsignacion", method = RequestMethod.POST)
-	public ModelAndView internarPorTraslado(
+	public ModelAndView internarPorAsignacion(
 			
 			@RequestParam Long idAsignacion,
 			@RequestParam Double distancia,
@@ -749,7 +752,7 @@ public class ControladorAsignacion {
 		}
     	
 		LocalDateTime hora = LocalDateTime.now();
-    	
+
 		asignacion.setMotivoIngreso(MotivoIngreso.ENFERMO);
 		asignacion.setHoraIngreso(hora);
     	servicioAsignacion.actualizarAsignacion(asignacion);
@@ -761,6 +764,11 @@ public class ControladorAsignacion {
 				.getSala().getSector().getPiso().getInstitucion().getId());
 		
 		Paciente paciente = asignacion.getPaciente();
+    	
+		paciente.setPosibleInfectado(null);
+		paciente.setInfectado(null);
+		servicioPaciente.actualizarPaciente(paciente);
+		
 		Cama cama = asignacion.getCama();
 		
 		String asunto = "Asignación Realizada";
