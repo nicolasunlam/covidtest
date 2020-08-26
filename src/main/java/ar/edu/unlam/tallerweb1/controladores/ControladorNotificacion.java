@@ -206,14 +206,29 @@ public class ControladorNotificacion {
 	}
 	
 	@RequestMapping(value = "/verDetalleMensaje/{id}")
-	public String verDetalleMensaje(@PathVariable Long id, Model m) {
+	public ModelAndView verDetalleMensaje(@PathVariable Long id, Model m, HttpServletRequest request) {
+		
+		ModelMap model = new ModelMap();
+		
+		if(servicioAtajo.validarInicioDeSesion(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+    	}
+    	if(servicioAtajo.validarPermisoAPagina(request) != null) {
+    		return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+    	}
+    	Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if(rol != null) {
+			model.put("rol", rol.name());	
+		}
+    	
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Notificacion not = servicioNotificacion.buscarNotificacionPorSuId(id);
 		m.addAttribute("notificacion", not);
-		return "verDetalleMensaje";
+		
+		return new ModelAndView("verMensajesEnviados", model);
 
 	} 
-	
 	
 	
 }
