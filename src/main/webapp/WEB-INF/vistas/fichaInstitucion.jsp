@@ -10,18 +10,6 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-
 <!-- Load Leaflet from CDN -->
 <link rel="stylesheet"
 	href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
@@ -141,14 +129,14 @@
 			<div class="col-2"></div>
 			<div class="col-5">
 				<h4>
-				<c:if test='${rol == "PACIENTE"}'>
+					<c:if test='${rol == "PACIENTE"}'>
 
-					<c:if test="${Math.round(distancia) < 9 }">
+						<c:if test="${Math.round(distancia) < 9 }">
 							
 								${fn:substring(distancia, 0, 3)}
 							
 						</c:if>
-					<c:if test="${Math.round(distancia) > 9}">
+						<c:if test="${Math.round(distancia) > 9}">
 							${Math.round(distancia)} 
 						</c:if>
 					kms.
@@ -158,7 +146,7 @@
 
 				<p id="latitudInstitucion" style="display: none;">${latitudInstitucion}</p>
 				<p id="longitudInstitucion" style="display: none;">${longitudInstitucion}</p>
-				<c:if test='${rol != "PACIENTE"}'>
+				<c:if test='${rol == "PACIENTE"}'>
 					<p id="latitudPaciente" style="display: none;">${latitudPaciente}</p>
 					<p id="longitudPaciente" style="display: none;">${longitudPaciente}</p>
 				</c:if>
@@ -187,30 +175,65 @@
 	</main>
 </c:if>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-	crossorigin="anonymous"></script>
-<script>
+<c:if test='${rol != "PACIENTE"}'>
+
+	<script type="text/javascript">
+
+
+var latitudInstitucion = document.getElementById('latitudInstitucion').innerHTML;
+var longitudInstitucion = document.getElementById('longitudInstitucion').innerHTML;
+var nombreInstitucion = document.getElementById('nombreInstitucion').innerHTML;
+
+var map = L.map('map').setView([ latitudInstitucion, longitudInstitucion ],
+		11);
+
+
+
+L
+		.tileLayer(
+				'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+				{
+					attribution : '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+				}).addTo(map);
+
+marker = new L.marker([ latitudInstitucion, longitudInstitucion ])
+		.bindPopup(nombreInstitucion).addTo(map);
+
+
+
+var circle = L.circle([ latitudInstitucion, longitudInstitucion ], {
+	color : 'red',
+	fillColor : '#f03',
+	fillOpacity : 0.5,
+	radius : 20
+}).addTo(map);
+
+
+	var polylinePoints = [ 	latitudInstitucion, longitudInstitucion  ];
+
+var polyline = L.polyline(polylinePoints).addTo(map);
+
+
+
+</script>
+
+</c:if>
+
+<c:if test='${rol == "PACIENTE"}'>
+	<script>
 
 
 	var latitudInstitucion = document.getElementById('latitudInstitucion').innerHTML;
 	var longitudInstitucion = document.getElementById('longitudInstitucion').innerHTML;
 	var nombreInstitucion = document.getElementById('nombreInstitucion').innerHTML;
-	
-	if (${latitudPaciente} != null) {
-
 	var latitudPaciente = document.getElementById('latitudPaciente').innerHTML;
 	var longitudPaciente = document.getElementById('longitudPaciente').innerHTML;
+	
+	alert(latitudInstitucion);
+	
+	if (latitudInstitucion != null) {
+
+
 	
 	}
 	
@@ -231,12 +254,9 @@
 
 	marker = new L.marker([ latitudInstitucion, longitudInstitucion ])
 			.bindPopup(nombreInstitucion).addTo(map);
-
-	if (${latitudPaciente}  != null) {
-
-		markerPaciente = new L.marker([ latitudPaciente, longitudPaciente ])
+	
+	var markerPaciente = new L.marker([ latitudPaciente, longitudPaciente ])
 		.bindPopup("Su ubicación").addTo(map);
-		}
 
 
 	var circle = L.circle([ latitudInstitucion, longitudInstitucion ], {
@@ -246,20 +266,16 @@
 		radius : 20
 	}).addTo(map);
 
-	if (${latitudPaciente}  != null) {
-
 	var polylinePoints = [ [ latitudInstitucion, longitudInstitucion ],
 			[ latitudPaciente, longitudPaciente ] ];
 
 	var polyline = L.polyline(polylinePoints).addTo(map);
-	}else{
-		var polylinePoints = [ [ latitudInstitucion, longitudInstitucion  ];
-
-	var polyline = L.polyline(polylinePoints).addTo(map);
-	}
+	
 
 
 </script>
+
+</c:if>
 
 <%@ include file="../../partial/footer.jsp"%>
 

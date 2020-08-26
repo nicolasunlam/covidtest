@@ -673,7 +673,6 @@ public class ControladorInstitucion {
 	public ModelAndView detalleInstitucion(
 			
 			@RequestParam(value = "idInstitucion") Long idInstitucion,
-			@RequestParam(value = "paciente", required = false) Boolean paciente,
 			HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
@@ -699,7 +698,7 @@ public class ControladorInstitucion {
 		model.put("latitudInstitucion", latitudInstitucion);
 		model.put("longitudInstitucion", longitudInstitucion);
 		
-		if (paciente != null) {
+		if (rol == Rol.PACIENTE) {
 			Long id = (Long) request.getSession().getAttribute("ID");
 			Usuario usuario = servicioUsuario.consultarUsuarioPorId(id);
 
