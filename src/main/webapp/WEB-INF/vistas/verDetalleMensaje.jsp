@@ -2,10 +2,11 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="../../partial/${armarHeader}1.jsp" />
 
-<title>Crear Mensaje</title>
+<title>Mensaje</title>
 
 <jsp:include page="../../partial/${armarHeader}2.jsp" />
 
@@ -13,11 +14,28 @@
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 </c:if>
 
-	"${notificacion.getAsunto()}"<br>
-	"${notificacion.getMsg()}"<br>
-	"${notificacion.getFechaHora()}"<br>
-	
-	
+<div class="container" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" style="margin-top: 75px;">
+
+<div class="card">
+  <h5 class="card-header">Asunto: "${notificacion.getAsunto()}"</h5>
+  <div class="card-body">
+  <p class="card-text">De: "${notificacion.getRemitente().getNombre()}"</p>
+    <h5 class="card-title">Mensaje: ${notificacion.getMsg()}.</h5>
+    <p class="card-text">Enviado el: <fmt:parseDate value="${notificacion.getFechaHora()}"
+pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+<fmt:formatDate pattern="dd 'de' MMMM 'de' yyyy 'a las' HH:mm 'horas'" 
+value="${ parsedDateTime }" /></p>
+    <a href="#" class="btn btn-primary">Responder</a>
+  </div>
+</div>
+</div>
+
+
+<%-- <fmt:parseDate value="${notificacion.getFechaHora()}"
+pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+<fmt:formatDate pattern="dd 'de' MMMM 'de' yyyy 'a las' HH:mm 'horas'" 
+value="${ parsedDateTime }" /> --%>
+
 <c:if test='${rol != "PACIENTE"}'>
 	</main>
 </c:if>
