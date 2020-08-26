@@ -605,7 +605,7 @@
 
 			<div class="">
 
-				<a href="">
+				<a href="posiblesinfectados">
 					<button type="button" class="btn btn-outline-danger">
 						Cancelar</button>
 				</a>

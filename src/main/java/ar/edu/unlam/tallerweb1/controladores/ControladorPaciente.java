@@ -359,7 +359,7 @@ public class ControladorPaciente {
 			cantidadCamasOcupadas = servicioCama.obtenerTotalDeCamasOcupadas().size();
 			cantidadCamasDisponibles = servicioCama.obtenerTotalDeCamasDisponibles().size();
 			Integer totalCamas = servicioCama.obtenerCamas().size();
-			cantidadCamasReservadas = totalCamas - (cantidadCamasOcupadas + cantidadCamasReservadas);
+			cantidadCamasReservadas = totalCamas - (cantidadCamasOcupadas + cantidadCamasDisponibles);
 
 		}
 
