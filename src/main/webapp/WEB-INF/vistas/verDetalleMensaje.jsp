@@ -14,20 +14,31 @@
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 </c:if>
 
-<div class="container" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" style="margin-top: 75px;">
+<div class="container" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"
+	style="margin-top: 75px;">
 
-<div class="card">
-  <h5 class="card-header">Asunto: "${notificacion.getAsunto()}"</h5>
-  <div class="card-body">
-  <p class="card-text">De: "${notificacion.getRemitente().getNombre()}"</p>
-    <h5 class="card-title">Mensaje: ${notificacion.getMsg()}.</h5>
-    <p class="card-text">Enviado el: <fmt:parseDate value="${notificacion.getFechaHora()}"
-pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-<fmt:formatDate pattern="dd 'de' MMMM 'de' yyyy 'a las' HH:mm 'horas'" 
-value="${ parsedDateTime }" /></p>
-    <a href="#" class="btn btn-primary">Responder</a>
-  </div>
-</div>
+	<div class="card">
+		<h5 class="card-header">Asunto: "${notificacion.getAsunto()}"</h5>
+		<div class="card-body">
+			<p class="card-text">De:
+				"${notificacion.getRemitente().getNombre()}"</p>
+			<h5 class="card-title"></h5>
+			<p class="card-text">Mensaje:</p>
+			<blockquote class="blockquote mb-0">
+				<p>${notificacion.getMsg()}</p>
+				<footer class="blockquote-footer">
+					Enviado el:
+					<fmt:parseDate value="${notificacion.getFechaHora()}"
+						pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+					<fmt:formatDate
+						pattern="dd 'de' MMMM 'de' yyyy 'a las' HH:mm 'horas'"
+						value="${ parsedDateTime }" />
+				</footer>
+			</blockquote>
+
+			<a href="#" class="btn btn-primary" style="margin-top: 25px;">Responder</a>
+		</div>
+	</div>
 </div>
 
 
