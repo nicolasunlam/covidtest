@@ -222,20 +222,12 @@ var polyline = L.polyline(polylinePoints).addTo(map);
 <c:if test='${rol == "PACIENTE"}'>
 	<script>
 
-
 	var latitudInstitucion = document.getElementById('latitudInstitucion').innerHTML;
 	var longitudInstitucion = document.getElementById('longitudInstitucion').innerHTML;
 	var nombreInstitucion = document.getElementById('nombreInstitucion').innerHTML;
 	var latitudPaciente = document.getElementById('latitudPaciente').innerHTML;
 	var longitudPaciente = document.getElementById('longitudPaciente').innerHTML;
 	
-	alert(latitudInstitucion);
-	
-	if (latitudInstitucion != null) {
-
-
-	
-	}
 	
 	var map = L.map('map').setView([ latitudInstitucion, longitudInstitucion ],
 			11);
