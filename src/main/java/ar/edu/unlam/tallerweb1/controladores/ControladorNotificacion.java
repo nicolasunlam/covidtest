@@ -68,9 +68,56 @@ public class ControladorNotificacion {
 
 		return new ModelAndView("crearMensaje", model);
 	}
+	//@RequestMapping(value = "responderAPaciente", method = RequestMethod.GET)
+	@RequestMapping(value = "responder", method = RequestMethod.GET)
+	public ModelAndView responder(
+
+			@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
+
+		if (servicioAtajo.validarInicioDeSesion(request) != null) {
+			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
+		}
+		if (servicioAtajo.validarPermisoAPagina(request) != null) {
+			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
+		}
+		Rol rol = (Rol) request.getSession().getAttribute("ROL");
+		if (rol != null) {
+			model.put("rol", rol.name());
+		}
+		model.put("armarHeader", servicioAtajo.armarHeader(request));
+		
+		if (rol == Rol.PACIENTE) {
+			Paciente p = servicioPaciente.consultarPacientePorId(id);
+			Long idPaciente = (Long) request.getSession().getAttribute("ID");
+
+			model.put("id", idPaciente);
+			model.put("p", p);
+		}
+		
+		if (rol == Rol.ADMIN) {
+			Usuario p = servicioUsuario.consultarUsuarioPorId(id);
+			Long idUsuario = (Long) request.getSession().getAttribute("ID");
+
+			model.put("id", idUsuario);
+			model.put("p", p);
+		}
+		
+		if (rol == Rol.INSTITUCION) {
+			Institucion p = servicioInstitucion.obtenerInstitucionPorId(id);
+			Long idInst = (Long) request.getSession().getAttribute("ID");
+
+			model.put("id", idInst);
+			model.put("p", p);
+		}
+
+
+		return new ModelAndView("crearMensaje", model);
+	}
 	
-	@RequestMapping(value = "responderAPaciente", method = RequestMethod.GET)
-	public ModelAndView responderAPaciente(
+	@RequestMapping(value = "responderAadmin", method = RequestMethod.GET)
+	public ModelAndView responderAadmin(
 
 			@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
 
