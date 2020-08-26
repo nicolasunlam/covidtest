@@ -70,11 +70,11 @@
 			<label for="inputPassword">Contraseña</label>
 		</div>
 
-		<div class="checkbox mb-2">
+		<!-- <div class="checkbox mb-2">
 			<label> <input path="recordar" type="checkbox"
 					value="remember-me" /> Recordar usuario y contraseña
 			</label>
-		</div>
+		</div> -->
 		
 				
 					
@@ -85,7 +85,7 @@
 					</p>
 				</c:if>
 		
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar
+		<button class="btn btn-lg btn-primary btn-block mt-4" type="submit">Iniciar
 			sesión</button>
 
 					
