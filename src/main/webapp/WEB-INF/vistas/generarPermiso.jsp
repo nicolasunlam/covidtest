@@ -43,7 +43,7 @@
 </c:if> --%>
 
 <c:if
-	test='${(paciente.getInfectado() == null) && (paciente.getPosibleInfectado() == null) && (paciente.getNombre() != null)}'>
+	test='${paciente.getInfectado() == null && paciente.getPosibleInfectado() == null && paciente.getNombre() != null}'>
 	<h3 class="text-center my-3">Complete los siguientes datos y
 		genere su permiso de circulacion</h3>
 
@@ -67,14 +67,16 @@
 						<form action="validarPermiso" method="POST"
 							class="d-flex justify-content-center flex-column justify-content-center">
 
-							<input type="hidden" value="${paciente.getNombre()}" name="nombre">
-							<input type="hidden" value="${paciente.getApellido()}" name="apellido">
-							<input type="hidden" value="${paciente.getEdad()}" name="edad">
+							<input type="hidden" value="${paciente.getNombre()}"
+								name="nombre"> <input type="hidden"
+								value="${paciente.getApellido()}" name="apellido"> <input
+								type="hidden" value="${paciente.getEdad()}" name="edad">
 							<input type="hidden" value="${paciente.getEmail()}" name="email">
-							<input type="hidden" value="${paciente.getTipoDocumento()}" name="tipoDocumento">
-							<input type="hidden" value="${paciente.getNumeroDocumento()}" name="numeroDocumento">
-							
-<%-- 							<h1>${paciente.getNombre()}</h1>
+							<input type="hidden" value="${paciente.getTipoDocumento()}"
+								name="tipoDocumento"> <input type="hidden"
+								value="${paciente.getNumeroDocumento()}" name="numeroDocumento">
+
+							<%-- 							<h1>${paciente.getNombre()}</h1>
 							<h1>${paciente.getApellido()}</h1>
 							<h1>${paciente.getEdad()}</h1>
 							<h1>${paciente.getEmail()}</h1>
@@ -248,6 +250,8 @@
 									<option id="motivo9">Trabajás asistiendo a personas
 										menores, mayores o con discapacidad
 									<option id="motivo10">Alguna otra actividad exceptuada
+
+
 
 
 
@@ -309,8 +313,7 @@
 	</div>
 </c:if>
 
-<c:if
-	test='${paciente.getNombre() == null}'>
+<c:if test='${paciente.getNombre() == null}'>
 	<h3 class="text-center my-3">Complete los siguientes datos y
 		genere su permiso de circulacion</h3>
 
@@ -334,14 +337,14 @@
 						<form action="validarPermiso" method="POST"
 							class="d-flex justify-content-center flex-column justify-content-center">
 
-<%-- 							<input type="hidden" value="${paciente.getNombre()}" name="nombre">
+							<%-- 							<input type="hidden" value="${paciente.getNombre()}" name="nombre">
 							<input type="hidden" value="${paciente.getApellido()}" name="apellido">
 							<input type="hidden" value="${paciente.getEdad()}" name="edad">
 							<input type="hidden" value="${paciente.getEmail()}" name="email">
 							<input type="hidden" value="${paciente.getTipoDocumento()}" name="tipoDocumento">
 							<input type="hidden" value="${paciente.getNumeroDocumento()}" name="numeroDocumento"> --%>
-							
-<%-- 							<h1>${paciente.getNombre()}</h1>
+
+							<%-- 							<h1>${paciente.getNombre()}</h1>
 							<h1>${paciente.getApellido()}</h1>
 							<h1>${paciente.getEdad()}</h1>
 							<h1>${paciente.getEmail()}</h1>
@@ -515,6 +518,8 @@
 									<option id="motivo9">Trabajás asistiendo a personas
 										menores, mayores o con discapacidad
 									<option id="motivo10">Alguna otra actividad exceptuada
+
+
 
 									
 								</select>
