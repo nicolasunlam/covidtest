@@ -128,8 +128,8 @@
 					<%
 						String usuario = (String) request.getSession().getAttribute("MAIL").toString();
 
-					String paramName = (String) usuario;
-					out.print("<tr><td>" + paramName + "</td>\n");
+							String paramName = (String) usuario;
+							out.print("<tr><td>" + paramName + "</td>\n");
 					%>
 
 
@@ -159,7 +159,7 @@
 
 
 						<li class="nav-item mt-3 mb-3"><a class="nav-link"
-							href="admin"> <span data-feather="home"></span> Home Admin
+							href="admin"> <span data-feather="home"></span> Inicio
 						</a></li>
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
@@ -224,14 +224,6 @@
 												<span data-feather="search"></span> Consultar paciente
 											</a>
 										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="egresarPaciente">
-												<span data-feather="user-minus"></span> Egresar paciente
-											</a>
-										</div>
-
-
-
 									</div>
 								</div>
 							</div>
@@ -271,7 +263,7 @@
 								</div>
 							</div>
 						</li>
-						
+
 						<li class="nav-item mt-3 mb-3"><a class="nav-link"
 							href="grafico-pacientes"> <span data-feather="bar-chart-2"></span>
 								Reportes
