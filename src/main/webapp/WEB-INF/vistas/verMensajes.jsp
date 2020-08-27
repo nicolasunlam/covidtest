@@ -61,8 +61,8 @@
 
 
 		<div class="my-3">
-			<span class=" h6">Paciente </span><input class="mr-4" " type="radio"
-				name="estado" id="paciente"> <span class=" h6">Institucion
+			<%-- <c:if test='${rol != "PACIENTE"}'><span class=" h6">Paciente </span><input class="mr-4" " type="radio"
+				name="estado" id="paciente"></c:if> --%> <span class=" h6">Institucion
 			</span><input class="mr-4" " type="radio" name="estado" id="institucion">
 			<span class="h6">Todos </span><input class="mr-4" " type="radio"
 				name="estado" id="restaurar">
@@ -148,7 +148,7 @@
 						<td class="align-middle"><fmt:parseDate
 								value="${notificacion.getFechaHora()}"
 								pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-							<fmt:formatDate pattern="dd/MM/yyyy ' - ' HH:mm 'h.'"
+							<fmt:formatDate pattern="dd/MM/yyyy ' - ' HH:mm 'hs.'"
 								value="${ parsedDateTime }" /></td>
 
 						<td class="align-middle"><c:out

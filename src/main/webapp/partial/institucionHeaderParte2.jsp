@@ -196,44 +196,7 @@
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
-								<span data-feather="user"></span>
-							</div>
-
-							<div id="accordion3">
-								<div class="">
-									<div class="" id="headingThree">
-										<h5 class="mb-0">
-											<button class="btn text-primary py-0" data-toggle="collapse"
-												data-target="#collapseThree" aria-expanded="true"
-												aria-controls="collapseThree" style="box-shadow: none">
-												Mis datos</button>
-										</h5>
-									</div>
-
-									<div id="collapseThree" class="collapse "
-										aria-labelledby="headingThree" data-parent="#accordion3">
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="MisDatos"> <span
-												data-feather="lock"></span> Mi cuenta
-											</a>
-										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark"
-												href="verMensajesRecibidos"> <span data-feather="inbox"></span>
-												Mis mensajes
-											</a>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</li>
-
-
-
-						<li class="nav-item mt-3 mb-3 d-flex mx-3">
-							<div class="py-1 text-primary">
-								<span data-feather="home"></span>
+								<span data-feather="users"></span>
 							</div>
 
 							<div id="accordion6">
@@ -252,7 +215,7 @@
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark"
 												href="listaPacientesInternados"> <span
-												data-feather="users"></span> Pacientes Internados
+												data-feather="user-check"></span> Pacientes Internados
 											</a>
 										</div>
 										<div class="card-body px-0">
@@ -326,6 +289,41 @@
 											<a class="nav-link px-0 text-dark"
 												href="trasladosParaRecibir"> <span
 												data-feather="user-plus"></span> Para recibir
+											</a>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</li>
+						
+												<li class="nav-item mt-3 mb-3 d-flex mx-3">
+							<div class="py-1 text-primary">
+								<span data-feather="database"></span>
+							</div>
+
+							<div id="accordion3">
+								<div class="">
+									<div class="" id="headingThree">
+										<h5 class="mb-0">
+											<button class="btn text-primary py-0" data-toggle="collapse"
+												data-target="#collapseThree" aria-expanded="true"
+												aria-controls="collapseThree" style="box-shadow: none">
+												Mis datos</button>
+										</h5>
+									</div>
+
+									<div id="collapseThree" class="collapse "
+										aria-labelledby="headingThree" data-parent="#accordion3">
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark" href="MisDatos"> <span
+												data-feather="lock"></span> Mi cuenta
+											</a>
+										</div>
+										<div class="card-body px-0">
+											<a class="nav-link px-0 text-dark"
+												href="verMensajesRecibidos"> <span data-feather="message-circle"></span>
+												Mis mensajes
 											</a>
 										</div>
 

@@ -128,8 +128,8 @@
 					<%
 						String usuario = (String) request.getSession().getAttribute("MAIL").toString();
 
-							String paramName = (String) usuario;
-							out.print("<tr><td>" + paramName + "</td>\n");
+					String paramName = (String) usuario;
+					out.print("<tr><td>" + paramName + "</td>\n");
 					%>
 
 
@@ -216,7 +216,7 @@
 										aria-labelledby="headingOne" data-parent="#accordion2">
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark" href="posiblesinfectados">
-												<span data-feather="users"></span> Lista de Espera
+												<span data-feather="user-plus"></span> Lista de Espera
 											</a>
 										</div>
 										<div class="card-body px-0">
@@ -231,7 +231,7 @@
 
 						<li class="nav-item mt-3 mb-3 d-flex mx-3">
 							<div class="py-1 text-primary">
-								<span data-feather="user"></span>
+								<span data-feather="database"></span>
 							</div>
 
 							<div id="accordion3">
@@ -241,7 +241,7 @@
 											<button class="btn text-primary py-0" data-toggle="collapse"
 												data-target="#collapseThree" aria-expanded="true"
 												aria-controls="collapseThree" style="box-shadow: none">
-												Admin</button>
+												Mis datos</button>
 										</h5>
 									</div>
 
@@ -254,7 +254,7 @@
 										</div>
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark"
-												href="verMensajesRecibidos"> <span data-feather="inbox"></span>
+												href="verMensajesRecibidos"> <span data-feather="message-circle"></span>
 												Mis mensajes
 											</a>
 										</div>
