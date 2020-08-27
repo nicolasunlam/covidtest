@@ -221,7 +221,7 @@
 
 					<td class="align-middle"><c:if
 							test="${paciente.getAsignacion() == nul}">
-						Este paciente no a sido asignado a ninguna cama.
+						Este paciente no ha sido asignado a alguna cama
 							
 						</c:if> <c:if test="${paciente.getAsignacion() != nul}">
 

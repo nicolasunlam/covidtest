@@ -54,8 +54,7 @@
 					<c:if test='${rol == null}'>
 						"home"
 						</c:if>>
-					<button type="button" class="btn btn-outline-primary">
-						Volver atrás</button>
+
 				</a>
 			</div>
 

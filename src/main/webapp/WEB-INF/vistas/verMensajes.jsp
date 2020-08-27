@@ -47,9 +47,6 @@
 					<c:if test='${rol == "INSTITUCION"}'>
 						"bienvenido"
 						</c:if>
-					<c:if test='${rol == "PACIENTE"}'>
-						"bienvenidoPaciente"
-						</c:if>
 					<c:if test='${rol == null}'>
 						"home"
 						</c:if>>
@@ -171,8 +168,10 @@
 						<td><a class="btn btn-outline-primary mb-2"
 							href="verDetalleMensaje?id=${notificacion.getId()}" role="button">Ver
 								Mensaje</a>
-								
-							<a class="btn btn-outline-success" href="responder?id=${notificacion.getRemitente().getId()}" role="button">Responder</a></td>
+								<c:if test='${rol != "PACIENTE"}'>
+						<a class="btn btn-outline-success" href="responder?id=${notificacion.getRemitente().getId()}" role="button">Responder</a>
+						</c:if>
+							</td>
 
 						</form>
 						</div>
