@@ -19,7 +19,7 @@
 
 <div class="container my-5">
 
-	<c:if test='${paciente.getInfectado()}'>
+	<c:if test='${paciente.getInfectado() || paciente.getPosibleInfectado()}'>
 		<h1 class="text-center mt-5 mb-3">En este momento no es posible
 			generar un permiso de circulación.</h1>
 		<h1 class="text-center mb-5">Debido a su estado, lo recomendable
