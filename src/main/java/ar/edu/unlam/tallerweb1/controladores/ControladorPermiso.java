@@ -76,7 +76,7 @@ public class ControladorPermiso {
 			@RequestParam(value = "numeroCalle", required = false) Integer numeroCalle,
 			@RequestParam(value = "calle", required = false) String calle,
 			@RequestParam(value = "nombreLocalidad", required = false) String nombreLocalidad,
-			@RequestParam(value = "telefono", required = false) Integer telefono,
+			@RequestParam(value = "telefono", required = false) String telefono,
 			@RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "motivo", required = false) String motivo) {
 
