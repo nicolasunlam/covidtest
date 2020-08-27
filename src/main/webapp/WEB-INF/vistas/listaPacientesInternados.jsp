@@ -34,14 +34,15 @@
 		información que necesita con mayor comodidad</p>
 
 	<div class="my-3">
-		<span class="text-success h6">Baja </span><input class="mr-4"
-			" type="radio" name="estado" id="baja"> <span
-			class="text-warning h6">Media </span><input class="mr-4"
-			" type="radio" name="estado" id="prio-media"> <span
-			class="text-danger h6">Alta </span><input class="mr-4" " type="radio"
-			name="estado" id="alta"> <span class="h6">Todos </span><input
-			class="mr-4" " type="radio" name="estado" id="restaurar">
+		<span class="text-success h6">Autorizado </span><input class="mr-4"
+			" type="radio" name="estado" id="autorizado"> <span
+			class="text-warning h6">En espera </span><input class="mr-4"
+			" type="radio" name="estado" id="espera"> <span
+			class="text-danger h6">Denegado </span><input class="mr-4"
+			" type="radio" name="estado" id="denegado"> <span class="h6">Reestablecer
+		</span><input class="mr-4" " type="radio" name="estado" id="restaurar">
 	</div>
+
 
 	<div class="table-responsive">
 
@@ -103,7 +104,7 @@
 				<th style="vertical-align: middle; width: 25%"
 					class="border border-secondary"
 					onmouseover="this.style.backgroundColor='#dee2e6';"
-					onmouseout="this.style.backgroundColor='white';">RESERVA <img
+					onmouseout="this.style.backgroundColor='white';">TRASLADO<img
 					style="margin-top: 0.40rem;"
 					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
 					width="10px" height="">
@@ -119,17 +120,16 @@
 			<c:forEach items="${listaPacientesInternados}" var="traslado">
 
 				<tr
-					<c:if
-						test="${traslado.getAsignacionActual().getPaciente().getPrioridad() == 5 || traslado.getAsignacionActual().getPaciente().getPrioridad() == 4}">
-						class="baja"
-					</c:if>
-					<c:if test="${traslado.getAsignacionActual().getPaciente().getPrioridad() == 3}">
-					class="prio-media"
-					</c:if>
-					<c:if
-						test="${traslado.getAsignacionActual().getPaciente().getPrioridad() == 2 || traslado.getAsignacionActual().getPaciente().getPrioridad() == 1}">
-						class="alta"
-					</c:if>>
+					<c:if test="${traslado.getAsignacionReservada().getAutorizada() == true &&
+								 traslado.getAsignacionActual().getHoraEgreso() == null}">
+		            		class="table-success autorizado"
+		               	</c:if>
+					<c:if test="${traslado.getAsignacionReservada().getAutorizada() == false}">
+		            		class="table-danger denegado"
+		               	</c:if>
+					<c:if test="${traslado.getAsignacionReservada().getAutorizada() == null}">
+		            		class="espera"
+		               	</c:if>>
 
 
 					<form action="procesarTraslado" method="GET">
@@ -219,30 +219,95 @@
 		              		 	</c:if> <c:if
 								test="${traslado.getAsignacionReservada() != nul}">
 
-								<p class="text-left mb-0">
-									<strong>Institución:</strong>
-									${traslado.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getNombre()}
-								</p>
-								<p class="text-left mb-0">
-									<strong>Sala:</strong>
-									${traslado.getAsignacionReservada().getCama().getSala().getDescripcion()}
-									(${traslado.getAsignacionReservada().getCama().getSala().getTipoSala().getDescripcion()})
-								</p>
-								<p class="text-left mb-0">
-									<strong>Cama:</strong>
-									${traslado.getAsignacionReservada().getCama().getDescripcion()}
-									(${traslado.getAsignacionReservada().getCama().getTipoCama().getDescripcion()})
-								</p>
-								<p class="text-left mb-0">
-									<strong>Fecha de reserva:</strong>
-									<fmt:parseDate
-										value="${traslado.getAsignacionReservada().getHoraReserva()}"
-										pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-									<fmt:formatDate pattern="dd/MM/yyyy 'a las' HH:mm 'horas.'"
-										value="${ parsedDateTime }" />
-								</p>
+								<c:if
+									test="${traslado.getAsignacionReservada().getAutorizada() == false}">
 
-							</c:if></td>
+									<h6>
+										<strong>TRASLADO RECHAZADO</strong>
+									</h6>
+								</c:if>
+
+								<c:if
+									test="${traslado.getAsignacionReservada().getAutorizada() == null}">
+
+									<h6>
+										<strong>ESPERANDO AUTORIZACIÓN</strong>
+									</h6>
+								</c:if>
+
+								<c:if
+									test="${traslado.getAsignacionReservada().getAutorizada() == true}">
+
+									<h6>
+										<strong>TRASLADO AUTORIZADO</strong>
+									</h6>
+								</c:if>
+
+								<div
+									id="mostrarInfo${traslado.getAsignacionReservada().getId()}"
+									hidden>
+
+
+									<p class="text-left mb-0">
+										<strong>Institución:</strong>
+										${traslado.getAsignacionReservada().getCama().getSala().getSector().getPiso().getInstitucion().getNombre()}
+									</p>
+									<p class="text-left mb-0">
+										<strong>Sala:</strong>
+										${traslado.getAsignacionReservada().getCama().getSala().getDescripcion()}
+										(${traslado.getAsignacionReservada().getCama().getSala().getTipoSala().getDescripcion()})
+									</p>
+									<p class="text-left mb-0">
+										<strong>Cama:</strong>
+										${traslado.getAsignacionReservada().getCama().getDescripcion()}
+										(${traslado.getAsignacionReservada().getCama().getTipoCama().getDescripcion()})
+									</p>
+									<p class="text-left mb-0">
+										<strong>Fecha de reserva:</strong>
+										<fmt:parseDate
+											value="${traslado.getAsignacionReservada().getHoraReserva()}"
+											pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+										<fmt:formatDate pattern="dd/MM/yyyy 'a las' HH:mm 'horas.'"
+											value="${ parsedDateTime }" />
+									</p>
+
+								</div>
+
+								<div class="d-flex justify-content-center">
+									<div class="custom-control custom-switch mt-2">
+										<input type="checkbox" class="custom-control-input"
+											id="activarInfo${traslado.getAsignacionReservada().getId()}"
+											onclick="javascript:mostrarInfo(this,'mostrarInfo${traslado.getAsignacionReservada().getId()}')">
+										<label class="custom-control-label"
+											for="activarInfo${traslado.getAsignacionReservada().getId()}">Mostrar
+											información</label>
+									</div>
+								</div>
+
+								<c:if
+									test="${traslado.getAsignacionReservada().getAutorizada() == false}">
+
+
+
+									<button type="button"
+										class="btn btn-outline-danger	btn-sm mt-3" data-toggle="modal"
+										data-target="#modalDenegar${traslado.getAsignacionActual().getId()}">
+										Eliminar solicitud de traslado</button>
+								</c:if>
+							</c:if> <script type="text/javascript">
+								function mostrarInfo(checkActivador,
+										idContenedorOculto) {
+
+									var contenedorOculto = document
+											.getElementById(idContenedorOculto);
+
+									if (checkActivador.checked == true) {
+										contenedorOculto.hidden = false;
+									} else {
+										contenedorOculto.hidden = true;
+									}
+								}
+							</script></td>
 						<td style="vertical-align: middle;">
 							<!-- Button trigger modal -->
 
@@ -251,18 +316,38 @@
 								<c:if test="${traslado.getAsignacionReservada() == nul}">
 									<form class="my-0" action="trasladar">
 										<input name="idPaciente"
-											value="${traslado.getAsignacionReservada().getPaciente().getId()}" hidden>
-										<button class="btn btn-outline-secondary" disabled>Trasladar</button>
+											value="${traslado.getAsignacionActual().getPaciente().getId()}"
+											hidden>
+										<button style="width: 103px" class="btn btn-outline-info">Solicitar
+											Traslado</button>
 									</form>
 								</c:if>
+
 								<c:if test="${traslado.getAsignacionReservada() != nul}">
-									<form class="my-0" action="trasladar">
-										<input name="idPaciente"
-											value="${traslado.getAsignacionReservada().getPaciente().getId()}" hidden>
-										<button style="width: 103px" class="btn btn-success">Trasladar</button>
-									</form>
+									<c:if
+										test="${traslado.getAsignacionReservada().getAutorizada() == true &&
+								 traslado.getAsignacionActual().getHoraEgreso() == null}">
+										<form class="my-0" action="trasladoEnCurso" method="post">
+											<input name="idAsignacionActual"
+												value="${traslado.getAsignacionActual().getId()}" hidden>
+											<input name="idAsignacionReservada"
+												value="${traslado.getAsignacionReservada().getId()}" hidden>
+											<button style="width: 103px" class="btn btn-success">Trasladar
+												ahora</button>
+										</form>
+									</c:if>
+
+									<c:if
+										test="${traslado.getAsignacionReservada().getAutorizada() == null}">
+										<form class="my-0" action="trasladar">
+											<input name="idPaciente"
+												value="${traslado.getAsignacionReservada().getPaciente().getId()}"
+												hidden>
+											<button style="width: 103px" class="btn btn-success" disabled>Trasladar
+												ahora</button>
+										</form>
+									</c:if>
 								</c:if>
-							
 								<a
 									href="egresarPacienteMotivo?idPaciente=${traslado.getAsignacionActual().getPaciente().getId()}"
 									class="btn btn-outline-success mx-1  my-1" type="button"
@@ -368,7 +453,7 @@
 				</div>
 				<!-- End Modal -->
 
-				<%-- <!-- Start Modal -->
+				<!-- Start Modal -->
 				<div class="modal fade"
 					id="modalDenegar${traslado.getAsignacionActual().getId()}"
 					tabindex="-1" role="dialog"
@@ -376,7 +461,7 @@
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content  px-3">
 							<div class="modal-header pb-2">
-								<h5 class="modal-title" id="exampleModalLongTitleUno">Denegar
+								<h5 class="modal-title" id="exampleModalLongTitleUno">Eliminar
 									solicitud de traslado</h5>
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
@@ -385,7 +470,7 @@
 							</div>
 							<div class="modal-body text-left">
 
-								<p class="p mt-2 mb-4">¿Está seguro/a que desea denegar el
+								<p class="p mt-2 mb-4">¿Está seguro/a que desea eliminar el
 									traslado solicitado?</p>
 
 								<p class="mb-0 font-weight-lighter text-danger">Una vez
@@ -396,20 +481,18 @@
 								<button type="button" class="btn btn-outline-primary"
 									data-dismiss="modal">Volver</button>
 
-								<form action="decidirTraslado" method="post">
-									<input name="idAsignacionReservada"
+								<form action="eliminarAsignacion" method="post">
+									<input name="idAsignacion"
 										value="${traslado.getAsignacionReservada().getId()}" hidden>
-									<input name="decision" value="denegado" hidden><input
-										name="distancia" value="${traslado.getDistancia()}" hidden>
-									<button type="submit" class="btn btn-outline-danger">Denegar
-										traslado</button>
+									<button type="submit" class="btn btn-outline-danger">Eliminar
+										solicitud de traslado</button>
 								</form>
 
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- End Modal --> --%>
+				<!-- End Modal -->
 
 			</c:forEach>
 
@@ -465,24 +548,24 @@
 </div>
 <script>
 	$('#restaurar').click(function() {
-		$('.alta').slideDown();
-		$('.prio-media').slideDown();
-		$('.baja').slideDown();
+		$('.denegado').slideDown();
+		$('.espera').slideDown();
+		$('.autorizado').slideDown();
 	});
-	$('#alta').click(function() {
-		$('.alta').slideDown();
-		$('.prio-media').slideUp();
-		$('.baja').slideUp();
+	$('#autorizado').click(function() {
+		$('.denegado').slideUp();
+		$('.espera').slideUp();
+		$('.autorizado').slideDown();
 	});
-	$('#prio-media').click(function() {
-		$('.prio-media').slideDown();
-		$('.alta').slideUp();
-		$('.baja').slideUp();
+	$('#denegado').click(function() {
+		$('.espera').slideUp();
+		$('.autorizado').slideUp();
+		$('.denegado').slideDown();
 	});
-	$('#baja').click(function() {
-		$('.baja').slideDown();
-		$('.prio-media').slideUp();
-		$('.alta').slideUp();
+	$('#espera').click(function() {
+		$('.autorizado').slideUp();
+		$('.denegado').slideUp();
+		$('.espera').slideDown();
 	});
 
 	function filtrarPorNombre() {
@@ -552,7 +635,7 @@
 	}
 </script>
 
-<script src="js/funciones.js"></script>
+
 <script src="js/sort.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
 <script src="js/dashboard.js"></script>
