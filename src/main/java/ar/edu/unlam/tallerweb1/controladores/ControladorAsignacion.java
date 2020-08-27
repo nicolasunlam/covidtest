@@ -551,7 +551,9 @@ public class ControladorAsignacion {
 		}
     	model.put("armarHeader", servicioAtajo.armarHeader(request));
 		
-        
+    	Long idInstitucion = (Long) request.getSession().getAttribute("ID");
+        Institucion institucion = servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+    	
     	Paciente pacienteBuscado =  servicioPaciente.consultarPacientePorId(idPaciente);
 		
 		if (pacienteBuscado == null) {
@@ -560,19 +562,20 @@ public class ControladorAsignacion {
 		}
 		
 		Asignacion asignacionBuscada = servicioAsignacion.consultarAsignacionPacienteInternado(pacienteBuscado);	
+		Asignacion asignacionReservada = servicioAsignacion.consultarReservaAsignacionPaciente(pacienteBuscado);
 		
 		if (asignacionBuscada == null) {
+			
 			model.put("error", "El paciente no está asignado");
 			return new ModelAndView("egresarPaciente", model);
 		}		
-		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd, MMMM, yyyy HH:mm");
-		LocalDateTime dateTime = asignacionBuscada.getHoraIngreso();
-		String horaIngreso = dateTime.format(formatter);
+
+		List<String> enfermedades = servicioPaciente.obtenerListaDeEnfermedadesDeUnPaciente(pacienteBuscado);
 		
 		model.put("paciente", pacienteBuscado);
-		model.put("horaIngreso", horaIngreso);
-		model.put("asignacion", asignacionBuscada);
+		model.put("enfermedades", enfermedades);
+		model.put("asignacionBuscada", asignacionBuscada);
+		model.put("asignacionReservada", asignacionReservada);
 		
         return new ModelAndView("egresarPacienteMotivo", model);
     }
@@ -624,6 +627,10 @@ public class ControladorAsignacion {
 		LocalDateTime dateTime = asignacionBuscada.getHoraIngreso();
 		String horaIngreso = dateTime.format(formatter);
 		String horaEgreso = dateTimeNow.format(formatter);
+		
+		List<String> enfermedades = servicioPaciente.obtenerListaDeEnfermedadesDeUnPaciente(pacienteBuscado);
+		
+		model.put("enfermedades", enfermedades);
 		
 		model.put("paciente", pacienteBuscado);
 		model.put("horaIngreso", horaIngreso);
