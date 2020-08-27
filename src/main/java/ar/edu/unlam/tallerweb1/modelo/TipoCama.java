@@ -4,7 +4,7 @@ public enum TipoCama {
 
 	FIJA("Fija", 5),
 	ARTICULADA_MANUAL("Articulada manual", 3),
-	ARTICULADA_ELECTRICA("Articulada eléctrica", 1);
+	ARTICULADA_ELECTRICA("Articulada electrica", 1);
 	
     private final String descripcion;
     private final Integer prioridad;

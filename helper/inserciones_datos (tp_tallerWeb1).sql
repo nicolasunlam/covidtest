@@ -122,19 +122,19 @@ VALUES("PACIENTE", "Paciente", 12, "Cristian", "Gómez", "cristian@email.com", "
 
 /* ----- PACIENTE PARA INTERNAR----- */
 INSERT INTO usuario(rol, DTYPE, id, nombre, apellido, email, password, numeroDocumento, tipoDocumento, domicilio_id, posibleInfectado, infectado, prioridad, edad, latitud, longitud, esFumador, tieneDiabetes, tieneEmbarazo, tieneEnfCardiologica, tieneEnfHepatica, tieneEnfRenal, tieneEnfRespiratoria)
-VALUES("PACIENTE", "Paciente", 21, "Juan", "Gómez", "cristian@email.com", "1234", "42120100", "DNI", 3, null, null, 5, 45, -34.72840647959868, -53.61369019379556, false, false, false, false, false, false, false),
-      ("PACIENTE", "Paciente", 22, "Juana", "Gómez", "celeste@email.com", "1234", "42130100", "DNI", 1, null, null, 5, 56, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
-	  ("PACIENTE", "Paciente", 23, "José", "García", "dario@email.com", "1234", "42140100", "DNI", 2, null, null, 5, 32, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
-      ("PACIENTE", "Paciente", 24, "Josefa", "García", "danila@email.com", "1234", "42150100", "DNI", 3, null, null, 5, 25, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
-	  ("PACIENTE", "Paciente", 25, "Julián", "García", "daniel@email.com", "1234", "42106100", "DNI", 4, null, null, 5, 36, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
-      ("PACIENTE", "Paciente", 26, "Juliana", "García", "daniela@email.com", "1234", "42160100", "DNI", 3, null, null, 5, 25, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
-      ("PACIENTE", "Paciente", 27, "Julieta", "García", "fabricio@email.com", "1234", "42170100", "DNI", 1, null, null, 5, 65, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
+VALUES("PACIENTE", "Paciente", 21, "Juan", "Gómez", "juango@email.com", "1234", "42120100", "DNI", 3, null, null, 5, 45, -34.72840647959868, -53.61369019379556, false, false, false, false, false, false, false),
+      ("PACIENTE", "Paciente", 22, "Juana", "Gómez", "juana@email.com", "1234", "42130100", "DNI", 1, null, null, 5, 56, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
+	  ("PACIENTE", "Paciente", 23, "José", "García", "joseg@email.com", "1234", "42140100", "DNI", 2, null, null, 5, 32, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
+      ("PACIENTE", "Paciente", 24, "Josefa", "García", "josefa@email.com", "1234", "42150100", "DNI", 3, null, null, 5, 25, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
+	  ("PACIENTE", "Paciente", 25, "Julián", "García", "julian@email.com", "1234", "42106100", "DNI", 4, null, null, 5, 36, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
+      ("PACIENTE", "Paciente", 26, "Juliana", "García", "julianaa@email.com", "1234", "42160100", "DNI", 3, null, null, 5, 25, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
+      ("PACIENTE", "Paciente", 27, "Julieta", "García", "julietaa@email.com", "1234", "42170100", "DNI", 1, null, null, 5, 65, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, false),
       ("PACIENTE", "Paciente", 28, "Julia", "García", "julia@email.com", "1234", "42108100", "PASAPORTE", 1, null, null, 1, 78, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
       ("PACIENTE", "Paciente", 29, "Julio", "Garcia", "julio@email.com", "1234", "46", "PASAPORTE", 3, null, null, 1, 56, -34.72840647959868, -58.61369019379556, true, true, true, false, true, true, true),
-      ("PACIENTE", "Paciente", 30, "Julia", "García", "fabian@email.com", "1234", "52108100", "PASAPORTE", 1, null, null, 1, 69, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
+      ("PACIENTE", "Paciente", 30, "Julia", "García", "jujulia@email.com", "1234", "52108100", "PASAPORTE", 1, null, null, 1, 69, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
       ("PACIENTE", "Paciente", 31, "Lorenzo", "Horandle", "lorenzo@email.com", "1234", "56", "PASAPORTE", 3, null, null, 1, 32, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
       ("PACIENTE", "Paciente", 32, "Laura", "Horandle", "laura@email.com", "1234", "42348100", "PASAPORTE", 1, null, null, 1, 78, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
-      ("PACIENTE", "Paciente", 33, "Lucia", "Iraola", "lucila@email.com", "1234", "64643", "PASAPORTE", 3, null, null, 1, 56, -34.72840647959868, -58.61369019379556, true, true, true, false, true, true, true),
+      ("PACIENTE", "Paciente", 33, "Lucia", "Iraola", "lucia@email.com", "1234", "64643", "PASAPORTE", 3, null, null, 1, 56, -34.72840647959868, -58.61369019379556, true, true, true, false, true, true, true),
       ("PACIENTE", "Paciente", 34, "Lucila", "Iraola", "lucila@email.com", "1234", "62122300", "PASAPORTE", 1, null, null, 1, 69, -34.72840647959868, -58.61369019379556, true, true, false, true, true, true, true),
       ("PACIENTE", "Paciente", 35, "Ludmila", "Imarriota", "ludmila@email.com", "1234", "435656", "PASAPORTE", 3, null, null, 4, 32, -34.72840647959868, -58.61369019379556, false, false, false, false, false, false, true),
 	  ("PACIENTE", "Paciente", 36, "Alejandrito", "Ismael", "alejandrito@email.com", "1234", "127854", "DNI", 2, null, null, 1, 45,-34.72840647959868, -52.71369019379556, true, true, false, true, true, true, true);

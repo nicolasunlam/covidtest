@@ -132,7 +132,7 @@
 		               	</c:if>>
 
 
-					<form action="procesarTraslado" method="GET">
+					<%-- <form action="procesarTraslado" method="GET"> --%>
 
 						<td style="vertical-align: middle;"><c:out
 								value="${traslado.getAsignacionActual().getPaciente().getApellido()}, 
@@ -354,17 +354,17 @@
 									style="width: 103px">Egresar</a>
 
 
-								<button type="button" class="btn btn-outline-primary mx-1 my-1"
-									style="width: 103px" data-toggle="modal"
-									data-target="#modalDetalle${traslado.getAsignacionActual().getId()}">
-									Ver detalle</button>
+								<a type="button" class="btn btn-outline-primary mx-1 my-1"
+									style="width: 103px" 
+									href="detalle?id=${traslado.getAsignacionActual().getPaciente().getId()}">
+									Ver detalle</a>
 
 
 							</div>
 
 						</td>
 
-					</form>
+					<%-- </form> --%>
 
 				</tr>
 

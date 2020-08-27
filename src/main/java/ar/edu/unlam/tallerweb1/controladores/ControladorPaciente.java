@@ -248,22 +248,25 @@ public class ControladorPaciente {
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
 		Paciente paciente = new Paciente();
+		
+		
 		model.put("paciente", paciente);
 
 		return new ModelAndView("consultarPaciente", model);
 	}
 
-	/* Detalle por consultar paciente por Nro y Tipo de Documento */
-	@RequestMapping(path = "/detalle", method = RequestMethod.POST)
+	
+	@RequestMapping(path = "/detalle", method = RequestMethod.GET)
 	public ModelAndView validarConsulta(
 
-			@ModelAttribute("paciente") Paciente paciente, HttpServletRequest request) {
+			@RequestParam (value="id") Long id, HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
 
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
 			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
+		
 		if (servicioAtajo.validarPermisoAPagina(request) != null) {
 			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
 		}
@@ -273,12 +276,53 @@ public class ControladorPaciente {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 
-		paciente = servicioPaciente.consultarPacientePorDoc(paciente.getNumeroDocumento(), paciente.getTipoDocumento());
+		Paciente paciente = servicioPaciente.consultarPacientePorId(id);
+		
+		Asignacion reserva=servicioAsignacion.consultarReservaAsignacionPaciente(paciente);
+		Asignacion asignacionActual=servicioAsignacion.consultarAsignacionPacienteInternado(paciente);
+		
+		Long idInstitucion = (Long)request.getSession().getAttribute("ID");
+		Institucion i= servicioInstitucion.obtenerInstitucionPorId(idInstitucion);
+		
+		model.put("paciente", paciente);
+		List<String> listaEnfermedades = servicioPaciente.obtenerListaDeEnfermedadesDeUnPaciente(paciente);
+		model.put("listaEnfermedades", listaEnfermedades);
+		model.put("reserva" ,reserva);
+		model.put("asignacion" ,asignacionActual);
+		
+		if (reserva != null) {
+			if (reserva.getCama().getSala().getSector().getPiso().getInstitucion() != i) {
+				model.put("detalleVista", "detallePaciente");
+//				model.put("error", "No existe el usuario buscado");
+				return new ModelAndView("detalle", model);
+			}
+		}
+		
+		if (asignacionActual != null) {
+			if (asignacionActual.getCama().getSala().getSector().getPiso().getInstitucion() != i) {
 
+				model.put("detalleVista", "detallePaciente");
+//				model.put("error", "No existe el usuario buscado");
+
+				return new ModelAndView("detalle", model);
+			}
+		}
+		
+		if(asignacionActual==null && reserva==null) {
+			
+			
+			model.put("detalleVista", "detallePaciente");
+			model.put("error", "No existe el usuario buscado");
+
+			return new ModelAndView("consultarPaciente", model);
+		}
+		
 		if (paciente != null) {
 
 			model.put("paciente", paciente);
 			model.put("detalleVista", "detallePaciente");
+			model.put("reserva", reserva );
+			model.put("asignacion",asignacionActual);
 
 			return new ModelAndView("detalle", model);
 		}

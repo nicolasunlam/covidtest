@@ -292,6 +292,7 @@
 
 
 
+
 									
 								</select>
 							</div>
@@ -518,6 +519,7 @@
 									<option id="motivo9">Trabajás asistiendo a personas
 										menores, mayores o con discapacidad
 									<option id="motivo10">Alguna otra actividad exceptuada
+
 
 
 

@@ -68,7 +68,7 @@ public class ControladorNotificacion {
 
 		return new ModelAndView("crearMensaje", model);
 	}
-	//@RequestMapping(value = "responderAPaciente", method = RequestMethod.GET)
+	
 	@RequestMapping(value = "responder", method = RequestMethod.GET)
 	public ModelAndView responder(
 
@@ -88,31 +88,36 @@ public class ControladorNotificacion {
 		}
 		model.put("armarHeader", servicioAtajo.armarHeader(request));
 		
-		if (rol == Rol.PACIENTE) {
-			Paciente p = servicioPaciente.consultarPacientePorId(id);
-			Long idPaciente = (Long) request.getSession().getAttribute("ID");
+//		if (rol == Rol.PACIENTE) {
+//			Paciente p = servicioPaciente.consultarPacientePorId(id);
+//			Long idPaciente = (Long) request.getSession().getAttribute("ID");
+//
+//			model.put("id", idPaciente);
+//			model.put("p", p);
+//		}
+//		
+//		if (rol == Rol.ADMIN) {
+//			Usuario p = servicioUsuario.consultarUsuarioPorId(id);
+//			Long idUsuario = (Long) request.getSession().getAttribute("ID");
+//
+//			model.put("id", idUsuario);
+//			model.put("p", p);
+//		}
+//		
+//		if (rol == Rol.INSTITUCION) {
+//			Institucion p = servicioInstitucion.obtenerInstitucionPorId(id);
+//			Long idInst = (Long) request.getSession().getAttribute("ID");
+//
+//			model.put("id", idInst);
+//			model.put("p", p);
+//		}
 
-			model.put("id", idPaciente);
-			model.put("p", p);
-		}
+		Usuario p = servicioUsuario.consultarUsuarioPorId(id);
+		Long idUsuario = (Long) request.getSession().getAttribute("ID");
+
+		model.put("id", idUsuario);
+		model.put("p", p);
 		
-		if (rol == Rol.ADMIN) {
-			Usuario p = servicioUsuario.consultarUsuarioPorId(id);
-			Long idUsuario = (Long) request.getSession().getAttribute("ID");
-
-			model.put("id", idUsuario);
-			model.put("p", p);
-		}
-		
-		if (rol == Rol.INSTITUCION) {
-			Institucion p = servicioInstitucion.obtenerInstitucionPorId(id);
-			Long idInst = (Long) request.getSession().getAttribute("ID");
-
-			model.put("id", idInst);
-			model.put("p", p);
-		}
-
-
 		return new ModelAndView("crearMensaje", model);
 	}
 	
@@ -188,9 +193,7 @@ public class ControladorNotificacion {
 		if (servicioAtajo.validarInicioDeSesion(request) != null) {
 			return new ModelAndView(servicioAtajo.validarInicioDeSesion(request));
 		}
-		if (servicioAtajo.validarPermisoAPagina(request) != null) {
-			return new ModelAndView(servicioAtajo.validarPermisoAPagina(request));
-		}
+		
 		Rol rol = (Rol) request.getSession().getAttribute("ROL");
 		if (rol != null) {
 			model.put("rol", rol.name());
