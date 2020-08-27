@@ -46,6 +46,8 @@
 
 <script
 	src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+	<script
+	src="js/dashboard.js"></script> <script src="js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
 
@@ -172,6 +174,7 @@
 </div>
 
 <c:if test='${rol != "PACIENTE"}'>
+<%@ include file="../../partial/footer.jsp"%>
 	</main>
 </c:if>
 
@@ -267,9 +270,10 @@ var polyline = L.polyline(polylinePoints).addTo(map);
 
 </script>
 
+
 </c:if>
 
-<%@ include file="../../partial/footer.jsp"%>
+
 
 </body>
 
