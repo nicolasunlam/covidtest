@@ -38,7 +38,7 @@
 				<c:if test='${rol == null}'>
 						"home"
 						</c:if>>
-				<button type="button" class="btn btn-primary">Volver atrás</button>
+
 			</a>
 		</div>
 
@@ -189,7 +189,7 @@
 		</table>
 	</div>
 
-	<a href="admin" class="btn btn-primary mt-3"> Volver atrás</a>
+	<a href="admin" class="btn btn-primary mt-3 mb-5"> Volver atrás</a>
 
 </div>
 

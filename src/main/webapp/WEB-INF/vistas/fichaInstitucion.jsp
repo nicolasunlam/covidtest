@@ -46,6 +46,8 @@
 
 <script
 	src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+	<script
+	src="js/dashboard.js"></script> <script src="js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
 
@@ -85,7 +87,7 @@
 				<h3 class="font-weight-bolder">Correo electrónico</h3>
 				<h4>${email}</h4>
 				<h3 class="font-weight-bolder mt-5">Dirección</h3>
-				<h4>${calle}${numero},${localidad}</h4>
+				<h4>${calle} ${numero}, ${localidad}</h4>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-5" id="map"></div>
@@ -115,8 +117,8 @@
 		<div class="row my-4">
 			<div class="col-3">
 				<c:if test="${camasDisponibles > 0}">
-					<h4 class="d-inline mr-3">Hay disponibilidad</h4>
-					<img src="img/right.png" width="35" height="35"
+					<h4 class="d-inline mr-1">Hay disponibilidad</h4>
+					<img class ="d-inline" src="img/right.png" width="35" height="35"
 						alt="Generic placeholder image" class="d-inline">
 				</c:if>
 				<c:if test="${camasDisponibles <= 0}">
@@ -165,13 +167,14 @@
 				<c:if test='${rol == null}'>
 						"home"
 						</c:if>
-				class="btn btn-primary"> Volver atrás</a>
+				class="btn btn-primary h-25">Volver atrás</a>
 
 		</div>
 	</div>
 </div>
 
 <c:if test='${rol != "PACIENTE"}'>
+<%@ include file="../../partial/footer.jsp"%>
 	</main>
 </c:if>
 
@@ -267,9 +270,10 @@ var polyline = L.polyline(polylinePoints).addTo(map);
 
 </script>
 
+
 </c:if>
 
-<%@ include file="../../partial/footer.jsp"%>
+
 
 </body>
 
