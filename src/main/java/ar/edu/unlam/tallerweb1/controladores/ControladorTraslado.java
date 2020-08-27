@@ -367,7 +367,7 @@ public class ControladorTraslado {
 			
 			@RequestParam Long idAsignacionActual,
 			@RequestParam Long idAsignacionReservada,
-			@RequestParam Double distancia,
+			@RequestParam(value = "distancia", required = false) Double distancia,
 			HttpServletRequest request
 			
 			) {
@@ -404,15 +404,27 @@ public class ControladorTraslado {
 		Cama cama = asignacionReservada.getCama();
 		
 		String asunto = "Traslado En Curso";
-		String msg = "Se le informa que el paciente "
+		String msg;
+		 if(distancia == null) {
+		 msg = "Se le informa que el paciente "
+		        + paciente.getApellido() + ", " + paciente.getNombre() 
+		        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
+        		+ " está siendo trasladado desde la institución " + institucion.getNombre() 
+		        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()		        
+		        + " hasta su institución para realizar la internación correspondiente en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
+		        + " de la sala de " + cama.getSala().getDescripcion() 
+		        + " de " + cama.getSala().getTipoSala().getDescripcion() + " ."; 
+		 }else {        
+		 msg = "Se le informa que el paciente "
 			        + paciente.getApellido() + ", " + paciente.getNombre() 
 			        + " (" + paciente.getTipoDocumento().getDescripcion() + ":"  + paciente.getNumeroDocumento() + ") " 
 	        		+ " está siendo trasladado desde la institución " + institucion.getNombre() 
-			        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()
-			        + " a " + Math.round(distancia) + " km de distancia "
+			        + " ubicada en la localidad de " + institucion.getDomicilio().getLocalidad().getNombreLocalidad()			      			       
+			        + " a " + Math.round(distancia) + " km de distancia "			        
 			        + " hasta su institución para realizar la internación correspondiente en la cama " + cama.getDescripcion() + " "  + cama.getTipoCama().getDescripcion() 
 			        + " de la sala de " + cama.getSala().getDescripcion() 
 			        + " de " + cama.getSala().getTipoSala().getDescripcion() + " ."; 
+		 }
 		
 		Notificacion notificacionTraslado = new Notificacion();
 		notificacionTraslado.setRemitente(institucion);

@@ -26,7 +26,7 @@
 		</div> --%>
 
 		<div class="mt-2 border-bottom">
-			<h5>${institucion.getNombre()} / Registrar Sector</h5>
+			<h5>${institucion.getNombre()} / Registrar Piso</h5>
 
 		</div>
 

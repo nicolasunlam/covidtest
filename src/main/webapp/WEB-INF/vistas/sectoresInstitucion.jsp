@@ -85,8 +85,8 @@ code {
 	<div
 		class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 		<h2 class="">Sectores</h2>
-		<a type="button" class="btn btn-outline-success" href="crearSector">
-			Agregar sector</a>
+		<!-- <a type="button" class="btn btn-outline-success" href="crearSector">
+			Agregar sector</a> -->
 	</div>
 	<h6 class="mb-5">Vea en detalle todos los sectores de su
 		institución</h6>

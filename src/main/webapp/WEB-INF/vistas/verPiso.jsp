@@ -237,7 +237,8 @@ code {
 												(${camaConAsignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()}).</p>
 
 											<div class="d-flex justify-content-between">
-												<form action="detalleAsignacion?idAsignacion=${camaConAsignacion.getAsignacion().getId()}">
+												<form action="detalle">
+												<input type="hidden" name="id" value="${camaConAsignacion.getAsignacion().getPaciente().getId()}">
 												<button type="submit" class="btn btn-outline-danger btn-sm">Ver
 													detalle</button>
 													</form>
@@ -268,8 +269,12 @@ code {
 												(${camaConAsignacion.getAsignacion().getPaciente().getTipoDocumento().getDescripcion()}).</p>
 
 											<div class="d-flex justify-content-between">
+											<form action="detalle">
+											<input type="hidden" name="id" value="${camaConAsignacion.getAsignacion().getPaciente().getId()}">
+											<input type="hidden" name="reservaBool" value="true">
 												<button class="btn btn-outline-warning btn-sm">Ver
 													detalle</button>
+													</form>
 												<div class="mt-1">
 													<img src="img/cama-am.png" style="width: 30px;"></img>
 												</div>
