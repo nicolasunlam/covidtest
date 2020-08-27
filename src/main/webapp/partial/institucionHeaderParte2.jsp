@@ -218,21 +218,13 @@
 												data-feather="user-check"></span> Pacientes Internados
 											</a>
 										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="internarPaciente">
-												<span data-feather="user-plus"></span> Internar paciente
-											</a>
-										</div>
+										
 										<div class="card-body px-0">
 											<a class="nav-link px-0 text-dark" href="egresarPaciente">
 												<span data-feather="user-minus"></span> Egresar paciente
 											</a>
 										</div>
-										<div class="card-body px-0">
-											<a class="nav-link px-0 text-dark" href="consultarPaciente">
-												<span data-feather="search"></span> Consultar paciente
-											</a>
-										</div>
+										
 									</div>
 								</div>
 							</div>

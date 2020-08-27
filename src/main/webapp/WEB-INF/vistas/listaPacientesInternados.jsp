@@ -104,7 +104,7 @@
 				<th style="vertical-align: middle; width: 25%"
 					class="border border-secondary"
 					onmouseover="this.style.backgroundColor='#dee2e6';"
-					onmouseout="this.style.backgroundColor='white';">TRASLADO<img
+					onmouseout="this.style.backgroundColor='white';">TRASLADO EN CURSO<img
 					style="margin-top: 0.40rem;"
 					class="bi bi-arrow-down-up float-right" alt="" src="img/sort.svg"
 					width="10px" height="">

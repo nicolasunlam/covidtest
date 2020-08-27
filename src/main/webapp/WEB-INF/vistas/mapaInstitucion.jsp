@@ -154,7 +154,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-
+<script
+	src="js/dashboard.js"></script>
+<script
+	src="js/bootstrap.bundle.js"></script>
+	
 <script>
 	var map = L.map('map').setView([ -35.05789999999996, -59.04061999999993 ],
 			9);

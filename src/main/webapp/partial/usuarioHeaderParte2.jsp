@@ -98,8 +98,12 @@
 				</a>
 				<li class="nav-item ml-3"><a class="btn btn-outline-success"
 					role="button" href="autoTest">Realizar test</a></li>
-				<li class="nav-item ml-4"><a class="btn btn-outline-info"
-					role="button" href="verMensajesRecibidos">Ver mis Mensajes </a></li>
+				<c:if test='${rol != null}'>
+
+					<li class="nav-item ml-4"><a class="btn btn-outline-info"
+						role="button" href="verMensajesRecibidos">Ver mis Mensajes </a></li>
+
+				</c:if>
 				<c:if test="${permiso == true}">
 					<li class="nav-item ml-3" id="botonPermiso"><a
 						class="btn btn-warning" href="generarPermiso">Generar Permiso
@@ -123,8 +127,8 @@
 					<%
 						String usuario = (String) request.getSession().getAttribute("MAIL").toString();
 
-					String paramName = (String) usuario;
-					out.print("<tr><td>" + paramName + "</td>\n");
+							String paramName = (String) usuario;
+							out.print("<tr><td>" + paramName + "</td>\n");
 					%>
 
 					<img src="img/avatar.svg" width="35" height="35"

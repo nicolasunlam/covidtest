@@ -13,7 +13,7 @@
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <style>
 #map {
-	height: 50em;
+	height: 30em;
 	width: 100%;
 }
 </style>

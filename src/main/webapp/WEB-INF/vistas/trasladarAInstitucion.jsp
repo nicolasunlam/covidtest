@@ -613,5 +613,7 @@
 <script src="js/sort.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/dashboard.js"></script>
+
 </body>
 </html>

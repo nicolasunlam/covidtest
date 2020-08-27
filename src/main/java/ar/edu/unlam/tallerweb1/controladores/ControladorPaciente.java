@@ -172,7 +172,7 @@ public class ControladorPaciente {
 			model.put("email", email);
 
 			String path = "http://localhost:" + request.getLocalPort();
-			servicioMail.SendEmail(paciente.getEmail(), "Confirmaci�n de registro: AsignAr: " + paciente.getNombre(),
+			servicioMail.SendEmail(paciente.getEmail(), "Confirmacion de registro: asignar: " + paciente.getNombre(),
 					path, pacienteBuscado);
 
 			return new ModelAndView("enfermedades", model);
@@ -785,7 +785,9 @@ public class ControladorPaciente {
 			usuario.setDomicilio(domicilio);
 
 		}
-
+		
+		request.getSession().removeAttribute("MAIL");
+		request.getSession().setAttribute("MAIL", usuario.getEmail());
 		servicioUsuario.actualizarUsuario(usuario);
 
 		return new ModelAndView("redirect:/MisDatos");
