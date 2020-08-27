@@ -259,7 +259,8 @@ public class ControladorPaciente {
 	@RequestMapping(path = "/detalle", method = RequestMethod.GET)
 	public ModelAndView validarConsulta(
 
-			@RequestParam (value="id") Long id, HttpServletRequest request) {
+			@RequestParam (value="id") Long id, HttpServletRequest request,
+			@RequestParam (value="reservaBool", required=false)Boolean reservaBool) {
 
 		ModelMap model = new ModelMap();
 
@@ -308,13 +309,16 @@ public class ControladorPaciente {
 			}
 		}
 		
-		if(asignacionActual==null && reserva==null) {
-			
-			
-			model.put("detalleVista", "detallePaciente");
-			model.put("error", "No existe el usuario buscado");
+		
+		if(reservaBool==null) {
+			if(asignacionActual==null && reserva==null) {
+				
+				
+				model.put("detalleVista", "detallePaciente");
+				model.put("error", "No existe el usuario buscado");
 
-			return new ModelAndView("consultarPaciente", model);
+				return new ModelAndView("consultarPaciente", model);
+			}
 		}
 		
 		if (paciente != null) {
