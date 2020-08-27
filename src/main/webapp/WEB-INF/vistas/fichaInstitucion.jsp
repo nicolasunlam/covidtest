@@ -85,7 +85,7 @@
 				<h3 class="font-weight-bolder">Correo electrónico</h3>
 				<h4>${email}</h4>
 				<h3 class="font-weight-bolder mt-5">Dirección</h3>
-				<h4>${calle}${numero},${localidad}</h4>
+				<h4>${calle} ${numero}, ${localidad}</h4>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-5" id="map"></div>
@@ -115,8 +115,8 @@
 		<div class="row my-4">
 			<div class="col-3">
 				<c:if test="${camasDisponibles > 0}">
-					<h4 class="d-inline mr-3">Hay disponibilidad</h4>
-					<img src="img/right.png" width="35" height="35"
+					<h4 class="d-inline mr-1">Hay disponibilidad</h4>
+					<img class ="d-inline" src="img/right.png" width="35" height="35"
 						alt="Generic placeholder image" class="d-inline">
 				</c:if>
 				<c:if test="${camasDisponibles <= 0}">
@@ -165,7 +165,7 @@
 				<c:if test='${rol == null}'>
 						"home"
 						</c:if>
-				class="btn btn-primary"> Volver atrás</a>
+				class="btn btn-primary h-25">Volver atrás</a>
 
 		</div>
 	</div>
